@@ -4,7 +4,9 @@
   "description": "A ui library.",
   "main": "index.js",
   "scripts": {
-
+    "start": "npm run dev",
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.config.js",
+    "build": "node build/build.js"
   },
   "repository": {
     "type": "git",
@@ -18,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/yuanzhaohao/dashkit-ui/issues"
   },
-  "homepage": "https://github.com/yuanzhaohao/dashkit-ui#readme"
+  "homepage": "https://github.com/yuanzhaohao/dashkit-ui#readme",
+  "devDependencies": {
+    "webpack": "^3.12.0"
+  }
 }
