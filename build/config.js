@@ -3,11 +3,12 @@
 const path = require('path')
 
 module.exports = {
+  indexPage: 'index',
   staticPath: './static',
   assetsRoot: './dist',
   proxyTable: {
     '/mock-api': {
-      target: 'http://localhost:8999/',
+      target: 'http://localhost:8787/',
       pathRewrite: {
         '^/mock-api' : '/mock-api'
       }

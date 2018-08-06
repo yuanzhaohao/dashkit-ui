@@ -114,7 +114,7 @@ module.exports = {
         loader: 'happypack/loader?id=ts',
       },
       {
-        test: /\.(css|scss$)$/,
+        test: /\.scss$/,
         loader: config.extractStyle === true
           ? ExtractTextPlugin.extract(['happypack/loader?id=css', 'postcss-loader', 'happypack/loader?id=sass'])
           : ['style-loader', 'happypack/loader?id=css', 'postcss-loader', 'happypack/loader?id=sass']

@@ -1,10 +1,11 @@
-import './app.scss'
+import '@/scss/bootstrap.scss';
+import './app.scss';
 
-import * as React from 'react'
-import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
-import { Provider } from 'react-redux'
-import store from '../redux/store'
-import asyncComponent from '../lib/async-component'
+import * as React from 'react';
+import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from '../redux/store';
+import asyncComponent from '../lib/async-component';
 
 const Index = asyncComponent(() => import('./index/index'))
 
