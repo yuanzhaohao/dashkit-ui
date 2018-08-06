@@ -39,7 +39,6 @@
     "@types/react-redux": "^6.0.2",
     "@types/react-router-dom": "^4.2.7",
     "autoprefixer": "^8.6.3",
-    "awesome-typescript-loader": "^3.5.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
     "babel-plugin-import": "^1.6.2",

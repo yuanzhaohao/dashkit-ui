@@ -113,22 +113,6 @@ module.exports = {
         test: /\.(ts|tsx)$/,
         loader: 'happypack/loader?id=ts',
       },
-      // {
-      //   test: /\.scss$/,
-      //   loader: config.extractStyle === true
-      //     ? ExtractTextPlugin.extract([
-      //       'style-loader',
-      //       'css-loader',
-      //       'postcss-loader',
-      //       'sass-loader'
-      //     ])
-      //     : [
-      //       'style-loader',
-      //       'css-loader',
-      //       'postcss-loader',
-      //       'sass-loader'
-      //     ]
-      // },
       {
         test: /\.(css|scss$)$/,
         loader: config.extractStyle === true
