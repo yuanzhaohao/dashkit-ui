@@ -1,9 +1,13 @@
 import { combineReducers } from 'redux';
-import indexReducer from './index/reducer';
+import { default as IndexReducer, IndexState } from './index/reducer';
 
 const reducers = {
-  index: indexReducer,
+  index: IndexReducer,
 }
+
+export type RootState = {
+  index: IndexState;
+};
 
 const rootReducer = combineReducers(reducers);
 

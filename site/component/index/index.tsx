@@ -1,24 +1,22 @@
-import './index.less'
+import './index.scss'
 
 import * as React from 'react';
 import { connect } from 'react-redux';
-import ThreePly from '../../lib/three-ply';
+import { RootState } from '../../redux/reducer';
+import * as indexAction from '../../redux/index/action';
 
-interface Props {};
-const mapDispatchToProps = {};
+type Props = {};
+const mapDispatchToProps = {
+  ...indexAction,
+};
 
 class Index extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
-    this.threeApp = 0;
   }
 
   public componentDidMount() {
-    this.threeApp = new ThreePly(
-      this.refs['three-canvas'],
-      './static/Lucy100k.ply',
-      // 'https://threejs.org/examples/models/ply/binary/Lucy100k.ply'
-    );
+    console.log('call componentDidMount');
   }
 
   public render() {
@@ -30,8 +28,10 @@ class Index extends React.Component<Props> {
   }
 }
 
-function mapStateToProps(state: any) {
-  return state.index
+function mapStateToProps({ index }: RootState) {
+  return {
+    index,
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index);

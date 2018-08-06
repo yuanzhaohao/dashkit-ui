@@ -7,7 +7,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const exists = require('fs').existsSync
 const utils = require('./utils')
 const config = require('./config')
-const sitePath = utils.resolve('src')
+const sitePath = utils.resolve('site')
 const srcPath = utils.resolve('src')
 const entry = utils.getEntry(path.join(sitePath, './entry'))
 const vendors = config.optimizeCommon && typeof config.optimizeCommon === 'object'
@@ -69,7 +69,7 @@ const createHappypackPlugin = () => {
         happyPackMode: true
       }
     }]),
-    createHappypack('less', ['less-loader']),
+    createHappypack('sass', ['sass-loader']),
     createHappypack('css', ['css-loader']),
   ]
 }
@@ -81,7 +81,7 @@ module.exports = {
     filename: '[name].js'
   },
   resolve: {
-    extensions: ['.js', '.ts', '.tsx', '.json'],
+    extensions: ['.js', '.ts', '.tsx', '.json', 'css', 'scss'],
     alias: {
       '@': srcPath
     }
@@ -107,19 +107,34 @@ module.exports = {
       ...(config.useEslint ? [createLintingRule()] : []),
       {
         test: /\.js$/,
-        exclude: /node_modules/,
         loader: 'happypack/loader?id=js',
       },
       {
         test: /\.(ts|tsx)$/,
-        exclude: /node_modules/,
-        loader: 'happypack/loader?id=ts',
+        // loader: 'happypack/loader?id=ts',
+        loader: 'awesome-typescript-loader',
       },
+      // {
+      //   test: /\.scss$/,
+      //   loader: config.extractStyle === true
+      //     ? ExtractTextPlugin.extract([
+      //       'style-loader',
+      //       'css-loader',
+      //       'postcss-loader',
+      //       'sass-loader'
+      //     ])
+      //     : [
+      //       'style-loader',
+      //       'css-loader',
+      //       'postcss-loader',
+      //       'sass-loader'
+      //     ]
+      // },
       {
-        test: /\.(css|less)$/,
+        test: /\.(css|scss$)$/,
         loader: config.extractStyle === true
-          ? ExtractTextPlugin.extract(['happypack/loader?id=css', 'postcss-loader', 'happypack/loader?id=less'])
-          : ['style-loader', 'happypack/loader?id=css', 'postcss-loader', 'happypack/loader?id=less']
+          ? ExtractTextPlugin.extract(['happypack/loader?id=css', 'postcss-loader', 'happypack/loader?id=sass'])
+          : ['style-loader', 'happypack/loader?id=css', 'postcss-loader', 'happypack/loader?id=sass']
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

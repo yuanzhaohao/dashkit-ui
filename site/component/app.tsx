@@ -1,4 +1,4 @@
-import './app.less'
+import './app.scss'
 
 import * as React from 'react'
 import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
@@ -7,7 +7,6 @@ import store from '../redux/store'
 import asyncComponent from '../lib/async-component'
 
 const Index = asyncComponent(() => import('./index/index'))
-const Detail = asyncComponent(() => import('./detail/detail'))
 
 export default () => (
   <Provider store={store}>
@@ -15,7 +14,6 @@ export default () => (
       <Switch>
         <Route exact path="/" component={Index} />
         <Route exact path="/index" component={Index} />
-        <Route exact path="/detail" component={Detail} />
         <Redirect to="/" />
       </Switch>
     </HashRouter>

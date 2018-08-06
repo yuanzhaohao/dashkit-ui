@@ -1,5 +1,10 @@
 import { ActionEntity } from '../action';
 
+export type IndexState = {
+  isLoading?: boolean;
+  isEnough?: boolean;
+};
+
 const initialState = {
   isLoading: false,
   isEnough: false,
