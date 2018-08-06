@@ -6,36 +6,28 @@ module.exports = {
   staticPath: './static',
   assetsRoot: './dist',
   proxyTable: {
-    '/api': {
-      target: 'http://blackcat.dev/',
-      changeOrigin: true,
-      pathRewrite: {
-        '^/api' : '/api'
-      }
-    },
     '/mock-api': {
       target: 'http://localhost:8999/',
       pathRewrite: {
         '^/mock-api' : '/mock-api'
       }
     },
-    '/media': {
-      target: 'http://blackcat.dev/',
-      changeOrigin: true,
-      pathRewrite: {
-        '^/media' : '/media'
-      }
-    }
   },
   optimizeCommon: {
     'vendor-lib': [
       'axios',
       'classnames'
     ],
+    'vendor-redux': [
+      'redux',
+      'redux-promise-middleware',
+      'redux-thunk'
+    ],
     'vendor-react': [
       'react',
       'react-dom',
-      'react-router'
+      'react-router',
+      'react-redux'
     ]
   },
   host: 'localhost',

@@ -111,8 +111,7 @@ module.exports = {
       },
       {
         test: /\.(ts|tsx)$/,
-        // loader: 'happypack/loader?id=ts',
-        loader: 'awesome-typescript-loader',
+        loader: 'happypack/loader?id=ts',
       },
       // {
       //   test: /\.scss$/,
