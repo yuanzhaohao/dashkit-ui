@@ -6,14 +6,8 @@ module.exports = {
   indexPage: 'index',
   staticPath: './static',
   assetsRoot: './dist',
-  proxyTable: {
-    '/mock-api': {
-      target: 'http://localhost:8787/',
-      pathRewrite: {
-        '^/mock-api' : '/mock-api'
-      }
-    },
-  },
+  proxyTable: {},
+  mockData: true,
   optimizeCommon: {
     'vendor-lib': [
       'axios',
