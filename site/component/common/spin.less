@@ -1,0 +1,95 @@
+@main-color: #1890ff;
+
+.spin {
+  display: none;
+  position: absolute;
+  transition: transform 0.3s cubic-bezier(.78, .14, .15, .86);
+  vertical-align: middle;
+  text-align: center;
+  opacity: 0;
+  &.spinning {
+    opacity: 1;
+    position: static;
+    display: inline-block;
+  }
+}
+
+.spin-circle {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 4px solid transparent;
+  border-left: 4px solid @main-color;
+  animation: spinRotate 1s infinite linear;
+  box-sizing: border-box;
+}
+
+.spin-large {
+  width: 64px;
+  height: 64px;
+}
+
+.spin-small {
+  width: 36px;
+  height: 36px;
+}
+
+.spin-text {
+  margin-top: 10px;
+  color: @main-color;
+  font-size: 26px;/*px*/
+}
+
+.spin-box {
+  position: relative;
+}
+
+.spin-container {
+  position: relative;
+}
+
+.spin-blur {
+  pointer-events: none;
+  user-select: none;
+  overflow: hidden;
+  opacity: 0.7;
+  filter: blur(0.5px);/*no*/
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #fff;
+    opacity: 0.3;
+    transition: all .3s;
+    z-index: 10;
+  }
+}
+
+.spin-loading {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  .spin {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes spinRotate {
+  0% {
+    transform: rotate(120deg)
+  }
+  100% {
+    transform: rotate(-240deg)
+  }
+}

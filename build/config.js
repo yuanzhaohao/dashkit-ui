@@ -38,7 +38,7 @@ module.exports = {
       'react-router'
     ]
   },
-  host: '0.0.0.0',
+  host: 'localhost',
   port: 8999,
   autoOpen: true,
   useEslint: false,

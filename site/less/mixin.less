@@ -1,0 +1,34 @@
+.clearfix() {
+  &:before{
+    content: '';
+    display: block;
+  }
+  &:after{
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+.text-overflow() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.line-overflow(@line: 1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: @line;
+  -webkit-box-orient: vertical;
+}
+
+.box-center() {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-box-align: center;
+  align-items: center;
+}

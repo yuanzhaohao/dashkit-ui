@@ -7,8 +7,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const exists = require('fs').existsSync
 const utils = require('./utils')
 const config = require('./config')
+const sitePath = utils.resolve('src')
 const srcPath = utils.resolve('src')
-const entry = utils.getEntry(path.join(srcPath, './entry'))
+const entry = utils.getEntry(path.join(sitePath, './entry'))
 const vendors = config.optimizeCommon && typeof config.optimizeCommon === 'object'
   ? config.optimizeCommon
   : {}
@@ -17,7 +18,7 @@ const createLintingRule = () => ({
   test: /\.(js|ts|tsx)$/,
   loader: 'eslint-loader',
   enforce: 'pre',
-  include: [srcPath],
+  include: [sitePath],
   options: {
     formatter: require('eslint-friendly-formatter'),
     emitWarning: true
@@ -25,9 +26,9 @@ const createLintingRule = () => ({
 })
 
 const createHtmlPlugin = () => {
-  let defaultTplPath = path.join(srcPath, './template.html')
+  let defaultTplPath = path.join(sitePath, './template.html')
   return Object.keys(entry).map(page => {
-    let pageTplPath = path.join(srcPath, `./${page}.html`)
+    let pageTplPath = path.join(sitePath, `./${page}.html`)
     let templatePath = defaultTplPath
     let chunks = Object.keys(vendors).concat(page)
 
