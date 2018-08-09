@@ -1,8 +1,11 @@
 import * as React from 'react';
-import Spin from '@/Spin/index';
+import { Spin } from '../../src/index';
 
-export default function asyncComponent(importComponent: () => void) {
-  class AsyncComponent extends React.Component {
+type State = {
+  component: any,
+};
+export default function asyncComponent(importComponent: any) {
+  class AsyncComponent extends React.Component<State> {
     constructor(props: any) {
       super(props)
       this.state = {
@@ -15,7 +18,7 @@ export default function asyncComponent(importComponent: () => void) {
 
       this.setState({
         component
-      })
+      });
     }
 
     public render() {

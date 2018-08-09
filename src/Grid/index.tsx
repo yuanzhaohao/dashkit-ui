@@ -2,11 +2,11 @@ import './style.scss';
 import * as classNames from 'classnames';
 import * as React from 'react';
 
-export type LayoutProps = {
+export type GridProps = {
 
 };
 
-class Layout extends React.Component<LayoutProps> {
+class Grid extends React.Component<GridProps> {
 
 }
-export default Layout;
+export default Grid;
