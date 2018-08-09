@@ -1,6 +1,6 @@
+import './style.scss';
 import * as classNames from 'classnames';
 import * as React from 'react';
-import * as styles from './style.scss';
 
 type InputProps = {
   type?: string;
@@ -21,13 +21,13 @@ class Input extends React.Component<InputProps> {
 
   public render() {
     const { className, type, disabled, onChange, ...attributes } = this.props;
-    const inputClassName = classNames([
-      styles.input,
+    const inputClassName = classNames(
+      'input',
       {
-        [styles.inputDisabled]: disabled,
+        'input-disabled': disabled,
       },
       className,
-    ]);
+    );
     const isTextareaInput = type === 'textarea';
     let TAG = 'input';
 

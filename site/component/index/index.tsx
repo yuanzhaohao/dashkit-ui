@@ -21,7 +21,7 @@ class Index extends React.Component<Props> {
 
   public render() {
     return (
-      <div className="index-container">Index Page</div>
+      <div className="index-container"></div>
     )
   }
 }
