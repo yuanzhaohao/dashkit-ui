@@ -1,4 +1,3 @@
-import '@/scss/bootstrap.scss';
 import './app.scss';
 
 import * as React from 'react';
@@ -25,7 +24,7 @@ export default () => (
               <Redirect to="/" />
             </Switch>
           </Content>
-          <Footer>Powered by Yuan Zhaohao</Footer>
+          <Footer className="footer">Powered by Yuan Zhaohao</Footer>
         </Layout>
       </Layout>
     </HashRouter>

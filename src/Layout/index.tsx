@@ -12,9 +12,9 @@ export type BasicProps = {
 
 class Layout extends React.Component<LayoutProps> {
   static Header: any;
-  static Footer: React.ComponentClass;
-  static Content: React.ComponentClass;
-  static Sider: React.ComponentClass;
+  static Footer: any;
+  static Content: any;
+  static Sider: any;
   render() {
     const { className, children, hasSider, ...others } = this.props;
     const layoutClassName = classNames(
