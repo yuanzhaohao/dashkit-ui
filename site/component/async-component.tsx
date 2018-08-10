@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Spin } from '../../src/index';
+import { Spin } from '../../src';
 
 type State = {
   component: any,

@@ -1,4 +1,4 @@
-export { default as Grid } from './grid/index';
-export { default as Layout } from './layout/index';
-export { default as Input } from './input/index';
-export { default as Spin } from './spin/index';
+export { default as Grid } from './grid';
+export { default as Layout } from './layout';
+export { default as Input } from './input';
+export { default as Spin } from './spin';
