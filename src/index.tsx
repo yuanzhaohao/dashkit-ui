@@ -1,4 +1,3 @@
-import '@/scss/bootstrap-reboot.scss';
 import './style/bootstrap-reboot.scss';
 
 export { default as Grid } from './grid';
