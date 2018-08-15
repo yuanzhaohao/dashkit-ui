@@ -1,14 +1,23 @@
 #app {
   width: 100%;
 }
-.app-sidebar {
-  // position: fixed;
-  // top: 0;
-  // left: 0;
-  height: 100vh;
-  border-right: 1px solid #e3ebf6;
-  overflow: scroll;
+
+.app-content {
+  position: relative;
 }
+
+.page-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  overflow: hidden;
+}
+
 .app-footer {
   text-align: center;
 }

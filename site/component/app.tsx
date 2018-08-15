@@ -3,7 +3,8 @@ import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { Layout } from '../../src';
 import store from '../redux/store';
-import AppHeader from './common/header';
+import CommonHeader from './common/header';
+import CommonSidebar from './common/sidebar';
 import asyncComponent from './async-component';
 
 import './app.scss';
@@ -15,10 +16,10 @@ export default () => (
   <Provider store={store}>
     <HashRouter>
       <Layout>
-        <Sidebar className="app-sidebar" />
+        <CommonSidebar />
         <Layout>
-          <AppHeader />
-          <Content>
+          <CommonHeader />
+          <Content className="app-content">
             <Switch>
               <Route exact path="/" component={Index} />
               <Route exact path="/index" component={Index} />
