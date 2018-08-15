@@ -1,9 +1,14 @@
 #app {
   width: 100%;
 }
-.header {
-  border-bottom: 1px solid #e3ebf6;
+.app-sidebar {
+  // position: fixed;
+  // top: 0;
+  // left: 0;
+  height: 100vh;
+  border-right: 1px solid #e3ebf6;
+  overflow: scroll;
 }
-.footer {
+.app-footer {
   text-align: center;
 }

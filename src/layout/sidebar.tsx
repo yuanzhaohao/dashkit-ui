@@ -1,22 +1,51 @@
-import * as classNames from 'classnames';
 import * as React from 'react';
+import * as classNames from 'classnames';
+import * as PropTypes from 'prop-types';
 
 export type SidebarProps = {
   className?: string;
 };
 
+const generateId = (() => {
+  let i = 0;
+  return (prefix: string = '') => {
+    i += 1;
+    return `${prefix}${i}`;
+  };
+})();
+
 class Sidebar extends React.Component<SidebarProps> {
-  static Header: any;
-  static Footer: any;
-  static Content: any;
-  static Sider: any;
+  static contextTypes = {
+    sidebarHook: PropTypes.object,
+  };
+
+  private uniqueId: string;
+  constructor(props: SidebarProps) {
+    super(props);
+    this.uniqueId = generateId('dashkit-sidebar-');
+  }
+  
+  componentDidMount() {
+    if (this.context.sidebarHook) {
+      this.context.sidebarHook.addSidebar(this.uniqueId);
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.context.sidebarHook) {
+      this.context.sidebarHook.removeSidebar(this.uniqueId);
+    }
+  }
+
   render() {
-    const { className, children, hasSider, ...others } = this.props;
+    const { className, children, ...attributes } = this.props;
     const layoutClassName = classNames(
-      'dashkit-layout',
+      'dashkit-layout-sidebar',
       className,
     )
-    return <div className={layoutClassName} {...others}>{children}</div>;
+    return (
+      <div {...attributes} className={layoutClassName}>{children}</div>
+    );
   }
 }
 

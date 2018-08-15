@@ -81,7 +81,7 @@ module.exports = {
     filename: '[name].js'
   },
   resolve: {
-    extensions: ['.js', '.ts', '.tsx', '.json', 'css', 'scss'],
+    extensions: ['.js', '.ts', '.tsx', '.json', 'css', 'scss', 'svg'],
     alias: {
       '@': srcPath
     }
@@ -118,6 +118,19 @@ module.exports = {
         loader: config.extractStyle === true
           ? ExtractTextPlugin.extract(['happypack/loader?id=css', 'postcss-loader', 'happypack/loader?id=sass'])
           : ['style-loader', 'happypack/loader?id=css', 'postcss-loader', 'happypack/loader?id=sass']
+      },
+      {
+        test: /\.svg$/,
+        use: [{
+            loader: 'babel-loader',
+          },
+          {
+            loader: 'react-svg-loader',
+            options: {
+              removeTags: true,
+            }
+          }
+        ]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
