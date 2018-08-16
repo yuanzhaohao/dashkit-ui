@@ -10,7 +10,8 @@ import asyncComponent from './async-component';
 import './app.scss';
 
 const { Content, Footer, Sidebar } = Layout;
-const Index = asyncComponent(() => import('./index'))
+const Index = asyncComponent(() => import('./index'));
+const PageButton = asyncComponent(() => import('./button'));
 
 export default () => (
   <Provider store={store}>
@@ -23,6 +24,7 @@ export default () => (
             <Switch>
               <Route exact path="/" component={Index} />
               <Route exact path="/index" component={Index} />
+              <Route exact path="/components/button" component={PageButton} />
               <Redirect to="/" />
             </Switch>
           </Content>

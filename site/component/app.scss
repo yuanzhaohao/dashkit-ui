@@ -6,6 +6,10 @@
   position: relative;
 }
 
+.app-footer {
+  text-align: center;
+}
+
 .page-loading {
   position: absolute;
   top: 50%;
@@ -18,6 +22,22 @@
   overflow: hidden;
 }
 
-.app-footer {
-  text-align: center;
+.page-container {
+  width: 100%;
+  padding: 24px;
+}
+
+.page-title {
+  font-size: 26px;
+}
+
+.page-subtitle {
+  margin-top: 6px;
+  margin-bottom: 0;
+  color: #95aac9;
+}
+
+.page-header {
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e3ebf6;
 }
