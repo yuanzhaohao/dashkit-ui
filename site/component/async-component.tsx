@@ -6,9 +6,12 @@ type State = {
 };
 export default function asyncComponent(importComponent: any) {
   class AsyncComponent extends React.Component<any, State> {
-   public state = {
-      component: null
-    };
+    constructor(props: any) {
+      super(props);
+      this.state = {
+        component: null
+      };
+    }
 
     public async componentDidMount() {
       const { default: component } = await importComponent();
@@ -19,10 +22,9 @@ export default function asyncComponent(importComponent: any) {
     }
 
     public render() {
-      const { component } = this.state;
       return (
-        component
-          ? <component />
+        this.state.component
+          ? <this.state.component />
           : <div className="page-loading">
             <Spin text="Loading..." />
           </div>
