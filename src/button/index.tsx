@@ -4,11 +4,12 @@ import * as classNames from 'classnames';
 import * as React from 'react';
 
 export type ButtonSize = 'small' | 'default' | 'large';
-export type ButtonType = 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark' | 'link';
+export type ButtonType = 'default' | 'primary' | 'success' | 'danger' | 'warning' | 'info' | 'link';
 export type ButtonProps = {
   className?: string;
   size?: ButtonSize;
   type?: ButtonType;
+  prefixCls?: string;
 };
 export type ButtonState = {
   spinning?: boolean;
@@ -16,17 +17,19 @@ export type ButtonState = {
 
 class Button extends React.Component<ButtonProps, ButtonState> {
   static defaultProps = {
+    prefixCls: 'dashkit-btn',
     size: 'default' as ButtonSize,
-    type: 'primary' as ButtonType,
+    type: 'default' as ButtonType,
   };
 
   render() {
-    const { children, type, className, ...attibutes } = this.props;
+    const { children, prefixCls, type, size, className, ...attibutes } = this.props;
     const buttonClassName = classNames(
-      'btn',
+      prefixCls,
       {
-        'btn-primary': type === 'primary',
-        'btn-secondary': type === 'secondary',
+        [`${prefixCls}-${type}`]: true,
+        [`${prefixCls}-large`]: size === 'large',
+        [`${prefixCls}-small`]: size === 'small',
       },
       className,
     );

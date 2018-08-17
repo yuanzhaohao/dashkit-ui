@@ -1,10 +1,17 @@
 import * as React from 'react';
 import './example.scss';
 
-class Example extends React.PureComponent {
+type ExampleProps = {
+  title?: string;
+};
+
+class Example extends React.PureComponent<ExampleProps> {
   render() {
+    const { title, children } = this.props;
     return (
-      <div className="app-example"></div>
+      <div className="app-example">
+        {children}
+      </div>
     )
   }
 }

@@ -18,21 +18,9 @@ $prefix: 'dashkit-card';
     margin-right: 0;
     margin-left: 0;
   }
-  >.list-group:first-child {
-    .list-group-item:first-child {
-      @include border-top-radius($card-border-radius);
-    }
-  }
-  >.list-group:last-child {
-    .list-group-item:last-child {
-      @include border-bottom-radius($card-border-radius);
-    }
-  }
 }
 
 .dashkit-card-body {
-  // Enable `flex-grow: 1` for decks and groups so that card blocks take up
-  // as much space as possible, ensuring footers are aligned to the bottom.
   flex: 1 1 auto;
   padding: $card-spacer-x;
 }
@@ -70,11 +58,6 @@ $prefix: 'dashkit-card';
   &:first-child {
     @include border-radius($card-inner-border-radius $card-inner-border-radius 0 0);
   }
-  +.list-group {
-    .list-group-item:first-child {
-      border-top: 0;
-    }
-  }
 }
 
 .card-footer {
@@ -87,8 +70,16 @@ $prefix: 'dashkit-card';
 }
 
 //
-// Header navs
+// Header 
 //
+.dashkit-card-header-title {
+  margin-bottom: 0;
+
+  > * {
+    flex: 1 1;
+  }
+}
+
 .dashkit-card-header-tabs {
   margin-right: -($card-spacer-x / 2);
   margin-bottom: -$card-spacer-y;

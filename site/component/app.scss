@@ -2,11 +2,18 @@
   width: 100%;
 }
 
+.app-layout {
+  margin-left: 250px;
+}
+
 .app-content {
   position: relative;
+  background-color: #f9fbfd;
 }
 
 .app-footer {
+  padding-bottom: 24px;
+  background-color: #f9fbfd;
   text-align: center;
 }
 
@@ -27,10 +34,6 @@
   padding: 24px;
 }
 
-.page-title {
-  font-size: 26px;
-}
-
 .page-subtitle {
   margin-top: 6px;
   margin-bottom: 0;
@@ -39,5 +42,9 @@
 
 .page-header {
   padding-bottom: 24px;
-  border-bottom: 1px solid #e3ebf6;
+  // border-bottom: 1px solid #e3ebf6;
+}
+
+.module-title {
+  margin-bottom: 6px;
 }

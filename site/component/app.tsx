@@ -18,7 +18,7 @@ export default () => (
     <HashRouter>
       <Layout>
         <CommonSidebar />
-        <Layout>
+        <Layout className="app-layout">
           <CommonHeader />
           <Content className="app-content">
             <Switch>

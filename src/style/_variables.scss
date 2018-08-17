@@ -1,9 +1,3 @@
-// Variables
-//
-// Variables should follow the `$component-state-property-size` formula for
-// consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
-
-
 //
 // Color system
 //
@@ -17,7 +11,7 @@ $gray-500: #adb5bd !default;
 $gray-600: #6c757d !default;
 $gray-700: #495057 !default;
 $gray-800: #343a40 !default;
-$gray-900: #212529 !default;
+$gray-900: #283e59 !default;
 $black:    #000 !default;
 
 $grays: () !default;
@@ -42,12 +36,12 @@ $blue:    #2c7be5 !default;
 $indigo:  #6610f2 !default;
 $purple:  #6f42c1 !default;
 $pink:    #e83e8c !default;
-$red:     #dc3545 !default;
+$red:     #e63757 !default;
 $orange:  #fd7e14 !default;
-$yellow:  #ffc107 !default;
+$yellow:  #f6c343 !default;
 $green:   #00d97e !default;
 $teal:    #20c997 !default;
-$cyan:    #17a2b8 !default;
+$cyan:    #39afd1 !default;
 
 $colors: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
@@ -70,27 +64,23 @@ $colors: map-merge(
   $colors
 );
 
+$default:       $gray-100 !default;
 $primary:       $blue !default;
-$secondary:     $gray-600 !default;
 $success:       $green !default;
-$info:          $cyan !default;
+$info:          $gray-600 !default;
 $warning:       $yellow !default;
 $danger:        $red !default;
-$light:         $gray-100 !default;
-$dark:          $gray-800 !default;
 
 $theme-colors: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
 $theme-colors: map-merge(
   (
+    "default":    $default,
     "primary":    $primary,
-    "secondary":  $secondary,
     "success":    $success,
     "info":       $info,
     "warning":    $warning,
-    "danger":     $danger,
-    "light":      $light,
-    "dark":       $dark
+    "danger":     $danger
   ),
   $theme-colors
 );
@@ -223,7 +213,7 @@ $line-height-lg:              1.5 !default;
 $line-height-sm:              1.5 !default;
 
 $border-width:                1px !default;
-$border-color:                $gray-300 !default;
+$border-color:              #e3ebf6 !default;
 
 $border-radius:               .25rem !default;
 $border-radius-lg:            .3rem !default;
@@ -253,9 +243,9 @@ $font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberati
 $font-family-base:            $font-family-sans-serif !default;
 // stylelint-enable value-keyword-case
 
-$font-size-base:              1rem !default; // Assumes the browser default, typically `16px`
-$font-size-lg:                ($font-size-base * 1.25) !default;
-$font-size-sm:                ($font-size-base * .875) !default;
+$font-size-base:              14px !default;
+$font-size-lg:                16px !default;
+$font-size-sm:                12px !default;
 
 $font-weight-light:           300 !default;
 $font-weight-normal:          400 !default;
@@ -347,20 +337,20 @@ $table-caption-color:         $text-muted !default;
 //
 // Shared variables that are reassigned to `$input-` and `$btn-` specific variables.
 
-$input-btn-padding-y:         .375rem !default;
-$input-btn-padding-x:         .75rem !default;
+$input-btn-padding-y:         6px !default;
+$input-btn-padding-x:         12px !default;
 $input-btn-line-height:       $line-height-base !default;
 
-$input-btn-focus-width:       .2rem !default;
+$input-btn-focus-width:       3px !default;
 $input-btn-focus-color:       rgba($component-active-bg, .25) !default;
 $input-btn-focus-box-shadow:  0 0 0 $input-btn-focus-width $input-btn-focus-color !default;
 
-$input-btn-padding-y-sm:      .25rem !default;
-$input-btn-padding-x-sm:      .5rem !default;
+$input-btn-padding-y-sm:      4px !default;
+$input-btn-padding-x-sm:      8px !default;
 $input-btn-line-height-sm:    $line-height-sm !default;
 
-$input-btn-padding-y-lg:      .5rem !default;
-$input-btn-padding-x-lg:      1rem !default;
+$input-btn-padding-y-lg:      8px !default;
+$input-btn-padding-x-lg:      16px !default;
 $input-btn-line-height-lg:    $line-height-lg !default;
 
 $input-btn-border-width:      $border-width !default;
@@ -393,7 +383,7 @@ $btn-active-box-shadow:       inset 0 3px 5px rgba($black, .125) !default;
 
 $btn-link-disabled-color:     $gray-600 !default;
 
-$btn-block-spacing-y:         .5rem !default;
+$btn-block-spacing-y:         8px !default;
 
 // Allows for customizing button radius independently from global border radius
 $btn-border-radius:           $border-radius !default;
@@ -405,7 +395,7 @@ $btn-transition:              color .15s ease-in-out, background-color .15s ease
 
 // Forms
 
-$label-margin-bottom:                   .5rem !default;
+$label-margin-bottom:                   8px !default;
 
 $input-padding-y:                       $input-btn-padding-y !default;
 $input-padding-x:                       $input-btn-padding-x !default;
@@ -453,16 +443,16 @@ $input-height-lg:                       calc(#{$input-height-inner-lg} + #{$inpu
 
 $input-transition:                      border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
 
-$form-text-margin-top:                  .25rem !default;
+$form-text-margin-top:                  4px !default;
 
-$form-check-input-gutter:               1.25rem !default;
-$form-check-input-margin-y:             .3rem !default;
-$form-check-input-margin-x:             .25rem !default;
+$form-check-input-gutter:               20px !default;
+$form-check-input-margin-y:             5px !default;
+$form-check-input-margin-x:             4px !default;
 
-$form-check-inline-margin-x:            .75rem !default;
-$form-check-inline-input-margin-x:      .3125rem !default;
+$form-check-inline-margin-x:            12px !default;
+$form-check-inline-input-margin-x:      5px !default;
 
-$form-group-margin-bottom:              1rem !default;
+$form-group-margin-bottom:              16px !default;
 
 $input-group-addon-color:               $input-color !default;
 $input-group-addon-bg:                  $gray-200 !default;
@@ -470,13 +460,13 @@ $input-group-addon-border-color:        $input-border-color !default;
 
 $custom-forms-transition:               background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
 
-$custom-control-gutter:                 1.5rem !default;
-$custom-control-spacer-x:               1rem !default;
+$custom-control-gutter:                 24px !default;
+$custom-control-spacer-x:               16px !default;
 
-$custom-control-indicator-size:         1rem !default;
+$custom-control-indicator-size:         16px !default;
 $custom-control-indicator-bg:           $gray-300 !default;
 $custom-control-indicator-bg-size:      50% 50% !default;
-$custom-control-indicator-box-shadow:   inset 0 .25rem .25rem rgba($black, .1) !default;
+$custom-control-indicator-box-shadow:   inset 0 4px 4px rgba($black, .1) !default;
 
 $custom-control-indicator-disabled-bg:          $gray-200 !default;
 $custom-control-label-disabled-color:           $gray-600 !default;
@@ -620,7 +610,7 @@ $zindex-tooltip:                    1070 !default;
 
 // Navs
 
-$nav-link-padding-y:                .5rem !default;
+$nav-link-padding-y:                8px !default;
 $nav-link-padding-x:                1rem !default;
 $nav-link-disabled-color:           $gray-600 !default;
 

@@ -1,6 +1,9 @@
 
 .app-sidebar {
-  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
   border-right: 1px solid #e3ebf6;
   overflow: scroll;
 }
