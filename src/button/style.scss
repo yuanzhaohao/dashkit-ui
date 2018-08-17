@@ -53,9 +53,11 @@ $value in $theme-colors {
   .#{$prefix-cls}-#{$color} {
     @if $color == 'default' {
       border-color: $border-color;
+      color: $dark;
       @include hover {
-        border-color: #d2ddec;
-        background-color: #f9fbfd;
+        border-color: $primary;
+        background-color: $light;
+        color: $primary;
       }
     } @else {
       @include button-variant($value, $value);
@@ -69,8 +71,8 @@ $value in $theme-colors {
     @if $color == 'default' {
       border-color: $border-color;
       @include hover {
-        border-color: $primary;
-        color: $primary;
+        border-color: $light;
+        background-color: $light;
       }
     } @else {
       @include button-outline-variant($value);

@@ -20,7 +20,7 @@ class PageButton extends React.Component<Props> {
         </div>
 
         <h2 className="module-title">Example</h2>
-        <Example title="Basic usage">
+        <Example title="Basic usage" desc="Use type, outline, round and circle to define Button's style.">
           <div className="button-list">
             <Button>Default</Button>
             <Button type="primary">Primary</Button>
