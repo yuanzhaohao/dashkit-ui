@@ -55,9 +55,9 @@ class PageButton extends React.Component<Props> {
             <Button size="large">Large</Button>
             <Button size="default">Default</Button>
             <Button size="small">Small</Button>
-            <Button type="primary" size="large">Large</Button>
-            <Button type="primary" size="default">Default</Button>
-            <Button type="primary" size="small">Small</Button>
+            <Button type="primary" size="large" round={true}>Large</Button>
+            <Button type="primary" size="default" round={true}>Default</Button>
+            <Button type="primary" size="small" round={true}>Small</Button>
           </div>
         </Example>
       </div>
