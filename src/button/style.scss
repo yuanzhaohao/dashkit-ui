@@ -1,8 +1,8 @@
 @import '../style/functions';
-@import '../style/variables';
+@import '../style/theme';
 @import '../style/mixins';
-$prefix-cls: 'dashkit-btn';
 
+$prefix-cls: 'dashkit-btn';
 
 .#{$prefix-cls} {
   display: inline-block;
@@ -13,7 +13,7 @@ $prefix-cls: 'dashkit-btn';
   user-select: none;
   border: $btn-border-width solid transparent;
   @include button-size($btn-padding-y, $btn-padding-x, $font-size-base, $btn-line-height, $btn-border-radius);
-  @include transition($btn-transition); // Share hover and focus styles
+  @include transition($btn-transition);
   @include hover-focus {
     text-decoration: none;
   }
@@ -51,14 +51,30 @@ fieldset:disabled a.#{$prefix-cls} {
 @each $color,
 $value in $theme-colors {
   .#{$prefix-cls}-#{$color} {
-    @include button-variant($value, $value);
+    @if $color == 'default' {
+      border-color: $border-color;
+      @include hover {
+        border-color: #d2ddec;
+        background-color: #f9fbfd;
+      }
+    } @else {
+      @include button-variant($value, $value);
+    }
   }
 }
 
 @each $color,
 $value in $theme-colors {
   .#{$prefix-cls}-outline-#{$color} {
-    @include button-outline-variant($value);
+    @if $color == 'default' {
+      border-color: $border-color;
+      @include hover {
+        border-color: $primary;
+        color: $primary;
+      }
+    } @else {
+      @include button-outline-variant($value);
+    }
   }
 }
 
@@ -85,7 +101,6 @@ $value in $theme-colors {
   } // No need for an active state here
 }
 
-//
 // Button Sizes
 //
 .#{$prefix-cls}-large {

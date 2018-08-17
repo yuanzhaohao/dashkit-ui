@@ -5,3 +5,10 @@
     }
   }
 }
+.button-list {
+  margin-top: 7px;
+
+  &:nth-of-type(1) {
+    margin-top: 0;
+  }
+}

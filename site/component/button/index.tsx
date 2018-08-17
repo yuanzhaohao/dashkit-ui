@@ -21,13 +21,23 @@ class PageButton extends React.Component<Props> {
 
         <h2 className="module-title">Example</h2>
         <Example title="Basic usage">
-          <Button>Default</Button>
-          <Button type="primary">Primary</Button>
-          <Button type="success">Success</Button>
-          <Button type="warning">Warning</Button>
-          <Button type="danger">Danger</Button>
-          <Button type="info">Info</Button>
-          <Button type="link">Link</Button>
+          <div className="button-list">
+            <Button>Default</Button>
+            <Button type="primary">Primary</Button>
+            <Button type="success">Success</Button>
+            <Button type="warning">Warning</Button>
+            <Button type="danger">Danger</Button>
+            <Button type="info">Info</Button>
+            <Button type="link">Link</Button>
+          </div>
+          <div className="button-list">
+            <Button outline={true}>Default</Button>
+            <Button type="primary" outline={true}>Primary</Button>
+            <Button type="success" outline={true}>Success</Button>
+            <Button type="warning" outline={true}>Warning</Button>
+            <Button type="danger" outline={true}>Danger</Button>
+            <Button type="info" outline={true}>Info</Button>
+          </div>
         </Example>
       </div>
     )

@@ -6,10 +6,12 @@ import * as React from 'react';
 export type ButtonSize = 'small' | 'default' | 'large';
 export type ButtonType = 'default' | 'primary' | 'success' | 'danger' | 'warning' | 'info' | 'link';
 export type ButtonProps = {
+  prefixCls?: string;
   className?: string;
   size?: ButtonSize;
   type?: ButtonType;
-  prefixCls?: string;
+  outline?: boolean;
+  round?: boolean;
 };
 export type ButtonState = {
   spinning?: boolean;
@@ -18,18 +20,21 @@ export type ButtonState = {
 class Button extends React.Component<ButtonProps, ButtonState> {
   static defaultProps = {
     prefixCls: 'dashkit-btn',
+    outline: false,
+    round: false,
     size: 'default' as ButtonSize,
     type: 'default' as ButtonType,
   };
 
   render() {
-    const { children, prefixCls, type, size, className, ...attibutes } = this.props;
+    const { children, prefixCls, type, outline, round, size, className, ...attibutes } = this.props;
     const buttonClassName = classNames(
       prefixCls,
       {
-        [`${prefixCls}-${type}`]: true,
+        [`${prefixCls}-${type}`]: !outline && !round && true,
         [`${prefixCls}-large`]: size === 'large',
         [`${prefixCls}-small`]: size === 'small',
+        [`${prefixCls}-outline-${type}`]: outline,
       },
       className,
     );

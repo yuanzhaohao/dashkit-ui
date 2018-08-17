@@ -164,7 +164,7 @@ $link-hover-decoration:     underline !default;
 //
 // Style p element.
 
-$paragraph-margin-bottom:   1rem !default;
+$paragraph-margin-bottom:   16px !default;
 
 
 // Grid breakpoints
@@ -215,13 +215,13 @@ $line-height-sm:              1.5 !default;
 $border-width:                1px !default;
 $border-color:              #e3ebf6 !default;
 
-$border-radius:               .25rem !default;
-$border-radius-lg:            .3rem !default;
-$border-radius-sm:            .2rem !default;
+$border-radius:               4px !default;
+$border-radius-lg:            5px !default;
+$border-radius-sm:            3px !default;
 
-$box-shadow-sm:               0 .125rem .25rem rgba($black, .075) !default;
-$box-shadow:                  0 .5rem 1rem rgba($black, .15) !default;
-$box-shadow-lg:               0 1rem 3rem rgba($black, .175) !default;
+$box-shadow-sm:               0 2px 4px rgba($black, .075) !default;
+$box-shadow:                  0 8px 16px rgba($black, .15) !default;
+$box-shadow-lg:               0 16px 48px rgba($black, .175) !default;
 
 $component-active-color:      $white !default;
 $component-active-bg:         theme-color("primary") !default;

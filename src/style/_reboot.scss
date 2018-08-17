@@ -1,3 +1,4 @@
+
 *,
 *::before,
 *::after {
@@ -140,7 +141,7 @@ ul ol {
 }
 
 dt {
-  font-weight: $dt-font-weight;
+  font-weight: $font-weight-bold;
 }
 
 dd {
