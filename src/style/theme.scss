@@ -150,8 +150,6 @@ $grid-gutter-width:           30px !default;
 
 // Components
 //
-$line-height-lg:              1.5 !default;
-$line-height-sm:              1.5 !default;
 
 $border-width:                1px !default;
 $border-color:              #e3ebf6 !default;
@@ -256,47 +254,27 @@ $table-striped-order:         odd !default;
 
 $table-caption-color:         $text-muted !default;
 
-// Buttons + Forms
-//
-
-$input-btn-padding-y:         6px !default;
-$input-btn-padding-x:         12px !default;
-$input-btn-line-height:       $line-height-base !default;
-
-$input-btn-focus-width:       3px !default;
-$input-btn-focus-color:       rgba($component-active-bg, .25) !default;
-$input-btn-focus-box-shadow:  0 0 0 $input-btn-focus-width $input-btn-focus-color !default;
-
-$input-btn-padding-y-sm:      4px !default;
-$input-btn-padding-x-sm:      8px !default;
-$input-btn-line-height-sm:    $line-height-sm !default;
-
-$input-btn-padding-y-lg:      8px !default;
-$input-btn-padding-x-lg:      16px !default;
-$input-btn-line-height-lg:    $line-height-lg !default;
-
-$input-btn-border-width:      $border-width !default;
-
 // Buttons
 //
-$btn-padding-y:               $input-btn-padding-y !default;
-$btn-padding-x:               $input-btn-padding-x !default;
-$btn-line-height:             $input-btn-line-height !default;
+$btn-height:                  34px !default;
+$btn-padding-x:               12px !default;
+$btn-line-height:             $line-height-base !default;
 
-$btn-padding-y-sm:            $input-btn-padding-y-sm !default;
-$btn-padding-x-sm:            $input-btn-padding-x-sm !default;
-$btn-line-height-sm:          $input-btn-line-height-sm !default;
+$btn-height-sm:               26px !default;
+$btn-padding-x-sm:            8px !default;
+$btn-line-height-sm:          $line-height-base !default;
 
-$btn-padding-y-lg:            $input-btn-padding-y-lg !default;
-$btn-padding-x-lg:            $input-btn-padding-x-lg !default;
-$btn-line-height-lg:          $input-btn-line-height-lg !default;
+$btn-height-lg:               42px !default;
+$btn-padding-x-lg:            16px !default;
+$btn-line-height-lg:          $line-height-base !default;
 
-$btn-border-width:            $input-btn-border-width !default;
+$btn-border-width:            $border-width !default;
 
 $btn-font-weight:             $font-weight-normal !default;
 $btn-box-shadow:              inset 0 1px 0 rgba($white, .15), 0 1px 1px rgba($black, .075) !default;
-$btn-focus-width:             $input-btn-focus-width !default;
-$btn-focus-box-shadow:        $input-btn-focus-box-shadow !default;
+$btn-focus-color:             rgba($component-active-bg, .25) !default;
+$btn-focus-width:             3px !default;
+$btn-focus-box-shadow:        0 0 0 $btn-focus-width $btn-focus-color !default;
 $btn-disabled-opacity:        .65 !default;
 $btn-active-box-shadow:       inset 0 3px 5px rgba($black, .125) !default;
 

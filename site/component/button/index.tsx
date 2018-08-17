@@ -30,13 +30,34 @@ class PageButton extends React.Component<Props> {
             <Button type="info">Info</Button>
             <Button type="link">Link</Button>
           </div>
+
           <div className="button-list">
-            <Button outline={true}>Default</Button>
+            <Button outline={true}>Outline</Button>
             <Button type="primary" outline={true}>Primary</Button>
             <Button type="success" outline={true}>Success</Button>
             <Button type="warning" outline={true}>Warning</Button>
             <Button type="danger" outline={true}>Danger</Button>
             <Button type="info" outline={true}>Info</Button>
+          </div>
+
+          <div className="button-list">
+            <Button round={true}>Round</Button>
+            <Button type="primary" round={true}>Primary</Button>
+            <Button type="success" round={true}>Success</Button>
+            <Button type="warning" round={true}>Warning</Button>
+            <Button type="danger" round={true}>Danger</Button>
+            <Button type="info" round={true}>Info</Button>
+          </div>
+        </Example>
+
+        <Example title="Sizes">
+          <div className="button-list">
+            <Button size="large">Large</Button>
+            <Button size="default">Default</Button>
+            <Button size="small">Small</Button>
+            <Button type="primary" size="large">Large</Button>
+            <Button type="primary" size="default">Default</Button>
+            <Button type="primary" size="small">Small</Button>
           </div>
         </Example>
       </div>

@@ -31,10 +31,11 @@ class Button extends React.Component<ButtonProps, ButtonState> {
     const buttonClassName = classNames(
       prefixCls,
       {
-        [`${prefixCls}-${type}`]: !outline && !round && true,
+        [`${prefixCls}-${type}`]: !outline && true,
         [`${prefixCls}-large`]: size === 'large',
         [`${prefixCls}-small`]: size === 'small',
         [`${prefixCls}-outline-${type}`]: outline,
+        [`${prefixCls}-rounded`]: round,
       },
       className,
     );
