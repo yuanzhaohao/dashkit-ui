@@ -10,12 +10,14 @@ export type SpinProps = {
   size?: SpinSize;
   delay?: number;
   text?: string;
+  prefixCls?: string;
 };
 export interface SpinState {
   spinning?: boolean;
 }
 class Spin extends React.Component<SpinProps, SpinState> {
   public static defaultProps = {
+    prefixCls: 'dashkit-spin',
     spinning: true,
     size: 'default' as SpinSize,
   };
@@ -86,43 +88,43 @@ class Spin extends React.Component<SpinProps, SpinState> {
     }
   }
   public render() {
-    const { className, size, text } = this.props;
+    const { className, size, text, prefixCls } = this.props;
     const { spinning } = this.state;
     const isNestedPattern = !!(this.props && this.props.children);
     const spinClassName = classNames([
-      'spin',
+      prefixCls,
       {
-        'spinning': spinning,
+        [`${prefixCls}-spinning`]: spinning,
       },
     ]);
     const circleClassName = classNames([
-      'spin-circle',
+      `${prefixCls}-circle`,
       {
-        'spin-large': size === 'large',
-        'spin-small': size === 'small',
+        [`${prefixCls}-large`]: size === 'large',
+        [`${prefixCls}-small`]: size === 'small',
       },
     ]);
 
     const spinElement = (
       <div className={spinClassName}>
         <div className={circleClassName} />
-        {text ? <div className="spin-text">{text}</div> : null}
+        {text ? <div className={`${prefixCls}-text`}>{text}</div> : null}
       </div>
     );
 
     if (isNestedPattern) {
       const containerClassName = classNames(
-        'spin-container',
+      `${prefixCls}-container`,
         {
-          'spin-blur': spinning,
+          [`${prefixCls}-blur`]: spinning,
         },
         className,
       );
       return (
-        <div className="spin-box">
+        <div className={`${prefixCls}-box`}>
           <div className={containerClassName}>{this.props.children}</div>
           {spinning ? (
-            <div className="spin-loading">{spinElement}</div>
+            <div className={`${prefixCls}-loading`}>{spinElement}</div>
           ) : null}
         </div>
       );
