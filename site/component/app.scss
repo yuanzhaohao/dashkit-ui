@@ -8,11 +8,12 @@
 
 .app-content {
   position: relative;
+  min-height: calc(100vh - 66px - 36px);
   background-color: #f9fbfd;
 }
 
 .app-footer {
-  padding-bottom: 24px;
+  padding-bottom: 15px;
   background-color: #f9fbfd;
   text-align: center;
 }

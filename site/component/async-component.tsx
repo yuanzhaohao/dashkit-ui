@@ -26,7 +26,7 @@ export default function asyncComponent(importComponent: any) {
         this.state.component
           ? <this.state.component />
           : <div className="page-loading">
-            <Spin text="Loading..." />
+            <Spin text="Loading..." spinning={true} />
           </div>
       )
     }
