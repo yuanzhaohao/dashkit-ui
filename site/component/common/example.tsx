@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as CodeMirror from 'codemirror';
 import './example.scss';
 
 type ExampleProps = {
@@ -7,6 +8,10 @@ type ExampleProps = {
 };
 
 class Example extends React.PureComponent<ExampleProps> {
+  componentDidMount() {
+    const codeElement = this.refs.code;
+    
+  }
   render() {
     const { title, desc, children } = this.props;
     const codeString = `<Button>a</Button>`;
@@ -18,9 +23,9 @@ class Example extends React.PureComponent<ExampleProps> {
           {title ? <div className="app-example-title">{title}</div> : null}
           {desc ? <div className="app-example-desc">{desc}</div> : null}
         </div>
-        <div className="app-example-code">
+        <code className="app-example-code">
           {codeString}
-        </div>
+        </code>
       </div>
     )
   }
