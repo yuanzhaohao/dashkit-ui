@@ -16,7 +16,10 @@ class Index extends React.Component<Props> {
   }
   public render() {
     return (
-      <div className="page-container">index page</div>
+      <div className="page-container">
+        <h1 className="index-title">Dashkit UI</h1>
+        <p className="index-desc">A component library for developers, designers and product managers.</p>
+      </div>
     )
   }
 }

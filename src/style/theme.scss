@@ -1,5 +1,5 @@
 //
-// Color 
+// Color
 //
 $white:    #fff !default;
 $gray-100: #f8f9fa !default;
@@ -130,7 +130,7 @@ $sizes: map-merge(
 );
 
 //Body
-// 
+//
 $body-bg : $white !default;
 $body-color : $gray-900 !default;
 
@@ -187,7 +187,7 @@ $font-weight-bold:            500 !default;
 $font-weight-base:            $font-weight-normal !default;
 $line-height-base:            1.5 !default;
 
-$h1-font-siz:                 $font-size-base * 2.5 !default;
+$h1-font-size:                $font-size-base * 2.25 !default;
 $h2-font-size:                $font-size-base * 2 !default;
 $h3-font-size:                $font-size-base * 1.75 !default;
 $h4-font-size:                $font-size-base * 1.5 !default;

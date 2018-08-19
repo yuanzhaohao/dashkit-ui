@@ -9,29 +9,33 @@
   }
 }
 
-.app-example-info {
-  position: relative;
-  padding: 18px 32px;
-  border-top: 1px solid #edf2f9;
-}
-
 .app-example-content {
   padding: 42px 24px 50px;
+}
+
+.app-example-info {
+  position: relative;
+  padding: 16px 24px;
+  border-top: 1px solid #edf2f9;
 }
 
 .app-example-title {
   position: absolute;
   top: -15px;
+  left: 16px;
   height: 30px;
   padding: 0 8px;
-  left: 24px;
   line-height: 30px;
   font-size: 16px;
   background-color: #fff;
 }
 
+.app-example-desc {
+  color: #95aac9;
+}
+
 .app-example-code {
-  padding: 24px 24px 0;
-  color: #5e6d82;
+  padding: 16px 24px;
+  font-size: 87.5%;
   border-top: 1px dashed #edf2f9;
 }
