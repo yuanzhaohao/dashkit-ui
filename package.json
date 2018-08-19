@@ -51,6 +51,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "chalk": "^2.4.1",
     "clean-css": "^4.1.11",
+    "codemirror": "^5.39.2",
     "compression-webpack-plugin": "^1.1.11",
     "connect-history-api-fallback": "^1.5.0",
     "css-loader": "^0.28.11",
