@@ -23,7 +23,7 @@ class Example extends React.PureComponent<ExampleProps> {
           {title ? <div className="app-example-title">{title}</div> : null}
           {desc ? <div className="app-example-desc">{desc}</div> : null}
         </div>
-        <code className="app-example-code">
+        <code className="app-example-code" ref="code">
           {codeString}
         </code>
       </div>
