@@ -2,7 +2,7 @@ import * as React from 'react';
 import './example.scss';
 
 type ExampleProps = {
-  markdownText?: string;
+  markdownText: string;
 };
 
 class Example extends React.PureComponent<ExampleProps> {
@@ -13,22 +13,53 @@ class Example extends React.PureComponent<ExampleProps> {
   }
   render() {
     const { markdownText } = this.props;
-    
+    const dataMeta = this.getDataMeta();
+    const dataSource = this.getDataSource();
+
     return (
       <div className="app-example">
-        {/* <div className="app-example-content">{children}</div>
+        {/* <div className="app-example-content">{children}</div> */}
         <div className="app-example-info">
-          {title ? <div className="app-example-title">{title}</div> : null}
-          {desc ? <div className="app-example-desc">{desc}</div> : null}
-        </div> */}
+          {dataMeta.title ? <div className="app-example-title">{dataMeta.title}</div> : null}
+          {dataMeta.subtitle ? <div className="app-example-subtitle">{dataMeta.subtitle}</div> : null}
+        </div>
         {markdownText
           ? <pre className="app-example-code show-code">
-            <code className="language-jsx" ref="code">{markdownText}</code>
+            <code className="language-jsx" ref="code">{dataSource}</code>
           </pre>
           : null
         }
       </div>
     )
+  }
+
+  private getDataSource = () => {
+    const { markdownText } = this.props;
+    const reg = /```\s?js\s?([^]+?)```/g
+    const sourceMatch = markdownText.match(/```(.*)\n?([^]+)```/)
+    if (sourceMatch && sourceMatch.length && sourceMatch[2]) {
+      return sourceMatch[2];
+    }
+    return '';
+  }
+
+  private getDataMeta = () => {
+    const { markdownText } = this.props;
+    const reg = /---(.*)\n?([^]+)---/;
+    const metaMatch = markdownText.match(reg);
+    const metaData: any = {};
+    if (metaMatch && metaMatch.length && metaMatch[2]) {
+      const originData = metaMatch[2];
+      const lines = originData.trim().split('\n');
+
+      lines.forEach((line: any) => {
+        const ary = line.trim().split(':');
+        if (ary && ary.length > 1) {
+          metaData[ary[0]] = ary[1].trim();
+        }
+      });
+    }
+    return metaData;
   }
 }
 
