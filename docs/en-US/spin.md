@@ -2,9 +2,13 @@
 
 A simple yet versatile animated spinner component.
 
-## Basic usage
+### Example
 
-Use type, outline, round and circle to define Button's style.
+::: example
+---
+title: Basic
+subtitle: Use type, outline, round and circle to define Button's style.
+---
 
 ```js
 render() {
@@ -37,3 +41,4 @@ render() {
   </div>
 }
 ```
+:::

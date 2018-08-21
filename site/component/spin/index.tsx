@@ -1,16 +1,13 @@
-import './style.scss'
-
 import * as React from 'react';
 import Page from '../common/page';
+import './style.scss';
 
-type Props = {};
-
-class PageButton extends React.Component<Props> {
-  public render() {
+class PageButton extends React.PureComponent {
+  render() {
+    const markdownText = require(`../../../docs/en-US/spin.md`);
     return (
-      <Page />
-    )
+      <Page markdownText={markdownText} name="spin" />
+    );
   }
 }
-
 export default PageButton;
