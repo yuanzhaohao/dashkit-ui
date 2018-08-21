@@ -6,6 +6,14 @@ type ExampleProps = {
 };
 
 class Example extends React.PureComponent<ExampleProps> {
+  dataMeta: any;
+  dataSource: any;
+  constructor(props: ExampleProps) {
+    super(props);
+    this.dataMeta = this.getDataMeta();
+    this.dataSource = this.getDataSource();
+  }
+
   componentDidMount() {
     if (this.refs.code) {
       (window as any).Prism.highlightElement(this.refs.code);
@@ -13,8 +21,7 @@ class Example extends React.PureComponent<ExampleProps> {
   }
   render() {
     const { markdownText } = this.props;
-    const dataMeta = this.getDataMeta();
-    const dataSource = this.getDataSource();
+    const { dataMeta, dataSource } = this;
 
     return (
       <div className="app-example">
