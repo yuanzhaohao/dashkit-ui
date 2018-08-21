@@ -5,13 +5,14 @@ import { Layout } from '../../src';
 import store from '../redux/store';
 import CommonHeader from './common/header';
 import CommonSidebar from './common/sidebar';
-import asyncComponent from './async-component';
+import asyncComponent from './common/async-component';
 
 import './app.scss';
 
-const { Content, Footer, Sidebar } = Layout;
+const { Content, Footer } = Layout;
 const Index = asyncComponent(() => import('./index'));
 const PageButton = asyncComponent(() => import('./button'));
+const PageSpin = asyncComponent(() => import('./spin'));
 
 export default () => (
   <Provider store={store}>
@@ -25,6 +26,7 @@ export default () => (
               <Route exact path="/" component={Index} />
               <Route exact path="/index" component={Index} />
               <Route exact path="/components/button" component={PageButton} />
+              <Route exact path="/components/spin" component={PageSpin} />
               <Redirect to="/" />
             </Switch>
           </Content>

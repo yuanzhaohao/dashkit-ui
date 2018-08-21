@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as prism from 'prismjs';
 import './example.scss';
 
 type ExampleProps = {
@@ -9,11 +8,24 @@ type ExampleProps = {
 
 class Example extends React.PureComponent<ExampleProps> {
   componentDidMount() {
-    prism.highlightAll();
+    (window as any).Prism.highlightElement(this.refs.code);
   }
   render() {
     const { title, desc, children } = this.props;
-    const codeString = `<Button>a</Button>`;
+    let codeString = `
+      <div className="button-list">
+  <Button
+    outline={false}
+    prefixCls="dashkit-btn"
+    round={false}
+    size="large"
+    type="default"
+  >
+    Large
+  </Button>
+</div>`;
+
+    const element = React.createElement(codeString);
     
     return (
       <div className="app-example">
@@ -22,9 +34,12 @@ class Example extends React.PureComponent<ExampleProps> {
           {title ? <div className="app-example-title">{title}</div> : null}
           {desc ? <div className="app-example-desc">{desc}</div> : null}
         </div>
-        <pre ref="code">
-          <code className="language-jsx">{codeString}</code>
-        </pre>
+        {codeString
+          ? <pre className="app-example-code show-code">
+            <code className="language-jsx" ref="code">{codeString}</code>
+          </pre>
+          : null
+        }
       </div>
     )
   }

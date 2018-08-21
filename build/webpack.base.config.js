@@ -81,7 +81,7 @@ module.exports = {
     filename: '[name].js'
   },
   resolve: {
-    extensions: ['.js', '.ts', '.tsx', '.json', 'css', 'scss', 'svg'],
+    extensions: ['.js', '.ts', '.tsx', '.json', 'css', 'scss', 'svg', 'md'],
     alias: {
       '@': srcPath
     }
@@ -155,7 +155,11 @@ module.exports = {
           limit: 10000,
           name: 'fonts/[name].[hash:7].[ext]'
         }
-      }
+      },
+      {
+        test: /\.md$/,
+        loader: 'raw-loader',
+      },
     ]
   }
 }
