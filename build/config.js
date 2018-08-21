@@ -4,7 +4,7 @@ const path = require('path')
 
 module.exports = {
   indexPage: 'index',
-  staticPath: './static',
+  staticPath: './site/static',
   assetsRoot: './dist',
   proxyTable: {},
   mockData: true,

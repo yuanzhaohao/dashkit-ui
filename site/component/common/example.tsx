@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as CodeMirror from 'codemirror';
+import * as prism from 'prismjs';
 import './example.scss';
 
 type ExampleProps = {
@@ -9,8 +9,7 @@ type ExampleProps = {
 
 class Example extends React.PureComponent<ExampleProps> {
   componentDidMount() {
-    const codeElement = this.refs.code;
-    
+    prism.highlightAll();
   }
   render() {
     const { title, desc, children } = this.props;
@@ -23,9 +22,9 @@ class Example extends React.PureComponent<ExampleProps> {
           {title ? <div className="app-example-title">{title}</div> : null}
           {desc ? <div className="app-example-desc">{desc}</div> : null}
         </div>
-        <code className="app-example-code" ref="code">
-          {codeString}
-        </code>
+        <pre ref="code">
+          <code className="language-jsx">{codeString}</code>
+        </pre>
       </div>
     )
   }
