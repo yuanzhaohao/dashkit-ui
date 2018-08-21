@@ -6,20 +6,20 @@ type ExampleProps = {
 };
 
 class Example extends React.PureComponent<ExampleProps> {
-  dataMeta: any;
-  dataSource: any;
+  private dataMeta: any;
+  private dataSource: any;
   constructor(props: ExampleProps) {
     super(props);
     this.dataMeta = this.getDataMeta();
     this.dataSource = this.getDataSource();
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     if (this.refs.code) {
       (window as any).Prism.highlightElement(this.refs.code);
     }
   }
-  render() {
+  public render() {
     const { markdownText } = this.props;
     const { dataMeta, dataSource } = this;
 
