@@ -35,6 +35,7 @@ class Page extends React.PureComponent<Props> {
     const { markdownText, name } = this.props;
     let html = '';
     if (typeof markdownText === 'string') {
+      this.components = [];
       const reg = /:::\s?example\s?([^]+?):::/g;
       const replaceText = markdownText.replace(reg, (match, text, offset) => {
         const key = `${name}-${offset.toString(36)}`;
