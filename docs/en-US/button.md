@@ -4,7 +4,12 @@ Buttons for actions in forms, dialogs, and more with support for multiple sizes,
 
 ### Example
 
-Use type, outline, round and circle to define Button's style.
+::: example
+
+```meta
+title: Basic
+subtitle: Use type, outline, round and circle to define Button's style.
+```
 
 ```js
 render() {
@@ -37,3 +42,25 @@ render() {
   </div>
 }
 ```
+:::
+
+::: example
+
+```meta
+title: Sizes
+subtitle: If a large or small button is desired, set the size property to either `large` or `small` respectively. Omit the `size` property for a button with the default size.
+```
+
+```js
+render() {
+  <div className="button-list">
+    <Button size="large">Large</Button>
+    <Button size="default">Default</Button>
+    <Button size="small">Small</Button>
+    <Button type="primary" size="large" round={true}>Large</Button>
+    <Button type="primary" size="default" round={true}>Default</Button>
+    <Button type="primary" size="small" round={true}>Small</Button>
+  </div>
+}
+```
+:::

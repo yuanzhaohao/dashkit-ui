@@ -43,8 +43,10 @@ class Example extends React.PureComponent<ExampleProps> {
   private getDataSource = () => {
     const { markdownText } = this.props;
     if (markdownText) {
-      const reg = /```\s?js\s?([^]+?)```/g
-      const sourceMatch = markdownText.match(/```(.*)\n?([^]+)```/)
+      // const reg = /```(.*)\n?([^]+)```/;
+      const reg = /```(.*)js\s?([^]+?)```/;
+      const sourceMatch = markdownText.match(reg);
+      console.log(sourceMatch)
       if (sourceMatch && sourceMatch.length && sourceMatch[2]) {
         return sourceMatch[2];
       }
@@ -54,10 +56,10 @@ class Example extends React.PureComponent<ExampleProps> {
 
   private getDataMeta = () => {
     const { markdownText } = this.props;
+    const metaData: any = {};
     if (markdownText) {
-      const reg = /---(.*)\n?([^]+)---/;
+      const reg = /```\s?meta\s?([^]+?)```/g;
       const metaMatch = markdownText.match(reg);
-      const metaData: any = {};
       if (metaMatch && metaMatch.length && metaMatch[2]) {
         const originData = metaMatch[2];
         const lines = originData.trim().split('\n');

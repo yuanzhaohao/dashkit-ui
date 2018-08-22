@@ -1,8 +1,9 @@
-import * as React from 'react';
-import Page from '../common/page';
 import './style.scss';
 
-class PageButton extends React.PureComponent {
+import * as React from 'react';
+import Page from '../common/page';
+
+class PageSpin extends React.PureComponent {
   render() {
     const markdownText = require(`../../../docs/en-US/spin.md`);
     return (
@@ -10,4 +11,4 @@ class PageButton extends React.PureComponent {
     );
   }
 }
-export default PageButton;
+export default PageSpin;

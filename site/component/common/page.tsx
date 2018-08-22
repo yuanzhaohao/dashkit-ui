@@ -19,6 +19,7 @@ class Page extends React.PureComponent<Props> {
     this.renderer = new marked.Renderer();
   }
   public componentDidMount() {
+    console.log(this.components);
     Object.keys(this.components).forEach(key => {
       const div = document.getElementById(key);
       if (div instanceof HTMLElement) {
