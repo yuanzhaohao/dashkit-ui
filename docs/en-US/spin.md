@@ -1,3 +1,8 @@
+---
+title: Basic
+subtitle: Use type, outline, round and circle to define Button's style.
+---
+
 # Spin
 
 A simple yet versatile animated spinner component.
@@ -5,11 +10,6 @@ A simple yet versatile animated spinner component.
 ### Example
 
 :::example
-
----
-title: Basic
-subtitle: Use type, outline, round and circle to define Button's style.
----
 
 ```js
 render() {
