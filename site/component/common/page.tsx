@@ -9,43 +9,44 @@ type Props = {
   name?: string;
 };
 
-
 class Page extends React.PureComponent<Props> {
   private renderer: any;
   private components: any;
   constructor(props: Props) {
     super(props);
-    this.components = {};
+    this.components = [];
     this.renderer = new marked.Renderer();
   }
   public componentDidMount() {
-    console.log(this.components);
-    Object.keys(this.components).forEach(key => {
-      const div = document.getElementById(key);
-      if (div instanceof HTMLElement) {
-        ReactDOM.render(this.components[key], div);
-      }
-    });
+    const contentElement = this.refs.content;
+    if (this.components.length && contentElement instanceof HTMLElement) {
+      ReactDOM.render(this.components, contentElement);
+    }
   }
   public render() {
     return (
-      <div className="app-page" dangerouslySetInnerHTML={this.getMarkdownText()} />
+      <div className="app-page">
+        <div className="app-page-info" dangerouslySetInnerHTML={this.getMarkdownText()} />
+        <div className="app-page-content" ref="content" />
+      </div>
     )
   }
-
   private getMarkdownText() {
     const { markdownText, name } = this.props;
     let html = '';
     if (typeof markdownText === 'string') {
-      const replaceText = markdownText.replace(/:::\s?example\s?([^]+?):::/g, (match, text, offset) => {
-        const id = `${name}-${offset.toString(36)}`;
+      const reg = /:::\s?example\s?([^]+?):::/g;
+      const replaceText = markdownText.replace(reg, (match, text, offset) => {
+        const key = `${name}-${offset.toString(36)}`;
+        this.components.push(
+          React.createElement(Example, {
+            markdownText: text,
+            key: key,
+          })
+        );
+        return '';
+      });
 
-        this.components[id] = React.createElement(Example, {
-          markdownText: text,
-        });
-
-        return `<div id=${id}></div>`;
-      })
       html = marked(replaceText, { renderer: this.renderer });
     }
     return {
