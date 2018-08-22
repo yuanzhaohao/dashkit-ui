@@ -4,11 +4,10 @@ A simple yet versatile animated spinner component.
 
 ### Example
 
-::: example
+:::example
+
 ---
-
 title: Basic
-
 subtitle: Use type, outline, round and circle to define Button's style.
 ---
 
