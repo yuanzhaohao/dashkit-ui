@@ -2,7 +2,7 @@
 
 Buttons for actions in forms, dialogs, and more with support for multiple sizes, states, and more.
 
-## Basic usage
+### Example
 
 Use type, outline, round and circle to define Button's style.
 
