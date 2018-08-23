@@ -5,6 +5,7 @@ import * as ReactDOM from 'react-dom';
 import * as marked from 'marked';
 import * as classNames from 'classnames';
 import { transform } from 'babel-standalone'; 
+// import * as transformer from '../../lib/transformer';
 import { Icon } from '../../../src';
 
 type ExampleProps = {
@@ -14,6 +15,7 @@ type ExampleProps = {
 type ExampleState = {
   showCode: boolean;
 };
+
 
 class Example extends React.PureComponent<ExampleProps, ExampleState> {
   private dataMeta: any;
@@ -31,35 +33,66 @@ class Example extends React.PureComponent<ExampleProps, ExampleState> {
 
   public componentDidMount() {
     if (this.dataSource) {
-      import('../../../src').then((Element: any) => {
-        const args = ['context', 'React', 'ReactDOM']
-        const argv = [this, React, ReactDOM]
+      // import('../../../src').then((Element: any) => {
+      //   const args = ['context', 'React', 'ReactDOM']
+      //   const argv = [this, React, ReactDOM]
 
-        for (const key in Element) {
-          args.push(key)
-          argv.push(Element[key])
+      //   for (const key in Element) {
+      //     args.push(key)
+      //     argv.push(Element[key])
+      //   }
+
+      //   return {
+      //     args,
+      //     argv,
+      //   }
+      // }).then(({ args, argv }) => {
+      //   // const code = transform(`
+      //   //   class Demo extends React.Component {
+      //   //     ${this.dataSource}
+      //   //   }
+
+      //   //   ReactDOM.render(<Demo {...context.props} />, document.getElementById('${this.contentKey}'))
+      //   // `, 
+      //   // {
+      //   //   presets: ['es2015', 'react']
+      //   // }).code;
+
+      //   const code = transform(`
+      //     ${this.dataSource
+      //       .replace('dashkit-ui', '../../../src')
+      //       .replace('mountNode', `document.getElementById(\'${this.contentKey}\')`)
+      //     }
+      //   `,
+      //     {
+      //       presets: ['es2015', 'react', 'stage-0'],
+      //       plugins: [
+      //         [
+      //           "transform-decorators-legacy"
+      //         ]
+      //       ]
+      //     }).code;
+
+      //   args.push(code);
+
+      //   new Function(...args).apply(null, argv);
+      // })
+      const code = transform(`
+          ${this.dataSource
+          .replace('dashkit-ui', '../../../src')
+          .replace('mountNode', `document.getElementById(\'${this.contentKey}\')`)
         }
-
-        return {
-          args,
-          argv,
-        }
-      }).then(({ args, argv }) => {
-        const code = transform(`
-          class Demo extends React.Component {
-            ${this.dataSource}
-          }
-
-          ReactDOM.render(<Demo {...context.props} />, document.getElementById('${this.contentKey}'))
-        `, 
+        `,
         {
-          presets: ['es2015', 'react']
+          presets: ['es2015', 'react', 'stage-0'],
+          plugins: [
+            [
+              "transform-decorators-legacy"
+            ]
+          ]
         }).code;
-
-        args.push(code);
-
-        new Function(...args).apply(null, argv);
-      })
+      console.log(code);
+      new Function([code]).apply(this);
     }
   }
   public render() {
