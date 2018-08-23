@@ -10,7 +10,7 @@ subtitle: The most basic usage.
 ```
 
 ```js
-import { Switch } from 'dashkit-ui';
+// import { Switch } from 'dashkit-ui';
 
 function onChange(checked) {
   console.log(`switch to ${checked}`);
