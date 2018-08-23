@@ -12,8 +12,11 @@ subtitle: Use `type` to define Icon's style.
 ```js
 render() {
   return (
-    <div className="icon-list">
-      <Icon type="home" />
+    <div className="icon-list clearfix">
+      <div className="icon-item">
+        <Icon type="home" />
+        <span>home</span>
+      </div>
     </div>
   )
 }

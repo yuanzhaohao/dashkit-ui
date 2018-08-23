@@ -1,14 +1,21 @@
+import './example.scss';
+
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as marked from 'marked';
+import * as classNames from 'classnames';
 import { transform } from 'babel-standalone'; // tslint:disable-line
-import './example.scss';
+import { Icon } from '../../../src';
 
 type ExampleProps = {
   markdownText: string;
 };
 
-class Example extends React.PureComponent<ExampleProps> {
+type ExampleState = {
+  showCode: boolean;
+};
+
+class Example extends React.PureComponent<ExampleProps, ExampleState> {
   private dataMeta: any;
   private dataSource: any;
   private contentKey: any;
@@ -16,14 +23,13 @@ class Example extends React.PureComponent<ExampleProps> {
     super(props);
     this.dataMeta = this.getDataMeta();
     this.dataSource = this.getDataSource();
-    this.contentKey = `${(Math.random() * 1e9).toString(36)}`
+    this.contentKey = `${(Math.random() * 1e9).toString(36)}`;
+    this.state = {
+      showCode: false,
+    };
   }
 
   public componentDidMount() {
-    if (this.refs.code) {
-      (window as any).Prism.highlightElement(this.refs.code);
-    }
-
     if (this.dataSource) {
       import('../../../src').then((Element: any) => {
         const args = ['context', 'React', 'ReactDOM']
@@ -57,23 +63,28 @@ class Example extends React.PureComponent<ExampleProps> {
     }
   }
   public render() {
-    const { markdownText } = this.props;
     const { dataMeta, dataSource } = this;
+    const { showCode } = this.state;
 
     return (
-      <div className="app-example">
-        <div className="app-example-content" id={this.contentKey}></div>
-        <div className="app-example-info">
-          {dataMeta.title ? <div className="app-example-title">{dataMeta.title}</div> : null}
+      <div className="example">
+        <div className="example-content" id={this.contentKey}></div>
+        <div className="example-info">
+          {dataMeta.title ? <div className="example-title">{dataMeta.title}</div> : null}
           {dataMeta.subtitle 
-            ? <div className="app-example-subtitle" dangerouslySetInnerHTML={{
+            ? <div className="example-subtitle" dangerouslySetInnerHTML={{
                 __html: marked(dataMeta.subtitle),
               }} /> 
             : null
           }
+          <Icon 
+            type={showCode ? 'folder-minus' : 'folder-plus'} 
+            className="example-control" 
+            onClick={this.onControlClick}
+          />
         </div>
-        {markdownText
-          ? <pre className="app-example-code show-code">
+        {showCode
+          ? <pre className="example-code">
             <code className="language-jsx" ref="code">{dataSource}</code>
           </pre>
           : null
@@ -113,6 +124,19 @@ class Example extends React.PureComponent<ExampleProps> {
       }
     }
     return metaData;
+  }
+
+  private onControlClick = () => {
+    const { showCode } = this.state;
+    const newValue = !showCode
+    this.setState({
+      showCode: newValue,
+    });
+    setTimeout(() => {
+      if (newValue && this.refs.code) {
+        (window as any).Prism.highlightElement(this.refs.code);
+      }
+    }, 0);
   }
 }
 
