@@ -1,8 +1,6 @@
-# Button
+# Icon
 
 Simply beautiful icons.
-
-### Example
 
 ::: example
 

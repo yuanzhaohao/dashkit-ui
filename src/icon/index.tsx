@@ -11,6 +11,8 @@ export type IconProps = {
 };
 
 class Icon extends React.PureComponent<IconProps> {
+
+
   static defaultProps = {
     prefixCls: 'dashkit-icon',
   };
@@ -26,5 +28,9 @@ class Icon extends React.PureComponent<IconProps> {
     return <i {...attribute} className={iconClassName} />;
   }
 }
+
+Icon.defaultProps = {
+  prefixCls: 'dashkit-icon',
+};
 
 export default Icon;

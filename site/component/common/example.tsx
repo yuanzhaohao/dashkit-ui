@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import * as marked from 'marked';
 import { transform } from 'babel-standalone'; // tslint:disable-line
 import './example.scss';
 
@@ -64,7 +65,12 @@ class Example extends React.PureComponent<ExampleProps> {
         <div className="app-example-content" id={this.contentKey}></div>
         <div className="app-example-info">
           {dataMeta.title ? <div className="app-example-title">{dataMeta.title}</div> : null}
-          {dataMeta.subtitle ? <div className="app-example-subtitle">{dataMeta.subtitle}</div> : null}
+          {dataMeta.subtitle 
+            ? <div className="app-example-subtitle" dangerouslySetInnerHTML={{
+                __html: marked(dataMeta.subtitle),
+              }} /> 
+            : null
+          }
         </div>
         {markdownText
           ? <pre className="app-example-code show-code">
