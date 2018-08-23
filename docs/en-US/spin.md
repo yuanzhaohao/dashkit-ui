@@ -36,7 +36,7 @@ render() {
 ```
 :::
 
-<!---
+:::example
 
 ```meta
 title: Description
@@ -51,4 +51,3 @@ render() {
 }
 ```
 :::
---->
