@@ -13,6 +13,7 @@ const { Content, Footer } = Layout;
 const Index = asyncComponent(() => import('./index'));
 const PageButton = asyncComponent(() => import('./button'));
 const PageSpin = asyncComponent(() => import('./spin'));
+const PageSwitch = asyncComponent(() => import('./switch'));
 const PageIcon = asyncComponent(() => import('./icon'));
 
 export default () => (
@@ -29,6 +30,7 @@ export default () => (
               <Route exact path="/components/button" component={PageButton} />
               <Route exact path="/components/spin" component={PageSpin} />
               <Route exact path="/components/icon" component={PageIcon} />
+              <Route exact path="/components/switch" component={PageSwitch} />
               <Redirect to="/" />
             </Switch>
           </Content>

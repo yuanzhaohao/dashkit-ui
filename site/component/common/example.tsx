@@ -4,7 +4,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as marked from 'marked';
 import * as classNames from 'classnames';
-import { transform } from 'babel-standalone'; // tslint:disable-line
+import { transform } from 'babel-standalone'; 
 import { Icon } from '../../../src';
 
 type ExampleProps = {

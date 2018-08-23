@@ -21,12 +21,12 @@ $prefix-cls: 'dashkit-btn';
   &.focus {
     outline: 0;
     box-shadow: $btn-focus-box-shadow;
-  } // Disabled comes first so active can properly restyle
+  }
   &.disabled,
   &:disabled {
     opacity: $btn-disabled-opacity;
     @include box-shadow(none);
-  } // Opinionated: add "hand" cursor to non-disabled .btn elements
+  }
   &:not(:disabled):not(.disabled) {
     cursor: pointer;
   }

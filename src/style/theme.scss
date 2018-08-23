@@ -274,9 +274,8 @@ $btn-border-width:            $border-width !default;
 
 $btn-font-weight:             $font-weight-normal !default;
 $btn-box-shadow:              inset 0 1px 0 rgba($white, .15), 0 1px 1px rgba($black, .075) !default;
-$btn-focus-color:             rgba($component-active-bg, .25) !default;
 $btn-focus-width:             3px !default;
-$btn-focus-box-shadow:        0 0 0 $btn-focus-width $btn-focus-color !default;
+$btn-focus-box-shadow:        0 0 0 3px rgba($component-active-bg, .25) !default;
 $btn-disabled-opacity:        .65 !default;
 $btn-active-box-shadow:       inset 0 3px 5px rgba($black, .125) !default;
 
@@ -295,3 +294,12 @@ $btn-transition:              color .15s ease-in-out, background-color .15s ease
 // Forms
 
 $label-margin-bottom:                   8px !default;
+
+// Switch
+$switch-height:               22px !default;
+$switch-height-sm:            16px !default;
+$switch-height-lg:            28px !default;
+$switch-bg:                 #e3ebf6 !default;
+$switch-bg-checked:           $primary !default;
+$switch-transition:           background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+$switch-focus-box-shadow:     0 0 0 1px #fff, 0 0 0 2.5px rgba($component-active-bg, .25) !default;
