@@ -1,14 +1,11 @@
-.button-page {
-  .app-example {
-    .dashkit-btn {
-      margin-right: 12px;
-    }
-  }
-}
 .button-list {
   margin-top: 12px;
 
   &:nth-of-type(1) {
     margin-top: 0;
+  }
+
+  .dashkit-btn {
+    margin-right: 12px;
   }
 }

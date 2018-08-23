@@ -17,7 +17,7 @@ export type ButtonState = {
   spinning?: boolean;
 }
 
-class Button extends React.Component<ButtonProps, ButtonState> {
+class Button extends React.PureComponent<ButtonProps, ButtonState> {
   static defaultProps = {
     prefixCls: 'dashkit-btn',
     outline: false,

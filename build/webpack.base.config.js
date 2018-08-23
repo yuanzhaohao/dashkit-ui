@@ -108,10 +108,12 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'happypack/loader?id=js',
+        exclude: /node_modules/,
       },
       {
         test: /\.(ts|tsx)$/,
         loader: 'happypack/loader?id=ts',
+        exclude: /node_modules/,
       },
       {
         test: /\.scss$/,

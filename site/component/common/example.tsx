@@ -1,4 +1,6 @@
 import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import { transform } from 'babel-standalone'; // tslint:disable-line
 import './example.scss';
 
 type ExampleProps = {
@@ -8,15 +10,49 @@ type ExampleProps = {
 class Example extends React.PureComponent<ExampleProps> {
   private dataMeta: any;
   private dataSource: any;
+  private contentKey: any;
   constructor(props: ExampleProps) {
     super(props);
     this.dataMeta = this.getDataMeta();
     this.dataSource = this.getDataSource();
+    this.contentKey = `${(Math.random() * 1e9).toString(36)}`
   }
 
   public componentDidMount() {
     if (this.refs.code) {
       (window as any).Prism.highlightElement(this.refs.code);
+    }
+
+    if (this.dataSource) {
+      import('../../../src').then((Element: any) => {
+        const args = ['context', 'React', 'ReactDOM']
+        const argv = [this, React, ReactDOM]
+
+        for (const key in Element) {
+          args.push(key)
+          argv.push(Element[key])
+        }
+
+        return {
+          args,
+          argv,
+        }
+      }).then(({ args, argv }) => {
+        const code = transform(`
+          class Demo extends React.Component {
+            ${this.dataSource}
+          }
+
+          ReactDOM.render(<Demo {...context.props} />, document.getElementById('${this.contentKey}'))
+        `, 
+        {
+          presets: ['es2015', 'react']
+        }).code;
+
+        args.push(code);
+
+        new Function(...args).apply(null, argv);
+      })
     }
   }
   public render() {
@@ -25,7 +61,7 @@ class Example extends React.PureComponent<ExampleProps> {
 
     return (
       <div className="app-example">
-        {/* <div className="app-example-content">{children}</div> */}
+        <div className="app-example-content" id={this.contentKey}></div>
         <div className="app-example-info">
           {dataMeta.title ? <div className="app-example-title">{dataMeta.title}</div> : null}
           {dataMeta.subtitle ? <div className="app-example-subtitle">{dataMeta.subtitle}</div> : null}
