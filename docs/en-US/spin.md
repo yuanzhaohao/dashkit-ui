@@ -24,13 +24,17 @@ subtitle: Use `size` to change sizes.
 ```
 
 ```js
+ReactDOM.render(
+  <div className="spin-list">
+    <Spin spining={true} size="small" />
+    <Spin spining={true} size="default" />
+    <Spin spining={true} size="large" />
+  </div>,
+  mountNode
+);
 render() {
   return (
-    <div className="spin-list">
-      <Spin spining={true} size="small" />
-      <Spin spining={true} size="default" />
-      <Spin spining={true} size="large" />
-    </div>
+    
   );
 }
 ```
@@ -44,10 +48,9 @@ subtitle: Use `text` to define description.
 ```
 
 ```js
-render() {
-  return (
-    <Spin spining={true} text="Loading..." />
-  );
-}
+ReactDOM.render(
+  <Spin spining={true} text="Loading..." />,
+  mountNode
+);
 ```
 :::
