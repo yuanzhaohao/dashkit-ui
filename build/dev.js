@@ -5,7 +5,7 @@ const path = require('path')
 const express = require('express')
 const webpack = require('webpack')
 const portfinder = require('portfinder')
-const open = require('open')
+const openBrowser = require('react-dev-utils/openBrowser')
 const proxyMiddleware = require('http-proxy-middleware')
 const utils = require('./utils')
 const config = require('./config')
@@ -66,7 +66,7 @@ devMiddleware.waitUntilValid(function() {
   const uri = `${URI}${page}.html`
 
   utils.success(`Listening at ${uri}\n`)
-  open(uri);
+  openBrowser(uri);
 })
 
 portfinder.basePort = PORT

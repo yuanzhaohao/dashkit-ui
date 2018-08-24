@@ -5,7 +5,9 @@ import * as ReactDOM from 'react-dom';
 import * as marked from 'marked';
 import * as classNames from 'classnames';
 import { transform } from 'babel-standalone'; 
+import * as babel from 'babel-core';
 // import * as transformer from '../../lib/transformer';
+const toReactElement = require('jsonml-to-react-element')
 import { Icon } from '../../../src';
 
 type ExampleProps = {
@@ -33,32 +35,33 @@ class Example extends React.PureComponent<ExampleProps, ExampleState> {
 
   public componentDidMount() {
     if (this.dataSource) {
-      import('../../../src').then((Element: any) => {
-        const args = ['context', 'React', 'ReactDOM']
-        const argv = [this, React, ReactDOM]
+      // import('../../../src').then((Element: any) => {
+      //   const args = ['context', 'React', 'ReactDOM']
+      //   const argv = [this, React, ReactDOM]
 
-        for (const key in Element) {
-          args.push(key)
-          argv.push(Element[key])
-        }
+      //   for (const key in Element) {
+      //     args.push(key)
+      //     argv.push(Element[key])
+      //   }
 
-        return {
-          args,
-          argv,
-        }
-      }).then(({ args, argv }) => {
-        const code = transform(`
-          ${this.dataSource
-          .replace('dashkit-ui', '../../../src')
-          .replace('mountNode', `document.getElementById(\'${this.contentKey}\')`)}
-        `, 
-        {
-          presets: ['es2015', 'react', 'stage-0']
-        }).code;
+      //   return {
+      //     args,
+      //     argv,
+      //   }
+      // }).then(({ args, argv }) => {
+      //   const code = transform(`
+      //     ${this.dataSource
+      //     .replace('dashkit-ui', '../../../src')
+      //     .replace('mountNode', `document.getElementById(\'${this.contentKey}\')`)}
+      //   `, 
+      //   {
+      //     presets: ['es2015', 'react', 'stage-0']
+      //   }).code;
 
-        args.push(code);
-        new Function(...args).apply(null, argv);
-      })
+      //   args.push(code);
+      //   new Function(...args).apply(null, argv);
+      // })
+
       // const code = transform(`
       //     ${this.dataSource
       //     .replace('dashkit-ui', '../../../src')
@@ -75,11 +78,18 @@ class Example extends React.PureComponent<ExampleProps, ExampleState> {
       //   }).code;
       // console.log(code);
       // new Function(['React', 'ReactDOM', code]).apply(this, [this, React, ReactDOM]);
+      const code = `
+          ${this.dataSource
+          .replace('dashkit-ui', '../../../src')
+          .replace('mountNode', `document.getElementById(\'${this.contentKey}\')`)}
+        `;
+      ReactDOM.render(toReactElement(code), document.getElementById(this.contentKey));
     }
   }
   public render() {
     const { dataMeta, dataSource } = this;
     const { showCode } = this.state;
+   
 
     return (
       <div className="example">
