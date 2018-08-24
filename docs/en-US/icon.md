@@ -12,12 +12,15 @@ subtitle: Use `type` to define Icon's style.
 ```js
 ReactDOM.render(
   <div className="icon-list clearfix">
-    <div className="icon-item">
-      <Icon type="home" />
-      <span>home</span>
+    <div className="icon-item-wrapper">
+      <div className="icon-item">
+        <Icon type="home" />
+        <span>home</span>
+      </div>
     </div>
   </div>,
-mountNode);
+  mountNode
+);
 ```
 :::
 
@@ -29,74 +32,27 @@ subtitle: Media controls.
 ```
 
 ```js
-ReactDOM.render(
-  <div className="icon-list clearfix">
-    <div className="icon-item">
-      <Icon type="fast-forward" />
-      <span>fast-forward</span>
-    </div>
+class IconList extends React.Component {
+  render() {
+    const { media } = context.props.pageData;
+    console.log(media);
 
-    <div className="icon-item">
-      <Icon type="pause-circle" />
-      <span>pause-circle</span>
-    </div>
+    return (
+      <div className="icon-list clearfix">
+        {media.map((name, key) => 
+          <div className="icon-item-wrapper" key={key}>
+            <div className="icon-item">
+              <Icon type={name} />
+              <span>{name}</span>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+}
 
-    <div className="icon-item">
-      <Icon type="pause" />
-      <span>pause</span>
-    </div>
-
-    <div className="icon-item">
-      <Icon type="play-circle" />
-      <span>play-circle</span>
-    </div>
-
-    <div className="icon-item">
-      <Icon type="play" />
-      <span>play</span>
-    </div>
-
-    <div className="icon-item">
-      <Icon type="repeat" />
-      <span>repeat</span>
-    </div>
-
-    <div className="icon-item">
-      <Icon type="rewind" />
-      <span>rewind</span>
-    </div>
-
-    <div className="icon-item">
-      <Icon type="shuffle" />
-      <span>shuffle</span>
-    </div>
-
-    <div className="icon-item">
-      <Icon type="skip-back" />
-      <span>skip-back</span>
-    </div>
-
-    <div className="icon-item">
-      <Icon type="skip-forward" />
-      <span>skip-forward</span>
-    </div>
-
-    <div className="icon-item">
-      <Icon type="stop-circle" />
-      <span>stop-circle</span>
-    </div>
-
-    <div className="icon-item">
-      <Icon type="volume-1" />
-      <span>volume-1</span>
-    </div>
-
-    <div className="icon-item">
-      <Icon type="volume-2" />
-      <span>volume-2</span>
-    </div>
-  </div>,
-mountNode);
+ReactDOM.render(<IconList />, mountNode);
 ```
 
 :::

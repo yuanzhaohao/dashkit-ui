@@ -7,6 +7,7 @@ import './page.scss';
 type Props = {
   markdownText?: string;
   name?: string;
+  pageData?: any;
 };
 
 class Page extends React.PureComponent<Props> {
@@ -33,17 +34,20 @@ class Page extends React.PureComponent<Props> {
   }
   private getMarkdownText() {
     const { markdownText, name } = this.props;
+    console.log(this.props)
     let html = '';
     if (typeof markdownText === 'string') {
       this.components = [];
       const reg = /:::\s?example\s?([^]+?):::/g;
       const replaceText = markdownText.replace(reg, (match, text, offset) => {
         const key = `${name}-${offset.toString(36)}`;
+        const attributes = {
+          ...this.props,
+          markdownText: text,
+          key: key,
+        }
         this.components.push(
-          React.createElement(Example, {
-            markdownText: text,
-            key: key,
-          })
+          React.createElement(Example, attributes)
         );
         return '';
       });

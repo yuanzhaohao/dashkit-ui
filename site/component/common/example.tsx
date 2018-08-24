@@ -5,9 +5,6 @@ import * as ReactDOM from 'react-dom';
 import * as marked from 'marked';
 import * as classNames from 'classnames';
 import { transform } from 'babel-standalone'; 
-// import * as babel from 'babel-core';
-// import * as transformer from '../../lib/transformer';
-const toReactElement = require('jsonml-to-react-element')
 import { Icon } from '../../../src';
 
 type ExampleProps = {
