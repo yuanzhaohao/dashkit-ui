@@ -4,11 +4,11 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as marked from 'marked';
 import * as classNames from 'classnames';
-import { transform } from 'babel-standalone'; 
+// import { transform } from 'babel-standalone'; 
 import { Icon } from '../../../src';
 
 type ExampleProps = {
-  markdownText: string;
+  dataSource: any;
 };
 
 type ExampleState = {
@@ -30,46 +30,47 @@ class Example extends React.PureComponent<ExampleProps, ExampleState> {
     };
   }
 
-  public componentDidMount() {
-    if (this.dataSource) {
-      const babelConfig = {
-        presets: ['es2015', 'react', 'stage-0'],
-        plugins: [
-          [
-            "transform-decorators-legacy"
-          ]
-        ]
-      };
-      import('../../../src').then((Element: any) => {
-        const args = ['context', 'React', 'ReactDOM'];
-        const argv = [this, React, ReactDOM];
+  // public componentDidMount() {
+  //   if (this.dataSource) {
+  //     const babelConfig = {
+  //       presets: ['es2015', 'react', 'stage-0'],
+  //       plugins: [
+  //         [
+  //           "transform-decorators-legacy"
+  //         ]
+  //       ]
+  //     };
+  //     import('../../../src').then((Element: any) => {
+  //       const args = ['context', 'React', 'ReactDOM'];
+  //       const argv = [this, React, ReactDOM];
 
-        for (const key in Element) {
-          args.push(key);
-          argv.push(Element[key]);
-        }
+  //       for (const key in Element) {
+  //         args.push(key);
+  //         argv.push(Element[key]);
+  //       }
 
-        return {
-          args,
-          argv,
-        }
-      }).then(({ args, argv }) => {
-        const code = `
-          ${this.dataSource
-            .replace('dashkit-ui', '../../../src')
-            .replace('mountNode', `document.getElementById(\'${this.contentKey}\')`)}
-        `;
-        const Component = transform(code, babelConfig).code;
-        args.push(Component);
-        new Function(...args).apply(this, argv);
-      })
+  //       return {
+  //         args,
+  //         argv,
+  //       }
+  //     }).then(({ args, argv }) => {
+  //       const code = `
+  //         ${this.dataSource
+  //           .replace('dashkit-ui', '../../../src')
+  //           .replace('mountNode', `document.getElementById(\'${this.contentKey}\')`)}
+  //       `;
+  //       const Component = transform(code, babelConfig).code;
+  //       args.push(Component);
+  //       new Function(...args).apply(this, argv);
+  //     })
       
-    }
-  }
+  //   }
+  // }
+
   public render() {
-    const { dataMeta, dataSource } = this;
+    const { dataMeta, dataCode } = this.props.dataSource;
     const { showCode } = this.state;
-   
+    console.log(dataMeta)
 
     return (
       <div className="example">
@@ -90,7 +91,7 @@ class Example extends React.PureComponent<ExampleProps, ExampleState> {
         </div>
         {showCode
           ? <pre className="example-code">
-            <code className="language-jsx" ref="code">{dataSource}</code>
+            <code className="language-jsx" ref="code">{dataCode}</code>
           </pre>
           : null
         }
@@ -106,8 +107,8 @@ class Example extends React.PureComponent<ExampleProps, ExampleState> {
       if (sourceMatch && sourceMatch.length && sourceMatch[2]) {
         return sourceMatch[2];
       }
-      return '';
     }
+    return '';
   }
 
   private getDataMeta = () => {
@@ -138,6 +139,7 @@ class Example extends React.PureComponent<ExampleProps, ExampleState> {
       showCode: newValue,
     });
     setTimeout(() => {
+      console.log(this.refs.code)
       if (newValue && this.refs.code) {
         (window as any).Prism.highlightElement(this.refs.code);
       }
