@@ -28,17 +28,9 @@ function requireGenerator(varName, moduleName) {
 }
 
 const defaultBabelConfig = {
-  presets: [
-    'react',
-    ['env', {
-      targets: {
-        browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4'],
-      },
-    }],
-  ],
+  presets: ['es2015', 'react', 'stage-0'],
   plugins: [
-    'transform-class-properties',
-    'transform-object-rest-spread',
+    'transform-decorators-legacy',
   ],
 };
 
