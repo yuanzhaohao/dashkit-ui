@@ -7,7 +7,7 @@ class PageButton extends React.PureComponent {
   render() {
     const markdownText = require(`../../../docs/en-US/button.md`);
     return (
-      <Page markdownText={markdownText} name="button" />
+      <Page dataSource={markdownText} name="button" />
     );
   }
 }

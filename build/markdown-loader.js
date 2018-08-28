@@ -8,36 +8,31 @@ module.exports = function (source) {
   }
   const options = loaderUtils.getOptions(this) || {};
 
-  source = JSON.stringify(source)
-    .replace(/\u2028/g, '\\u2028')
-    .replace(/\u2029/g, '\\u2029');
-
   const reg = /:::\s?example\s?([^]+?):::/g;
-  const example = {};
-  const replaceText = source.replace(reg, (match, text, offset) => {
-    console.log(text)
-    const key = `example-${offset.toString(36)}`;
+  const demos = [];
+  source = source.replace(reg, (match, text, offset) => {
     const dataCode = getDataCode(text);
     const dataMeta = getDataMeta(text);
-    example[key] = {
+    const component = transformer(dataCode);
+    console.log(component)
+    demos.push({
       dataCode,
       dataMeta,
-      component: transformer(dataCode),
-    };
-    return `<div id=${key}></div>`;
+      component,
+    });
+    return '';
   });
 
-  return `module.exports = {`
-    + `\n  markdown: ${replaceText},`
-    + `\n  example: ${JSON.stringify(example)},`
-  + `};`;
+  return `module.exports = {` +
+    `\n  markdown: ${JSON.stringify(source)},` +
+    ` \n  demos: ${JSON.stringify(demos)},` +
+    `};`;
 }
 
 function getDataCode(markdownText) {
   if (markdownText) {
     const reg = /```(.*)js\s?([^]+?)```/;
     const sourceMatch = markdownText.match(reg);
-    console.log(sourceMatch)
     if (sourceMatch && sourceMatch.length && sourceMatch[2]) {
       return sourceMatch[2];
     }
@@ -52,7 +47,7 @@ function getDataMeta(markdownText) {
     const metaMatch = markdownText.match(reg);
     if (metaMatch && metaMatch.length && metaMatch[2]) {
       const originData = metaMatch[2];
-      const lines = originData.trim().split('\\n');
+      const lines = originData.trim().split('\n');
 
       lines.forEach((line) => {
         const ary = line.trim().split(':');

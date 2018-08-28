@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { Layout } from '../../src';
+import { Layout } from 'dashkit-ui';
 import store from '../redux/store';
 import CommonHeader from './common/header';
 import CommonSidebar from './common/sidebar';
@@ -11,9 +11,9 @@ import './app.scss';
 
 const { Content, Footer } = Layout;
 const Index = asyncComponent(() => import('./index'));
-// const PageButton = asyncComponent(() => import('./button'));
-// const PageSpin = asyncComponent(() => import('./spin'));
-// const PageIcon = asyncComponent(() => import('./icon'));
+const PageButton = asyncComponent(() => import('./button'));
+const PageSpin = asyncComponent(() => import('./spin'));
+const PageIcon = asyncComponent(() => import('./icon'));
 const PageSwitch = asyncComponent(() => import('./switch'));
 
 export default () => (
@@ -27,9 +27,9 @@ export default () => (
             <Switch>
               <Route exact path="/" component={Index} />
               <Route exact path="/index" component={Index} />
-              {/* <Route exact path="/components/button" component={PageButton} />
+              <Route exact path="/components/button" component={PageButton} />
               <Route exact path="/components/spin" component={PageSpin} />
-              <Route exact path="/components/icon" component={PageIcon} /> */}
+              <Route exact path="/components/icon" component={PageIcon} />
               <Route exact path="/components/switch" component={PageSwitch} />
               <Redirect to="/" />
             </Switch>

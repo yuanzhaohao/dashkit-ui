@@ -26,7 +26,7 @@ class PageIcon extends React.PureComponent {
   render() {
     const markdownText = require(`../../../docs/en-US/icon.md`);
     return (
-      <Page markdownText={markdownText} name="icon" pageData={pageData} />
+      <Page dataSource={markdownText} name="icon" pageData={pageData} />
     );
   }
 }

@@ -7,7 +7,7 @@ class PageSpin extends React.PureComponent {
   render() {
     const markdownText = require(`../../../docs/en-US/spin.md`);
     return (
-      <Page markdownText={markdownText} name="spin" />
+      <Page dataSource={markdownText} name="spin" />
     );
   }
 }

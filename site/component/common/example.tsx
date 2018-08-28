@@ -24,19 +24,20 @@ class Example extends React.PureComponent<ExampleProps, ExampleState> {
   }
 
   public render() {
-    const { dataMeta, dataCode } = this.props.dataSource;
+    const { dataMeta, dataCode, component } = this.props.dataSource;
     const { showCode } = this.state;
-    console.log(convert(dataCode))
+    console.log(typeof component, component);
 
     return (
       <div className="example">
-        <div className="example-content" id={this.contentKey}></div>
+        <div className="example-content" ref={this.contentKey}></div>
+        <div className="example-content" ref={this.contentKey}></div>
         <div className="example-info">
           {dataMeta.title ? <div className="example-title">{dataMeta.title}</div> : null}
-          {dataMeta.subtitle 
+          {dataMeta.subtitle
             ? <div className="example-subtitle" dangerouslySetInnerHTML={{
-                __html: marked(dataMeta.subtitle),
-              }} /> 
+              __html: marked(dataMeta.subtitle),
+            }} />
             : null
           }
           <Icon 
@@ -47,7 +48,7 @@ class Example extends React.PureComponent<ExampleProps, ExampleState> {
         </div>
         {showCode
           ? <pre className="example-code">
-            <code className="language-jsx" ref="code">{JSON.parse(dataCode)}</code>
+            <code className="language-jsx" ref="code">{dataCode}</code>
           </pre>
           : null
         }

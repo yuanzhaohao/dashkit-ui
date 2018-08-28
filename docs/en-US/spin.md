@@ -10,9 +10,10 @@ subtitle: Use `spining` to decide wheather it is shown.
 ```
 
 ```js
-render() {
-  return <Spin spining={true} />
-}
+ReactDOM.render(
+  <Spin spining={true} />,
+  mountNode
+);
 ```
 :::
 
@@ -32,11 +33,6 @@ ReactDOM.render(
   </div>,
   mountNode
 );
-render() {
-  return (
-    
-  );
-}
 ```
 :::
 
