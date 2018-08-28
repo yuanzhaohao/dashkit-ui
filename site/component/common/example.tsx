@@ -2,7 +2,7 @@ import './example.scss';
 
 import * as React from 'react';
 import * as marked from 'marked';
-import { Icon } from '../../../src';
+import { Icon } from 'dashkit-ui';
 
 type ExampleProps = {
   dataSource: any;

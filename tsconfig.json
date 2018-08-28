@@ -9,7 +9,11 @@
     "moduleResolution": "node",
     "rootDir": "src",
     "strict": true,
-    "strictFunctionTypes": false
+    "strictFunctionTypes": false,
+    "baseUrl": ".",
+    "paths": {
+      "dashkit-ui": ["./src"]
+    }
   },
   "exclude": [
     "node_modules"
