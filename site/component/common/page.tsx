@@ -7,7 +7,7 @@ import './page.scss';
 type Props = {
   dataSource: {
     markdown: string;
-    picked: any;
+    example: any;
   };
   name?: string;
   pageData?: any;
@@ -22,24 +22,18 @@ class Page extends React.PureComponent<Props> {
     this.renderer = new marked.Renderer();
   }
   public componentDidMount() {
-    const { picked } = this.props.dataSource;
+    const { example } = this.props.dataSource;
 
-    if (picked) {
-      for (const key in picked) {
+    if (example) {
+      for (const key in example) {
         const div = document.getElementById(key);
-        console.log(picked);
+        console.log(example);
         const Element = React.createElement(Example, {
-          dataSource: picked[key],
+          dataSource: example[key],
         });
         ReactDOM.render(Element, div);
       }
     }
-    
-
-    // if (this.components.length && contentElement instanceof HTMLElement) {
-    //   ReactDOM.render(this.components, contentElement);
-      
-    // }
   }
   public render() {
     return (

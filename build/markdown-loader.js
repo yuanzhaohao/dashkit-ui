@@ -37,6 +37,7 @@ function getDataCode(markdownText) {
   if (markdownText) {
     const reg = /```(.*)js\s?([^]+?)```/;
     const sourceMatch = markdownText.match(reg);
+    console.log(sourceMatch)
     if (sourceMatch && sourceMatch.length && sourceMatch[2]) {
       return sourceMatch[2];
     }
@@ -51,7 +52,7 @@ function getDataMeta(markdownText) {
     const metaMatch = markdownText.match(reg);
     if (metaMatch && metaMatch.length && metaMatch[2]) {
       const originData = metaMatch[2];
-      const lines = originData.trim().split('\n');
+      const lines = originData.trim().split('\\n');
 
       lines.forEach((line) => {
         const ary = line.trim().split(':');

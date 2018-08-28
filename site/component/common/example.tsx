@@ -1,10 +1,7 @@
 import './example.scss';
 
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
 import * as marked from 'marked';
-import * as classNames from 'classnames';
-// import { transform } from 'babel-standalone'; 
 import { Icon } from '../../../src';
 
 type ExampleProps = {
@@ -17,60 +14,19 @@ type ExampleState = {
 
 
 class Example extends React.PureComponent<ExampleProps, ExampleState> {
-  private dataMeta: any;
-  private dataSource: any;
   private contentKey: any;
   constructor(props: ExampleProps) {
     super(props);
-    this.dataMeta = this.getDataMeta();
-    this.dataSource = this.getDataSource();
     this.contentKey = `${(Math.random() * 1e9).toString(36)}`;
     this.state = {
       showCode: false,
     };
   }
 
-  // public componentDidMount() {
-  //   if (this.dataSource) {
-  //     const babelConfig = {
-  //       presets: ['es2015', 'react', 'stage-0'],
-  //       plugins: [
-  //         [
-  //           "transform-decorators-legacy"
-  //         ]
-  //       ]
-  //     };
-  //     import('../../../src').then((Element: any) => {
-  //       const args = ['context', 'React', 'ReactDOM'];
-  //       const argv = [this, React, ReactDOM];
-
-  //       for (const key in Element) {
-  //         args.push(key);
-  //         argv.push(Element[key]);
-  //       }
-
-  //       return {
-  //         args,
-  //         argv,
-  //       }
-  //     }).then(({ args, argv }) => {
-  //       const code = `
-  //         ${this.dataSource
-  //           .replace('dashkit-ui', '../../../src')
-  //           .replace('mountNode', `document.getElementById(\'${this.contentKey}\')`)}
-  //       `;
-  //       const Component = transform(code, babelConfig).code;
-  //       args.push(Component);
-  //       new Function(...args).apply(this, argv);
-  //     })
-      
-  //   }
-  // }
-
   public render() {
     const { dataMeta, dataCode } = this.props.dataSource;
     const { showCode } = this.state;
-    console.log(dataMeta)
+    console.log(convert(dataCode))
 
     return (
       <div className="example">
@@ -91,45 +47,12 @@ class Example extends React.PureComponent<ExampleProps, ExampleState> {
         </div>
         {showCode
           ? <pre className="example-code">
-            <code className="language-jsx" ref="code">{dataCode}</code>
+            <code className="language-jsx" ref="code">{JSON.parse(dataCode)}</code>
           </pre>
           : null
         }
       </div>
     )
-  }
-
-  private getDataSource = () => {
-    const { markdownText } = this.props;
-    if (markdownText) {
-      const reg = /```(.*)js\s?([^]+?)```/;
-      const sourceMatch = markdownText.match(reg);
-      if (sourceMatch && sourceMatch.length && sourceMatch[2]) {
-        return sourceMatch[2];
-      }
-    }
-    return '';
-  }
-
-  private getDataMeta = () => {
-    const { markdownText } = this.props;
-    const metaData: any = {};
-    if (markdownText) {
-      const reg = /```(.*)meta\s?([^]+?)```/;
-      const metaMatch = markdownText.match(reg);
-      if (metaMatch && metaMatch.length && metaMatch[2]) {
-        const originData = metaMatch[2];
-        const lines = originData.trim().split('\n');
-
-        lines.forEach((line: any) => {
-          const ary = line.trim().split(':');
-          if (ary && ary.length > 1) {
-            metaData[ary[0]] = ary[1].trim();
-          }
-        });
-      }
-    }
-    return metaData;
   }
 
   private onControlClick = () => {
@@ -139,12 +62,18 @@ class Example extends React.PureComponent<ExampleProps, ExampleState> {
       showCode: newValue,
     });
     setTimeout(() => {
-      console.log(this.refs.code)
       if (newValue && this.refs.code) {
         (window as any).Prism.highlightElement(this.refs.code);
       }
     }, 0);
   }
+}
+
+function convert(str) {
+  str = str.replace(/(&#x)(\w{4});/gi, function ($0) {
+    return String.fromCharCode(parseInt(encodeURIComponent($0).replace(/(%26%23x)(\w{4})(%3B)/g, '$2'), 16));
+  });
+  return str;
 }
 
 export default Example;
