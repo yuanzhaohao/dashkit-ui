@@ -10,6 +10,8 @@ subtitle: Use `spining` to decide wheather it is shown.
 ```
 
 ```js
+import { Spin } from 'dashkit-ui';
+
 ReactDOM.render(
   <Spin spining={true} />,
   mountNode
@@ -25,6 +27,8 @@ subtitle: Use `size` to change sizes.
 ```
 
 ```js
+import { Spin } from 'dashkit-ui';
+
 ReactDOM.render(
   <div className="spin-list">
     <Spin spining={true} size="small" />
@@ -44,6 +48,8 @@ subtitle: Use `text` to define description.
 ```
 
 ```js
+import { Spin } from 'dashkit-ui';
+
 ReactDOM.render(
   <Spin spining={true} text="Loading..." />,
   mountNode

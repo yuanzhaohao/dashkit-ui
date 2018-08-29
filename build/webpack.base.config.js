@@ -161,28 +161,10 @@ module.exports = {
       },
       {
         test: /\.md$/,
-        // loader: 'raw-loader',
-        use: [{
-          loader: path.resolve(__dirname , './markdown-loader.js'),
-          options: {
-            render(source) {
-              const reg = /:::\s?example\s?([^]+?):::/g;
-              const replaceText = source.replace(reg, (match, text, offset) => {
-                const key = offset.toString(36);
-                // const attributes = {
-                //   ...this.props,
-                //   markdownText: text,
-                //   key: key,
-                // }
-                // this.components.push(
-                //   React.createElement(Example, attributes)
-                // );
-                return `<div id=${key}></div>`;
-              });
-              return replaceText;
-            }
-          }
-        }]
+        loader: [
+          'babel-loader',
+          path.resolve(__dirname, './markdown-loader.js')
+        ]
       },
     ]
   }

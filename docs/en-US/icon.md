@@ -10,6 +10,8 @@ subtitle: Use `type` to define Icon's style.
 ```
 
 ```js
+import { Icon } from 'dashkit-ui';
+
 ReactDOM.render(
   <div className="icon-list clearfix">
     <div className="icon-item-wrapper">
@@ -32,6 +34,8 @@ subtitle: Media controls.
 ```
 
 ```js
+import { Icon } from 'dashkit-ui';
+
 class IconList extends React.Component {
   render() {
     const { media } = context.props.pageData;

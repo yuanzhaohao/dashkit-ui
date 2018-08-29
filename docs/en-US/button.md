@@ -10,6 +10,8 @@ subtitle: Use `type`, `outline`, `round` and `circle` to define Button's style.
 ```
 
 ```js
+import { Button } from 'dashkit-ui';
+
 ReactDOM.render(
   <div className="button-wrapper">
     <div className="button-list">
@@ -40,7 +42,8 @@ ReactDOM.render(
       <Button type="info" round={true}>Info</Button>
     </div>
   </div>,
-mountNode);
+  mountNode
+);
 ```
 :::
 
@@ -52,6 +55,8 @@ subtitle: If a large or small button is desired, set the size property to either
 ```
 
 ```js
+import { Button } from 'dashkit-ui';
+
 ReactDOM.render(
   <div className="button-list">
     <Button size="large">Large</Button>
@@ -61,6 +66,7 @@ ReactDOM.render(
     <Button type="primary" size="default" round={true}>Default</Button>
     <Button type="primary" size="small" round={true}>Small</Button>
   </div>,
-mountNode);
+  mountNode
+);
 ```
 :::

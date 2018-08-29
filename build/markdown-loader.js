@@ -1,31 +1,40 @@
 const loaderUtils = require('loader-utils');
 const marked = require('marked');
 const transformer = require('./transformer');
+const defaultOptions = {
+  markedRenderer: new marked.Renderer,
+};
 
 module.exports = function (source) {
   if (this.cacheable) {
     this.cacheable();
   }
-  const options = loaderUtils.getOptions(this) || {};
-
+  const options = Object.assign(defaultOptions, loaderUtils.getOptions(this));
   const reg = /:::\s?example\s?([^]+?):::/g;
   const demos = [];
-  source = source.replace(reg, (match, text, offset) => {
+  source = source.replace(reg, (match, text) => {
     const dataCode = getDataCode(text);
     const dataMeta = getDataMeta(text);
-    const component = transformer(dataCode);
-    console.log(component)
-    demos.push({
-      dataCode,
-      dataMeta,
-      component,
-    });
+    const previewer = transformer(dataCode);
+    if (dataMeta.subtitle) {
+      dataMeta.subtitle = marked(dataMeta.subtitle, {
+        renderer: options.markedRenderer
+      })
+    }
+    console.log(previewer);
+    demos.push(
+      `{` +
+      `dataCode: ${JSON.stringify(dataCode)},` +
+      `dataMeta: ${JSON.stringify(dataMeta)},` +
+      `previewer: ${previewer},` +
+      `}`
+    );
     return '';
   });
 
   return `module.exports = {` +
-    `\n  markdown: ${JSON.stringify(source)},` +
-    ` \n  demos: ${JSON.stringify(demos)},` +
+    `\n  basic: ${JSON.stringify(marked(source, { renderer: options.markedRenderer }))},` +
+    `\n  demos: [${demos.join(',')}],` +
     `};`;
 }
 

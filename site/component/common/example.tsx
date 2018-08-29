@@ -1,7 +1,6 @@
 import './example.scss';
 
 import * as React from 'react';
-import * as marked from 'marked';
 import { Icon } from 'dashkit-ui';
 
 type ExampleProps = {
@@ -14,29 +13,25 @@ type ExampleState = {
 
 
 class Example extends React.PureComponent<ExampleProps, ExampleState> {
-  private contentKey: any;
   constructor(props: ExampleProps) {
     super(props);
-    this.contentKey = `${(Math.random() * 1e9).toString(36)}`;
     this.state = {
       showCode: false,
     };
   }
 
   public render() {
-    const { dataMeta, dataCode, component } = this.props.dataSource;
+    const { dataMeta, dataCode, previewer } = this.props.dataSource;
     const { showCode } = this.state;
-    console.log(typeof component, component);
 
     return (
       <div className="example">
-        <div className="example-content" ref={this.contentKey}></div>
-        <div className="example-content" ref={this.contentKey}></div>
+        <div className="example-content">{previewer()}</div>
         <div className="example-info">
           {dataMeta.title ? <div className="example-title">{dataMeta.title}</div> : null}
           {dataMeta.subtitle
             ? <div className="example-subtitle" dangerouslySetInnerHTML={{
-              __html: marked(dataMeta.subtitle),
+              __html: dataMeta.subtitle,
             }} />
             : null
           }
@@ -68,13 +63,6 @@ class Example extends React.PureComponent<ExampleProps, ExampleState> {
       }
     }, 0);
   }
-}
-
-function convert(str) {
-  str = str.replace(/(&#x)(\w{4});/gi, function ($0) {
-    return String.fromCharCode(parseInt(encodeURIComponent($0).replace(/(%26%23x)(\w{4})(%3B)/g, '$2'), 16));
-  });
-  return str;
 }
 
 export default Example;
