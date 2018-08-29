@@ -6,7 +6,7 @@ import Sidebar from './sidebar';
 
 export type LayoutProps = {
   className?: string;
-  hasSider?: boolean;
+  hasSidebar?: boolean;
 };
 export type LayoutState = {
   sidebars?: string[];
@@ -43,11 +43,11 @@ class Layout extends React.Component<LayoutProps, LayoutState> {
     };
   }
   render() {
-    const { className, children, hasSider, ...attributes } = this.props;
+    const { className, children, hasSidebar, ...attributes } = this.props;
     const layoutClassName = classNames(
       'dashkit-layout',
       {
-        'dashkit-layout-has-sidebar': hasSider || this.state.sidebars.length > 0
+        'dashkit-layout-has-sidebar': hasSidebar || this.state.sidebars.length > 0
       },
       className,
     )

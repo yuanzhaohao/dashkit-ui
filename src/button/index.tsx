@@ -12,6 +12,8 @@ export type ButtonProps = {
   type?: ButtonType;
   outline?: boolean;
   round?: boolean;
+  disabled?: boolean;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 export type ButtonState = {
   spinning?: boolean;
@@ -22,12 +24,24 @@ class Button extends React.PureComponent<ButtonProps, ButtonState> {
     prefixCls: 'dashkit-btn',
     outline: false,
     round: false,
+    disabled: false,
     size: 'default' as ButtonSize,
     type: 'default' as ButtonType,
   };
 
   render() {
-    const { children, prefixCls, type, outline, round, size, className, ...attibutes } = this.props;
+    const { 
+      children, 
+      prefixCls, 
+      type, 
+      outline, 
+      round, 
+      size, 
+      className, 
+      disabled, 
+      onClick,
+      ...attibutes
+    } = this.props;
     const buttonClassName = classNames(
       prefixCls,
       {
@@ -39,12 +53,16 @@ class Button extends React.PureComponent<ButtonProps, ButtonState> {
       },
       className,
     );
-    return <button
-      {...attibutes}
-      className={buttonClassName}
-    >
-      {children}
-    </button>
+    return (
+      <button
+        {...attibutes}
+        className={buttonClassName}
+        disabled={!!disabled}
+        onClick={!!disabled ? undefined : onClick}
+      >
+        {children}
+      </button>
+    );
   }
 }
 export default Button;

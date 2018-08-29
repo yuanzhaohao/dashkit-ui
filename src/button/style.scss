@@ -25,6 +25,7 @@ $prefix-cls: 'dashkit-btn';
   &.disabled,
   &:disabled {
     opacity: $btn-disabled-opacity;
+    pointer-events: none;
     @include box-shadow(none);
   }
   &:not(:disabled):not(.disabled) {
@@ -53,6 +54,7 @@ $value in $theme-colors {
   .#{$prefix-cls}-#{$color} {
     @if $color == 'default' {
       border-color: $border-color;
+      background-color: $white;
       color: $dark;
       @include hover {
         border-color: $primary;
@@ -69,6 +71,7 @@ $value in $theme-colors {
 $value in $theme-colors {
   .#{$prefix-cls}-outline-#{$color} {
     @if $color == 'default' {
+      background-color: $white;
       border-color: $border-color;
       @include hover {
         border-color: $light;
@@ -99,8 +102,9 @@ $value in $theme-colors {
   &:disabled,
   &.disabled {
     color: $btn-link-disabled-color;
+    opacity: $btn-disabled-opacity;
     pointer-events: none;
-  } // No need for an active state here
+  }
 }
 
 .#{$prefix-cls}-rounded {

@@ -70,3 +70,49 @@ ReactDOM.render(
 );
 ```
 :::
+
+::: example
+
+```meta
+title: Disabled
+subtitle: Add the `disabled` property to determine if the button is disabled.  
+```
+
+```js
+import { Button } from 'dashkit-ui';
+
+ReactDOM.render(
+  <div className="button-wrapper">
+    <div className="button-list">
+      <Button>Default</Button>
+      <Button disabled={true}>Default Disabled</Button>
+    </div>
+    <div className="button-list">
+      <Button type="primary">Primary</Button>
+      <Button type="primary" disabled={true}>Default Disabled</Button>
+    </div>
+    <div className="button-list">
+      <Button type="success">Success</Button>
+      <Button type="success" disabled={true}>Success Disabled</Button>
+    </div>
+    <div className="button-list">
+      <Button type="warning">Warning</Button>
+      <Button type="warning" disabled={true}>Warning Disabled</Button>
+    </div>
+    <div className="button-list">
+      <Button type="danger">Danger</Button>
+      <Button type="danger" disabled={true}>Danger Disabled</Button>
+    </div>
+    <div className="button-list">
+      <Button type="info">Info</Button>
+      <Button type="info" disabled={true}>Info Disabled</Button>
+    </div>
+    <div className="button-list">
+      <Button type="link">Link</Button>
+      <Button type="link" disabled={true}>Link Disabled</Button>
+    </div>
+  </div>,
+  mountNode
+);
+```
+:::
