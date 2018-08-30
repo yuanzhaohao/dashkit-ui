@@ -11,7 +11,7 @@ class AppSidebar extends React.PureComponent {
       <Sidebar className="app-sidebar">
         <div className="sidebar-logo">
           <LogoSvg className="sidebar-logo-img" />
-          <div className="sidebar-logo-title">Dashkit UI</div>
+          <div className="sidebar-logo-title">Discreet UI</div>
         </div>
       </Sidebar>
     )
