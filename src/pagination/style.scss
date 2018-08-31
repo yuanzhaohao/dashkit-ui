@@ -1,0 +1,123 @@
+@import '../style/functions';
+@import '../style/theme';
+@import '../style/mixins';
+
+$prefix-cls: 'dashkit-pagination';
+$item-size: 32px;
+$item-large-size: 40px;
+$item-small-size: 24px;
+
+.#{$prefix-cls} {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  &:after {
+    content: '';
+    display: block;
+    height: 0;
+    clear: both;
+    overflow: hidden;
+    visibility: hidden;
+  }
+}
+
+.#{$prefix-cls}-item {
+  display: inline-block;
+  min-width: $item-size;
+  height: $item-size;
+  margin-right: 8px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  list-style: none;
+  user-select: none;
+  vertical-align: middle;
+  outline: 0;
+  font-size: 14px;
+  font-family: Arial;
+  color: rgba(0, 0, 0, .65);
+  box-sizing: border-box;
+  cursor: pointer;
+
+  &:focus,
+  &:hover {
+    transition: all .3s;
+    border-color: $primary;
+    color: $primary;
+  }
+
+  >span {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.#{$prefix-cls}-active {
+  border-color: $primary;
+  color: $primary;
+}
+
+.#{$prefix-cls}-disabled {
+  cursor: not-allowed;
+  color: #d9d9d9;
+
+  &:focus,
+  &:hover {
+    transition: none;
+    border-color: #d9d9d9;
+    color: #d9d9d9;
+  }
+}
+
+.#{$prefix-cls}-prev,
+.#{$prefix-cls}-next {
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.#{$prefix-cls}-small {
+  .#{$prefix-cls}-item {
+    min-width: $item-small-size;
+    height: $item-small-size;
+    font-size: 12px;
+  }
+
+  .#{$prefix-cls}-prev,
+  .#{$prefix-cls}-next {
+    border: 0;
+  }
+}
+
+.#{$prefix-cls}-large {
+  .#{$prefix-cls}-item {
+    min-width: $item-large-size;
+    height: $item-large-size;
+    line-height: $item-large-size - 2px;
+    font-size: 16px;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.#{$prefix-cls}-miss {
+  border: 0;
+  font-size: 0;
+  cursor: default;
+
+  i {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    margin: 0 rem(1.5px);
+    background-color: #d9d9d9;
+    border-radius: 50%;
+  }
+}
