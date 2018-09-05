@@ -15,6 +15,7 @@ const PageButton = asyncComponent(() => import('./button'));
 const PageSpin = asyncComponent(() => import('./spin'));
 const PageIcon = asyncComponent(() => import('./icon'));
 const PageSwitch = asyncComponent(() => import('./switch'));
+const PagePagination = asyncComponent(() => import('./pagination'));
 
 export default () => (
   <Provider store={store}>
@@ -31,6 +32,7 @@ export default () => (
               <Route exact path="/components/spin" component={PageSpin} />
               <Route exact path="/components/icon" component={PageIcon} />
               <Route exact path="/components/switch" component={PageSwitch} />
+              <Route exact path="/components/pagination" component={PagePagination} />
               <Redirect to="/" />
             </Switch>
           </Content>

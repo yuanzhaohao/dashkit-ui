@@ -1,0 +1,9 @@
+.pagination-wrapper {
+  .dashkit-pagination {
+    margin-bottom: 16px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

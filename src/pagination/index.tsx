@@ -13,6 +13,7 @@ export type PaginationProps = {
   pageSize?: number;
   range?: number;
   className?: string;
+  disabled: boolean;
   onChange?: (value: number) => void;
 };
 
@@ -26,39 +27,44 @@ class Pagination extends React.Component<PaginationProps> {
     size: 'default' as PaginationSize,
   };
   public render() {
-    const { className, prefixCls, size, current = 1 } = this.props;
-    const paginationClassName = classNames([
+    const { className, prefixCls, size, current = 1, disabled } = this.props;
+    const paginationClassName = classNames(
       prefixCls,
       {
         [`${prefixCls}-large`]: size === 'large',
         [`${prefixCls}-small`]: size === 'small',
       },
       className,
-    ]);
-    const itemClassName = `${prefixCls}-item`;
+    );
+    const itemClassName = classNames(
+      `${prefixCls}-item`,
+      {
+        [`${prefixCls}-disabled`]: !!disabled,
+      }
+    );
     const { pages, max } = this.getPages();
     const items: React.ReactNodeArray = [];
 
     items.push(
-      <li
+      <button
         key="previous"
         onClick={
-          current <= 1 ? null : this.handleChange.bind(this, current - 1)
+          current > 1 && !disabled 
+            ? this.handleChange.bind(this, current - 1)
+            : null
         }
         className={classNames(itemClassName, [`${prefixCls}-prev`], {
           [`${prefixCls}-disabled`]: current === 1,
         })}
       >
-        <span>
-          <Icon type="chvron-left" />
-        </span>
-      </li>,
+        <Icon type="chevron-left" />
+      </button>,
     );
 
     pages.forEach((page) => {
       if (page === '<..' || page === '..>') {
         items.push(
-          <li
+          <div
             key={page}
             className={classNames(itemClassName, `${prefixCls}-miss`)}
           >
@@ -67,42 +73,42 @@ class Pagination extends React.Component<PaginationProps> {
               <i />
               <i />
             </span>
-          </li>,
+          </div>,
         );
       } else {
         items.push(
-          <li
+          <button
             key={page}
             onClick={
-              current === page ? null : this.handleChange.bind(this, page)
+              current !== page && !disabled
+               ? this.handleChange.bind(this, page)
+               : null
             }
             className={classNames(itemClassName, {
               [`${prefixCls}-active`]: current === page,
             })}
-          >
-            <span>{page}</span>
-          </li>,
+          >{page}</button>,
         );
       }
     });
 
     items.push(
-      <li
+      <button
         key="next"
         onClick={
-          current >= max ? null : this.handleChange.bind(this, current + 1)
+          current < max && !disabled
+            ? this.handleChange.bind(this, current + 1)
+            : null
         }
         className={classNames(itemClassName, [`${prefixCls}-next`], {
           [`${prefixCls}-disabled`]: current === max,
         })}
       >
-        <span>
-          <Icon type="chvron-right" />
-        </span>
-      </li>,
+        <Icon type="chevron-right" />
+      </button>,
     );
 
-    return <ul className={paginationClassName}>{items}</ul>;
+    return <div className={paginationClassName}>{items}</div>;
   }
 
   private getPages = () => {

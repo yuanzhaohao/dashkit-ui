@@ -3,47 +3,43 @@
 @import '../style/mixins';
 
 $prefix-cls: 'dashkit-pagination';
-$item-size: 32px;
-$item-large-size: 40px;
-$item-small-size: 24px;
+$pagination-size-sm: 24px;
 
 .#{$prefix-cls} {
+  display: flex;
   margin: 0;
-  padding: 0;
-  list-style: none;
-
-  &:after {
-    content: '';
-    display: block;
-    height: 0;
-    clear: both;
-    overflow: hidden;
-    visibility: hidden;
-  }
 }
 
 .#{$prefix-cls}-item {
-  display: inline-block;
-  min-width: $item-size;
-  height: $item-size;
-  margin-right: 8px;
-  border: 1px solid #d9d9d9;
-  border-radius: 4px;
-  list-style: none;
-  user-select: none;
-  vertical-align: middle;
-  outline: 0;
-  font-size: 14px;
+  display: flex;
+  min-width: $pagination-size;
+  height: $pagination-size;
+  margin-right: $pagination-margin-right;
+  padding: 0 $pagination-padding-x;
+  border: $pagination-border-width solid $pagination-border-color;
+  border-radius: $pagination-border-radius;
+  background-color: $pagination-bg;
+  color: $pagination-color;
+  font-size: $pagination-font-size;
   font-family: Arial;
-  color: rgba(0, 0, 0, .65);
-  box-sizing: border-box;
   cursor: pointer;
+  justify-content: center;
+  align-items: center;
 
-  &:focus,
   &:hover {
+    z-index: 2;
+    color: $pagination-hover-color;
+    text-decoration: none;
+    background-color: $pagination-hover-bg;
+    border-color: $pagination-hover-border-color;
     transition: all .3s;
-    border-color: $primary;
-    color: $primary;
+  }
+
+  &:focus {
+    z-index: 2;
+    outline: $pagination-focus-outline;
+    box-shadow: $pagination-focus-box-shadow;
+    transition: all .3s;
   }
 
   >span {
@@ -56,35 +52,43 @@ $item-small-size: 24px;
 }
 
 .#{$prefix-cls}-active {
-  border-color: $primary;
-  color: $primary;
+  z-index: 1;
+  color: $pagination-active-color;
+  background-color: $pagination-active-bg;
+  border-color: $pagination-active-border-color;
+  cursor: default;
+
+  &:hover {
+    color: $pagination-active-color;
+    background-color: $pagination-active-bg;
+    border-color: $pagination-active-border-color;
+  }
+
+  &:focus {
+    color: $pagination-active-color;
+    background-color: $pagination-active-bg;
+    border-color: $pagination-active-border-color;
+  }
 }
 
 .#{$prefix-cls}-disabled {
-  cursor: not-allowed;
-  color: #d9d9d9;
-
-  &:focus,
-  &:hover {
-    transition: none;
-    border-color: #d9d9d9;
-    color: #d9d9d9;
-  }
+  opacity: $pagination-disabled-opacity;
+  pointer-events: none;
+  cursor: auto;
 }
 
 .#{$prefix-cls}-prev,
 .#{$prefix-cls}-next {
-  svg {
-    width: 16px;
-    height: 16px;
+  i {
+    font-size: 16px;
   }
 }
 
 .#{$prefix-cls}-small {
   .#{$prefix-cls}-item {
-    min-width: $item-small-size;
-    height: $item-small-size;
-    font-size: 12px;
+    min-width: $pagination-size-sm;
+    height: $pagination-size-sm;
+    font-size: $pagination-font-size-sm;
   }
 
   .#{$prefix-cls}-prev,
@@ -95,15 +99,13 @@ $item-small-size: 24px;
 
 .#{$prefix-cls}-large {
   .#{$prefix-cls}-item {
-    min-width: $item-large-size;
-    height: $item-large-size;
-    line-height: $item-large-size - 2px;
-    font-size: 16px;
+    min-width: $pagination-size-lg;
+    height: $pagination-size-lg;
+    font-size: $pagination-font-size-lg;
   }
 
-  svg {
-    width: 20px;
-    height: 20px;
+  i {
+    font-size: 20px;
   }
 }
 
@@ -112,11 +114,15 @@ $item-small-size: 24px;
   font-size: 0;
   cursor: default;
 
+  &:hover {
+    background-color: inherit;
+  }
+
   i {
     display: inline-block;
     width: 4px;
     height: 4px;
-    margin: 0 rem(1.5px);
+    margin: 0 1.5px;
     background-color: #d9d9d9;
     border-radius: 50%;
   }
