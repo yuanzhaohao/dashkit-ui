@@ -10,7 +10,7 @@ module.exports = {
   mockData: true,
   optimizeCommon: {
     'vendor-lib': [
-      'axios',
+      'prop-types',
       'classnames'
     ],
     'vendor-redux': [

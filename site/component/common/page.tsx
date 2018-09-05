@@ -1,6 +1,4 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import * as marked from 'marked';
 import Example from './example';
 import './page.scss';
 

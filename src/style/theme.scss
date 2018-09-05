@@ -283,19 +283,14 @@ $btn-link-disabled-color:     $gray-600 !default;
 
 $btn-block-spacing-y:         8px !default;
 
-// Allows for customizing button radius independently from global border radius
 $btn-border-radius:           $border-radius !default;
 $btn-border-radius-lg:        $border-radius-lg !default;
 $btn-border-radius-sm:        $border-radius-sm !default;
 
 $btn-transition:              color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
 
-
-// Forms
-
-$label-margin-bottom:                   8px !default;
-
 // Switch
+// 
 $switch-height:               22px !default;
 $switch-height-sm:            16px !default;
 $switch-height-lg:            28px !default;
@@ -303,3 +298,33 @@ $switch-bg:                 #e3ebf6 !default;
 $switch-bg-checked:           $primary !default;
 $switch-transition:           background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 $switch-focus-box-shadow:     0 0 0 1px #fff, 0 0 0 2.5px rgba($component-active-bg, .25) !default;
+
+// Pagination
+// 
+$pagination-padding-y:              .5rem !default;
+$pagination-padding-x:              .75rem !default;
+$pagination-padding-y-sm:           .25rem !default;
+$pagination-padding-x-sm:           .5rem !default;
+$pagination-padding-y-lg:           .75rem !default;
+$pagination-padding-x-lg:           1.5rem !default;
+$pagination-line-height:            1.25 !default;
+
+$pagination-color:                  $link-color !default;
+$pagination-bg:                     $white !default;
+$pagination-border-width:           $border-width !default;
+$pagination-border-color:           $border-color !default;
+
+$pagination-focus-box-shadow:       0 0 0 3px rgba($component-active-bg, .25) !default;
+$pagination-focus-outline:          0 !default;
+
+$pagination-hover-color:            $link-hover-color !default;
+$pagination-hover-bg:               $gray-200 !default;
+$pagination-hover-border-color:     $gray-300 !default;
+
+$pagination-active-color:           $component-active-color !default;
+$pagination-active-bg:              $component-active-bg !default;
+$pagination-active-border-color:    $pagination-active-bg !default;
+
+$pagination-disabled-color:         $gray-600 !default;
+$pagination-disabled-bg:            $white !default;
+$pagination-disabled-border-color:  $gray-300 !default;
