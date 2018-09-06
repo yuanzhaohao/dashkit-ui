@@ -160,11 +160,8 @@ module.exports = {
         }
       },
       {
-        test: /\.md$/,
-        loader: [
-          'babel-loader',
-          path.resolve(__dirname, './markdown-loader.js')
-        ]
+        test: /(en\-US)|(zh\-CN)\.md$/,
+        loader: 'markdown-website-loader',
       },
     ]
   }

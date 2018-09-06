@@ -5,6 +5,7 @@ import { Icon } from 'dashkit-ui';
 
 type ExampleProps = {
   dataSource: any;
+  locale?: string;
 };
 
 type ExampleState = {
@@ -21,17 +22,18 @@ class Example extends React.PureComponent<ExampleProps, ExampleState> {
   }
 
   public render() {
-    const { dataMeta, dataCode, previewer } = this.props.dataSource;
+    const { locale = 'en-US' } = this.props;
+    const { meta, code, preview } = this.props.dataSource;
     const { showCode } = this.state;
 
     return (
       <div className="example">
-        <div className="example-content">{previewer()}</div>
+        <div className="example-content">{preview()}</div>
         <div className="example-info">
-          {dataMeta.title ? <div className="example-title">{dataMeta.title}</div> : null}
-          {dataMeta.subtitle
+          {meta.title ? <div className="example-title">{meta.title[locale]}</div> : null}
+          {meta.subtitle
             ? <div className="example-subtitle" dangerouslySetInnerHTML={{
-              __html: dataMeta.subtitle,
+              __html: meta.subtitle[locale],
             }} />
             : null
           }
@@ -43,7 +45,7 @@ class Example extends React.PureComponent<ExampleProps, ExampleState> {
         </div>
         {showCode
           ? <pre className="example-code">
-            <code className="language-jsx" ref="code">{dataCode}</code>
+            <code className="language-jsx" ref="code">{code}</code>
           </pre>
           : null
         }

@@ -5,9 +5,10 @@ import Page from '../common/page';
 
 class PageButton extends React.PureComponent {
   render() {
-    const markdownText = require(`../../../docs/en-US/button.md`);
+    const locale = 'en-US';
+    const dataSource = require(`../../../docs/button/${locale}.md`);
     return (
-      <Page dataSource={markdownText} name="button" />
+      <Page dataSource={dataSource} locale={locale} name="button" />
     );
   }
 }
