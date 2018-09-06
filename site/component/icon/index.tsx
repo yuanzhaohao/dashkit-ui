@@ -24,9 +24,10 @@ const pageData = {
 };
 class PageIcon extends React.PureComponent {
   render() {
-    const markdownText = require(`../../../docs/en-US/icon.md`);
+    const locale = 'en-US';
+    const dataSource = require(`../../../docs/icon/${locale}.md`);
     return (
-      <Page dataSource={markdownText} name="icon" pageData={pageData} />
+      <Page dataSource={dataSource} locale={locale} name="icon" />
     );
   }
 }

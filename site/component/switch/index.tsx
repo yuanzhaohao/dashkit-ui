@@ -5,9 +5,10 @@ import Page from '../common/page';
 
 class PageSwitch extends React.PureComponent {
   render() {
-    const markdownData = require(`../../../docs/en-US/switch.md`);
+    const locale = 'en-US';
+    const dataSource = require(`../../../docs/switch/${locale}.md`);
     return (
-      <Page dataSource={markdownData} name="switch" />
+      <Page dataSource={dataSource} locale={locale} name="switch" />
     );
   }
 }

@@ -5,9 +5,10 @@ import Page from '../common/page';
 
 class PagePagination extends React.PureComponent {
   render() {
-    const markdownText = require(`../../../docs/en-US/pagination.md`);
+    const locale = 'en-US';
+    const dataSource = require(`../../../docs/pagination/${locale}.md`);
     return (
-      <Page dataSource={markdownText} name="pagination" />
+      <Page dataSource={dataSource} locale={locale} name="pagination" />
     );
   }
 }

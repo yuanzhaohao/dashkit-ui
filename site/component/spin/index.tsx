@@ -5,9 +5,10 @@ import Page from '../common/page';
 
 class PageSpin extends React.PureComponent {
   render() {
-    const markdownText = require(`../../../docs/en-US/spin.md`);
+    const locale = 'en-US';
+    const dataSource = require(`../../../docs/spin/${locale}.md`);
     return (
-      <Page dataSource={markdownText} name="spin" />
+      <Page dataSource={dataSource} locale={locale} name="spin" />
     );
   }
 }
