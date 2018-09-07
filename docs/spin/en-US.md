@@ -1,4 +1,4 @@
-# Pagination
+# Spin
 
 A simple yet versatile animated spinner component.
 
