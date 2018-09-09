@@ -3,46 +3,42 @@ import * as React from 'react';
 import './style.scss';
 
 export type InputSize = 'small' | 'default' | 'large';
-export type InputType = 'text' | 'password' | 'integer' | 'number';
 
 export type InputProps = {
-  prefixCls?: string;
   className?: string;
+  prefixCls?: string;
   size?: InputSize;
-  value?: any;
+  value?: string | number;
   name?: string;
   disabled?: boolean;
-  defaultValue?: any;
+  defaultValue?: string;
   placeholder?: string;
-  type?: InputType;
-  onChange?: (value: any) => void;
+  type?: string;
+  digits?: number;
+  onChange?: (value: string) => void;
+  onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyUp?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 };
-export type InputState = {
-  value?: string;
-};
-const REG = {
-  integer: /^[-+]?[0-9]*$/,
-  number: /^\s*(\-|\+)?(\d+|(\d*(\.\d*)))*\s*$/,
-};
-class Input extends React.Component<InputProps, InputState> {
+
+function fixControlledValue<T>(value: T) {
+  if (typeof value === 'undefined' || value === null) {
+    return '';
+  }
+  return value;
+}
+
+class Input extends React.Component<InputProps> {
   public static defaultProps = {
     prefixCls: 'dashkit-input',
-    value: '',
     size: 'default' as InputSize,
-    type: 'text' as InputType,
+    type: 'text',
   };
 
   constructor(props: InputProps) {
     super(props);
     this.state = {
-      value: props.value || props.defaultValue,
+      value: props.value,
     };
-  }
-
-  public componentWillReceiveProps(nextProps: InputProps) {
-    if ('value' in nextProps && nextProps.value !== this.props.value) {
-      this.setState({ value: nextProps.value });
-    }
   }
 
   public render() {
@@ -55,52 +51,77 @@ class Input extends React.Component<InputProps, InputState> {
       prefixCls,
       ...attributes
     } = this.props;
-    const { value } = this.state;
+    const value = this.props.value;
     const inputClassName = classNames(
       prefixCls,
       {
         [`${prefixCls}-large`]: size === 'large',
         [`${prefixCls}-small`]: size === 'small',
-        [`${prefixCls}-disabled`]: !!disabled,
       },
       className,
     );
     const inputType = type === 'password' ? 'password' : 'text';
+    if ('value' in this.props) {
+      attributes.value = fixControlledValue(value);
+      delete attributes.defaultValue;
+    }
     return (
       <input
         {...attributes}
-        readOnly={disabled}
         className={inputClassName}
-        onChange={!disabled ? this.handleChange : undefined}
+        readOnly={disabled}
         type={inputType}
-        value={value}
+        onChange={!disabled ? this.handleChange : undefined}
+        onKeyUp={!disabled ? this.handleKeyUp : undefined}
+        onBlur={!disabled ? this.handleBlur : undefined}
       />
     );
   }
 
   private handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { onChange, type } = this.props;
-    let value: any = event.target.value;
+    const { onChange } = this.props;
+    const { value } = event.target;
 
-    if (value && type === 'number') {
-      if (!REG[type].test(value)) {
-        return;
-      } else {
-        value = Number(value);
-      }
-
-      if (isNaN(value)) {
-        return;
-      }
+    if (this.invalidNumber(value)) {
+      return;
     }
-
-    this.setState({
-      value,
-    });
 
     if (onChange) {
       onChange(value);
     }
+  }
+  private handleBlur = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    const { onBlur } = this.props;
+    if (onBlur) {
+      onBlur(event);
+    }
+    if (this.invalidNumber(value)) {
+      return;
+    }
+  }
+
+  private handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    const { onKeyUp } = this.props;
+    if (onKeyUp) {
+      onKeyUp(event);
+    }
+  }
+
+  private invalidNumber = (value: string) => {
+    const { digits, type } = this.props;
+    if (type !== 'number') {
+      return false;
+    }
+
+    let reg = '^-?\\d*';
+    if (digits === undefined) {
+      reg += '\\.?\\d*';
+    } else if (digits > 0) {
+      reg += `\\.?\\d{0,${digits}}`;
+    }
+    reg += '$';
+    return !new RegExp(reg).test(value);
   }
 }
 

@@ -68,11 +68,9 @@ class Pagination extends React.Component<PaginationProps> {
             key={page}
             className={classNames(itemClassName, `${prefixCls}-miss`)}
           >
-            <span>
-              <i />
-              <i />
-              <i />
-            </span>
+            <i />
+            <i />
+            <i />
           </div>,
         );
       } else {

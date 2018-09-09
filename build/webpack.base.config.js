@@ -164,5 +164,9 @@ module.exports = {
         loader: 'markdown-website-loader',
       },
     ]
+  },
+  stats: {
+    errors: true, 
+    warnings: false
   }
 }

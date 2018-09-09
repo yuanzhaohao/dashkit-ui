@@ -12,8 +12,8 @@ $prefix-cls: 'dashkit-btn';
   vertical-align: middle;
   user-select: none;
   border: $btn-border-width solid transparent;
+  transition: $btn-transition;
   @include button-size($btn-height, $btn-padding-x, $font-size-base, $btn-line-height, $btn-border-radius);
-  @include transition($btn-transition);
   @include hover-focus {
     text-decoration: none;
   }
@@ -26,16 +26,16 @@ $prefix-cls: 'dashkit-btn';
   &:disabled {
     opacity: $btn-disabled-opacity;
     pointer-events: none;
-    @include box-shadow(none);
+    box-shadow: none;
   }
   &:not(:disabled):not(.disabled) {
     cursor: pointer;
   }
   &:not(:disabled):not(.disabled):active,
   &:not(:disabled):not(.disabled).active {
-    @include box-shadow($btn-active-box-shadow);
+    box-shadow: $btn-active-box-shadow;
     &:focus {
-      @include box-shadow($btn-focus-box-shadow, $btn-active-box-shadow);
+      box-shadow: $btn-focus-box-shadow, $btn-active-box-shadow;
     }
   }
 }

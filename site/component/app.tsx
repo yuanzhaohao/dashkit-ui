@@ -12,8 +12,9 @@ import './app.scss';
 const { Content, Footer } = Layout;
 const Index = asyncComponent(() => import('./index'));
 const PageButton = asyncComponent(() => import('./button'));
-const PageSpin = asyncComponent(() => import('./spin'));
 const PageIcon = asyncComponent(() => import('./icon'));
+const PageSpin = asyncComponent(() => import('./spin'));
+const PageInput = asyncComponent(() => import('./input'));
 const PageSwitch = asyncComponent(() => import('./switch'));
 const PagePagination = asyncComponent(() => import('./pagination'));
 
@@ -31,6 +32,7 @@ export default () => (
               <Route exact path="/components/button" component={PageButton} />
               <Route exact path="/components/spin" component={PageSpin} />
               <Route exact path="/components/icon" component={PageIcon} />
+              <Route exact path="/components/input" component={PageInput} />
               <Route exact path="/components/switch" component={PageSwitch} />
               <Route exact path="/components/pagination" component={PagePagination} />
               <Redirect to="/" />

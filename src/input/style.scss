@@ -1,33 +1,51 @@
-.input {
-  width: 185px;
-  height: 34px;
-  padding: 8px;
-  border: 1px solid rgba(0, 0, 0, 0.14);
-  box-sizing: border-box;
-  color: #555;
-  border-radius: 3px;
-  font-size: 14px;
+@import '../style/functions';
+@import '../style/theme';
+@import '../style/mixins';
 
-  &::placeholder {
-    opacity: 1;
-    color: #999;
-  }
+$prefix-cls: 'dashkit-input';
 
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.02);
-  }
+.#{$prefix-cls} {
+  display: block;
+  width: 100%;
+  height: $input-height;
+  padding: $input-padding-y $input-padding-x;
+  outline: 0;
+  font-size: $font-size-base;
+  color: $input-color;
+  background-color: $input-bg;
+  background-clip: padding-box;
+  border: $input-border-width solid $input-border-color;
+  border-radius: $border-radius;
+  transition: $input-transition;
 
   &:focus {
-    outline: 0;
+    background-color: $input-focus-bg;
+    border-color: $input-focus-border-color;
+    box-shadow: $input-box-shadow, $input-focus-box-shadow;
   }
-}
-
-.input-disabled {
-  cursor: not-allowed;
-  background-color: #eceeef;
-  color: #bbb;
 
   &:hover {
-    background-color: #fff;
+    border-color: $input-hover-border-color;
+  }
+
+  // Placeholder
+  &::placeholder {
+    color: $input-placeholder-color;
+    opacity: 1;
+  }
+  &:disabled,
+  &[readonly] {
+    background-color: $input-disabled-bg;
+    opacity: 1;
+    cursor: not-allowed;
+
+    &:hover {
+      border-color: $input-border-color;
+    }
+
+    &:focus {
+      border-color: $input-border-color;
+      box-shadow: none;
+    }
   }
 }

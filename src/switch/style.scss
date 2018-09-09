@@ -15,7 +15,7 @@ $prefix-cls: 'dashkit-switch';
   border: 1px solid transparent;
   background-color: $switch-bg;
   user-select: none;
-  @include transition($switch-transition);
+  transition: $switch-transition;
   cursor: pointer;
 
   &:focus,

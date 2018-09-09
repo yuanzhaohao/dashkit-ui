@@ -32,7 +32,6 @@ class Page extends React.PureComponent<Props> {
         children.push(child);
       });
 
-      console.log(name, demoData);
       ReactDOM.render(children, demoElement);
     }
   }
