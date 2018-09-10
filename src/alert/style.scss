@@ -1,0 +1,29 @@
+@import '../style/functions';
+@import '../style/theme';
+@import '../style/mixins';
+
+$prefix-cls: 'dashkit-alert';
+
+.#{$prefix-cls} {
+  position: relative;
+  padding: $alert-padding-y $alert-padding-x;
+  margin-bottom: $alert-margin-bottom;
+  border: 1px solid transparent;
+  border-radius: $alert-border-radius;
+  transform-origin: 0 0;
+  transition: transform 0.216s, opacity 0.216s ease-out;
+
+  &-dismissed {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+}
+
+.#{$prefix-cls}-heading {
+  color: inherit;
+}
+
+.#{$prefix-cls}-link {
+  font-weight: $alert-link-font-weight;
+}
+

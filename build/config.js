@@ -13,11 +13,11 @@ module.exports = {
       'prop-types',
       'classnames'
     ],
-    'vendor-redux': [
-      'redux',
-      'redux-promise-middleware',
-      'redux-thunk'
-    ],
+    // 'vendor-redux': [
+    //   'redux',
+    //   'redux-promise-middleware',
+    //   'redux-thunk'
+    // ],
     'vendor-react': [
       'react',
       'react-dom',

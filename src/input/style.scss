@@ -14,7 +14,7 @@ $prefix-cls: 'dashkit-input';
   color: $input-color;
   background-color: $input-bg;
   background-clip: padding-box;
-  border: $input-border-width solid $input-border-color;
+  border: 1px solid $input-border-color;
   border-radius: $border-radius;
   transition: $input-transition;
 
