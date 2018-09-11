@@ -31,13 +31,90 @@ $prefix-cls: 'dashkit-btn';
   &:not(:disabled):not(.disabled) {
     cursor: pointer;
   }
-  &:not(:disabled):not(.disabled):active,
-  &:not(:disabled):not(.disabled).active {
-    box-shadow: $btn-active-box-shadow;
-    &:focus {
-      box-shadow: $btn-focus-box-shadow, $btn-active-box-shadow;
+
+  &-rounded {
+    border-radius: $btn-height / 2;
+  }
+
+  &-link {
+    font-weight: $font-weight-normal;
+    color: $link-color;
+    background-color: transparent;
+    @include hover {
+      color: $link-hover-color;
+      text-decoration: $link-hover-decoration;
+      background-color: transparent;
+      border-color: transparent;
+    }
+    &:focus,
+    &.focus {
+      text-decoration: $link-hover-decoration;
+      border-color: transparent;
+      box-shadow: none;
+    }
+    &:disabled,
+    &.disabled {
+      color: $btn-link-disabled-color;
+      opacity: $btn-disabled-opacity;
+      pointer-events: none;
     }
   }
+
+
+  // Button Sizes
+  //
+  &-large {
+    @include button-size($btn-height-lg, $btn-padding-x-lg, $font-size-lg, $btn-line-height-lg, $btn-border-radius-lg);
+
+    &-rounded {
+      border-radius: $btn-height-lg / 2;
+    }
+  }
+
+  &-small {
+    @include button-size($btn-height-sm, $btn-padding-x-sm, $font-size-sm, $btn-line-height-sm, $btn-border-radius-sm);
+
+    &-rounded {
+      border-radius: $btn-height-sm / 2;
+    }
+  }
+
+  // Alternate buttons
+  //
+  @each $color,
+  $value in $theme-colors {
+    &-#{$color} {
+      @if $color == 'default' {
+        border-color: $border-color;
+        background-color: $white;
+        color: $dark;
+        @include hover {
+          border-color: $primary;
+          background-color: $light;
+          color: $primary;
+        }
+      } @else {
+        @include button-variant($value, $value);
+      }
+    }
+  }
+
+  @each $color,
+  $value in $theme-colors {
+    &-outline-#{$color} {
+      @if $color == 'default' {
+        background-color: $white;
+        border-color: $border-color;
+        @include hover {
+          border-color: $light;
+          background-color: $light;
+        }
+      } @else {
+        @include button-outline-variant($value);
+      }
+    }
+  }
+
 }
 
 // Future-proof disabling of clicks on `<a>` elements
@@ -46,86 +123,3 @@ fieldset:disabled a.#{$prefix-cls} {
   pointer-events: none;
 }
 
-//
-// Alternate buttons
-//
-@each $color,
-$value in $theme-colors {
-  .#{$prefix-cls}-#{$color} {
-    @if $color == 'default' {
-      border-color: $border-color;
-      background-color: $white;
-      color: $dark;
-      @include hover {
-        border-color: $primary;
-        background-color: $light;
-        color: $primary;
-      }
-    } @else {
-      @include button-variant($value, $value);
-    }
-  }
-}
-
-@each $color,
-$value in $theme-colors {
-  .#{$prefix-cls}-outline-#{$color} {
-    @if $color == 'default' {
-      background-color: $white;
-      border-color: $border-color;
-      @include hover {
-        border-color: $light;
-        background-color: $light;
-      }
-    } @else {
-      @include button-outline-variant($value);
-    }
-  }
-}
-
-.#{$prefix-cls}-link {
-  font-weight: $font-weight-normal;
-  color: $link-color;
-  background-color: transparent;
-  @include hover {
-    color: $link-hover-color;
-    text-decoration: $link-hover-decoration;
-    background-color: transparent;
-    border-color: transparent;
-  }
-  &:focus,
-  &.focus {
-    text-decoration: $link-hover-decoration;
-    border-color: transparent;
-    box-shadow: none;
-  }
-  &:disabled,
-  &.disabled {
-    color: $btn-link-disabled-color;
-    opacity: $btn-disabled-opacity;
-    pointer-events: none;
-  }
-}
-
-.#{$prefix-cls}-rounded {
-  border-radius: $btn-height / 2;
-}
-
-
-// Button Sizes
-//
-.#{$prefix-cls}-large {
-  @include button-size($btn-height-lg, $btn-padding-x-lg, $font-size-lg, $btn-line-height-lg, $btn-border-radius-lg);
-
-  &.#{$prefix-cls}-rounded {
-    border-radius: $btn-height-lg / 2;
-  }
-}
-
-.#{$prefix-cls}-small {
-  @include button-size($btn-height-sm, $btn-padding-x-sm, $font-size-sm, $btn-line-height-sm, $btn-border-radius-sm);
-
-  &.#{$prefix-cls}-rounded {
-    border-radius: $btn-height-sm / 2;
-  }
-}

@@ -13,17 +13,24 @@ $prefix-cls: 'dashkit-alert';
   transform-origin: 0 0;
   transition: transform 0.216s, opacity 0.216s ease-out;
 
+  h3, h4, h5 {
+    margin-top: 0.3em;
+    color: inherit;
+    font-size: 16px;
+  }
+
+  a {
+    font-weight: $alert-link-font-weight;
+  }
+
   &-dismissed {
     opacity: 0;
     transform: scaleY(0);
   }
 }
 
-.#{$prefix-cls}-heading {
-  color: inherit;
+@each $color, $value in $theme-colors {
+  .#{$prefix-cls}-#{$color} {
+    @include alert-variant(theme-color-level($color, $alert-bg-level), theme-color-level($color, $alert-border-level), theme-color-level($color, $alert-color-level));
+  }
 }
-
-.#{$prefix-cls}-link {
-  font-weight: $alert-link-font-weight;
-}
-
