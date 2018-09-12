@@ -7,114 +7,110 @@ $prefix-cls: 'dashkit-pagination';
 .#{$prefix-cls} {
   display: flex;
   margin: 0;
-}
 
-.#{$prefix-cls}-item {
-  display: flex;
-  min-width: $pagination-size;
-  height: $pagination-size;
-  margin-right: $pagination-margin-right;
-  padding: 0 $pagination-padding-x;
-  border: $pagination-border-width solid $pagination-border-color;
-  border-radius: $pagination-border-radius;
-  background-color: $pagination-bg;
-  color: $pagination-color;
-  font-size: $pagination-font-size;
-  font-family: Arial;
-  cursor: pointer;
-  justify-content: center;
-  align-items: center;
+  &-item {
+    display: flex;
+    min-width: $pagination-size;
+    height: $pagination-size;
+    margin-right: $pagination-margin-right;
+    padding: 0 $pagination-padding-x;
+    border: $pagination-border-width solid $pagination-border-color;
+    border-radius: $pagination-border-radius;
+    background-color: $pagination-bg;
+    color: $pagination-color;
+    font-size: $pagination-font-size;
+    font-family: Arial;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
 
-  &:hover {
-    z-index: 2;
-    color: $pagination-hover-color;
-    text-decoration: none;
-    background-color: $pagination-hover-bg;
-    border-color: $pagination-hover-border-color;
-    transition: all .3s;
+    &:hover {
+      z-index: 2;
+      color: $pagination-hover-color;
+      text-decoration: none;
+      background-color: $pagination-hover-bg;
+      border-color: $pagination-hover-border-color;
+      transition: all .3s;
+    }
+
+    &:focus {
+      z-index: 2;
+      outline: $pagination-focus-outline;
+      box-shadow: $pagination-focus-box-shadow;
+      transition: all .3s;
+    }
   }
 
-  &:focus {
-    z-index: 2;
-    outline: $pagination-focus-outline;
-    box-shadow: $pagination-focus-box-shadow;
-    transition: all .3s;
-  }
-}
-
-.#{$prefix-cls}-active {
-  z-index: 1;
-  color: $pagination-active-color;
-  background-color: $pagination-active-bg;
-  border-color: $pagination-active-border-color;
-  cursor: default;
-
-  &:hover {
+  &-active {
+    z-index: 1;
     color: $pagination-active-color;
     background-color: $pagination-active-bg;
     border-color: $pagination-active-border-color;
+    cursor: default;
+
+    &:hover {
+      color: $pagination-active-color;
+      background-color: $pagination-active-bg;
+      border-color: $pagination-active-border-color;
+    }
+
+    &:focus {
+      color: $pagination-active-color;
+      background-color: $pagination-active-bg;
+      border-color: $pagination-active-border-color;
+    }
   }
 
-  &:focus {
-    color: $pagination-active-color;
-    background-color: $pagination-active-bg;
-    border-color: $pagination-active-border-color;
+  &-disabled {
+    opacity: $pagination-disabled-opacity;
+    pointer-events: none;
+    cursor: auto;
   }
-}
 
-.#{$prefix-cls}-disabled {
-  opacity: $pagination-disabled-opacity;
-  pointer-events: none;
-  cursor: auto;
-}
-
-.#{$prefix-cls}-prev,
-.#{$prefix-cls}-next {
-  i {
-    font-size: 16px;
+  &-prev,
+  &-next {
+    i {
+      font-size: 16px;
+    }
   }
-}
 
-.#{$prefix-cls}-small {
-  .#{$prefix-cls}-item {
+  &-miss {
+    border: 0;
+    font-size: 0;
+    cursor: default;
+
+    &:hover {
+      background-color: inherit;
+    }
+
+    i {
+      display: inline-block;
+      width: 4px;
+      height: 4px;
+      margin: 0 1.5px;
+      background-color: #d9d9d9;
+      border-radius: 50%;
+    }
+  }
+
+  &-small &-item {
     min-width: $pagination-size-sm;
     height: $pagination-size-sm;
     font-size: $pagination-font-size-sm;
   }
 
-  .#{$prefix-cls}-prev,
-  .#{$prefix-cls}-next {
+  &-small &-prev,
+  &-small &-next {
     border: 0;
   }
-}
 
-.#{$prefix-cls}-large {
-  .#{$prefix-cls}-item {
+  &-large &-item {
     min-width: $pagination-size-lg;
     height: $pagination-size-lg;
     font-size: $pagination-font-size-lg;
   }
 
-  i {
+  &-large i {
     font-size: 20px;
-  }
-}
-
-.#{$prefix-cls}-miss {
-  border: 0;
-  font-size: 0;
-  cursor: default;
-
-  &:hover {
-    background-color: inherit;
-  }
-
-  i {
-    display: inline-block;
-    width: 4px;
-    height: 4px;
-    margin: 0 1.5px;
-    background-color: #d9d9d9;
-    border-radius: 50%;
   }
 }
