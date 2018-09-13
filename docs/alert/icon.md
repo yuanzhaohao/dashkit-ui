@@ -13,12 +13,7 @@ import { Alert } from 'dashkit-ui';
 
 ReactDOM.render(
   <div className="alert-wrapper">
-    <Alert type="success" icon closable>
-      <h4>Well done!</h4>
-      Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.
-      <hr />
-      Whenever you need to, be sure to use margin utilities to keep things nice and tidy.
-    </Alert>
+    <Alert type="success" icon closable>A simple success alert—check it out!</Alert>
     <Alert type="danger" icon closable>A simple danger alert—check it out!</Alert>
     <Alert type="warning" icon closable>A simple warning alert—check it out!</Alert>
     <Alert type="info" icon closable>A simple info alert—check it out!</Alert>
