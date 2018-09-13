@@ -12,6 +12,7 @@ export type AlertProps = {
   type?: AlertType;
   duration?: number;
   closable?: boolean;
+  showIcon?: boolean;
   onClose?: React.MouseEventHandler<HTMLAnchorElement>;
 };
 
@@ -52,6 +53,7 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
       },
       className,
     );
+
     const closeIcon = closable ? (
       <Icon type="x" className={`${prefixCls}-close`} onClick={this.handleClose} />
     ) : null
@@ -64,13 +66,10 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
   }
 
   private animationEnd = () => {
-    console.log('call animationEnd')
-    setTimeout(() => {
-      this.setState({
-        closed: true,
-        dismissed: true,
-      });
-    }, 0)
+    this.setState({
+      closed: true,
+      dismissed: true,
+    });
   }
 
   private handleClose = (e: React.MouseEvent<HTMLAnchorElement>) => {
