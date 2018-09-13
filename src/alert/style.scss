@@ -45,10 +45,36 @@ $prefix-cls: 'dashkit-alert';
       color: $alert-close-hover-color;
     }
   }
-}
 
-@each $color, $value in $theme-colors {
-  .#{$prefix-cls}-#{$color} {
-    @include alert-variant(theme-color-level($color, $alert-bg-level), theme-color-level($color, $alert-border-level), theme-color-level($color, $alert-color-level));
+  &-with-icon {
+    padding-left: $alert-padding-x + 22;
+  }
+
+  &-icon {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    margin-top: 2px;
+    left: $alert-padding-x;
+    top: $alert-padding-y;
+    color: $primary;
+
+    > svg {
+      vertical-align: top;
+    }
+  }
+
+  &-default {
+    @include alert-variant($alert-default-bg, $alert-default-border, $alert-default-text);
+  }
+
+  @each $color, $value in $alert-theme-colors {
+    &-#{$color} {
+      @include alert-variant(theme-color-level($color, $alert-bg-level), theme-color-level($color, $alert-border-level), theme-color-level($color, $alert-color-level));
+
+      .#{$prefix-cls}-icon path {
+        fill: theme-color-level($color, $alert-color-level);
+      }
+    }
   }
 }

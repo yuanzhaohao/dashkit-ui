@@ -3,6 +3,7 @@ import './style.scss';
 import * as React from 'react';
 import * as classNames from 'classnames';
 import Icon from '../icon';
+import * as svgIcons from '../utils/svg-icon';
 
 export type AlertType = 'default' | 'success' | 'danger' | 'warning' | 'info';
 
@@ -12,7 +13,7 @@ export type AlertProps = {
   type?: AlertType;
   duration?: number;
   closable?: boolean;
-  showIcon?: boolean;
+  icon?: boolean;
   onClose?: React.MouseEventHandler<HTMLAnchorElement>;
 };
 
@@ -24,7 +25,7 @@ export type AlertState = {
 class Alert extends React.PureComponent<AlertProps, AlertState> {
   static defaultProps = {
     prefixCls: 'dashkit-alert',
-    size: 'default' as AlertType,
+    type: 'default' as AlertType,
   };
   private readonly containerDiv: React.RefObject<HTMLDivElement>;
   constructor(props: AlertProps) {
@@ -43,22 +44,28 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
       type,
       children,
       closable,
+      icon,
     } = this.props;
+    const isShowIcon = icon && svgIcons[type];
     const alertClassName = classNames(
       prefixCls,
       {
         [`${prefixCls}-${type}`]: true,
         [`${prefixCls}-with-close`]: closable,
+        [`${prefixCls}-with-icon`]: isShowIcon,
         [`${prefixCls}-dismissed`]: !!this.state.dismissed,
       },
       className,
     );
-
     const closeIcon = closable ? (
       <Icon type="x" className={`${prefixCls}-close`} onClick={this.handleClose} />
-    ) : null
+    ) : null;
+    const svgIcon = isShowIcon ? (
+      <div className={`${prefixCls}-icon`}>{svgIcons[type]}</div>
+    ) : null;
     return this.state.closed ? null : (
       <div className={alertClassName} ref={this.containerDiv}>
+        {svgIcon}
         {children}
         {closeIcon}
       </div>

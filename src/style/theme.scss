@@ -362,6 +362,16 @@ $input-hover-border-color:          $input-focus-border-color !default;
 
 // Alert
 // 
+$alert-theme-colors: () !default;
+$alert-theme-colors: map-merge(
+  (
+    "info":       $primary,
+    "success":    $success,
+    "warning":    $warning,
+    "danger":     $danger
+  ),
+  $alert-theme-colors
+);
 $alert-padding-y:                   12px !default;
 $alert-padding-x:                   20px !default;
 $alert-margin-bottom:               16px !default;
@@ -373,3 +383,6 @@ $alert-color-level:                 6 !default;
 $alert-close-size:                  18px !default;
 $alert-close-color:                 $gray-500 !default;
 $alert-close-hover-color:           $gray-800 !default;
+$alert-default-bg:                  $white !default;
+$alert-default-border:              $border-color !default;
+$alert-default-text:                $gray-800 !default;
