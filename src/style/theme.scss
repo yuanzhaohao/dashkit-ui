@@ -364,9 +364,12 @@ $input-hover-border-color:          $input-focus-border-color !default;
 // 
 $alert-padding-y:                   12px !default;
 $alert-padding-x:                   20px !default;
-$alert-margin-bottom:               1rem !default;
+$alert-margin-bottom:               16px !default;
 $alert-border-radius:               $border-radius !default;
 $alert-link-font-weight:            $font-weight-bold !default;
 $alert-bg-level:                    -10 !default;
 $alert-border-level:                -9 !default;
 $alert-color-level:                 6 !default;
+$alert-close-size:                  18px !default;
+$alert-close-color:                 $gray-500 !default;
+$alert-close-hover-color:           $gray-800 !default;

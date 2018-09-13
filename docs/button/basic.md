@@ -24,21 +24,21 @@ ReactDOM.render(
     </div>
 
     <div className="button-list">
-      <Button outline={true}>Outline</Button>
-      <Button type="primary" outline={true}>Primary</Button>
-      <Button type="success" outline={true}>Success</Button>
-      <Button type="warning" outline={true}>Warning</Button>
-      <Button type="danger" outline={true}>Danger</Button>
-      <Button type="info" outline={true}>Info</Button>
+      <Button outline>Outline</Button>
+      <Button type="primary" outline>Primary</Button>
+      <Button type="success" outline>Success</Button>
+      <Button type="warning" outline>Warning</Button>
+      <Button type="danger" outline>Danger</Button>
+      <Button type="info" outline>Info</Button>
     </div>
 
     <div className="button-list">
-      <Button round={true}>Round</Button>
-      <Button type="primary" round={true}>Primary</Button>
-      <Button type="success" round={true}>Success</Button>
-      <Button type="warning" round={true}>Warning</Button>
-      <Button type="danger" round={true}>Danger</Button>
-      <Button type="info" round={true}>Info</Button>
+      <Button round>Round</Button>
+      <Button type="primary" round>Primary</Button>
+      <Button type="success" round>Success</Button>
+      <Button type="warning" round>Warning</Button>
+      <Button type="danger" round>Danger</Button>
+      <Button type="info" round>Info</Button>
     </div>
   </div>,
   mountNode

@@ -27,6 +27,24 @@ $prefix-cls: 'dashkit-alert';
     opacity: 0;
     transform: scaleY(0);
   }
+
+  &-with-close {
+    padding-right: $alert-padding-x + $alert-close-size;
+  }
+
+  &-close {
+    position: absolute;
+    top: $alert-padding-y;
+    right: 12px;
+    font-size: $alert-close-size;
+    color: $alert-close-color;
+    transition: color .3s;
+    cursor: pointer;
+
+    &:hover {
+      color: $alert-close-hover-color;
+    }
+  }
 }
 
 @each $color, $value in $theme-colors {

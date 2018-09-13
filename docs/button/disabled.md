@@ -19,27 +19,27 @@ ReactDOM.render(
     </div>
     <div className="button-list">
       <Button type="primary">Primary</Button>
-      <Button type="primary" disabled={true}>Default Disabled</Button>
+      <Button type="primary" disabled>Default Disabled</Button>
     </div>
     <div className="button-list">
       <Button type="success">Success</Button>
-      <Button type="success" disabled={true}>Success Disabled</Button>
+      <Button type="success" disabled>Success Disabled</Button>
     </div>
     <div className="button-list">
       <Button type="warning">Warning</Button>
-      <Button type="warning" disabled={true}>Warning Disabled</Button>
+      <Button type="warning" disabled>Warning Disabled</Button>
     </div>
     <div className="button-list">
       <Button type="danger">Danger</Button>
-      <Button type="danger" disabled={true}>Danger Disabled</Button>
+      <Button type="danger" disabled>Danger Disabled</Button>
     </div>
     <div className="button-list">
       <Button type="info">Info</Button>
-      <Button type="info" disabled={true}>Info Disabled</Button>
+      <Button type="info" disabled>Info Disabled</Button>
     </div>
     <div className="button-list">
       <Button type="link">Link</Button>
-      <Button type="link" disabled={true}>Link Disabled</Button>
+      <Button type="link" disabled>Link Disabled</Button>
     </div>
   </div>,
   mountNode
