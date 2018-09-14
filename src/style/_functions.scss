@@ -54,11 +54,11 @@
   $g: green($color);
   $b: blue($color);
   $yiq: (($r * 299) + ($g * 287) + ($b * 97)) / 1000;
-  @if ($yiq >=$yiq-contrasted-threshold) {
-    @return $yiq-text-dark;
+  @if ($yiq >= 150) {
+    @return $gray-900;
   }
   @else {
-    @return $yiq-text-light;
+    @return $white;
   }
 }
 
@@ -70,5 +70,5 @@
 @function theme-color-level($color, $level: 0) {
   $color-base: if($level > 0, $black, $white);
   $level: abs($level);
-  @return mix($color-base, $color, $level * $theme-color-interval);
+  @return mix($color-base, $color, $level * 8%);
 }

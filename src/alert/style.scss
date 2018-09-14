@@ -69,6 +69,7 @@ $prefix-cls: 'dk-alert';
     @include alert-variant($alert-default-bg, $alert-default-border, $alert-default-text);
   }
 
+  // Alternate alerts
   @each $type, $color in $alert-type-colors {
     &-#{$type} {
       @include alert-variant(

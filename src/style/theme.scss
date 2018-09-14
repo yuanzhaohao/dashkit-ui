@@ -65,27 +65,6 @@ $theme-colors: map-merge(
   $theme-colors
 );
 
-$theme-color-interval:      8% !default;
-$yiq-contrasted-threshold:  150 !default;
-$yiq-text-dark:             $gray-900 !default;
-$yiq-text-light:            $white !default;
-
-// Spacing
-//
-$spacer: 16px !default;
-$spacers: () !default;
-$spacers: map-merge(
-  (
-    0: 0,
-    1: ($spacer * .25),
-    2: ($spacer * .5),
-    3: $spacer,
-    4: ($spacer * 1.5),
-    5: ($spacer * 3)
-  ),
-  $spacers
-);
-
 //Body
 //
 $body-bg:                     $white !default;
@@ -151,7 +130,7 @@ $h4-font-size:                $font-size-base * 1.5 !default;
 $h5-font-size:                $font-size-base * 1.25 !default;
 $h6-font-size:                $font-size-base !default;
 
-$headings-margin-bottom:      ($spacer / 2) !default;
+$headings-margin-bottom:      8px !default;
 $headings-font-family:        inherit !default;
 $headings-font-weight:        500 !default;
 $headings-line-height:        1.2 !default;
@@ -160,8 +139,6 @@ $headings-color:              inherit !default;
 $lead-font-size:              ($font-size-base * 1.25) !default;
 $lead-font-weight:            300 !default;
 
-$small-font-size:             80% !default;
-
 $text-muted:                  $gray-600 !default;
 
 $blockquote-small-color:      $gray-600 !default;
@@ -169,6 +146,7 @@ $blockquote-font-size:        ($font-size-base * 1.25) !default;
 
 $hr-border-color:             rgba($black, .1) !default;
 $hr-border-width:             $border-width !default;
+$hr-margin-y:                 16px !default;
 
 $mark-padding:                .2em !default;
 
@@ -176,10 +154,7 @@ $kbd-box-shadow:              inset 0 -2px 0 rgba($black, .25) !default;
 $nested-kbd-font-weight:      $font-weight-bold !default;
 
 $list-inline-padding:         8px !default;
-
 $mark-bg:                     #fcf8e3 !default;
-
-$hr-margin-y:                 $spacer !default;
 
 // Tables
 //
@@ -209,6 +184,17 @@ $table-caption-color:         $text-muted !default;
 
 // Buttons
 //
+$btn-type-colors: () !default;
+$btn-type-colors: map-merge(
+  (
+    "primary":    $primary,
+    "success":    $success,
+    "info":       $info,
+    "warning":    $warning,
+    "danger":     $danger
+  ),
+  $btn-type-colors
+);
 $btn-height:                  34px !default;
 $btn-padding-x:               12px !default;
 $btn-line-height:             $line-height-base !default;
@@ -226,7 +212,7 @@ $btn-border-width:            $border-width !default;
 $btn-font-weight:             $font-weight-normal !default;
 $btn-box-shadow:              inset 0 1px 0 rgba($white, .15), 0 1px 1px rgba($black, .075) !default;
 $btn-focus-width:             2.5px !default;
-$btn-focus-box-shadow:        0 0 0 3px rgba($component-active-bg, .25) !default;
+$btn-focus-box-shadow:        0 0 0 $btn-focus-width rgba($component-active-bg, .25) !default;
 $btn-disabled-opacity:        .65 !default;
 $btn-active-box-shadow:       inset 0 3px 5px rgba($black, .125) !default;
 
@@ -317,7 +303,7 @@ $input-hover-border-color:          $input-focus-border-color !default;
 $alert-type-colors: () !default;
 $alert-type-colors: map-merge(
   (
-    "info":       $primary,
+    "info":       $info,
     "success":    $success,
     "warning":    $warning,
     "danger":     $danger

@@ -21,7 +21,7 @@ export type ButtonState = {
 
 class Button extends React.PureComponent<ButtonProps, ButtonState> {
   static defaultProps = {
-    prefixCls: 'dashkit-btn',
+    prefixCls: 'dk-btn',
     outline: false,
     round: false,
     disabled: false,

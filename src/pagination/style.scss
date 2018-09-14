@@ -102,6 +102,10 @@ $prefix-cls: 'dashkit-pagination';
   &-small &-prev,
   &-small &-next {
     border: 0;
+
+    &:hover {
+      background-color: transparent;
+    }
   }
 
   &-large &-item {

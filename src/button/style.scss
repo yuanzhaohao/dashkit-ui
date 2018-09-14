@@ -2,7 +2,7 @@
 @import '../style/theme';
 @import '../style/mixins';
 
-$prefix-cls: 'dashkit-btn';
+$prefix-cls: 'dk-btn';
 
 .#{$prefix-cls} {
   display: inline-block;
@@ -13,7 +13,13 @@ $prefix-cls: 'dashkit-btn';
   user-select: none;
   border: $btn-border-width solid transparent;
   transition: $btn-transition;
-  @include button-size($btn-height, $btn-padding-x, $font-size-base, $btn-line-height, $btn-border-radius);
+  @include button-size(
+    $btn-height, 
+    $btn-padding-x, 
+    $font-size-base, 
+    $btn-line-height, 
+    $btn-border-radius
+  );
   @include hover-focus {
     text-decoration: none;
   }
@@ -27,94 +33,107 @@ $prefix-cls: 'dashkit-btn';
     opacity: $btn-disabled-opacity;
     pointer-events: none;
     box-shadow: none;
+    cursor: not-allowed;
   }
   &:not(:disabled):not(.disabled) {
     cursor: pointer;
-  }
-
-  &-rounded {
-    border-radius: $btn-height / 2;
   }
 
   &-link {
     font-weight: $font-weight-normal;
     color: $link-color;
     background-color: transparent;
+
     @include hover {
       color: $link-hover-color;
       text-decoration: $link-hover-decoration;
       background-color: transparent;
       border-color: transparent;
     }
+
     &:focus,
     &.focus {
       text-decoration: $link-hover-decoration;
       border-color: transparent;
       box-shadow: none;
     }
+
     &:disabled,
     &.disabled {
       color: $btn-link-disabled-color;
-      opacity: $btn-disabled-opacity;
-      pointer-events: none;
     }
+  }
+
+  &-default {
+    border-color: $border-color;
+    background-color: $white;
+    color: $dark;
+
+    @include hover {
+      border-color: $primary;
+      background-color: $light;
+      color: $primary;
+    }
+  }
+
+  &-outline-default {
+    background-color: $white;
+    border-color: $border-color;
+
+    @include hover {
+      border-color: $light;
+      background-color: $light;
+    }
+  }
+
+  &-rounded {
+    border-radius: $btn-height / 2;
   }
 
 
   // Button Sizes
   //
   &-large {
-    @include button-size($btn-height-lg, $btn-padding-x-lg, $font-size-lg, $btn-line-height-lg, $btn-border-radius-lg);
+    @include button-size(
+      $btn-height-lg, 
+      $btn-padding-x-lg, 
+      $font-size-lg, 
+      $btn-line-height-lg, 
+      $btn-border-radius-lg
+    );
 
-    &-rounded {
+    &.#{$prefix-cls}-rounded {
       border-radius: $btn-height-lg / 2;
     }
   }
 
   &-small {
-    @include button-size($btn-height-sm, $btn-padding-x-sm, $font-size-sm, $btn-line-height-sm, $btn-border-radius-sm);
+    @include button-size(
+      $btn-height-sm, 
+      $btn-padding-x-sm, 
+      $font-size-sm, 
+      $btn-line-height-sm, 
+      $btn-border-radius-sm
+    );
 
-    &-rounded {
+    &.#{$prefix-cls}-rounded {
       border-radius: $btn-height-sm / 2;
     }
   }
 
   // Alternate buttons
   //
-  @each $color,
-  $value in $theme-colors {
-    &-#{$color} {
-      @if $color == 'default' {
-        border-color: $border-color;
-        background-color: $white;
-        color: $dark;
-        @include hover {
-          border-color: $primary;
-          background-color: $light;
-          color: $primary;
-        }
-      } @else {
-        @include button-variant($value, $value);
-      }
+  @each $type, $color in $btn-type-colors {
+    &-#{$type} {
+      @include button-variant($color);
     }
   }
 
-  @each $color,
-  $value in $theme-colors {
-    &-outline-#{$color} {
-      @if $color == 'default' {
-        background-color: $white;
-        border-color: $border-color;
-        @include hover {
-          border-color: $light;
-          background-color: $light;
-        }
-      } @else {
-        @include button-outline-variant($value);
-      }
+  @each $type, $color in $btn-type-colors {
+    &-outline-#{$type} {
+      @include button-outline-variant($color);
     }
   }
-
 }
 
 // Future-proof disabling of clicks on `<a>` elements
