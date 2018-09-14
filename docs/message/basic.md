@@ -36,7 +36,7 @@ ReactDOM.render(
     <Button onClick={show}>Show</Button>
     <Button onClick={success}>Success</Button>
     <Button onClick={error}>Error</Button>
-    <Button onClick={info}>Error</Button>
+    <Button onClick={info}>Info</Button>
     <Button onClick={warning}>Warning</Button>
   </div>,
   mountNode

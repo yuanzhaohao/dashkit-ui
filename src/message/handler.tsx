@@ -9,7 +9,8 @@ const components: any = {};
 function getElement(type: AlertType) {
   const div = document.createElement('div');
 
-  document.body.appendChild(div)
+  div.className = 'dk-msg';
+  document.body.appendChild(div);
   elements[type] = div;
   return div
 }
