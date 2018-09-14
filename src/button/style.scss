@@ -71,7 +71,7 @@ $prefix-cls: 'dk-btn';
 
     @include hover {
       border-color: $primary;
-      background-color: $light;
+      // background-color: $light;
       color: $primary;
     }
   }

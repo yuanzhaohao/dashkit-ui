@@ -9,8 +9,9 @@ import './app.scss';
 
 const { Content, Footer } = Layout;
 const Index = asyncComponent(() => import('./index'));
-const PageAlert = asyncComponent(() => import('./alert'));
 const PageButton = asyncComponent(() => import('./button'));
+const PageAlert = asyncComponent(() => import('./alert'));
+const PageMessage = asyncComponent(() => import('./message'));
 const PageIcon = asyncComponent(() => import('./icon'));
 const PageSpin = asyncComponent(() => import('./spin'));
 const PageInput = asyncComponent(() => import('./input'));
@@ -29,6 +30,7 @@ export default () => (
             <Route exact path="/index" component={Index} />
             <Route exact path="/components/alert" component={PageAlert} />
             <Route exact path="/components/button" component={PageButton} />
+            <Route exact path="/components/message" component={PageMessage} />
             <Route exact path="/components/spin" component={PageSpin} />
             <Route exact path="/components/icon" component={PageIcon} />
             <Route exact path="/components/input" component={PageInput} />

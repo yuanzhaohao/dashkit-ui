@@ -7,5 +7,6 @@ export { default as Input } from './input';
 export { default as Spin } from './spin';
 export { default as Button } from './button';
 export { default as Alert } from './alert';
+export { default as Message } from './message';
 export { default as Switch } from './switch';
 export { default as Pagination } from './pagination';

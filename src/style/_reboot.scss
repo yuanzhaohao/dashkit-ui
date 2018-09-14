@@ -110,6 +110,10 @@ ol ul,
 ul ol {
   margin-bottom: 0;
 }
+ol li,
+ul li {
+  margin-bottom: 8px;
+}
 
 dt {
   font-weight: $font-weight-bold;

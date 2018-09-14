@@ -3,7 +3,8 @@ import './style.scss';
 import * as React from 'react';
 import * as classNames from 'classnames';
 import Icon from '../icon';
-import * as svgIcons from '../utils/svg-icon';
+const svgIcons: any = require('../utils/svg-icon');
+// import * as svgIcons from '../utils/svg-icon';
 
 export type AlertType = 'default' | 'success' | 'danger' | 'warning' | 'info';
 
@@ -27,7 +28,7 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
     prefixCls: 'dk-alert',
     type: 'default' as AlertType,
   };
-  private readonly containerDiv: React.RefObject<HTMLDivElement>;
+  readonly containerDiv: React.RefObject<HTMLDivElement>;
   constructor(props: AlertProps) {
     super(props);
     this.state = {
@@ -37,16 +38,17 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
     this.containerDiv = React.createRef();
   }
 
-  public render() {
+  render() {
     const {
       prefixCls,
       className,
-      type,
       children,
       closable,
       icon,
+      type,
     } = this.props;
-    const isShowIcon = icon && svgIcons[type];
+    const iconChild = svgIcons[type || 'default'];
+    const isShowIcon = icon && iconChild;
     const alertClassName = classNames(
       prefixCls,
       {
@@ -57,29 +59,33 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
       },
       className,
     );
-    const closeIcon = closable ? (
-      <Icon type="x" className={`${prefixCls}-close`} onClick={this.handleClose} />
-    ) : null;
-    const svgIcon = isShowIcon ? (
-      <div className={`${prefixCls}-icon`}>{svgIcons[type]}</div>
-    ) : null;
     return this.state.closed ? null : (
       <div className={alertClassName} ref={this.containerDiv}>
-        {svgIcon}
+        {isShowIcon 
+          ? (
+            <div className={`${prefixCls}-icon`}>{iconChild}</div>
+          )
+          : null
+        }
         {children}
-        {closeIcon}
+        {closable 
+          ? (
+            <Icon type="x" className={`${prefixCls}-close`} onClick={this.handleClose} />
+          )
+          : null
+        }
       </div>
     );
   }
 
-  private animationEnd = () => {
+  animationEnd = () => {
     this.setState({
       closed: true,
       dismissed: true,
     });
   }
 
-  private handleClose = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  handleClose = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const alertElement = this.containerDiv.current;
     if (alertElement) {
       const eventName = getTransitionEvents(alertElement);
