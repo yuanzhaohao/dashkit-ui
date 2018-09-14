@@ -24,7 +24,7 @@ export type AlertState = {
 
 class Alert extends React.PureComponent<AlertProps, AlertState> {
   static defaultProps = {
-    prefixCls: 'dashkit-alert',
+    prefixCls: 'dk-alert',
     type: 'default' as AlertType,
   };
   private readonly containerDiv: React.RefObject<HTMLDivElement>;

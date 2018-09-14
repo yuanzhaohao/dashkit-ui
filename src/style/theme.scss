@@ -42,26 +42,6 @@ $green:   #00d97e !default;
 $teal:    #20c997 !default;
 $cyan:    #39afd1 !default;
 
-$colors: () !default;
-// stylelint-disable-next-line scss/dollar-variable-default
-$colors: map-merge(
-  (
-    "blue":       $blue,
-    "indigo":     $indigo,
-    "purple":     $purple,
-    "pink":       $pink,
-    "red":        $red,
-    "orange":     $orange,
-    "yellow":     $yellow,
-    "green":      $green,
-    "teal":       $teal,
-    "cyan":       $cyan,
-    "white":      $white,
-    "gray":       $gray-600,
-    "gray-dark":  $gray-800
-  ),
-  $colors
-);
 
 $default:       $gray-100 !default;
 $primary:       $blue !default;
@@ -90,19 +70,9 @@ $yiq-contrasted-threshold:  150 !default;
 $yiq-text-dark:             $gray-900 !default;
 $yiq-text-light:            $white !default;
 
-// Options
-//
-$enable-caret:              true !default;
-$enable-rounded:            true !default;
-$enable-shadows:            true !default;
-$enable-transitions:        true !default;
-$enable-hover-media-query:  false !default;
-$enable-grid-classes:       true !default;
-$enable-print-styles:       true !default;
-
 // Spacing
 //
-$spacer: 1rem !default;
+$spacer: 16px !default;
 $spacers: () !default;
 $spacers: map-merge(
   (
@@ -116,18 +86,6 @@ $spacers: map-merge(
   $spacers
 );
 
-$sizes: () !default;
-$sizes: map-merge(
-  (
-    25: 25%,
-    50: 50%,
-    75: 75%,
-    100: 100%,
-    auto: auto
-  ),
-  $sizes
-);
-
 //Body
 //
 $body-bg:                     $white !default;
@@ -135,7 +93,7 @@ $body-color:                  $gray-900 !default;
 
 // Links
 //
-$link-color:                  theme-color("primary") !default;
+$link-color:                  $primary !default;
 $link-decoration:             none !default;
 $link-hover-color:            darken($link-color, 15%) !default;
 $link-hover-decoration:       underline !default;
@@ -164,7 +122,7 @@ $box-shadow:                  0 8px 16px rgba($black, .15) !default;
 $box-shadow-lg:               0 16px 48px rgba($black, .175) !default;
 
 $component-active-color:      $white !default;
-$component-active-bg:         theme-color("primary") !default;
+$component-active-bg:         $primary !default;
 
 $caret-width:                 .3em !default;
 
@@ -192,12 +150,6 @@ $h3-font-size:                $font-size-base * 1.75 !default;
 $h4-font-size:                $font-size-base * 1.5 !default;
 $h5-font-size:                $font-size-base * 1.25 !default;
 $h6-font-size:                $font-size-base !default;
-
-$headings-margin-bottom:      ($spacer / 2) !default;
-$headings-font-family:        inherit !default;
-$headings-font-weight:        500 !default;
-$headings-line-height:        1.2 !default;
-$headings-color:              inherit !default;
 
 $headings-margin-bottom:      ($spacer / 2) !default;
 $headings-font-family:        inherit !default;
@@ -362,15 +314,15 @@ $input-hover-border-color:          $input-focus-border-color !default;
 
 // Alert
 // 
-$alert-theme-colors: () !default;
-$alert-theme-colors: map-merge(
+$alert-type-colors: () !default;
+$alert-type-colors: map-merge(
   (
     "info":       $primary,
     "success":    $success,
     "warning":    $warning,
     "danger":     $danger
   ),
-  $alert-theme-colors
+  $alert-type-colors
 );
 $alert-padding-y:                   12px !default;
 $alert-padding-x:                   20px !default;

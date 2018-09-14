@@ -2,7 +2,7 @@
 @import '../style/theme';
 @import '../style/mixins';
 
-$prefix-cls: 'dashkit-alert';
+$prefix-cls: 'dk-alert';
 
 .#{$prefix-cls} {
   position: relative;
@@ -36,6 +36,7 @@ $prefix-cls: 'dashkit-alert';
     position: absolute;
     top: $alert-padding-y;
     right: 12px;
+    margin-top: 1px;
     font-size: $alert-close-size;
     color: $alert-close-color;
     transition: color .3s;
@@ -68,9 +69,13 @@ $prefix-cls: 'dashkit-alert';
     @include alert-variant($alert-default-bg, $alert-default-border, $alert-default-text);
   }
 
-  @each $color, $value in $alert-theme-colors {
-    &-#{$color} {
-      @include alert-variant(theme-color-level($color, $alert-bg-level), theme-color-level($color, $alert-border-level), theme-color-level($color, $alert-color-level));
+  @each $type, $color in $alert-type-colors {
+    &-#{$type} {
+      @include alert-variant(
+        theme-color-level($color, $alert-bg-level), 
+        theme-color-level($color, $alert-border-level),
+        theme-color-level($color, $alert-color-level)
+      );
 
       .#{$prefix-cls}-icon path {
         fill: theme-color-level($color, $alert-color-level);
