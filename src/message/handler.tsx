@@ -16,6 +16,7 @@ function getElement(type: AlertType) {
 }
 
 export function destroy(type: AlertType) {
+  console.log('call destory')
   if (components[type]) {
     delete components[type]
   }

@@ -15,7 +15,7 @@ export type MessageProps = {
 
 export type MessageItemProps = {
   id?: string;
-  type?: AlertType;
+  type: AlertType;
   content?: React.ReactNode;
 };
 
@@ -63,6 +63,7 @@ class Message extends React.PureComponent<MessageProps, MessageState> {
               className={contentClassName}
               onClose={this.removeMessage.bind(this, id)}
               icon
+              closable
               type={type}
             >
               {content}
@@ -75,7 +76,7 @@ class Message extends React.PureComponent<MessageProps, MessageState> {
   }
 
   addMessage = (message: MessageItemProps) => {
-    const id = getUid();
+    message.id = getUid();
     const { max } = this.props;
     const { messages } = this.state;
     const tempMessages = [...messages, message];
@@ -89,10 +90,27 @@ class Message extends React.PureComponent<MessageProps, MessageState> {
   }
 
   removeMessage = (id: string) => {
-    const { messages } = this.state;
-    this.setState({
-      messages: messages.filter(message => message.id !== id)
-    });
+    // const { messages } = this.state;
+    // this.setState({
+    //   messages: messages.filter(message => message.id !== id)
+    // });
+
+    let callback
+    const messages = this.state.messages.filter((m) => {
+      if (m.id !== id) return true
+      if (m.onClose) {
+        callback = m.onClose
+      }
+      return false
+    })
+
+    if (messages.length === 0) {
+      this.props.onDestory()
+    } else {
+      this.setState({ messages })
+    }
+
+    if (callback) callback()
   }
 }
 

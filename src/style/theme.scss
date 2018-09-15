@@ -310,7 +310,7 @@ $alert-type-colors: map-merge(
   ),
   $alert-type-colors
 );
-$alert-padding-y:                   12px !default;
+$alert-padding-y:                   8px !default;
 $alert-padding-x:                   20px !default;
 $alert-margin-bottom:               16px !default;
 $alert-border-radius:               $border-radius !default;
@@ -324,3 +324,8 @@ $alert-close-hover-color:           $gray-800 !default;
 $alert-default-bg:                  $white !default;
 $alert-default-border:              $border-color !default;
 $alert-default-text:                $gray-800 !default;
+
+// Message
+// 
+$message-content-shadow:            0 4px 12px rgba(0, 0, 0, 0.15) !default;
+$message-content-transition:        transform 0.216s, opacity 0.216s ease-in !default;

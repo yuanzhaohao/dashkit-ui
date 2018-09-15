@@ -1,8 +1,9 @@
 import { destroy, getComponent } from './handler';
 
-const create = type => (content, duration = 3, options = {}) => {
-  const { onClose, position = 'top' } = options
-  const messager = getComponent(position)
+const create = (type: string) => (content, duration = 3, options = {}) => {
+  const { onClose, position = 'top' } = options;
+  const messager = getComponent(position);
+  console.log(messager)
   messager.addMessage({
     content,
     duration,
@@ -17,10 +18,5 @@ export default {
   info: create('info'),
   warn: create('warning'),
   warning: create('warning'),
-  danger: create('danger'),
   error: create('danger'),
-  close: () => {
-    destroy('top')
-    destroy('middle')
-  },
 }

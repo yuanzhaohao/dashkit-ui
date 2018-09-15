@@ -3,18 +3,18 @@ import './style.scss';
 import * as React from 'react';
 import * as classNames from 'classnames';
 import Icon from '../icon';
-const svgIcons: any = require('../utils/svg-icon');
-// import * as svgIcons from '../utils/svg-icon';
+import { Transition, SvgIcon } from '../utils'
 
 export type AlertType = 'default' | 'success' | 'danger' | 'warning' | 'info';
 
 export type AlertProps = {
   prefixCls?: string;
   className?: string;
-  type?: AlertType;
+  type: AlertType;
   duration?: number;
   closable?: boolean;
   icon?: boolean;
+  style?: React.CSSProperties;
   onClose?: React.MouseEventHandler<HTMLAnchorElement>;
 };
 
@@ -46,8 +46,9 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
       closable,
       icon,
       type,
+      style,
     } = this.props;
-    const iconChild = svgIcons[type || 'default'];
+    const iconChild = SvgIcon[type];
     const isShowIcon = icon && iconChild;
     const alertClassName = classNames(
       prefixCls,
@@ -60,7 +61,7 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
       className,
     );
     return this.state.closed ? null : (
-      <div className={alertClassName} ref={this.containerDiv}>
+      <div className={alertClassName} ref={this.containerDiv} style={style}>
         {isShowIcon 
           ? (
             <div className={`${prefixCls}-icon`}>{iconChild}</div>
@@ -79,6 +80,7 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
   }
 
   animationEnd = () => {
+    console.log('call animationEnd')
     this.setState({
       closed: true,
       dismissed: true,
@@ -86,18 +88,23 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
   }
 
   handleClose = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const alertElement = this.containerDiv.current;
-    if (alertElement) {
-      const eventName = getTransitionEvents(alertElement);
-      alertElement.addEventListener(eventName, this.animationEnd);
-    }
+    // const alertElement = this.containerDiv.current;
+    // if (alertElement) {
+    //   const eventName = getTransitionEvents(alertElement);
+    //   alertElement.addEventListener(eventName, this.animationEnd);
+    // }
+    console.log('call handleClose')
     this.setState({
       dismissed: true,
     });
     const { onClose } = this.props;
-    if (typeof onClose === 'function') {
-      onClose(e);
-    }
+    
+    setTimeout(() => {
+      this.animationEnd();
+      if (typeof onClose === 'function') {
+        onClose(e);
+      }
+    }, 350)
   }
 }
 

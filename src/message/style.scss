@@ -14,9 +14,11 @@ $prefix-cls: 'dk-msg';
 
   &-item {
     display: flex;
+    transition: $message-content-transition;
   }
 
   &-content {
     margin: 0 auto 20px;
+    box-shadow: $message-content-shadow;
   }
 }
