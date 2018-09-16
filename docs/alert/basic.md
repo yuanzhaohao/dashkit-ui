@@ -22,7 +22,7 @@ ReactDOM.render(
       Whenever you need to, be sure to use margin utilities to keep things nice and tidy.
     </Alert>
     <Alert type="warning">A simple warning alert—check it out!</Alert>
-    <Alert type="danger">A simple danger alert—check it out!</Alert>
+    <Alert type="error">A simple error alert—check it out!</Alert>
   </div>,
   mountNode
 );

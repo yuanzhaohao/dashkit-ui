@@ -14,11 +14,23 @@ $prefix-cls: 'dk-msg';
 
   &-item {
     display: flex;
-    transition: $message-content-transition;
+    justify-content: center;
+    align-items: center;
+    transform-origin: 0 0;
+
+    &-enter {
+      opacity: 0;
+      transform: scaleY(0);
+    }
+
+    &-enter-active {
+      opacity: 1;
+      transform: scaleY(1);
+      transition: transform 0.216s, opacity 0.216s ease-in;
+    }
   }
 
   &-content {
-    margin: 0 auto 20px;
     box-shadow: $message-content-shadow;
   }
 }

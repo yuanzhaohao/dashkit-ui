@@ -4,6 +4,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as classNames from 'classnames';
 import Alert, { AlertType } from '../alert';
+import Animate from 'rc-animate';
 
 export type MessageProps = {
   prefixCls: string;
@@ -34,7 +35,7 @@ class Message extends React.PureComponent<MessageProps, MessageState> {
   static defaultProps = {
     prefixCls: 'dk-msg',
     type: 'default' as AlertType,
-    max: 100,
+    max: 10,
   };
 
   constructor(props: MessageProps) {
@@ -52,12 +53,11 @@ class Message extends React.PureComponent<MessageProps, MessageState> {
       className,
     );
     const { messages } = this.state;
-
-    if (messages && messages.length) {
-      return [
-        messages.map(({
-          id, type, content,
-        }) => (
+    const messageNodes = (
+      messages && messages.length
+      ? messages.map(({
+        id, type, content,
+      }) => (
           <div key={id} className={`${prefixCls}-item`}>
             <Alert
               className={contentClassName}
@@ -70,9 +70,17 @@ class Message extends React.PureComponent<MessageProps, MessageState> {
             </Alert>
           </div>
         ))
-      ];
-    }
-    return null;
+      : null
+    );
+
+    // return <div className={prefixCls}>{messageNodes}</div>;
+
+    return (
+      <Animate
+        className={prefixCls}
+        transitionName={`${prefixCls}-item`}
+      >{messageNodes}</Animate>
+    );
   }
 
   addMessage = (message: MessageItemProps) => {

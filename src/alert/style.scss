@@ -11,7 +11,6 @@ $prefix-cls: 'dk-alert';
   border: 1px solid transparent;
   border-radius: $alert-border-radius;
   transform-origin: 0 0;
-  transition: transform 0.216s, opacity 0.216s ease-out;
 
   h3, h4, h5 {
     margin-top: 0.3em;
@@ -23,9 +22,27 @@ $prefix-cls: 'dk-alert';
     font-weight: $alert-link-font-weight;
   }
 
-  &-dismissed {
+  &-enter {
     opacity: 0;
     transform: scaleY(0);
+  }
+
+  &-enter-active {
+    background-color: #000;
+    opacity: 1;
+    transform: scaleY(1);
+    transition: transform 0.216s, opacity 0.216s ease-in;
+  }
+
+  &-leave {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+
+  &-leave-active {
+    opacity: 0;
+    transform: scaleY(0);
+    transition: transform 0.216s, opacity 0.216s ease-out;
   }
 
   &-with-close {

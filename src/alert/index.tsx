@@ -3,9 +3,10 @@ import './style.scss';
 import * as React from 'react';
 import * as classNames from 'classnames';
 import Icon from '../icon';
-import { Transition, SvgIcon } from '../utils'
+import { Transition, SvgIcon } from '../utils';
+import Animate from 'rc-animate';
 
-export type AlertType = 'default' | 'success' | 'danger' | 'warning' | 'info';
+export type AlertType = 'default' | 'success' | 'error' | 'warning' | 'info';
 
 export type AlertProps = {
   prefixCls?: string;
@@ -15,7 +16,7 @@ export type AlertProps = {
   closable?: boolean;
   icon?: boolean;
   style?: React.CSSProperties;
-  onClose?: React.MouseEventHandler<HTMLAnchorElement>;
+  onClose?: VoidFunction;
 };
 
 export type AlertState = {
@@ -56,55 +57,63 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
         [`${prefixCls}-${type}`]: true,
         [`${prefixCls}-with-close`]: closable,
         [`${prefixCls}-with-icon`]: isShowIcon,
-        [`${prefixCls}-dismissed`]: !!this.state.dismissed,
       },
       className,
     );
     return this.state.closed ? null : (
-      <div className={alertClassName} ref={this.containerDiv} style={style}>
-        {isShowIcon 
-          ? (
-            <div className={`${prefixCls}-icon`}>{iconChild}</div>
-          )
-          : null
-        }
-        {children}
-        {closable 
-          ? (
-            <Icon type="x" className={`${prefixCls}-close`} onClick={this.handleClose} />
-          )
-          : null
-        }
-      </div>
+      <Animate
+        showProp="data-show"
+        transitionName={`${prefixCls}`}
+        onEnd={this.onAnimationEnd}
+      >
+        <div data-show={!this.state.dismissed} className={alertClassName} style={style}>
+          {isShowIcon 
+            ? (
+              <div className={`${prefixCls}-icon`}>{iconChild}</div>
+            )
+            : null
+          }
+          {children}
+          {closable 
+            ? (
+              <Icon type="x" className={`${prefixCls}-close`} onClick={this.handleClose} />
+            )
+            : null
+          }
+        </div>
+      </Animate>
     );
   }
 
-  animationEnd = () => {
-    console.log('call animationEnd')
+  onAnimationEnd = () => {
     this.setState({
       closed: true,
       dismissed: true,
     });
+    const { onClose } = this.props;
+    if (typeof onClose === 'function') {
+      setTimeout(() => {
+        onClose();
+      }, 0);
+    }
   }
 
   handleClose = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
     // const alertElement = this.containerDiv.current;
     // if (alertElement) {
     //   const eventName = getTransitionEvents(alertElement);
     //   alertElement.addEventListener(eventName, this.animationEnd);
-    // }
-    console.log('call handleClose')
     this.setState({
       dismissed: true,
     });
-    const { onClose } = this.props;
     
-    setTimeout(() => {
-      this.animationEnd();
-      if (typeof onClose === 'function') {
-        onClose(e);
-      }
-    }, 350)
+    // setTimeout(() => {
+    //   this.animationEnd();
+    //   if (typeof onClose === 'function') {
+    //     onClose(e);
+    //   }
+    // }, 350)
   }
 }
 

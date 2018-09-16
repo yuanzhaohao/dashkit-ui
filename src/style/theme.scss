@@ -306,7 +306,7 @@ $alert-type-colors: map-merge(
     "info":       $info,
     "success":    $success,
     "warning":    $warning,
-    "danger":     $danger
+    "error":      $danger
   ),
   $alert-type-colors
 );

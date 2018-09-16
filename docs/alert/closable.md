@@ -12,7 +12,7 @@ subtitle:
 import { Alert } from 'dashkit-ui';
 
 const onClose = function (e) {
-  console.log(e, 'I was closed.');
+  window.alert('I was closed.');
 };
 
 ReactDOM.render(

@@ -13,10 +13,10 @@ import { Alert } from 'dashkit-ui';
 
 ReactDOM.render(
   <div className="alert-wrapper">
-    <Alert type="success" icon closable>A simple success alert—check it out!</Alert>
-    <Alert type="danger" icon closable>A simple danger alert—check it out!</Alert>
-    <Alert type="warning" icon closable>A simple warning alert—check it out!</Alert>
+    <Alert type="success" icon>A simple success alert—check it out!</Alert>
+    <Alert type="warning" icon>A simple warning alert—check it out!</Alert>
     <Alert type="info" icon closable>A simple info alert—check it out!</Alert>
+    <Alert type="error" icon closable>A simple error alert—check it out!</Alert>
   </div>,
   mountNode
 );
