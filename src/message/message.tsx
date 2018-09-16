@@ -1,11 +1,9 @@
 import './style.scss';
 
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
 import * as classNames from 'classnames';
-import Alert, { AlertType } from '../alert';
+import { AlertType } from '../alert';
 import MessageItem from './messageItem';
-import Animate from 'rc-animate';
 
 export type MessageProps = {
   prefixCls: string;
