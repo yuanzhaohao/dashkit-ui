@@ -60,27 +60,40 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
       },
       className,
     );
+    const alertNode = (
+      <div data-show={!this.state.dismissed} className={alertClassName} style={style}>
+        {isShowIcon
+          ? (
+            <div className={`${prefixCls}-icon`}>{iconChild}</div>
+          )
+          : null
+        }
+        {children}
+        {closable
+          ? (
+            <Icon type="x" className={`${prefixCls}-close`} onClick={this.handleClose} />
+          )
+          : null
+        }
+      </div>
+    );
+
+    // return this.state.closed ? null : (
+    //   <Transition
+    //     name={`${prefixCls}`}
+    //     showProp="data-show"
+    //     onAfterLeave={this.onAnimationEnd}
+    //   >
+    //     {alertNode}
+    //   </Transition>
+    // );
     return this.state.closed ? null : (
       <Animate
         showProp="data-show"
         transitionName={`${prefixCls}`}
         onEnd={this.onAnimationEnd}
       >
-        <div data-show={!this.state.dismissed} className={alertClassName} style={style}>
-          {isShowIcon 
-            ? (
-              <div className={`${prefixCls}-icon`}>{iconChild}</div>
-            )
-            : null
-          }
-          {children}
-          {closable 
-            ? (
-              <Icon type="x" className={`${prefixCls}-close`} onClick={this.handleClose} />
-            )
-            : null
-          }
-        </div>
+        {alertNode}
       </Animate>
     );
   }

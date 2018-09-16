@@ -3,10 +3,12 @@ import * as ReactDOM from 'react-dom';
 
 export type TransitionProps = {
   name?: string;
+  showProp?: string;
   onEnter: VoidFunction;
   onAfterEnter: VoidFunction;
   onLeave: VoidFunction;
   onAfterLeave: VoidFunction;
+  children: React.ReactNode;
 };
 
 class Transition extends React.PureComponent<TransitionProps> {
@@ -23,53 +25,39 @@ class Transition extends React.PureComponent<TransitionProps> {
     this.didLeave = this.didLeave.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    const children = React.isValidElement(this.props.children) && React.Children.only(this.props.children);
-    const nextChildren = React.isValidElement(nextProps.children) && React.Children.only(nextProps.children);
+  // componentWillReceiveProps(nextProps: TransitionProps) {
+  //   const children = React.isValidElement(this.props.children) && React.Children.only(this.props.children);
+  //   const nextChildren = React.isValidElement(nextProps.children) && React.Children.only(nextProps.children);
 
-    if (!nextProps.name) {
-      this.setState({
-        children: nextChildren
-      });
-      return;
-    }
+  //   if (!nextProps.name) {
+  //     this.setState({
+  //       children: nextChildren
+  //     });
+  //     return;
+  //   }
 
-    if (this.isViewComponent(nextChildren)) {
-      this.setState({
-        children: this.enhanceChildren(nextChildren, { show: children ? children.props.show : true })
-      })
-    } else {
-      if (nextChildren) {
-        this.setState({
-          children: this.enhanceChildren(nextChildren)
-        })
-      }
-    }
-  }
+  //   this.setState({
+  //     children: this.enhanceChildren(nextChildren, { show: children ? children.props.show : true })
+  //   })
+  // }
 
   componentDidUpdate(preProps: TransitionProps) {
-    if (!this.props.name) return;
+    const { name, showProp, children } = this.props;
 
-    const children = React.isValidElement(this.props.children) && React.Children.only(this.props.children);
-    const preChildren = React.isValidElement(preProps.children) && React.Children.only(preProps.children);
+    if (!name) return;
 
-    if (this.isViewComponent(children)) {
-      if ((!preChildren || !preChildren.props.show) && children.props.show) {
-        this.toggleVisible();
-      } else if (preChildren && preChildren.props.show && !children.props.show) {
-        this.toggleHidden();
-      }
-    } else {
-      if (!preChildren && children) {
-        this.toggleVisible();
-      } else if (preChildren && !children) {
-        this.toggleHidden();
-      }
+    console.log('componentDidUpdate');
+
+    const preChildren = preProps.children;
+
+    if ((!preChildren || !preChildren.props[showProp]) && children.props[showProp]) {
+      this.toggleVisible();
+    } else if (preChildren && preChildren.props[showProp] && !children.props[showProp]) {
+      this.toggleHidden();
     }
-
   }
 
-  enhanceChildren = (children: React.ReactNode, props) => {
+  enhanceChildren = (children: React.ReactNode, props?: TransitionProps) => {
     return React.cloneElement(
       children, 
       Object.assign({ 
@@ -91,13 +79,7 @@ class Transition extends React.PureComponent<TransitionProps> {
     }
   }
 
-  isViewComponent(element) {
-    return element && element.type._typeName === 'View';
-  }
-
-  /* css animation fix when animation applyied to .{action} instanceof .{action}-active */
-
-  animateElement(element, action, active, fn) {
+  animateElement(element, action, active, fn: any) {
     element.classList.add(active);
 
     const styles = getComputedStyle(element);
@@ -121,11 +103,13 @@ class Transition extends React.PureComponent<TransitionProps> {
 
   didEnter(e) {
     const childDOM = ReactDOM.findDOMNode(this.el);
+    console.log('call didEnter')
 
     if (!e || e.target !== childDOM) return;
 
     const { onAfterEnter } = this.props;
     const { enterActive, enterTo } = this.transitionClass;
+
 
     childDOM.classList.remove(enterActive, enterTo);
 
@@ -143,19 +127,15 @@ class Transition extends React.PureComponent<TransitionProps> {
     const { leaveActive, leaveTo } = this.transitionClass;
 
     new Promise((resolve) => {
-      if (this.isViewComponent(children)) {
-        childDOM.removeEventListener('transitionend', this.didLeave);
-        childDOM.removeEventListener('animationend', this.didLeave);
+      childDOM.removeEventListener('transitionend', this.didLeave);
+      childDOM.removeEventListener('animationend', this.didLeave);
 
-        window.requestAnimationFrame(() => {
-          childDOM.style.display = 'none';
-          childDOM.classList.remove(leaveActive, leaveTo);
+      window.requestAnimationFrame(() => {
+        childDOM.style.display = 'none';
+        childDOM.classList.remove(leaveActive, leaveTo);
 
-          window.requestAnimationFrame(resolve);
-        })
-      } else {
-        this.setState({ children: null }, resolve);
-      }
+        window.requestAnimationFrame(resolve);
+      })
     }).then(() => {
       onAfterLeave && onAfterLeave()
     })
@@ -164,12 +144,13 @@ class Transition extends React.PureComponent<TransitionProps> {
   toggleVisible() {
     const { onEnter } = this.props;
     const { enter, enterActive, enterTo, leaveActive, leaveTo } = this.transitionClass;
+    console.log(this.el)
     const childDOM = ReactDOM.findDOMNode(this.el);
 
     childDOM.addEventListener('transitionend', this.didEnter);
     childDOM.addEventListener('animationend', this.didEnter);
 
-    // this.animateElement(childDOM, enter, enterActive, this.didEnter);
+    this.animateElement(childDOM, enter, enterActive, this.didEnter);
 
     window.requestAnimationFrame(() => {
       // when hidden transition not end
@@ -185,7 +166,7 @@ class Transition extends React.PureComponent<TransitionProps> {
 
       onEnter && onEnter();
 
-      requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
         childDOM.classList.remove(enter);
         childDOM.classList.add(enterTo);
       })
@@ -195,15 +176,14 @@ class Transition extends React.PureComponent<TransitionProps> {
   toggleHidden() {
     const { onLeave } = this.props;
     const { leave, leaveActive, leaveTo, enterActive, enterTo } = this.transitionClass;
-    const childDOM = ReactDOM.findDOMNode(this.el);
+    const childDOM: React. = ReactDOM.findDOMNode(this.el);
 
     childDOM.addEventListener('transitionend', this.didLeave);
     childDOM.addEventListener('animationend', this.didLeave);
 
-    // this.animateElement(childDOM, leave, leaveActive, this.didLeave);
+    this.animateElement(childDOM, leave, leaveActive, this.didLeave);
 
-    requestAnimationFrame(() => {
-      // when enter transition not end
+    window.requestAnimationFrame(() => {
       if (childDOM.classList.contains(enterActive)) {
         childDOM.classList.remove(enterActive, enterTo);
 
@@ -215,7 +195,7 @@ class Transition extends React.PureComponent<TransitionProps> {
 
       onLeave && onLeave();
 
-      requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
         childDOM.classList.remove(leave);
         childDOM.classList.add(leaveTo);
       })
@@ -223,7 +203,7 @@ class Transition extends React.PureComponent<TransitionProps> {
   }
 
   render() {
-    return this.state.children || null;
+    return this.state.children;
   }
 }
 

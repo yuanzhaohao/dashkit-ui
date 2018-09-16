@@ -3,7 +3,8 @@ import './style.scss';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as classNames from 'classnames';
-import Alert, { AlertType } from '../alert';
+import { AlertType } from '../alert';
+import MessageItem from './messageItem';
 import Animate from 'rc-animate';
 
 export type MessageProps = {
@@ -11,6 +12,7 @@ export type MessageProps = {
   className?: string;
   type: AlertType;
   max: number;
+  duration: number;
   onDestory?: VoidFunction;
 };
 
@@ -36,7 +38,9 @@ class Message extends React.PureComponent<MessageProps, MessageState> {
     prefixCls: 'dk-msg',
     type: 'default' as AlertType,
     max: 10,
+    duration: 3,
   };
+  closeTimer: number;
 
   constructor(props: MessageProps) {
     super(props);
@@ -44,32 +48,28 @@ class Message extends React.PureComponent<MessageProps, MessageState> {
     this.state = {
       messages: [],
     }
+    this.closeTimer = 0;
   }
 
   render() {
-    const { className, prefixCls } = this.props;
-    const contentClassName = classNames(
-      `${prefixCls}-content`,
-      className,
-    );
+    const { prefixCls } = this.props;
     const { messages } = this.state;
     const messageNodes = (
       messages && messages.length
       ? messages.map(({
         id, type, content,
       }) => (
-          <div key={id} className={`${prefixCls}-item`}>
-            <Alert
-              className={contentClassName}
-              onClose={this.removeMessage.bind(this, id)}
-              icon
-              closable
-              type={type}
-            >
-              {content}
-            </Alert>
-          </div>
-        ))
+        <MessageItem 
+          key={id} 
+          prefixCls={prefixCls}
+          onClose={this.removeMessage.bind(this, id)}
+          icon
+          closable
+          type={type}
+        >
+          {content}
+        </MessageItem>
+      ))
       : null
     );
 
