@@ -28,6 +28,17 @@ $prefix-cls: 'dk-msg';
       transform: scaleY(1);
       transition: transform 0.216s, opacity 0.216s ease-in;
     }
+
+    &-leave {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+
+    &-leave-active {
+      opacity: 0;
+      transform: scaleY(0);
+      transition: transform 0.216s, opacity 0.216s ease-out;
+    }
   }
 
   &-content {

@@ -1,8 +1,6 @@
 import './style.scss';
 
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import * as classNames from 'classnames';
 import Alert, { AlertType } from '../alert';
 
 export type MessageProps = {
@@ -12,15 +10,13 @@ export type MessageProps = {
   duration?: number;
   closable?: boolean;
   icon?: boolean;
+  content?: React.ReactNode;
   onClose?: VoidFunction;
 };
 
 class MessageItem extends React.PureComponent<MessageProps> {
   static defaultProps = {
-    prefixCls: 'dk-msg',
-    type: 'default' as AlertType,
-    max: 10,
-    duration: 3,
+    duration: 3000,
   };
   closeTimer: number;
 
@@ -44,6 +40,7 @@ class MessageItem extends React.PureComponent<MessageProps> {
   }
 
   close = () => {
+    console.log('call close');
     this.clearCloseTimer();
     this.props.onClose && this.props.onClose();
   }
@@ -52,7 +49,7 @@ class MessageItem extends React.PureComponent<MessageProps> {
     if (this.props.duration) {
       this.closeTimer = window.setTimeout(() => {
         this.close();
-      }, this.props.duration * 1000);
+      }, this.props.duration);
     }
   }
 
@@ -69,7 +66,7 @@ class MessageItem extends React.PureComponent<MessageProps> {
   }
 
   render() {
-    const { prefixCls, children } = this.props;
+    const { prefixCls, type, content } = this.props;
 
     return (
       <div
@@ -77,7 +74,14 @@ class MessageItem extends React.PureComponent<MessageProps> {
         onMouseEnter={this.clearCloseTimer}
         onMouseLeave={this.startCloseTimer}
       >
-        {children}
+        <Alert
+          className={`${prefixCls}-content`}
+          onClose={this.close}
+          icon
+          type={type}
+        >
+          {content}
+        </Alert>
       </div>
     );
   }

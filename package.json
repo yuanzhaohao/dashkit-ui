@@ -28,7 +28,8 @@
     "prop-types": "^15.6.2",
     "rc-animate": "^2.4.4",
     "react": "^16.1.1",
-    "react-dom": "^16.1.1"
+    "react-dom": "^16.1.1",
+    "react-transition-group": "^2.4.0"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.4",
@@ -37,6 +38,7 @@
     "@types/react-dom": "^16.0.6",
     "@types/react-redux": "^6.0.2",
     "@types/react-router-dom": "^4.2.7",
+    "@types/react-transition-group": "^2.0.14",
     "autoprefixer": "^8.6.3",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",

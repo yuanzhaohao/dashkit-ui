@@ -3,7 +3,7 @@ import './style.scss';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as classNames from 'classnames';
-import { AlertType } from '../alert';
+import Alert, { AlertType } from '../alert';
 import MessageItem from './messageItem';
 import Animate from 'rc-animate';
 
@@ -40,7 +40,6 @@ class Message extends React.PureComponent<MessageProps, MessageState> {
     max: 10,
     duration: 3,
   };
-  closeTimer: number;
 
   constructor(props: MessageProps) {
     super(props);
@@ -48,39 +47,41 @@ class Message extends React.PureComponent<MessageProps, MessageState> {
     this.state = {
       messages: [],
     }
-    this.closeTimer = 0;
   }
 
   render() {
-    const { prefixCls } = this.props;
+    const { prefixCls, className } = this.props;
     const { messages } = this.state;
-    const messageNodes = (
-      messages && messages.length
-      ? messages.map(({
-        id, type, content,
-      }) => (
-        <MessageItem 
-          key={id} 
-          prefixCls={prefixCls}
-          onClose={this.removeMessage.bind(this, id)}
-          icon
-          closable
-          type={type}
-        >
-          {content}
-        </MessageItem>
-      ))
-      : null
+    const messageClassName = classNames(
+      prefixCls,
+      className,
     );
-
-    // return <div className={prefixCls}>{messageNodes}</div>;
 
     return (
-      <Animate
-        className={prefixCls}
-        transitionName={`${prefixCls}-item`}
-      >{messageNodes}</Animate>
+      <div className={messageClassName}>
+        {messages && messages.length
+          ? messages.map(({
+            id, type, content,
+          }) => (
+            <MessageItem
+              key={id}
+              type={type}
+              content={content}
+              prefixCls={prefixCls}
+              onClose={this.removeMessage.bind(this, id)}
+            />
+          ))
+          : null
+        }
+      </div>
     );
+
+    // return (
+    //   <Animate
+    //     className={prefixCls}
+    //     transitionName={`${prefixCls}-item`}
+    //   >{messageNodes}</Animate>
+    // );
   }
 
   addMessage = (message: MessageItemProps) => {
@@ -98,27 +99,19 @@ class Message extends React.PureComponent<MessageProps, MessageState> {
   }
 
   removeMessage = (id: string) => {
-    // const { messages } = this.state;
-    // this.setState({
-    //   messages: messages.filter(message => message.id !== id)
-    // });
+    const { messages } = this.state;
+    const tempMessages = messages.filter(message => message.id !== id);
 
-    let callback
-    const messages = this.state.messages.filter((m) => {
-      if (m.id !== id) return true
-      if (m.onClose) {
-        callback = m.onClose
+    if (tempMessages.length === 0) {
+      const { onDestory } = this.props;
+      if (typeof onDestory === 'function') {
+        onDestory();
       }
-      return false
-    })
-
-    if (messages.length === 0) {
-      this.props.onDestory()
     } else {
-      this.setState({ messages })
+      this.setState({
+        messages: tempMessages,
+      });
     }
-
-    if (callback) callback()
   }
 }
 
