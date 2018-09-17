@@ -80,7 +80,7 @@ h6 {
 
 p {
   margin-top: 0;
-  margin-bottom: $paragraph-margin-bottom;
+  margin-bottom: 16px;
 }
 
 abbr[title],
@@ -92,7 +92,7 @@ abbr[data-original-title] { // 4
 }
 
 address {
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
   font-style: normal;
   line-height: inherit;
 }
