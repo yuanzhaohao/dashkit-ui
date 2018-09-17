@@ -2,44 +2,30 @@ import './style.scss';
 
 import * as React from 'react';
 import * as classNames from 'classnames';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import { AlertType } from '../alert';
+import { TransitionGroup } from 'react-transition-group';
 import MessageItem from './messageItem';
+export type MessageType = 'default' | 'success' | 'error' | 'warning' | 'info' | 'loading';
 
 export type MessageProps = {
   prefixCls: string;
   className?: string;
-  type: AlertType;
   max: number;
-  duration: number;
   onDestory?: VoidFunction;
 };
 
 export type MessageItemProps = {
-  id?: string;
-  type: AlertType;
+  id: string;
+  type?: MessageType;
+  duration?: number;
   content?: React.ReactNode;
+  onClose?: VoidFunction;
 };
 
 export type MessageState = {
   messages: MessageItemProps[];
 }
 
-let seed = 0;
-const now = Date.now();
-
-function getUid() {
-  return `dashkit-message-${now}-${seed++}`;
-}
-
 class Message extends React.PureComponent<MessageProps, MessageState> {
-  static defaultProps = {
-    prefixCls: 'dk-msg',
-    type: 'default' as AlertType,
-    max: 10,
-    duration: 3000,
-  };
-
   constructor(props: MessageProps) {
     super(props);
 
@@ -60,14 +46,18 @@ class Message extends React.PureComponent<MessageProps, MessageState> {
       <TransitionGroup className={messageClassName}>
         {messages && messages.length
           ? messages.map(({
-            id, type, content,
+            id, type, content, duration, onClose,
           }) => (
             <MessageItem
               key={id}
               type={type}
               content={content}
               prefixCls={prefixCls}
-              onClose={this.removeMessage.bind(this, id)}
+              duration={duration}
+              onClose={() => {
+                this.removeMessage(id);
+                onClose && onClose();
+              }}
             />
           ))
           : null
@@ -77,7 +67,6 @@ class Message extends React.PureComponent<MessageProps, MessageState> {
   }
 
   addMessage = (message: MessageItemProps) => {
-    message.id = getUid();
     const { max } = this.props;
     const { messages } = this.state;
     const tempMessages = [...messages, message];
@@ -97,7 +86,6 @@ class Message extends React.PureComponent<MessageProps, MessageState> {
     this.setState({
       messages: tempMessages,
     });
-    console.log(tempMessages);
     // if (tempMessages.length === 0) {
     //   const { onDestory } = this.props;
     //   if (typeof onDestory === 'function') {

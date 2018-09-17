@@ -1,15 +1,13 @@
 import './style.scss';
 
 import * as React from 'react';
-import Alert, { AlertType } from '../alert';
+import Alert from '../alert';
+import { MessageType } from './message';
 
 export type MessageItemProps = {
   prefixCls?: string;
-  className?: string;
-  type: AlertType;
+  type?: MessageType;
   duration?: number;
-  closable?: boolean;
-  icon?: boolean;
   content?: React.ReactNode;
   onClose?: VoidFunction;
 };
@@ -20,9 +18,6 @@ export type MessageItemState = {
 };
 
 class MessageItem extends React.PureComponent<MessageItemProps, MessageItemState> {
-  static defaultProps = {
-    duration: 3000,
-  };
   closeTimer: number;
 
   constructor(props: MessageItemProps) {

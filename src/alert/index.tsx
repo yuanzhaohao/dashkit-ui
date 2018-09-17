@@ -6,14 +6,14 @@ import { CSSTransition } from 'react-transition-group';
 import Icon from '../icon';
 import { SvgIcon } from '../utils';
 
-export type AlertType = 'default' | 'success' | 'error' | 'warning' | 'info';
+export type AlertType = 'default' | 'success' | 'error' | 'warning' | 'info' | 'loading';
 
 export type AlertProps = {
-  prefixCls: string;
+  prefixCls?: string;
   className?: string;
-  type: AlertType;
-  closable: boolean;
-  icon: boolean;
+  type?: AlertType;
+  closable?: boolean;
+  icon?: boolean;
   style?: React.CSSProperties;
   onClose?: VoidFunction;
   dismiss?: boolean;
@@ -49,7 +49,7 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
       type,
       style,
     } = this.props;
-    const iconChild = SvgIcon[type];
+    const iconChild = SvgIcon[type || 'default'];
     const isShowIcon = icon && iconChild;
     const alertClassName = classNames(
       prefixCls,
