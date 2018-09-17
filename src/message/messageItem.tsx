@@ -3,7 +3,7 @@ import './style.scss';
 import * as React from 'react';
 import Alert, { AlertType } from '../alert';
 
-export type MessageProps = {
+export type MessageItemProps = {
   prefixCls?: string;
   className?: string;
   type: AlertType;
@@ -14,22 +14,31 @@ export type MessageProps = {
   onClose?: VoidFunction;
 };
 
-class MessageItem extends React.PureComponent<MessageProps> {
+export type MessageItemState = {
+  dismiss: boolean;
+  closed: boolean;
+};
+
+class MessageItem extends React.PureComponent<MessageItemProps, MessageItemState> {
   static defaultProps = {
     duration: 3000,
   };
   closeTimer: number;
 
-  constructor(props: MessageProps) {
+  constructor(props: MessageItemProps) {
     super(props);
     this.closeTimer = 0;
+    this.state = {
+      dismiss: false,
+      closed: false,
+    };
   }
 
   componentDidMount() {
     this.startCloseTimer();
   }
 
-  componentDidUpdate(prevProps: MessageProps) {
+  componentDidUpdate(prevProps: MessageItemProps) {
     if (this.props.duration !== prevProps.duration) {
       this.restartCloseTimer();
     }
@@ -40,8 +49,10 @@ class MessageItem extends React.PureComponent<MessageProps> {
   }
 
   close = () => {
-    console.log('call close');
     this.clearCloseTimer();
+    this.setState({
+      dismiss: true,
+    });
     this.props.onClose && this.props.onClose();
   }
 
@@ -65,10 +76,17 @@ class MessageItem extends React.PureComponent<MessageProps> {
     this.startCloseTimer();
   }
 
+  destory = () => {
+    this.setState({
+      closed: true,
+    });
+  }
+
   render() {
     const { prefixCls, type, content } = this.props;
+    const { dismiss, closed } = this.state;
 
-    return (
+    return closed ? null : (
       <div
         className={`${prefixCls}-item`}
         onMouseEnter={this.clearCloseTimer}
@@ -76,9 +94,10 @@ class MessageItem extends React.PureComponent<MessageProps> {
       >
         <Alert
           className={`${prefixCls}-content`}
-          onClose={this.close}
-          icon
+          onClose={this.destory}
+          dismiss={dismiss}
           type={type}
+          icon
         >
           {content}
         </Alert>

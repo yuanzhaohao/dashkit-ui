@@ -16,10 +16,11 @@ export type AlertProps = {
   icon: boolean;
   style?: React.CSSProperties;
   onClose?: VoidFunction;
+  dismiss?: boolean;
 };
 
 export type AlertState = {
-  dismissed: boolean;
+  dismiss: boolean;
 };
 
 class Alert extends React.PureComponent<AlertProps, AlertState> {
@@ -33,7 +34,7 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
   constructor(props: AlertProps) {
     super(props);
     this.state = {
-      dismissed: false,
+      dismiss: false,
     };
     this.containerDiv = React.createRef();
   }
@@ -60,9 +61,13 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
       className,
     );
 
+    const dismiss = ('dismiss' in this.props)
+      ? this.props.dismiss
+      : this.state.dismiss
+
     return (
       <CSSTransition
-        in={!this.state.dismissed}
+        in={!dismiss}
         timeout={216}
         unmountOnExit
         classNames={`${prefixCls}`}
@@ -96,12 +101,12 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
 
   handleClose = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    if (this.state.dismissed) {
+    if (this.state.dismiss) {
       return;
     }
 
     this.setState({
-      dismissed: true,
+      dismiss: true,
     });
   }
 }

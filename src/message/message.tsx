@@ -2,6 +2,7 @@ import './style.scss';
 
 import * as React from 'react';
 import * as classNames from 'classnames';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { AlertType } from '../alert';
 import MessageItem from './messageItem';
 
@@ -36,7 +37,7 @@ class Message extends React.PureComponent<MessageProps, MessageState> {
     prefixCls: 'dk-msg',
     type: 'default' as AlertType,
     max: 10,
-    duration: 3,
+    duration: 3000,
   };
 
   constructor(props: MessageProps) {
@@ -56,7 +57,7 @@ class Message extends React.PureComponent<MessageProps, MessageState> {
     );
 
     return (
-      <div className={messageClassName}>
+      <TransitionGroup className={messageClassName}>
         {messages && messages.length
           ? messages.map(({
             id, type, content,
@@ -71,15 +72,8 @@ class Message extends React.PureComponent<MessageProps, MessageState> {
           ))
           : null
         }
-      </div>
+      </TransitionGroup>
     );
-
-    // return (
-    //   <Animate
-    //     className={prefixCls}
-    //     transitionName={`${prefixCls}-item`}
-    //   >{messageNodes}</Animate>
-    // );
   }
 
   addMessage = (message: MessageItemProps) => {
@@ -100,16 +94,20 @@ class Message extends React.PureComponent<MessageProps, MessageState> {
     const { messages } = this.state;
     const tempMessages = messages.filter(message => message.id !== id);
 
-    if (tempMessages.length === 0) {
-      const { onDestory } = this.props;
-      if (typeof onDestory === 'function') {
-        onDestory();
-      }
-    } else {
-      this.setState({
-        messages: tempMessages,
-      });
-    }
+    this.setState({
+      messages: tempMessages,
+    });
+    console.log(tempMessages);
+    // if (tempMessages.length === 0) {
+    //   const { onDestory } = this.props;
+    //   if (typeof onDestory === 'function') {
+    //     onDestory();
+    //   }
+    // } else {
+    //   this.setState({
+    //     messages: tempMessages,
+    //   });
+    // }
   }
 }
 
