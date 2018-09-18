@@ -69,15 +69,15 @@ $prefix-cls: 'dk-alert';
 
   &-icon {
     position: absolute;
-    width: 15px;
-    height: 15px;
-    margin-top: 2px;
+    top: 0;
     left: $alert-padding-x;
-    top: $alert-padding-y;
-    color: $primary;
+    display: flex;
+    align-items: center;
+
 
     > svg {
-      vertical-align: top;
+      width: 15px;
+      height: 15px;
     }
   }
 
@@ -94,7 +94,7 @@ $prefix-cls: 'dk-alert';
         theme-color-level($color, $alert-color-level)
       );
 
-      .#{$prefix-cls}-icon path {
+      svg path {
         fill: theme-color-level($color, $alert-color-level);
       }
     }

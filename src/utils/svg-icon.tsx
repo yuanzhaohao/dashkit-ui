@@ -13,7 +13,11 @@ function icon(path: string[]) {
   )
 }
 
-export const info = icon(infoPath);
-export const success = icon(successPath);
-export const warning = icon(warningPath);
-export const error = icon(errorPath);
+const svgIcon: { [index: string]: JSX.Element } = {
+  info: icon(infoPath),
+  success: icon(successPath),
+  warning: icon(warningPath),
+  error: icon(errorPath),
+};
+
+export default svgIcon;

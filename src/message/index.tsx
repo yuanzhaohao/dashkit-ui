@@ -1,12 +1,17 @@
+import './style.scss';
+
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import Message, { MessageType } from './message';
+import { MessageType } from './types';
+import Message from './message';
 
 const prefixCls = 'dk-msg';
-const defaultDuration = 3000;
+const defaultDuration = 2.5;
+const defaultTransitionDuration = 0.216;
+
 const defaultMax = 100;
 
-let element: any = null;
+let element: HTMLDivElement | null = null;
 let component: any = null;
 
 const now = Date.now();
@@ -33,7 +38,12 @@ function getComponent() {
     element = div;
     document.body.appendChild(div);
     component = ReactDOM.render(
-      <Message prefixCls={prefixCls} max={defaultMax} />,
+      <Message 
+        prefixCls={prefixCls} 
+        max={defaultMax} 
+        transitionDuration={defaultTransitionDuration}
+        onDestory={destroy} 
+      />,
       div,
     )
   }

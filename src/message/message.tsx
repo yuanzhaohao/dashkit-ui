@@ -1,29 +1,7 @@
-import './style.scss';
-
 import * as React from 'react';
-import * as classNames from 'classnames';
 import { TransitionGroup } from 'react-transition-group';
 import MessageItem from './messageItem';
-export type MessageType = 'default' | 'success' | 'error' | 'warning' | 'info' | 'loading';
-
-export type MessageProps = {
-  prefixCls: string;
-  className?: string;
-  max: number;
-  onDestory?: VoidFunction;
-};
-
-export type MessageItemProps = {
-  id: string;
-  type?: MessageType;
-  duration?: number;
-  content?: React.ReactNode;
-  onClose?: VoidFunction;
-};
-
-export type MessageState = {
-  messages: MessageItemProps[];
-}
+import { MessageProps, MessageState, MessageItemProps } from './types';
 
 class Message extends React.PureComponent<MessageProps, MessageState> {
   constructor(props: MessageProps) {
@@ -35,15 +13,11 @@ class Message extends React.PureComponent<MessageProps, MessageState> {
   }
 
   render() {
-    const { prefixCls, className } = this.props;
+    const { prefixCls } = this.props;
     const { messages } = this.state;
-    const messageClassName = classNames(
-      prefixCls,
-      className,
-    );
 
     return (
-      <TransitionGroup className={messageClassName}>
+      <TransitionGroup>
         {messages && messages.length
           ? messages.map(({
             id, type, content, duration, onClose,
@@ -79,23 +53,22 @@ class Message extends React.PureComponent<MessageProps, MessageState> {
     });
   }
 
-  removeMessage = (id: string) => {
+  removeMessage = (id?: string) => {
+    const { transitionDuration, onDestory } = this.props;
     const { messages } = this.state;
     const tempMessages = messages.filter(message => message.id !== id);
 
     this.setState({
       messages: tempMessages,
     });
-    // if (tempMessages.length === 0) {
-    //   const { onDestory } = this.props;
-    //   if (typeof onDestory === 'function') {
-    //     onDestory();
-    //   }
-    // } else {
-    //   this.setState({
-    //     messages: tempMessages,
-    //   });
-    // }
+
+    setTimeout(() => {
+      if (typeof onDestory === 'function') {
+        window.requestAnimationFrame(() => {
+          onDestory();
+        });
+      }
+    }, transitionDuration * 1000);
   }
 }
 

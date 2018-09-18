@@ -1,2 +1,2 @@
 
-export const SvgIcon = require('./svg-icon');
+export { default as SvgIcon } from './svg-icon';

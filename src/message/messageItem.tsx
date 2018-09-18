@@ -1,21 +1,6 @@
-import './style.scss';
-
 import * as React from 'react';
 import Alert from '../alert';
-import { MessageType } from './message';
-
-export type MessageItemProps = {
-  prefixCls?: string;
-  type?: MessageType;
-  duration?: number;
-  content?: React.ReactNode;
-  onClose?: VoidFunction;
-};
-
-export type MessageItemState = {
-  dismiss: boolean;
-  closed: boolean;
-};
+import { MessageItemProps, MessageItemState } from './types';
 
 class MessageItem extends React.PureComponent<MessageItemProps, MessageItemState> {
   closeTimer: number;
@@ -55,7 +40,7 @@ class MessageItem extends React.PureComponent<MessageItemProps, MessageItemState
     if (this.props.duration) {
       this.closeTimer = window.setTimeout(() => {
         this.close();
-      }, this.props.duration);
+      }, this.props.duration * 1000);
     }
   }
 
