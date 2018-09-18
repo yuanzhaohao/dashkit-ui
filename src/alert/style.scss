@@ -71,6 +71,7 @@ $prefix-cls: 'dk-alert';
     position: absolute;
     top: 0;
     left: $alert-padding-x;
+    height: 100%;
     display: flex;
     align-items: center;
 

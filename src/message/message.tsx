@@ -17,7 +17,7 @@ class Message extends React.PureComponent<MessageProps, MessageState> {
     const { messages } = this.state;
 
     return (
-      <TransitionGroup>
+      <TransitionGroup className={prefixCls}>
         {messages && messages.length
           ? messages.map(({
             id, type, content, duration, onClose,
@@ -62,13 +62,19 @@ class Message extends React.PureComponent<MessageProps, MessageState> {
       messages: tempMessages,
     });
 
-    setTimeout(() => {
-      if (typeof onDestory === 'function') {
-        window.requestAnimationFrame(() => {
-          onDestory();
-        });
-      }
-    }, transitionDuration * 1000);
+    // if (tempMessages.length === 0) {
+    //   setTimeout(() => {
+    //     if (typeof onDestory === 'function') {
+    //       if (window.requestAnimationFrame) {
+    //         window.requestAnimationFrame(() => {
+    //           onDestory();
+    //         });
+    //       } else {
+    //         onDestory();
+    //       }
+    //     }
+    //   }, transitionDuration * 1000);
+    // }
   }
 }
 

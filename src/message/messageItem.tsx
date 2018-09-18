@@ -33,7 +33,11 @@ class MessageItem extends React.PureComponent<MessageItemProps, MessageItemState
     this.setState({
       dismiss: true,
     });
-    this.props.onClose && this.props.onClose();
+    setTimeout(() => {
+      if (typeof this.props.onClose === 'function') {
+        this.props.onClose()
+      }
+    }, 0);
   }
 
   startCloseTimer = () => {

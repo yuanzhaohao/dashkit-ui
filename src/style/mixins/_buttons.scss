@@ -11,7 +11,7 @@
   $active-background: darken($background, 10%);
   $active-border: darken($border, 12.5%);
 
-  color: color-yiq($background);
+  color: $white;
   border-color: $border;
   @include gradient-bg($background);
 

@@ -51,7 +51,7 @@ function getComponent() {
 }
 
 function create(type: MessageType) {
-  return (content: React.ReactNode, duration: number = defaultDuration, onClose: VoidFunction) => {
+  return async (content: React.ReactNode, duration: number = defaultDuration, onClose: VoidFunction) => {
     const messager = getComponent();
     messager.addMessage({
       id: getUid(),
