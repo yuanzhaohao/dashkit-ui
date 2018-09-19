@@ -30,15 +30,15 @@ class Button extends React.PureComponent<ButtonProps, ButtonState> {
   };
 
   render() {
-    const { 
-      children, 
-      prefixCls, 
-      type, 
-      outline, 
-      round, 
-      size, 
-      className, 
-      disabled, 
+    const {
+      children,
+      prefixCls,
+      type,
+      outline,
+      round,
+      size,
+      className,
+      disabled,
       onClick,
       ...attibutes
     } = this.props;

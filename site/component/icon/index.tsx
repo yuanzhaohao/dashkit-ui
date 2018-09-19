@@ -22,13 +22,10 @@ const pageData = {
     'volume',
   ]
 };
-class PageIcon extends React.PureComponent {
-  render() {
-    const locale = 'en-US';
-    const dataSource = require(`../../../docs/icon/${locale}.md`);
-    return (
-      <Page dataSource={dataSource} locale={locale} name="icon" />
-    );
+class PageIcon extends Page {
+  document(locale: string) {
+    return require(`../../../docs/icon/${locale}.md`)
   }
 }
+
 export default PageIcon;

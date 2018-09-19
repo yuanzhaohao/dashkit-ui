@@ -3,15 +3,16 @@ import * as ReactDOM from 'react-dom';
 import Example from './example';
 import './page.scss';
 
-type Props = {
+class Page extends React.PureComponent {
+  locale: string;
   dataSource: any;
-  name?: string;
-  locale?: string;
-};
-
-class Page extends React.PureComponent<Props> {
-  public componentDidMount() {
-    const { dataSource, name, locale } = this.props;
+  constructor(props: any) {
+    super(props);
+    this.locale = window.localStorage.getItem('DASHKIT_UI_LOCALE') || 'en-US';
+    this.dataSource = this.document(this.locale);
+  }
+  componentDidMount() {
+    const { dataSource, locale } = this;
     const demoElement = document.getElementById('demos');
 
     console.log(dataSource)
@@ -36,8 +37,8 @@ class Page extends React.PureComponent<Props> {
     }
   }
 
-  public render() {
-    const { dataSource } = this.props;
+  render() {
+    const { dataSource } = this;
 
     return (
       <div className="app-page">

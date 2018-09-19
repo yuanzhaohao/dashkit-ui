@@ -16,13 +16,13 @@ module.exports = {
     // 'vendor-redux': [
     //   'redux',
     //   'redux-promise-middleware',
-    //   'redux-thunk'
+    //   'redux-thunk',
+    //   'react-redux'
     // ],
     'vendor-react': [
       'react',
       'react-dom',
-      'react-router',
-      'react-redux'
+      'react-router'
     ]
   },
   host: 'localhost',
