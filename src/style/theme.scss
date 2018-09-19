@@ -329,3 +329,16 @@ $alert-default-text:                $gray-800 !default;
 // 
 $message-content-shadow:            0 4px 12px rgba(0, 0, 0, 0.15) !default;
 $message-content-transition:        transform 0.216s, opacity 0.216s ease-in !default;
+
+// Grid
+//
+$grid-columns:                      12 !default;
+$grid-gutter-width:                 16px !default;
+$grid-outer-margin:                 32px !default;
+$grid-breakpoints: (
+  sm: 48em,
+  md: 62em,
+  lg: 75em
+) !default;
+$grid-gutter-compensation:          $grid-gutter-width * 0.5 * -1;
+$grid-half-gutter-width:            $grid-gutter-width * 0.5;

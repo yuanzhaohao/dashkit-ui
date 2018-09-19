@@ -3,3 +3,26 @@
 @import '../style/mixins';
 
 $prefix-cls: 'dk-grid';
+
+.#{$prefix-cls} {
+
+  &-row {
+    @include grid-make-row();
+  }
+
+  &-row-reverse {
+    flex-direction: row-reverse;
+  }
+
+  &-col-reverse {
+    flex-direction: column-reverse;
+  }
+}
+
+@include grid-make-col($prefix-cls, xs);
+
+@each $name, $breakpoint in $grid-breakpoints {
+  @media only screen and (min-width: $breakpoint) {
+    @include grid-make-col($prefix-cls, $name);
+  }
+}
