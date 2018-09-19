@@ -19,7 +19,7 @@ export type PaginationProps = {
 
 class Pagination extends React.Component<PaginationProps> {
   public static defaultProps = {
-    prefixCls: 'dashkit-pagination',
+    prefixCls: 'dk-pagination',
     current: 1,
     pageSize: 20,
     total: 0,

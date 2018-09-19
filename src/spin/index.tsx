@@ -17,7 +17,7 @@ export interface SpinState {
 }
 class Spin extends React.Component<SpinProps, SpinState> {
   public static defaultProps = {
-    prefixCls: 'dashkit-spin',
+    prefixCls: 'dk-spin',
     spinning: true,
     size: 'default' as SpinSize,
   };

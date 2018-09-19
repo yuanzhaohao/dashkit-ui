@@ -2,7 +2,7 @@
 @import '../style/theme';
 @import '../style/mixins';
 
-$prefix-cls: 'dashkit-pagination';
+$prefix-cls: 'dk-pagination';
 
 .#{$prefix-cls} {
   display: flex;
