@@ -37,7 +37,6 @@ class Col extends React.PureComponent<ColProps> {
       className,
       first,
       last,
-      ...attibutes
     } = this.props;
     const colKeysClassNames = this.getColClassNames();
     const rowClassName = classNames(colKeysClassNames, {
@@ -49,7 +48,6 @@ class Col extends React.PureComponent<ColProps> {
       <div
         style={style}
         className={rowClassName}
-        {...attibutes}
       >{children}</div>
     );
   }

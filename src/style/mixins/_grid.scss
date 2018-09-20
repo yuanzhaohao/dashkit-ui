@@ -2,27 +2,16 @@
 //
 // Generate semantic grid columns with these mixins.
 
-@mixin grid-make-row() {
-  display: flex;
-  flex-wrap: wrap;
-  flex: 0 1 auto;
-  flex-direction: row;
-  margin-right: $grid-gutter-compensation;
-  margin-left: $grid-gutter-compensation;
-  box-sizing: border-box;
-}
-
-@mixin grid-col-common {
-  flex: 0 0 auto;
-  padding-right: $grid-half-gutter-width;
-  padding-left: $grid-half-gutter-width;
-  box-sizing: border-box;
-}
-
 @mixin grid-make-col($prefix, $name) {
+  [class*="#{$prefix}-col-xs"] {
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    padding-right: $grid-gutter-compensation * -1;
+    padding-left: $grid-gutter-compensation * -1;
+  }
+
   @for $i from 1 through $grid-columns {
     .#{$prefix}-col-#{$name}-#{$i} {
-      @include grid-col-common();
       flex-basis: 100% / $grid-columns * $i;
       max-width: 100% / $grid-columns * $i;
     }
@@ -30,13 +19,7 @@
 
   @for $i from 0 through $grid-columns {
     .#{$prefix}-col-#{$name}-offset-#{$i} {
-      @include grid-col-common();
-
-      @if $i==0 {
-        margin-left: 0;
-      } @else {
-        margin-left: 100% / $grid-columns * $i;
-      }
+      margin-left: 100% / $grid-columns * $i
     }
   }
 

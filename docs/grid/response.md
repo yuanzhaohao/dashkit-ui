@@ -1,8 +1,8 @@
 ---
 order: 0
 title:
-  zh-CN: 响应式
-  en-US: Responsive
+  zh-CN: 响应式布局
+  en-US: Responsive Layout
 subtitle:
   zh-CN: 基本用法。
   en-US: Responsive modifiers enable specifying different column sizes, offsets, alignment and distribution at xs, sm, md & lg viewport widths.

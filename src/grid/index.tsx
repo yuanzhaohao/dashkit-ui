@@ -26,7 +26,6 @@ class Grid extends React.PureComponent<GridProps> {
       style,
       fluid,
       className,
-      ...attibutes
     } = this.props;
     const gridClassName = classNames(prefixCls, {
       [`${prefixCls}-fluid`]: fluid,
@@ -36,7 +35,6 @@ class Grid extends React.PureComponent<GridProps> {
       <div
         style={style}
         className={gridClassName}
-        {...attibutes}
       >{children}</div>
     );
   }

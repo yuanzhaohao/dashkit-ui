@@ -32,7 +32,6 @@ class Row extends React.PureComponent<RowProps> {
       style,
       className,
       reverse,
-      ...attibutes
     } = this.props;
     const rowKeysClassNames = this.getRowClassNames();
     const rowClassName = classNames(`${prefixCls}-row`, rowKeysClassNames, {
@@ -43,7 +42,6 @@ class Row extends React.PureComponent<RowProps> {
       <div
         style={style}
         className={rowClassName}
-        {...attibutes}
       >{children}</div>
     );
   }

@@ -9,12 +9,20 @@ $prefix-cls: 'dk-grid';
   margin-left: auto;
 
   &-fluid {
+    margin-right: auto;
+    margin-left: auto;
     padding-right: $grid-outer-margin;
     padding-left: $grid-outer-margin;
   }
 
   &-row {
-    @include grid-make-row();
+    box-sizing: border-box;
+    display: flex;
+    flex: 0 1 auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-right: $grid-gutter-compensation;
+    margin-left: $grid-gutter-compensation;
   }
 
   &-row-reverse {
