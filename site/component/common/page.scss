@@ -18,23 +18,56 @@
 
 // Grid
 //
+@mixin grid-make-item() {
+  display: block;
+  position: relative;
+  box-sizing: border-box;
+  padding: 16px;
+  background: #2c7be5;
+  border: 1px solid #FFF;
+  border-radius: 2px;
+  overflow: hidden;
+  text-align: center;
+  color: #fff;
+}
 .grid-list {
   div[class*="dk-grid-col-"] {
     margin-bottom: 16px;
 
     &::after {
       content:'';
-      display: block;
-      position: relative;
-      box-sizing: border-box;
-      padding: 16px;
-      background: #2c7be5;
-      border: 1px solid #FFF;
-      border-radius: 2px;
-      overflow: hidden;
-      text-align: center;
-      color: #fff;
+      @include grid-make-item;
     }
+  }
+}
+
+.grid-title {
+  margin-top: 24px;
+  color: #2c7be5;
+}
+
+.grid-title-first {
+  margin-top: 0;
+}
+
+.grid-nested,
+.grid-alignment {
+  .grid-box {
+    @include grid-make-item;
+  }
+
+  .grid-box-nested {
+    background: #036;
+    border-color: #2c7be5;
+  }
+
+  .grid-box-first {
+    background: #06C;
+    border-color: #2c7be5;
+  }
+
+  .grid-box-large {
+    height: 100px;
   }
 }
 

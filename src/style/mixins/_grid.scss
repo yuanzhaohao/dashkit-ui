@@ -3,7 +3,7 @@
 // Generate semantic grid columns with these mixins.
 
 @mixin grid-make-col($prefix, $name) {
-  [class*="#{$prefix}-col-xs"] {
+  [class*="#{$prefix}-col-#{$name}"] {
     box-sizing: border-box;
     flex: 0 0 auto;
     padding-right: $grid-gutter-compensation * -1;
