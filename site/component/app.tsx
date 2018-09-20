@@ -10,20 +10,17 @@ import Page from './common/page';
 
 const { Content, Footer } = Layout;
 const Index = asyncComponent(() => import('./index'));
-const locale = window.localStorage.getItem('DASHKIT_UI_LOCALE') || 'en-US';
 
 const pages = [
-  'button', 'alert', 'message', 'spin', 'icon', 'input', 'switch', 'pagination',
+  'grid', 'button', 'alert', 'message', 'spin', 'icon', 'input',
+  'switch', 'pagination',
 ].map(page => {
   return {
     page: page,
-    component: asyncComponent(() => import(`./${page}`)),
-    // component: asyncComponent(() => import(`../../docs/${name}/${locale}.md`)),
+    // component: asyncComponent(() => import(`../../docs/${page}/${locale}.md`)),
   };
 
 })
-
-console.log(pages);
 
 export default () => (
   <HashRouter>
@@ -35,8 +32,8 @@ export default () => (
           <Switch>
             <Route exact path="/" component={Index} />
             <Route exact path="/index" component={Index} />
-            {pages.map(({ page, component }) =>
-              <Route key={page} exact path={`/components/${page}`} component={component} />
+            {pages.map(({ page }) =>
+              <Route key={page} exact path={`/components/${page}`} component={Page} />
             )}
             <Redirect to="/" />
           </Switch>

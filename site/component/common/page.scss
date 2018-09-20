@@ -15,3 +15,67 @@
 #demos {
   margin-bottom: 20px;
 }
+
+.button-list {
+  margin-top: 12px;
+
+  &:nth-of-type(1) {
+    margin-top: 0;
+  }
+
+  button {
+    margin-right: 12px;
+  }
+}
+
+.alert-list {
+  margin-top: 12px;
+}
+
+.icon-list {
+  width: 100%;
+
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+.icon-item-wrapper {
+  float: left;
+  width: 20%;
+  padding: 8px;
+}
+
+.icon-item {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: #f2f4f5;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:nth-of-type(4n) {
+    margin-right: 0;
+  }
+
+  >span {
+    margin-left: 10px;
+  }
+}
+
+.message-wrapper {
+  button {
+    margin-right: 10px;
+  }
+}
+
+.spin-list {
+  display: flex;
+  align-items: center;
+
+  .dk-spin {
+    margin-right: 20px;
+  }
+}
