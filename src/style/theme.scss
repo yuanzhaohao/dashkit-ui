@@ -81,11 +81,6 @@ $link-hover-decoration:       underline !default;
 //
 $paragraph-margin-bottom:     16px !default;
 
-// Grid columns
-//
-$grid-columns:                12 !default;
-$grid-gutter-width:           30px !default;
-
 // Components
 //
 
@@ -227,7 +222,7 @@ $btn-border-radius-sm:        $border-radius-sm !default;
 $btn-transition:              color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
 
 // Switch
-// 
+//
 $switch-height:               22px !default;
 $switch-height-sm:            16px !default;
 $switch-height-lg:            28px !default;
@@ -275,7 +270,7 @@ $pagination-disabled-opacity:       .65 !default;
 
 
 // Input
-// 
+//
 $input-height:                      32px !default;
 $input-padding-y:                   11px !default;
 $input-padding-x:                   4px !default;
@@ -299,7 +294,7 @@ $input-focus-box-shadow:            0 0 0 2px lighten($component-active-bg, 25%)
 $input-hover-border-color:          $input-focus-border-color !default;
 
 // Alert
-// 
+//
 $alert-type-colors: () !default;
 $alert-type-colors: map-merge(
   (
@@ -326,7 +321,7 @@ $alert-default-border:              $border-color !default;
 $alert-default-text:                $gray-800 !default;
 
 // Message
-// 
+//
 $message-content-shadow:            0 4px 12px rgba(0, 0, 0, 0.15) !default;
 $message-content-transition:        transform 0.216s, opacity 0.216s ease-in !default;
 

@@ -37,9 +37,9 @@ class Example extends React.PureComponent<ExampleProps, ExampleState> {
             }} />
             : null
           }
-          <Icon 
-            type={showCode ? 'folder-minus' : 'folder-plus'} 
-            className="example-control" 
+          <Icon
+            type={showCode ? 'folder-minus' : 'folder-plus'}
+            className="example-control"
             onClick={this.onControlClick}
           />
         </div>

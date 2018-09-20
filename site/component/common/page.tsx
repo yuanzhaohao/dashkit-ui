@@ -30,6 +30,8 @@ class Page extends React.PureComponent<PageProps, PageState> {
     const locale = window.localStorage.getItem('DASHKIT_UI_LOCALE') || 'en-US';
     const dataSource = await import(`../../../docs/${page}/${locale}.md`);
 
+    console.log(dataSource);
+
     this.setState({
       dataSource,
     });

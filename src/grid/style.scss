@@ -5,6 +5,13 @@
 $prefix-cls: 'dk-grid';
 
 .#{$prefix-cls} {
+  margin-right: auto;
+  margin-left: auto;
+
+  &-fluid {
+    padding-right: $grid-outer-margin;
+    padding-left: $grid-outer-margin;
+  }
 
   &-row {
     @include grid-make-row();

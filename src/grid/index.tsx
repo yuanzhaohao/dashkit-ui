@@ -1,29 +1,22 @@
 import './style.scss';
 import * as classNames from 'classnames';
 import * as React from 'react';
-
-const rowKeys = ['start', 'center', 'end', 'top', 'middle', 'bottom', 'around', 'between'];
-export type GridViewportType = 'xs' | 'sm' | 'md' | 'lg';
+import Row from './row';
+import Col from './col';
 
 export type GridProps = {
   prefixCls?: string;
   className?: string;
   style?: React.CSSProperties;
-  reverse?: boolean;
-  start?: GridViewportType;
-  center?: GridViewportType,
-  end?: GridViewportType,
-  top?: GridViewportType,
-  middle?: GridViewportType,
-  bottom?: GridViewportType,
-  around?: GridViewportType,
-  between?: GridViewportType,
+  fluid?: boolean;
 };
 
-class Grid extends React.Component<GridProps> {
+class Grid extends React.PureComponent<GridProps> {
+  static Row: React.ReactNode;
+  static Col: React.ReactNode;
   static defaultProps = {
     prefixCls: 'dk-grid',
-    reverse: false,
+    fluid: false,
   };
 
   render() {
@@ -31,23 +24,26 @@ class Grid extends React.Component<GridProps> {
       children,
       prefixCls,
       style,
-      reverse,
+      fluid,
       className,
       ...attibutes
     } = this.props;
-    const rowClassName = classNames({
-      [`${prefixCls}-row`]: true,
-      [`${prefixCls}-reverse`]: reverse,
+    const gridClassName = classNames(prefixCls, {
+      [`${prefixCls}-fluid`]: fluid,
     }, className);
 
     return (
       <div
         style={style}
-        className={rowClassName}
+        className={gridClassName}
         {...attibutes}
       >{children}</div>
     );
   }
 }
+
+Grid.Row = Row;
+Grid.Col = Col;
+
 
 export default Grid;

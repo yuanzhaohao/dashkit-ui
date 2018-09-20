@@ -16,6 +16,30 @@
   margin-bottom: 20px;
 }
 
+// Grid
+//
+.grid-list {
+  div[class*="dk-grid-col-"] {
+    margin-bottom: 16px;
+
+    &::after {
+      content:'';
+      display: block;
+      position: relative;
+      box-sizing: border-box;
+      padding: 16px;
+      background: #2c7be5;
+      border: 1px solid #FFF;
+      border-radius: 2px;
+      overflow: hidden;
+      text-align: center;
+      color: #fff;
+    }
+  }
+}
+
+// Button
+//
 .button-list {
   margin-top: 12px;
 
@@ -28,10 +52,14 @@
   }
 }
 
+// Alert
+//
 .alert-list {
   margin-top: 12px;
 }
 
+// Icon
+//
 .icon-list {
   width: 100%;
 
@@ -65,12 +93,16 @@
   }
 }
 
+// Message
+//
 .message-wrapper {
   button {
     margin-right: 10px;
   }
 }
 
+// Spin
+//
 .spin-list {
   display: flex;
   align-items: center;

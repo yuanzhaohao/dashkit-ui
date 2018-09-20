@@ -1,0 +1,1 @@
+export type ViewportType = 'xs' | 'sm' | 'md' | 'lg';
