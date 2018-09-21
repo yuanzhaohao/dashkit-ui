@@ -1,9 +1,11 @@
 import * as React from 'react';
+import './page.scss';
+
 import * as ReactDOM from 'react-dom';
 import { RouteComponentProps } from 'react-router-dom';
-import { Spin } from '../../../src';
+import { Spin, Grid } from '../../../src';
 import Example from './example';
-import './page.scss';
+const { Row, Col } = Grid;
 
 interface PageProps extends RouteComponentProps<PageProps> {
   dataSource: any;
@@ -63,16 +65,20 @@ class Page extends React.PureComponent<PageProps, PageState> {
     const { dataSource } = this.state;
 
     return (
-      <div className="app-page">
-        {dataSource && dataSource.markdown
-          ? <div className="app-page-info" dangerouslySetInnerHTML={{
-            __html: dataSource.markdown
-          }} />
-          : <div className="page-loading">
-            <Spin text="Loading..." spinning={true} />
-          </div>
-        }
-      </div>
+      <Grid className="app-page" fluid>
+        <Row center="xs">
+          <Col xs={12} md={10} lg={8}>
+            {dataSource && dataSource.markdown
+              ? <div className="app-page-info" dangerouslySetInnerHTML={{
+                __html: dataSource.markdown
+              }} />
+              : <div className="page-loading">
+                <Spin text="Loading..." spinning={true} />
+              </div>
+            }
+          </Col>
+        </Row>
+      </Grid>
     )
   }
 }

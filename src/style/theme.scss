@@ -334,6 +334,10 @@ $grid-breakpoints: (
   sm: 48em,
   md: 62em,
   lg: 75em
+  // sm: 576px,
+  // md: 768px,
+  // lg: 992px,
+  // xl: 1200px
 ) !default;
 $grid-gutter-compensation:          $grid-gutter-width * 0.5 * -1;
 $grid-half-gutter-width:            $grid-gutter-width * 0.5;

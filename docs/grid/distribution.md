@@ -14,12 +14,37 @@ const { Row, Col } = Grid;
 
 ReactDOM.render(
   <div className="grid-alignment">
-    <h4 className="grid-title grid-title-first">.start-</h4>
+    <h4 className="grid-title grid-title-first">.around-</h4>
     <Row>
       <Col xs={12}>
         <div className="grid-box">
-          <Row start="xs">
-            <Col xs={6}>
+          <Row around="xs">
+            <Col xs={2}>
+              <div className="grid-box grid-box-nested"></div>
+            </Col>
+            <Col xs={2}>
+              <div className="grid-box grid-box-nested"></div>
+            </Col>
+            <Col xs={2}>
+              <div className="grid-box grid-box-nested"></div>
+            </Col>
+          </Row>
+        </div>
+      </Col>
+    </Row>
+
+    <h4 className="grid-title grid-title-first">.between-</h4>
+    <Row>
+      <Col xs={12}>
+        <div className="grid-box">
+          <Row between="xs">
+            <Col xs={2}>
+              <div className="grid-box grid-box-nested"></div>
+            </Col>
+            <Col xs={2}>
+              <div className="grid-box grid-box-nested"></div>
+            </Col>
+            <Col xs={2}>
               <div className="grid-box grid-box-nested"></div>
             </Col>
           </Row>
