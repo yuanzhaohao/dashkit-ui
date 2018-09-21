@@ -16,10 +16,10 @@ export type BasicProps = {
 };
 
 class Layout extends React.Component<LayoutProps, LayoutState> {
-  static Header: React.ReactNode;
-  static Footer: React.ReactNode;
-  static Content: React.ReactNode;
-  static Sidebar: React.ReactNode;
+  static Header: any;
+  static Footer: any;
+  static Content: any;
+  static Sidebar: any;
   static childContextTypes = {
     sidebarHook: PropTypes.object,
   };

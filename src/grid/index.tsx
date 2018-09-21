@@ -12,8 +12,8 @@ export type GridProps = {
 };
 
 class Grid extends React.PureComponent<GridProps> {
-  static Row: React.ReactNode;
-  static Col: React.ReactNode;
+  static Row: any;
+  static Col: any;
   static defaultProps = {
     prefixCls: 'dk-grid',
     fluid: false,
