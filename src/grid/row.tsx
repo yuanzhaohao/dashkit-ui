@@ -51,9 +51,12 @@ class Row extends React.PureComponent<RowProps> {
 
     return rowKeys.map(key => {
       const value = this.props[key];
-      return {
-        [`${prefixCls}-${key}-${value}`]: !!value,
+      if (!!value) {
+        return {
+          [`${prefixCls}-${key}-${value}`]: true,
+        }
       }
+      return null;
     });
   }
 }
