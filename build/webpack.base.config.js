@@ -69,7 +69,13 @@ const createHappypackPlugin = () => {
         happyPackMode: true
       }
     }]),
-    createHappypack('sass', ['sass-loader']),
+    // createHappypack('sass', ['sass-loader']),
+    createHappypack('sass', [{
+      loader: 'sass-loader',
+      options: {
+        data: "$icon-base-url: '//yuanzhaohao.github.io/dashkit-ui/static';"
+      }
+    }]),
     createHappypack('css', ['css-loader']),
   ]
 }
@@ -118,7 +124,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: config.extractStyle === true
+        loader: config.extractStyle === true && process.env.NODE_ENV === 'production'
           ? ExtractTextPlugin.extract(['happypack/loader?id=css', 'postcss-loader', 'happypack/loader?id=sass'])
           : ['style-loader', 'happypack/loader?id=css', 'postcss-loader', 'happypack/loader?id=sass']
       },
