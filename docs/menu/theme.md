@@ -16,10 +16,10 @@ ReactDOM.render(
   <Row>
     <Col xs={6}>
       <Menu>
-        <Menu.Item>Dashboard</Menu.Item>
-        <Menu.Item>Getting started</Menu.Item>
-        <Menu.Item>Components</Menu.Item>
-        <Menu.Item>Changelog</Menu.Item>
+        <Menu.Item icon="home">Dashboard</Menu.Item>
+        <Menu.Item icon="clipboard">Getting started</Menu.Item>
+        <Menu.Item icon="book-open">Components</Menu.Item>
+        <Menu.Item icon="git-branch">Changelog</Menu.Item>
       </Menu>
     </Col>
     <Col xs={6}></Col>

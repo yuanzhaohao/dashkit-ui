@@ -21,7 +21,9 @@ const devMiddleware = require('webpack-dev-middleware')(compiler, {
   quiet: true,
 })
 
-app.use('/static', express.static(utils.resolve(config.staticPath)))
+app.use('/static', express.static(
+  path.join(utils.resolve(config.basePath), config.staticPath)
+))
 app.use(require('connect-history-api-fallback')())
 app.use(devMiddleware)
 

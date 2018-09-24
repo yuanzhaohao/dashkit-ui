@@ -44,7 +44,7 @@ rm(assetsRoot, err => {
     }
 
     // @note: copy static & minify static
-    const staticPath = utils.resolve(config.staticPath)
+    const staticPath = path.join(utils.resolve(config.basePath), config.staticPath);
     if (config.staticPath && exists(staticPath)) {
       const staticDistPath = path.join(assetsRoot, config.staticPath)
       fs.copySync(staticPath, staticDistPath)

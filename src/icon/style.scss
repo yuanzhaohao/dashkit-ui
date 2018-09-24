@@ -1,4 +1,6 @@
-$icon-prefix-cls: 'dk-icon';
+@import '../style/functions';
+@import '../style/theme';
+@import '../style/mixins';
 
 @font-face {
   font-family: 'feather';
@@ -16,7 +18,7 @@ $icon-prefix-cls: 'dk-icon';
 
 .#{$icon-prefix-cls} {
   display: inline-block;
-  font-size: 24px;
+  font-size: $icon-font-size;
   font-style: normal;
   vertical-align: baseline;
   text-align: center;
@@ -25,6 +27,7 @@ $icon-prefix-cls: 'dk-icon';
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
   &:before {
     display: block;
     font-family: 'feather' !important;

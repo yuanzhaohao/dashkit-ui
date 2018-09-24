@@ -30,10 +30,9 @@ class MenuItem extends React.PureComponent<MenuItemProps> {
       [`${prefixCls}`]: true,
       [`${prefixCls}-disabled`]: disabled,
     }, className);
-    const iconClassName = `${prefixCls}-icon`;
     const iconNode = icon
       ? typeof icon === 'string'
-        ? <Icon className={iconClassName} type={icon} />
+        ? <Icon type={icon} />
         : icon
       : null;
 

@@ -23,6 +23,7 @@ $menu-prefix-cls: 'dk-menu';
     margin-bottom: 0;
     color: $menu-item-color;
     align-items: center;
+    cursor: pointer;
 
     &:hover {
       color: $menu-item-active-color;
@@ -35,6 +36,11 @@ $menu-prefix-cls: 'dk-menu';
       &:hover {
         color: $menu-item-active-color;
       }
+    }
+
+    > .#{$icon-prefix-cls} {
+      margin-right: 10px;
+      font-size: 17px;
     }
   }
 }
