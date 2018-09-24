@@ -145,3 +145,15 @@
     margin-right: 20px;
   }
 }
+
+// Switch
+//
+.switch-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .dk-switch {
+    margin-right: 10px;
+  }
+}

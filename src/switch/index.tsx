@@ -7,6 +7,7 @@ export type SwitchSize = 'small' | 'default' | 'large';
 
 export type SwitchProps = {
   className?: string;
+  style?: React.CSSProperties;
   prefixCls?: string;
   size?: SwitchSize;
   checked?: boolean;
@@ -23,7 +24,7 @@ class Switch extends React.Component<SwitchProps, SwitchState> {
   public static defaultProps = {
     checked: false,
     disabled: false,
-    prefixCls: 'dashkit-switch',
+    prefixCls: 'dk-switch',
     size: 'default' as SwitchSize,
   };
   constructor(props: SwitchProps) {
@@ -42,7 +43,7 @@ class Switch extends React.Component<SwitchProps, SwitchState> {
     }
   }
   public render() {
-    const { className, checkedChildren, unCheckedChildren, disabled, size, prefixCls } = this.props;
+    const { className, style, checkedChildren, unCheckedChildren, disabled, size, prefixCls } = this.props;
     const { checked } = this.state;
     const switchClassName = classNames(
       prefixCls,
@@ -57,6 +58,7 @@ class Switch extends React.Component<SwitchProps, SwitchState> {
     return (
       <button
         className={switchClassName}
+        style={style}
         onClick={disabled ? undefined : this.onToggle}
       >
         <span className={`${prefixCls}-inner`}>

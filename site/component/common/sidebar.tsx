@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Layout } from '../../../src';
+// @ts-ignore
 import LogoSvg from '../../assets/logo.svg';
 import './sidebar.scss';
 

@@ -14,7 +14,7 @@ class Icon extends React.PureComponent<IconProps> {
 
 
   static defaultProps = {
-    prefixCls: 'dashkit-icon',
+    prefixCls: 'dk-icon',
   };
   render() {
     const { className, type, prefixCls, ...attribute } = this.props;

@@ -3,13 +3,14 @@ order: 1
 title:
   zh-CN: 媒体
   en-US: Media
-subtitle: 
+subtitle:
   zh-CN: 媒体控制。
   en-US: Media controls.
 ---
 
 ```js
-import { Icon } from 'dashkit-ui';
+import { Icon, Grid } from 'dashkit-ui';
+const { Row, Col }  = Grid;
 
 class IconList extends React.Component {
   render() {
@@ -33,7 +34,7 @@ class IconList extends React.Component {
 
     return (
       <div className="icon-list clearfix">
-        {media.map((name, key) => 
+        {media.map((name, key) =>
           <div className="icon-item-wrapper" key={key}>
             <div className="icon-item">
               <Icon type={name} />

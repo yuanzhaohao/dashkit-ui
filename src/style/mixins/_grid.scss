@@ -1,6 +1,5 @@
 /// Grid system
 //
-// Generate semantic grid columns with these mixins.
 
 @mixin grid-make-col($prefix, $name) {
   [class*="#{$prefix}-col-#{$name}"] {

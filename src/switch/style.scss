@@ -1,7 +1,7 @@
 @import '../style/functions';
 @import '../style/theme';
 @import '../style/mixins';
-$prefix-cls: 'dashkit-switch';
+$prefix-cls: 'dk-switch';
 
 .#{$prefix-cls} {
   position: relative;
@@ -36,79 +36,81 @@ $prefix-cls: 'dashkit-switch';
     content: '';
     cursor: pointer;
   }
-}
 
-.#{$prefix-cls}-inner {
-  display: block;
-  margin-left: 24px;
-  margin-right: 6px;
-  color: #fff;
-  font-size: 12px;
-  text-align: center;
-}
+  &-inner {
+    display: block;
+    margin-left: 24px;
+    margin-right: 6px;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+  }
 
-.#{$prefix-cls}-checked {
-  background-color: $switch-bg-checked;
+  &-checked {
+    background-color: $switch-bg-checked;
 
-  .#{$prefix-cls}-inner {
+    &:after {
+      left: 100%;
+      transform: translateX(-100%);
+      margin-left: -1px;
+    }
+  }
+
+  &-checked &-inner {
     margin-left: 6px;
     margin-right: 24px;
   }
 
-  &:after {
-    left: 100%;
-    transform: translateX(-100%);
-    margin-left: -1px;
+  &-disabled {
+    cursor: not-allowed;
+    opacity: .4;
   }
-}
 
-.#{$prefix-cls}-disabled {
-  cursor: not-allowed;
-  opacity: .4;
-}
+  &-small {
+    height: $switch-height-sm;
+    min-width: 28px;
+    line-height: $switch-height-sm - 2px;
 
-.#{$prefix-cls}-small {
-  height: $switch-height-sm;
-  min-width: 28px;
-  line-height: $switch-height-sm - 2px;
+    &:after {
+      width: $switch-height-sm - 4px;
+      height: $switch-height-sm - 4px;
+    }
 
-  .#{$prefix-cls}-inner {
+    &.#{$prefix-cls}-checked {
+      .#{$prefix-cls}-inner {
+        margin-left: 3px;
+        margin-right: 18px;
+      }
+    }
+  }
+
+  &-small &-inner {
     margin-left: 18px;
     margin-right: 3px;
     font-size: 10px;
   }
-  &:after {
-    width: $switch-height-sm - 4px;
-    height: $switch-height-sm - 4px;
-  }
 
-  &.#{$prefix-cls}-checked {
-    .#{$prefix-cls}-inner {
-      margin-left: 3px;
-      margin-right: 18px;
+  &-large {
+    height: $switch-height-lg;
+    min-width: 60px;
+    line-height: $switch-height-lg - 2px;
+
+    &:after {
+      width: $switch-height-lg - 4px;
+      height: $switch-height-lg - 4px;
+    }
+
+    &.#{$prefix-cls}-checked {
+      .#{$prefix-cls}-inner {
+        margin-left: 3px;
+        margin-right: 18px;
+      }
     }
   }
-}
 
-.#{$prefix-cls}-large {
-  height: $switch-height-lg;
-  min-width: 60px;
-  line-height: $switch-height-lg - 2px;
-
-  .#{$prefix-cls}-inner {
+  &-large &-inner {
     margin-left: 18px;
     margin-right: 3px;
     font-size: 14px;
-  }
-  &:after {
-    width: $switch-height-lg - 4px;
-    height: $switch-height-lg - 4px;
-  }
-
-  &.#{$prefix-cls}-checked {
-    .#{$prefix-cls}-inner {
-      margin-left: 3px;
-      margin-right: 18px;
-    }
   }
 }

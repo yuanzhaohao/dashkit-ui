@@ -1,0 +1,40 @@
+@import '../style/functions';
+@import '../style/theme';
+@import '../style/mixins';
+
+$menu-prefix-cls: 'dk-menu';
+
+.#{$menu-prefix-cls} {
+  position: relative;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: $menu-width;
+  height: 100%;
+  background: $menu-bg;
+  border-right: 1px solid $menu-border-color;
+
+  &-item {
+    display: flex;
+    width: 100%;
+    height: $menu-item-height;
+    padding: 0 $menu-item-padding-x;
+    margin-bottom: 0;
+    color: $menu-item-color;
+    align-items: center;
+
+    &:hover {
+      color: $menu-item-active-color;
+    }
+
+    > a {
+      display: block;
+      color: $menu-item-color;
+
+      &:hover {
+        color: $menu-item-active-color;
+      }
+    }
+  }
+}
