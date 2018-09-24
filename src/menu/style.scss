@@ -15,7 +15,20 @@ $menu-prefix-cls: 'dk-menu';
   background: $menu-bg;
   border-right: 1px solid $menu-border-color;
 
-  &-item {
+  ul,
+  ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .#{$icon-prefix-cls} {
+    margin-right: $menu-item-icon-margin-x;
+    font-size: $menu-item-icon-size;
+  }
+
+  &-item,
+  &-submenu-title {
     display: flex;
     width: 100%;
     height: $menu-item-height;
@@ -37,10 +50,21 @@ $menu-prefix-cls: 'dk-menu';
         color: $menu-item-active-color;
       }
     }
+  }
 
-    > .#{$icon-prefix-cls} {
-      margin-right: 10px;
-      font-size: 17px;
-    }
+  &-submenu > &-item {
+    padding-left: $menu-item-padding-x + $menu-item-icon-size + $menu-item-icon-margin-x;
+  }
+
+  &-submenu-arrow {
+    position: absolute;
+    right: $menu-item-padding-x;
+    transition: all .2s ease-in-out;
+    margin-right: 0;
+    transform: rotate(0);
+  }
+
+  &-submenu-active > &-submenu-arrow {
+    transform: rotate(-180deg);
   }
 }

@@ -11,15 +11,21 @@ subtitle:
 ```js
 import { Menu, Grid } from 'dashkit-ui';
 const { Row, Col } = Grid;
+const { Item, SubMenu } = Menu;
 
 ReactDOM.render(
   <Row>
     <Col xs={6}>
       <Menu>
-        <Menu.Item icon="home">Dashboard</Menu.Item>
-        <Menu.Item icon="clipboard">Getting started</Menu.Item>
-        <Menu.Item icon="book-open">Components</Menu.Item>
-        <Menu.Item icon="git-branch">Changelog</Menu.Item>
+        <Item icon="home">Dashboard</Item>
+        <Item icon="clipboard">Getting started</Item>
+        <SubMenu icon="book-open" title="Components">
+          <Item>Alert</Item>
+          <Item>Button</Item>
+          <Item>Input</Item>
+          <Item>Layout</Item>
+        </SubMenu>
+        <Item icon="git-branch">Changelog</Item>
       </Menu>
     </Col>
     <Col xs={6}></Col>

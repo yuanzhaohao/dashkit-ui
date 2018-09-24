@@ -2,6 +2,7 @@ import './style.scss';
 import * as classNames from 'classnames';
 import * as React from 'react';
 import MenuItem from './menu-item';
+import SubMenu from './sub-menu';
 
 export type MenuProps = {
   prefixCls?: string;
@@ -12,6 +13,7 @@ export type MenuProps = {
 
 class Menu extends React.PureComponent<MenuProps> {
   static Item: any;
+  static SubMenu: any;
   static defaultProps = {
     prefixCls: 'dk-menu',
     theme: 'light',
@@ -25,7 +27,8 @@ class Menu extends React.PureComponent<MenuProps> {
       className,
       theme,
     } = this.props;
-    const menuClassName = classNames(prefixCls, {
+    const menuClassName = classNames({
+      [`${prefixCls}`]: true,
       [`${prefixCls}-dark`]: theme === 'dark',
     }, className);
 
@@ -36,5 +39,7 @@ class Menu extends React.PureComponent<MenuProps> {
 }
 
 Menu.Item = MenuItem;
+Menu.SubMenu = SubMenu;
+
 
 export default Menu;
