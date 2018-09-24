@@ -1,6 +1,6 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
-import { ViewportType } from './types';
+import { ViewportType, ColKeyType } from './types';
 
 export type ColProps = {
   prefixCls?: string;
@@ -20,7 +20,7 @@ export type ColProps = {
   last?: ViewportType;
 };
 
-function isInteger(value) {
+function isInteger(value?: number | boolean) {
   return typeof value === 'number' && isFinite(value) && Math.floor(value) === value;
 }
 
@@ -55,7 +55,7 @@ class Col extends React.PureComponent<ColProps> {
   getColClassNames = () => {
     const { props } = this;
     const { prefixCls } = props;
-    const classMap = {
+    const classMap: { [key: string]: string } = {
       xs: `${prefixCls}-col-xs`,
       sm: `${prefixCls}-col-sm`,
       md: `${prefixCls}-col-md`,
@@ -70,7 +70,7 @@ class Col extends React.PureComponent<ColProps> {
 
     return Object.keys(props)
       .filter(key => classMap[key])
-      .map(key => isInteger(props[key])
+      .map((key: ColKeyType) => isInteger(props[key])
         ? (classMap[key] + '-' + props[key])
         : classMap[key]
       );

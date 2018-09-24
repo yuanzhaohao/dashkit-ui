@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import { ViewportType } from './types';
+import { ViewportType, RowKeyType } from './types';
 
 export type RowProps = {
   prefixCls?: string;
@@ -17,7 +17,7 @@ export type RowProps = {
   between?: ViewportType,
 };
 
-const rowKeys = ['start', 'center', 'end', 'top', 'middle', 'bottom', 'around', 'between'];
+const rowKeys: RowKeyType[] = ['start', 'center', 'end', 'top', 'middle', 'bottom', 'around', 'between'];
 
 class Row extends React.PureComponent<RowProps> {
   static defaultProps = {
@@ -49,7 +49,7 @@ class Row extends React.PureComponent<RowProps> {
   getRowClassNames = () => {
     const { prefixCls } = this.props;
 
-    return rowKeys.map(key => {
+    return rowKeys.map((key: RowKeyType) => {
       const value = this.props[key];
       if (!!value) {
         return {
