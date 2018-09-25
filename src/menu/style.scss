@@ -60,20 +60,12 @@ $menu-prefix-cls: 'dk-menu';
     padding-left: $menu-item-padding-x + $menu-item-icon-size + $menu-item-icon-margin-x;
   }
 
-  &-arrow {
-    position: absolute;
-    right: $menu-item-padding-x;
-    font-size: $menu-item-icon-size;
-    transform: rotate(0);
-    transition: transform .3s ease;
-
-    &-active {
-      transform: rotate(-180deg);
-    }
+  &-submenu &-submenu &-submenu-title {
+    padding-left: $menu-item-padding-x + $menu-item-icon-size + $menu-item-icon-margin-x;
   }
 
-  &-submenu &-submenu {
-    padding-left: $menu-item-icon-size + $menu-item-icon-margin-x;
+  &-submenu &-submenu &-item {
+    padding-left: $menu-item-padding-x * 2 + $menu-item-icon-size + $menu-item-icon-margin-x;
   }
 
   &-submenu-list {
@@ -91,6 +83,18 @@ $menu-prefix-cls: 'dk-menu';
 
     &-exit-done {
       height: 0;
+    }
+  }
+
+  &-arrow {
+    position: absolute;
+    right: $menu-item-padding-x;
+    font-size: $menu-item-icon-size;
+    transform: rotate(0);
+    transition: transform .3s ease;
+
+    &-active {
+      transform: rotate(-180deg);
     }
   }
 }

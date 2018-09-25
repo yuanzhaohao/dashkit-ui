@@ -14,12 +14,7 @@ export type MenuProps = {
   title?: string;
 };
 
-export type MenuState = {
-  active: boolean;
-};
-
-
-class SubMenu extends React.Component<MenuProps, MenuState> {
+class SubMenu extends React.Component<MenuProps> {
   static Item: any;
   static defaultProps = {
     prefixCls: 'dk-menu',
@@ -29,17 +24,12 @@ class SubMenu extends React.Component<MenuProps, MenuState> {
     subMenuHook: PropTypes.object,
   };
 
-  state = {
-    active: false,
-  };
-
   render() {
-    const { children, prefixCls, style, className, icon, title } = this.props;
-    const { active } = this.state;
+    const { children, index, prefixCls, style, className, icon, title } = this.props;
+    const { subMenuHook } = this.context;
     const submenuPrefixCls = `${prefixCls}-submenu`;
-    const subClassName = classNames({
-      [`${submenuPrefixCls}`]: true,
-    }, className);
+    const active = subMenuHook.existOpenedMenu(index);
+
     const iconNode = icon && typeof icon === 'string'
       ? <Icon type={icon} className={`${prefixCls}-icon`} />
       : null;
@@ -55,7 +45,9 @@ class SubMenu extends React.Component<MenuProps, MenuState> {
     );
 
     return (
-      <div className={subClassName} style={style}>
+      <div className={classNames({
+        [`${submenuPrefixCls}`]: true,
+      }, className)} style={style}>
         {titleNode}
         <CSSTransition
           in={active}
@@ -73,11 +65,16 @@ class SubMenu extends React.Component<MenuProps, MenuState> {
   }
 
   handleClick = () => {
-    const active = !this.state.active;
-    const { index } = this.props;
-    this.setState({
-      active,
-    });
+    const { subMenuHook } = this.context;
+
+    if (subMenuHook) {
+      const { index } = this.props;
+      if (!subMenuHook.existOpenedMenu(index)) {
+        subMenuHook.addOpenedMenu(index);
+      } else {
+        subMenuHook.removeOpenedMenu(index);
+      }
+    }
   }
 
   handleEnter = (el: HTMLDivElement) => {
@@ -99,6 +96,14 @@ class SubMenu extends React.Component<MenuProps, MenuState> {
     if (el.scrollHeight !== 0) {
       el.style.height = '0';
     }
+  }
+
+  getRootState = () => {
+    if (this.context.subMenuHook) {
+      return this.context.subMenuHook.getState();
+    }
+
+    return {};
   }
 }
 

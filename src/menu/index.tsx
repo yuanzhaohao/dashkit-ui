@@ -30,6 +30,7 @@ class Menu extends React.PureComponent<MenuProps, MenuState> {
   };
   static childContextTypes = {
     itemHook: PropTypes.object,
+    subMenuHook: PropTypes.object,
   };
 
   constructor(props: MenuProps) {
@@ -41,8 +42,13 @@ class Menu extends React.PureComponent<MenuProps, MenuState> {
   }
 
   getChildContext() {
+    const defaultContext = {
+      getState: () => {
+        return this.state;
+      }
+    };
     return {
-      itemHook: {
+      itemHook: Object.assign({
         selectItem: (index: string) => {
           const { activeIndex } = this.state;
           if (index !== activeIndex) {
@@ -50,21 +56,28 @@ class Menu extends React.PureComponent<MenuProps, MenuState> {
               activeIndex: index,
             });
           }
-        },
-
-        getState: () => {
-          return this.state;
         }
-      },
+      }, defaultContext),
 
-      subMenuHook: {
+      subMenuHook: Object.assign({
         addOpenedMenu: (index: string) => {
           const { openedMenus } = this.state;
           this.setState({
-            openedMenus: [...new Set([...openedMenus, index])],
+            openedMenus: Array.from(new Set([...openedMenus, index])),
           });
+        },
+
+        removeOpenedMenu: (index: string) => {
+          const { openedMenus } = this.state;
+          this.setState({
+            openedMenus: openedMenus.filter(m => m !== index),
+          });
+        },
+
+        existOpenedMenu: (index: string) => {
+          return this.state.openedMenus.indexOf(index) !== -1;
         }
-      }
+      }, defaultContext),
     }
   }
 
