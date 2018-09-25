@@ -2,9 +2,9 @@
 @import '../style/theme';
 @import '../style/mixins';
 
-$prefix-cls: 'dk-alert';
+$alert-prefix-cls: 'dk-alert';
 
-.#{$prefix-cls} {
+.#{$alert-prefix-cls} {
   position: relative;
   padding: $alert-padding-y $alert-padding-x;
   margin-bottom: $alert-margin-bottom;

@@ -19,12 +19,12 @@ class Sidebar extends React.Component<SidebarProps> {
     sidebarHook: PropTypes.object,
   };
 
-  private uniqueId: string;
+  uniqueId: string;
   constructor(props: SidebarProps) {
     super(props);
     this.uniqueId = generateId('dashkit-sidebar-');
   }
-  
+
   componentDidMount() {
     if (this.context.sidebarHook) {
       this.context.sidebarHook.addSidebar(this.uniqueId);

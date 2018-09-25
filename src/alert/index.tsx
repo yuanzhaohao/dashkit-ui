@@ -99,7 +99,7 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
     }
   }
 
-  handleClose = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  handleClose = (e: React.MouseEvent) => {
     e.preventDefault();
     if (this.state.dismiss) {
       return;

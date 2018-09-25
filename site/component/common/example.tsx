@@ -21,7 +21,7 @@ class Example extends React.PureComponent<ExampleProps, ExampleState> {
     };
   }
 
-  public render() {
+  render() {
     const { locale = 'en-US' } = this.props;
     const { meta, code, preview } = this.props.dataSource;
     const { showCode } = this.state;
@@ -53,7 +53,8 @@ class Example extends React.PureComponent<ExampleProps, ExampleState> {
     )
   }
 
-  private onControlClick = () => {
+  onControlClick = () => {
+    console.log('call onControlClick')
     const { showCode } = this.state;
     const newValue = !showCode
     this.setState({

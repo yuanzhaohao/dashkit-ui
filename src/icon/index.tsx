@@ -8,15 +8,16 @@ export type IconProps = {
   type: string;
   className?: string;
   style?: React.CSSProperties;
-  onClick?: React.MouseEventHandler<any>;
+  onClick?: React.MouseEventHandler;
 };
 
 class Icon extends React.PureComponent<IconProps> {
   static defaultProps = {
     prefixCls: 'dk-icon',
   };
+
   render() {
-    const { className, type, prefixCls, style } = this.props;
+    const { className, type, prefixCls, style, onClick } = this.props;
     const iconClassName = classNames(
       {
         [`${prefixCls}`]: true,
@@ -24,7 +25,7 @@ class Icon extends React.PureComponent<IconProps> {
       },
       className,
     )
-    return <i className={iconClassName} style={style} />;
+    return <i className={iconClassName} style={style} onClick={onClick} />;
   }
 }
 
