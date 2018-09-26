@@ -13,6 +13,7 @@ export type MenuProps = {
   defaultOpeneds?: string[];
   mode?: 'horizontal' | 'vertical',
   theme?: 'dark' | 'light';
+  onOpen?: (index: string) => void;
 };
 
 export type MenuState = {

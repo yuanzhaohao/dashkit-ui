@@ -14,10 +14,10 @@ $prefix-cls: 'dk-btn';
   border: $btn-border-width solid transparent;
   transition: $btn-transition;
   @include button-size(
-    $btn-height, 
-    $btn-padding-x, 
-    $font-size-base, 
-    $btn-line-height, 
+    $btn-height,
+    $btn-padding-x,
+    $font-size-base,
+    $btn-line-height,
     $btn-border-radius
   );
   @include hover-focus {
@@ -32,8 +32,6 @@ $prefix-cls: 'dk-btn';
   &:disabled {
     opacity: $btn-disabled-opacity;
     pointer-events: none;
-    box-shadow: none;
-    cursor: not-allowed;
   }
   &:not(:disabled):not(.disabled) {
     cursor: pointer;
@@ -95,10 +93,10 @@ $prefix-cls: 'dk-btn';
   //
   &-large {
     @include button-size(
-      $btn-height-lg, 
-      $btn-padding-x-lg, 
-      $font-size-lg, 
-      $btn-line-height-lg, 
+      $btn-height-lg,
+      $btn-padding-x-lg,
+      $font-size-lg,
+      $btn-line-height-lg,
       $btn-border-radius-lg
     );
 
@@ -109,10 +107,10 @@ $prefix-cls: 'dk-btn';
 
   &-small {
     @include button-size(
-      $btn-height-sm, 
-      $btn-padding-x-sm, 
-      $font-size-sm, 
-      $btn-line-height-sm, 
+      $btn-height-sm,
+      $btn-padding-x-sm,
+      $font-size-sm,
+      $btn-line-height-sm,
       $btn-border-radius-sm
     );
 

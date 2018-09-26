@@ -3,6 +3,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import * as classNames from 'classnames';
 import { CSSTransition } from 'react-transition-group';
+import { removeClass } from '../utils/dom';
 import Icon from '../icon';
 
 export type MenuProps = {
@@ -49,17 +50,23 @@ class SubMenu extends React.Component<MenuProps> {
         [`${submenuPrefixCls}`]: true,
       }, className)} style={style}>
         {titleNode}
-        <CSSTransition
-          in={active}
-          timeout={350}
-          onEnter={this.handleEnter}
-          onEntered={this.handleEntered}
-          onExit={this.handleExit}
-          onExiting={this.handleExiting}
-          classNames={`${submenuPrefixCls}-list`}
-        >
-          <ul className={`${submenuPrefixCls}-list`}>{children}</ul>
-        </CSSTransition>
+        {children
+          ? <CSSTransition
+            in={active}
+            timeout={350}
+            onEnter={this.handleEnter}
+            onEntered={this.handleEntered}
+            onExit={this.handleExit}
+            onExiting={this.handleExiting}
+            classNames={`${submenuPrefixCls}-list`}
+          >
+            <ul className={classNames({
+              [`${submenuPrefixCls}-list`]: true,
+              [`${submenuPrefixCls}-list-opened`]: active,
+            })}>{children}</ul>
+          </CSSTransition>
+          : null
+        }
       </div>
     );
   }
@@ -78,6 +85,8 @@ class SubMenu extends React.Component<MenuProps> {
   }
 
   handleEnter = (el: HTMLDivElement) => {
+    const { prefixCls } = this.props;
+    removeClass(el, `${prefixCls}-submenu-list-opened`);
     if (el.scrollHeight !== 0) {
       el.style.height = el.scrollHeight + 'px';
     }
@@ -89,7 +98,6 @@ class SubMenu extends React.Component<MenuProps> {
 
   handleExit = (el: HTMLDivElement) => {
     el.style.height = el.scrollHeight + 'px';
-    el.style.overflow = 'hidden';
   }
 
   handleExiting = (el: HTMLDivElement) => {
@@ -102,7 +110,6 @@ class SubMenu extends React.Component<MenuProps> {
     if (this.context.subMenuHook) {
       return this.context.subMenuHook.getState();
     }
-
     return {};
   }
 }

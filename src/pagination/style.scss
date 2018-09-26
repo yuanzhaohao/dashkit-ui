@@ -64,7 +64,6 @@ $prefix-cls: 'dk-pagination';
   &-disabled {
     opacity: $pagination-disabled-opacity;
     pointer-events: none;
-    cursor: auto;
   }
 
   &-prev,

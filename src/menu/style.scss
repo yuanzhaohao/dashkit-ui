@@ -46,8 +46,6 @@ $menu-prefix-cls: 'dk-menu';
     &-disabled {
       opacity: $menu-disabled-opacity;
       pointer-events: none;
-      cursor: not-allowed;
-      background: none;
     }
   }
 
@@ -91,7 +89,7 @@ $menu-prefix-cls: 'dk-menu';
     right: $menu-item-padding-x;
     font-size: $menu-item-icon-size;
     transform: rotate(0);
-    transition: transform .3s ease;
+    transition: transform .35s ease;
 
     &-active {
       transform: rotate(-180deg);
