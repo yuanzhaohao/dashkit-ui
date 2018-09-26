@@ -7,7 +7,6 @@ import Icon from '../icon';
 export type MenuItemProps = {
   prefixCls?: string;
   className?: string;
-  style?: React.CSSProperties;
   index: string;
   disabled?: boolean;
   icon?: string;
@@ -24,7 +23,7 @@ class MenuItem extends React.Component<MenuItemProps> {
   };
 
   render() {
-    const { children, prefixCls, style, className, index, disabled, icon } = this.props;
+    const { children, prefixCls, className, index, disabled, icon, ...attributes } = this.props;
     const rootState = this.getRootState();
     const itemClassName = classNames({
       [`${prefixCls}-item`]: true,
@@ -37,8 +36,8 @@ class MenuItem extends React.Component<MenuItemProps> {
 
     return (
       <li className={itemClassName}
-        style={style}
         onClick={disabled ? undefined : this.handleClick}
+        {...attributes}
       >
         {iconNode}
         {children}

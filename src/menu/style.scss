@@ -66,6 +66,8 @@ $menu-prefix-cls: 'dk-menu';
   }
 
   &-icon {
+    width: $menu-item-icon-size;
+    height: $menu-item-icon-size;
     margin-right: $menu-item-icon-margin-x;
     font-size: $menu-item-icon-size;
   }

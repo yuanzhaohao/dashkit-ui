@@ -9,7 +9,6 @@ import Icon from '../icon';
 export type MenuProps = {
   prefixCls?: string;
   className?: string;
-  style?: React.CSSProperties;
   index: string;
   icon?: string;
   title?: string;
@@ -26,7 +25,7 @@ class SubMenu extends React.Component<MenuProps> {
   };
 
   render() {
-    const { children, index, prefixCls, style, className, icon, title } = this.props;
+    const { children, index, prefixCls, className, icon, title, ...attributes } = this.props;
     const { subMenuHook } = this.context;
     const submenuPrefixCls = `${prefixCls}-submenu`;
     const active = subMenuHook.existOpenedMenu(index);
@@ -46,9 +45,12 @@ class SubMenu extends React.Component<MenuProps> {
     );
 
     return (
-      <div className={classNames({
-        [`${submenuPrefixCls}`]: true,
-      }, className)} style={style}>
+      <div
+        className={classNames({
+          [`${submenuPrefixCls}`]: true,
+        }, className)}
+        {...attributes}
+      >
         {titleNode}
         {children
           ? <CSSTransition

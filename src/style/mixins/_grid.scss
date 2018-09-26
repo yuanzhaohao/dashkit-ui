@@ -1,12 +1,16 @@
 /// Grid system
 //
 
+@mixin grid-make-col-common() {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  padding-right: $grid-gutter-compensation * -1;
+  padding-left: $grid-gutter-compensation * -1;
+}
+
 @mixin grid-make-col($prefix, $name) {
   [class*="#{$prefix}-col-#{$name}"] {
-    box-sizing: border-box;
-    flex: 0 0 auto;
-    padding-right: $grid-gutter-compensation * -1;
-    padding-left: $grid-gutter-compensation * -1;
+    @include grid-make-col-common();
   }
 
   @for $i from 1 through $grid-columns {
@@ -35,7 +39,6 @@
 
   .#{$prefix}-center-#{$name} {
     justify-content: center;
-    // text-align: center;
   }
 
   .#{$prefix}-end-#{$name} {

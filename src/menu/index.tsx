@@ -93,13 +93,7 @@ class Menu extends React.PureComponent<MenuProps, MenuState> {
   }
 
   render() {
-    const {
-      children,
-      prefixCls,
-      style,
-      className,
-      theme,
-    } = this.props;
+    const { children, prefixCls, className, style, theme } = this.props;
     const menuClassName = classNames({
       [`${prefixCls}`]: true,
       [`${prefixCls}-dark`]: theme === 'dark',
