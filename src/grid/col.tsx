@@ -30,8 +30,7 @@ class Col extends React.PureComponent<ColProps> {
 
   render() {
     const { props } = this;
-    const { children, prefixCls, className, first, last, ...atributes } = this.props;
-
+    const { children, prefixCls, className, first, last, ...attributes } = this.props;
 
     const classMap: { [key: string]: string } = {
       xs: `${prefixCls}-col-xs`,
@@ -45,10 +44,10 @@ class Col extends React.PureComponent<ColProps> {
       lgOffset: `${prefixCls}-col-lg-offset`,
       xlOffset: `${prefixCls}-col-xl-offset`,
     };
-    const colKeysClassNames = Object.keys(props)
+    const colKeysClassNames = Object.keys(attributes)
       .filter(key => classMap[key])
       .map((key: ColKeyType) => {
-        delete atributes[key];
+        delete attributes[key];
         if (isInteger(props[key])) {
           return (classMap[key] + '-' + props[key]);
         }
@@ -62,7 +61,7 @@ class Col extends React.PureComponent<ColProps> {
 
 
     return (
-      <div className={rowClassName} {...atributes}>{children}</div>
+      <div className={rowClassName} {...attributes}>{children}</div>
     );
   }
 }
