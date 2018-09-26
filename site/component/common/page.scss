@@ -158,3 +158,18 @@
     margin-right: 10px;
   }
 }
+
+// Menu
+//
+.menu-item {
+  display: flex;
+  justify-content: center;
+  padding: 15px 0;
+}
+
+.menu-theme {
+
+  &-switch {
+    margin-bottom: 20px;
+  }
+}

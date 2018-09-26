@@ -41,6 +41,16 @@ $menu-prefix-cls: 'dk-menu';
 
     &-active {
       color: $menu-item-active-color;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 8px;
+        bottom: 8px;
+        left: 0;
+        width: 2px;
+        background-color: $menu-item-active-color;
+      }
     }
 
     &-disabled {
@@ -71,11 +81,9 @@ $menu-prefix-cls: 'dk-menu';
     overflow: hidden;
     transition: height 0.35s ease;
 
+    &-opened,
+    &-exit,
     &-enter-done {
-      height: auto;
-    }
-
-    &-exit {
       height: auto;
     }
 
@@ -93,6 +101,25 @@ $menu-prefix-cls: 'dk-menu';
 
     &-active {
       transform: rotate(-180deg);
+    }
+  }
+}
+
+.#{$menu-prefix-cls}-dark {
+  border-color: $menu-dark-border-color;
+  background: $menu-dark-bg;
+
+  .#{$menu-prefix-cls}-item,
+  .#{$menu-prefix-cls}-submenu-title {
+    color: $menu-dark-item-color;
+
+    &-active {
+      color: $menu-dark-item-active-color;
+    }
+
+    &:hover {
+      background-color: $menu-dark-item-active-bg;
+      color: $menu-dark-item-active-color;
     }
   }
 }

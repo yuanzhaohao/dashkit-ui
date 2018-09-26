@@ -6,16 +6,18 @@ $prefix-cls: 'dk-switch';
 .#{$prefix-cls} {
   position: relative;
   display: inline-block;
-  box-sizing: border-box;
-  height: $switch-height;
   min-width: 44px;
+  height: $switch-height;
+  padding: 0;
+  margin: 0;
   line-height: $switch-height - 2px;
   vertical-align: middle;
   border-radius: 100px;
   border: 1px solid transparent;
   background-color: $switch-bg;
-  user-select: none;
   transition: $switch-transition;
+  user-select: none;
+  box-sizing: border-box;
   cursor: pointer;
 
   &:focus,
@@ -25,6 +27,7 @@ $prefix-cls: 'dk-switch';
   }
 
   &:after {
+    content: '';
     position: absolute;
     width: $switch-height - 4px;
     height: $switch-height - 4px;
@@ -33,14 +36,15 @@ $prefix-cls: 'dk-switch';
     border-radius: 50%;
     background-color: #fff;
     transition: all .2s ease;
-    content: '';
     cursor: pointer;
   }
 
   &-inner {
     display: block;
-    margin-left: 24px;
+    margin-left: $switch-height - 2px;
     margin-right: 6px;
+    padding-left: 4px;
+    padding-right: 4px;
     color: #fff;
     font-size: 12px;
     text-align: center;
@@ -58,12 +62,12 @@ $prefix-cls: 'dk-switch';
 
   &-checked &-inner {
     margin-left: 6px;
-    margin-right: 24px;
+    margin-right: $switch-height - 2px;
   }
 
   &-disabled {
-    cursor: not-allowed;
-    opacity: .4;
+    opacity: $switch-disabled-opacity;
+    pointer-events: none;
   }
 
   &-small {
@@ -79,14 +83,16 @@ $prefix-cls: 'dk-switch';
     &.#{$prefix-cls}-checked {
       .#{$prefix-cls}-inner {
         margin-left: 3px;
-        margin-right: 18px;
+        margin-right: $switch-height-sm - 2px;
       }
     }
   }
 
   &-small &-inner {
-    margin-left: 18px;
+    margin-left: $switch-height-sm - 2px;
     margin-right: 3px;
+    padding-left: 2px;
+    padding-right: 2px;
     font-size: 10px;
   }
 
@@ -102,15 +108,17 @@ $prefix-cls: 'dk-switch';
 
     &.#{$prefix-cls}-checked {
       .#{$prefix-cls}-inner {
-        margin-left: 3px;
-        margin-right: 18px;
+        margin-left: 8px;
+        margin-right: $switch-height-lg - 2px;
       }
     }
   }
 
   &-large &-inner {
-    margin-left: 18px;
-    margin-right: 3px;
+    margin-left: $switch-height-lg - 2px;
+    margin-right: 8px;
+    padding-left: 6px;
+    padding-right: 6px;
     font-size: 14px;
   }
 }
