@@ -7,7 +7,6 @@ import Col from './col';
 export type GridProps = {
   prefixCls?: string;
   className?: string;
-  style?: React.CSSProperties;
   fluid?: boolean;
 };
 
@@ -20,22 +19,13 @@ class Grid extends React.PureComponent<GridProps> {
   };
 
   render() {
-    const {
-      children,
-      prefixCls,
-      style,
-      fluid,
-      className,
-    } = this.props;
+    const { children, prefixCls, fluid, className, ...attributes } = this.props;
     const gridClassName = classNames(prefixCls, {
       [`${prefixCls}-fluid`]: fluid,
     }, className);
 
     return (
-      <div
-        style={style}
-        className={gridClassName}
-      >{children}</div>
+      <div className={gridClassName} {...attributes}>{children}</div>
     );
   }
 }

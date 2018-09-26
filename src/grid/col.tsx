@@ -5,7 +5,6 @@ import { ViewportType, ColKeyType } from './types';
 export type ColProps = {
   prefixCls?: string;
   className?: string;
-  style?: React.CSSProperties;
   xs?: number | boolean;
   sm?: number | boolean;
   md?: number | boolean;
@@ -30,31 +29,10 @@ class Col extends React.PureComponent<ColProps> {
   };
 
   render() {
-    const {
-      children,
-      prefixCls,
-      style,
-      className,
-      first,
-      last,
-    } = this.props;
-    const colKeysClassNames = this.getColClassNames();
-    const rowClassName = classNames(colKeysClassNames, {
-      [`${prefixCls}-first-${first}`]: first !== undefined,
-      [`${prefixCls}-last-${last}`]: last !== undefined,
-    }, className);
-
-    return (
-      <div
-        style={style}
-        className={rowClassName}
-      >{children}</div>
-    );
-  }
-
-  getColClassNames = () => {
     const { props } = this;
-    const { prefixCls } = props;
+    const { children, prefixCls, className, first, last, ...atributes } = this.props;
+
+
     const classMap: { [key: string]: string } = {
       xs: `${prefixCls}-col-xs`,
       sm: `${prefixCls}-col-sm`,
@@ -67,13 +45,25 @@ class Col extends React.PureComponent<ColProps> {
       lgOffset: `${prefixCls}-col-lg-offset`,
       xlOffset: `${prefixCls}-col-xl-offset`,
     };
-
-    return Object.keys(props)
+    const colKeysClassNames = Object.keys(props)
       .filter(key => classMap[key])
-      .map((key: ColKeyType) => isInteger(props[key])
-        ? (classMap[key] + '-' + props[key])
-        : classMap[key]
-      );
+      .map((key: ColKeyType) => {
+        delete atributes[key];
+        if (isInteger(props[key])) {
+          return (classMap[key] + '-' + props[key]);
+        }
+        return classMap[key]
+      });
+
+    const rowClassName = classNames(colKeysClassNames, {
+      [`${prefixCls}-first-${first}`]: first !== undefined,
+      [`${prefixCls}-last-${last}`]: last !== undefined,
+    }, className);
+
+
+    return (
+      <div className={rowClassName} {...atributes}>{children}</div>
+    );
   }
 }
 

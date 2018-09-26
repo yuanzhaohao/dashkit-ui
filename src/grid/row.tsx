@@ -26,23 +26,17 @@ class Row extends React.PureComponent<RowProps> {
   };
 
   render() {
-    const {
-      children,
-      prefixCls,
-      style,
-      className,
-      reverse,
-    } = this.props;
+    const { children, prefixCls, className, reverse, ...attributes } = this.props;
     const rowKeysClassNames = this.getRowClassNames();
     const rowClassName = classNames(`${prefixCls}-row`, rowKeysClassNames, {
-      [`${prefixCls}-reverse`]: reverse,
+      [`${prefixCls}-row-reverse`]: reverse,
     }, className);
 
+    rowKeys.forEach(key => {
+      delete attributes[key];
+    });
     return (
-      <div
-        style={style}
-        className={rowClassName}
-      >{children}</div>
+      <div className={rowClassName} {...attributes}>{children}</div>
     );
   }
 
