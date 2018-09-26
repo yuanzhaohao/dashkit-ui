@@ -32,8 +32,6 @@ class Page extends React.PureComponent<PageProps, PageState> {
     const locale = window.localStorage.getItem('DASHKIT_UI_LOCALE') || 'en-US';
     const dataSource = await import(`../../../docs/${page}/${locale}.md`);
 
-    console.log(dataSource);
-
     this.setState({
       dataSource,
     });
@@ -41,22 +39,18 @@ class Page extends React.PureComponent<PageProps, PageState> {
     const demoElement = document.getElementById('demos');
 
     if (demoElement && dataSource.demos && Object.keys(dataSource.demos)) {
-      const children: any[] = [];
       const demoData = Object.keys(dataSource.demos)
         .map(key => dataSource.demos[key])
         .sort((a, b) => a.meta.order - b.meta.order);
-
-      demoData.forEach((d, key) => {
-        const child = (
+      const children = demoData.map((d, key) => {
+        return (
           <Example
             key={key}
             locale={locale}
             dataSource={d}
           />
-        );
-        children.push(child);
+        )
       });
-
       ReactDOM.render(children, demoElement);
     }
   }

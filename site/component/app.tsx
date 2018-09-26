@@ -12,27 +12,22 @@ const { Content, Footer } = Layout;
 const Index = asyncComponent(() => import('./index'));
 
 const pages = [
-  'grid', 'layout', 'menu', 'button', 'alert', 'message', 'spin', 'icon', 'input',
+  'grid', 'layout', 'menu', 'button', 'alert',
+  'message', 'spin', 'icon', 'input',
   'switch', 'pagination',
-].map(page => {
-  return {
-    page: page,
-    // component: asyncComponent(() => import(`../../docs/${page}/${locale}.md`)),
-  };
-
-})
+]
 
 export default () => (
   <HashRouter>
     <Layout>
-      <CommonSidebar />
+      <CommonSidebar pages={pages} />
       <Layout className="app-layout">
         <CommonHeader />
         <Content className="app-content">
           <Switch>
             <Route exact path="/" component={Index} />
             <Route exact path="/index" component={Index} />
-            {pages.map(({ page }) =>
+            {pages.map(page =>
               <Route key={page} exact path={`/components/${page}`} component={Page} />
             )}
             <Redirect to="/" />
