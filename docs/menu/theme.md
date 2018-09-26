@@ -22,6 +22,7 @@ class MenuDemo extends React.Component {
       <div className="menu-theme">
         <Switch
           className="menu-theme-switch"
+          checked={theme === 'dark'}
           onChange={this.handleSwitchChange}
           checkedChildren="Dark"
           unCheckedChildren="Light"
@@ -52,8 +53,10 @@ class MenuDemo extends React.Component {
     );
   }
 
-  handleSwitchChange = () => {
-
+  handleSwitchChange = (checked) => {
+    this.setState({
+      theme: checked ? 'dark' : 'light',
+    });
   }
 }
 

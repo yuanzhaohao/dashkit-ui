@@ -54,7 +54,6 @@ class Example extends React.PureComponent<ExampleProps, ExampleState> {
   }
 
   onControlClick = () => {
-    console.log('call onControlClick')
     const { showCode } = this.state;
     const newValue = !showCode
     this.setState({
