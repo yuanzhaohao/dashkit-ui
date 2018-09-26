@@ -13,6 +13,7 @@ export type MenuProps = {
   defaultOpeneds?: string[];
   mode?: 'horizontal' | 'vertical',
   theme?: 'dark' | 'light';
+  onSelect?: (index: string) => void;
   onOpen?: (index: string) => void;
 };
 
@@ -52,10 +53,14 @@ class Menu extends React.PureComponent<MenuProps, MenuState> {
       itemHook: Object.assign({
         selectItem: (index: string) => {
           const { activeIndex } = this.state;
+          const { onSelect } = this.props;
           if (index !== activeIndex) {
             this.setState({
               activeIndex: index,
             });
+            if (typeof onSelect === 'function') {
+              onSelect(index);
+            }
           }
         }
       }, defaultContext),
@@ -63,9 +68,14 @@ class Menu extends React.PureComponent<MenuProps, MenuState> {
       subMenuHook: Object.assign({
         addOpenedMenu: (index: string) => {
           const { openedMenus } = this.state;
+          const { onOpen } = this.props;
           this.setState({
             openedMenus: Array.from(new Set([...openedMenus, index])),
           });
+
+          if (typeof onOpen === 'function') {
+            onOpen(index);
+          }
         },
 
         removeOpenedMenu: (index: string) => {

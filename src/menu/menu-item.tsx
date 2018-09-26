@@ -49,10 +49,10 @@ class MenuItem extends React.Component<MenuItemProps> {
   handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-
-    if (this.context.itemHook) {
+    const { itemHook } = this.context;
+    if (itemHook) {
       const { index } = this.props;
-      this.context.itemHook.selectItem(index);
+      itemHook.selectItem(index);
     }
   }
 

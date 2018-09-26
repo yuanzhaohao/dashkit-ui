@@ -17,7 +17,13 @@ class MenuDemo extends React.Component {
   render() {
     const { theme } = this.props;
     return (
-      <Menu defaultActive="Dashboard" defaultOpeneds={['Layouts', 'Menu']} theme={theme}>
+      <Menu
+        defaultActive="Dashboard"
+        defaultOpeneds={['Layouts', 'Menu']}
+        theme={theme}
+        onSelect={this.onMenuSelect}
+        onOpen={this.onSubMenuOpen}
+      >
         <Item icon="home" index="Dashboard">Dashboard</Item>
         <Item icon="clipboard" index="Getting started">Getting started</Item>
         <SubMenu icon="book-open" title="Components" index="Components">
@@ -39,6 +45,14 @@ class MenuDemo extends React.Component {
         </SubMenu>
       </Menu>
     );
+  }
+
+  onMenuSelect = (index) => {
+    console.log(`item selected: ${index}`);
+  }
+
+  onSubMenuOpen = (index) => {
+    console.log(`submunu opened: ${index}`);
   }
 }
 

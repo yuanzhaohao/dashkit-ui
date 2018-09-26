@@ -34,22 +34,27 @@ $menu-prefix-cls: 'dk-menu';
     color: $menu-item-color;
     align-items: center;
     cursor: pointer;
-    transition: all .2s ease-in-out;
+    transition: background-color .2s ease-in-out;
 
     &:hover {
       background-color: $menu-item-active-bg;
     }
 
+    &:before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      bottom: 8px;
+      left: 0;
+      width: 2px;
+      background-color: transparent;
+      transition: background-color .2s ease-in-out;
+    }
+
     &-active {
       color: $menu-item-active-color;
 
-      &::before {
-        content: '';
-        position: absolute;
-        top: 8px;
-        bottom: 8px;
-        left: 0;
-        width: 2px;
+      &:before {
         background-color: $menu-item-active-color;
       }
     }
