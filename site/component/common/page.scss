@@ -22,6 +22,10 @@
 .layout-list{
   text-align: center;
 
+  > .dk-layout {
+    margin-bottom: 30px;
+  }
+
   .dk-layout-header,
   .dk-layout-footer {
     background: #2c7be5;
@@ -39,6 +43,9 @@
 
   .dk-layout-sidebar {
     background: #06C;
+    color: #fff;
+    min-height: 120px;
+    line-height: 120px;
   }
 }
 

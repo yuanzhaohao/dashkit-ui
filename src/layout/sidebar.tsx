@@ -40,7 +40,7 @@ class Sidebar extends React.Component<SidebarProps> {
   render() {
     const { className, children, ...attributes } = this.props;
     const layoutClassName = classNames(
-      'dashkit-layout-sidebar',
+      'dk-layout-sidebar',
       className,
     )
     return (

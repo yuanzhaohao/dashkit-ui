@@ -10,7 +10,7 @@ subtitle:
 
 ```js
 import { Layout } from 'dashkit-ui';
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Footer, Sidebar, Content } = Layout;
 
 ReactDOM.render(
   <div className="layout-list">
@@ -18,6 +18,33 @@ ReactDOM.render(
       <Header>Header</Header>
       <Content>Content</Content>
       <Footer>Footer</Footer>
+    </Layout>
+
+    <Layout>
+      <Header>Header</Header>
+      <Layout>
+        <Sidebar>Sidebar</Sidebar>
+        <Content>Content</Content>
+      </Layout>
+      <Footer>Footer</Footer>
+    </Layout>
+
+    <Layout>
+      <Header>Header</Header>
+      <Layout>
+        <Content>Content</Content>
+        <Sidebar>Sidebar</Sidebar>
+      </Layout>
+      <Footer>Footer</Footer>
+    </Layout>
+
+    <Layout>
+      <Sidebar>Sidebar</Sidebar>
+      <Layout>
+        <Header>Header</Header>
+        <Content>Content</Content>
+        <Footer>Footer</Footer>
+      </Layout>
     </Layout>
   </div>,
   mountNode
