@@ -42,6 +42,7 @@ class checkbox extends React.Component<SwitchProps, SwitchState> {
       },
       className,
     );
+    console.log(children, checked);
     return (
       <label
         className={checkboxClassName}
