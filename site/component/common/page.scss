@@ -17,6 +17,31 @@
   margin-bottom: 20px;
 }
 
+// Layout
+//
+.layout-list{
+  text-align: center;
+
+  .dk-layout-header,
+  .dk-layout-footer {
+    background: #2c7be5;
+    color: #fff;
+    height: 64px;
+    line-height: 64px;
+  }
+
+  .dk-layout-content {
+    background: #036;
+    color: #fff;
+    min-height: 120px;
+    line-height: 120px;
+  }
+
+  .dk-layout-sidebar {
+    background: #06C;
+  }
+}
+
 // Grid
 //
 @mixin grid-make-item() {
@@ -171,5 +196,13 @@
 
   &-switch {
     margin-bottom: 20px;
+  }
+}
+
+// Pagination
+//
+.pagination-wrapper {
+  .dk-pagination {
+    margin-bottom: 10px;
   }
 }

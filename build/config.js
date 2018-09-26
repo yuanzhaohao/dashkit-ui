@@ -31,6 +31,6 @@ module.exports = {
   autoOpen: true,
   useEslint: false,
   visualizer: true,
-  extractStyle: true,
+  extractStyle: false,
   mockData: true
 }

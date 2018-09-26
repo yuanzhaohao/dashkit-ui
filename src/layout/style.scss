@@ -1,36 +1,38 @@
-.dashkit-layout {
+@import '../style/functions';
+@import '../style/theme';
+@import '../style/mixins';
+
+$layout-prefix-cls: 'dk-layout';
+
+.#{$layout-prefix-cls} {
   display: flex;
   flex-direction: column;
   flex: auto;
   background-color: #fff;
 
-  * {
-    box-sizing: border-box;
+  &-has-sidebar {
+    flex-direction: row;
   }
-}
 
-.dashkit-layout-has-sidebar {
-  flex-direction: row;
-}
+  &-header {
+    flex: 0 0 auto;
+    background-color: #fff;
+    height: 66px;
+    line-height: 66px;
+  }
 
-.dashkit-layout-header {
-  flex: 0 0 auto;
-  background-color: #fff;
-  height: 66px;
-  line-height: 66px;
-}
+  &-content {
+    flex: auto;
+  }
 
-.dashkit-layout-content {
-  flex: auto;
-}
+  &-footer {
+    flex: 0 0 auto;
+    background-color: #fff;
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 14px;
+  }
 
-.dashkit-layout-footer {
-  flex: 0 0 auto;
-  background-color: #fff;
-  color: rgba(0, 0, 0, 0.65);
-  font-size: 14px;
-}
-
-.dashkit-layout-sidebar {
-  width: 250px;
+  &-sidebar {
+    width: 250px;
+  }
 }

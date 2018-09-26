@@ -2,9 +2,9 @@
 @import '../style/theme';
 @import '../style/mixins';
 
-$prefix-cls: 'dk-grid';
+$grid-prefix-cls: 'dk-grid';
 
-.#{$prefix-cls} {
+.#{$grid-prefix-cls} {
   margin-right: auto;
   margin-left: auto;
 
@@ -34,10 +34,10 @@ $prefix-cls: 'dk-grid';
   }
 }
 
-@include grid-make-col($prefix-cls, xs);
+@include grid-make-col($grid-prefix-cls, xs);
 
 @each $name, $breakpoint in $grid-breakpoints {
   @media only screen and (min-width: $breakpoint) {
-    @include grid-make-col($prefix-cls, $name);
+    @include grid-make-col($grid-prefix-cls, $name);
   }
 }

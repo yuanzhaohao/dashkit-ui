@@ -5,6 +5,7 @@ import * as PropTypes from 'prop-types';
 import Sidebar from './sidebar';
 
 export type LayoutProps = {
+  prefixCls?: string;
   className?: string;
   hasSidebar?: boolean;
 };
@@ -12,6 +13,7 @@ export type LayoutState = {
   sidebars?: string[];
 };
 export type BasicProps = {
+  prefixCls?: string;
   className?: string;
 };
 
@@ -22,6 +24,10 @@ class Layout extends React.Component<LayoutProps, LayoutState> {
   static Sidebar: any;
   static childContextTypes = {
     sidebarHook: PropTypes.object,
+  };
+  static defaultProps = {
+    prefixCls: 'dk-layout',
+    hasSidebar: false,
   };
   state = {
     sidebars: [],
@@ -43,35 +49,38 @@ class Layout extends React.Component<LayoutProps, LayoutState> {
     };
   }
   render() {
-    const { className, children, hasSidebar, ...attributes } = this.props;
+    const { prefixCls, className, children, hasSidebar } = this.props;
     const layoutClassName = classNames(
-      'dashkit-layout',
       {
-        'dashkit-layout-has-sidebar': hasSidebar || this.state.sidebars.length > 0
+        [`${prefixCls}`]: true,
+        [`${prefixCls}-has-sidebar`]: hasSidebar || this.state.sidebars.length > 0
       },
       className,
     )
     return (
-      <div {...attributes} className={layoutClassName}>{children}</div>
+      <div className={layoutClassName}>{children}</div>
     );
   }
 }
 
-function generator(classname: string) {
+function generator(cls: string) {
   return class Basic extends React.Component<BasicProps> {
+    static defaultProps = {
+      prefixCls: 'dk-layout',
+    };
     render() {
-      const { className, children, ...attributes } = this.props;
-      const basicClassName = classNames(classname, className);
+      const { prefixCls, className, children } = this.props;
+      const basicClassName = classNames(`${prefixCls}-${cls}`, className);
       return (
-        <div {...attributes} className={basicClassName}>{children}</div>
+        <div className={basicClassName}>{children}</div>
       );
     }
   }
 }
 
-const Header = generator('dashkit-layout-header');
-const Footer = generator('dashkit-layout-footer');
-const Content = generator('dashkit-layout-content');
+const Header = generator('header');
+const Footer = generator('footer');
+const Content = generator('content');
 
 Layout.Header = Header;
 Layout.Footer = Footer;
