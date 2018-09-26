@@ -28,7 +28,7 @@ function fixControlledValue<T>(value: T) {
 }
 
 class Input extends React.Component<InputProps> {
-  public static defaultProps = {
+  static defaultProps = {
     prefixCls: 'dashkit-input',
     size: 'default' as InputSize,
     type: 'text',
@@ -41,7 +41,7 @@ class Input extends React.Component<InputProps> {
     };
   }
 
-  public render() {
+  render() {
     const {
       children,
       className,
@@ -71,14 +71,14 @@ class Input extends React.Component<InputProps> {
         className={inputClassName}
         readOnly={disabled}
         type={inputType}
-        onChange={!disabled ? this.handleChange : undefined}
-        onKeyUp={!disabled ? this.handleKeyUp : undefined}
-        onBlur={!disabled ? this.handleBlur : undefined}
+        onChange={this.handleChange}
+        onKeyUp={this.handleKeyUp}
+        onBlur={this.handleBlur}
       />
     );
   }
 
-  private handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { onChange } = this.props;
     const { value } = event.target;
 
@@ -90,7 +90,8 @@ class Input extends React.Component<InputProps> {
       onChange(value);
     }
   }
-  private handleBlur = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+  handleBlur = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     const { onBlur } = this.props;
     if (onBlur) {
@@ -101,14 +102,14 @@ class Input extends React.Component<InputProps> {
     }
   }
 
-  private handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const { onKeyUp } = this.props;
     if (onKeyUp) {
       onKeyUp(event);
     }
   }
 
-  private invalidNumber = (value: string) => {
+  invalidNumber = (value: string) => {
     const { digits, type } = this.props;
     if (type !== 'number') {
       return false;

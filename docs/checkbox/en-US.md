@@ -1,11 +1,11 @@
-# Button
+# Checkbox
 
 Buttons for actions in forms, dialogs, and more with support for multiple sizes, states, and more.
 
 <Demos />
 
 ## API
-### Button
+### Checkbox
 Property    | Description    | Type      | Default   |
 |---------- |-------- |---------- |-------------  |-------- |
 | className | className of the component | - | - |
@@ -18,7 +18,7 @@ Property    | Description    | Type      | Default   |
 | icon  | button icon, see `Icon` component | string  |  -  |
 | onClick | `click` event handler | - | - |
 
-### Button.Group
+### Checkbox.Group
 Property    | Description    | Type      | Default   |
 |---------- |-------- |---------- |-------------  |-------- |
 | className | className of the component | - | - |

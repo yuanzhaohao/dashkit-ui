@@ -227,6 +227,12 @@ $btn-border-radius-sm:        $border-radius-sm !default;
 
 $btn-transition:              color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
 
+// Checkbox
+//
+$checkbox-margin-right:       24px !default;
+$checkbox-active-color:       $primary !default;
+$checkbox-border-radius:      2px !default;
+
 // Switch
 //
 $switch-height:               22px !default;
@@ -368,3 +374,4 @@ $menu-dark-border-color:            $gray-900 !default;
 $menu-dark-item-color:              #6e84a3 !default;
 $menu-dark-item-active-color:       $white !default;
 $menu-dark-item-active-bg:          mix($black, $primary, 75%) !default;
+

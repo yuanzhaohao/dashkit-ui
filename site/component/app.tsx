@@ -12,9 +12,8 @@ const { Content, Footer } = Layout;
 const Index = asyncComponent(() => import('./index'));
 
 const pages = [
-  'grid', 'layout', 'menu', 'button', 'alert',
-  'message', 'spin', 'icon', 'input',
-  'switch', 'pagination',
+  'grid', 'layout', 'menu', 'button', 'checkbox', 'switch', 'alert',
+  'message', 'spin', 'icon', 'input', 'pagination',
 ]
 
 export default () => (

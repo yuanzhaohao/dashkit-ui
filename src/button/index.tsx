@@ -13,7 +13,6 @@ export type ButtonProps = {
   outline?: boolean;
   round?: boolean;
   disabled?: boolean;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 export type ButtonState = {
   spinning?: boolean;
@@ -39,7 +38,6 @@ class Button extends React.PureComponent<ButtonProps, ButtonState> {
       size,
       className,
       disabled,
-      onClick,
       ...attibutes
     } = this.props;
     const buttonClassName = classNames(
@@ -57,8 +55,7 @@ class Button extends React.PureComponent<ButtonProps, ButtonState> {
       <button
         {...attibutes}
         className={buttonClassName}
-        disabled={!!disabled}
-        onClick={!!disabled ? undefined : onClick}
+        disabled={disabled}
       >
         {children}
       </button>

@@ -1,0 +1,23 @@
+@import '../style/functions';
+@import '../style/theme';
+@import '../style/mixins';
+
+$checkbox-prefix-cls: 'dk-checkbox';
+
+.#{$checkbox-prefix-cls} {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  margin-right: $checkbox-margin-right;
+  vertical-align: middle;
+  cursor: pointer;
+
+  input[type=checkbox],
+  input[type=radio] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    clip: rect(0, 0, 0, 0);
+  }
+}

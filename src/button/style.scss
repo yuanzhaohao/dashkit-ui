@@ -2,9 +2,9 @@
 @import '../style/theme';
 @import '../style/mixins';
 
-$prefix-cls: 'dk-btn';
+$btn-prefix-cls: 'dk-btn';
 
-.#{$prefix-cls} {
+.#{$btn-prefix-cls} {
   display: inline-block;
   font-weight: $btn-font-weight;
   text-align: center;
@@ -13,26 +13,28 @@ $prefix-cls: 'dk-btn';
   user-select: none;
   border: $btn-border-width solid transparent;
   transition: $btn-transition;
-  @include button-size(
-    $btn-height,
-    $btn-padding-x,
-    $font-size-base,
-    $btn-line-height,
-    $btn-border-radius
-  );
+  @include button-size($btn-height,
+  $btn-padding-x,
+  $font-size-base,
+  $btn-line-height,
+  $btn-border-radius);
+
   @include hover-focus {
     text-decoration: none;
   }
+
   &:focus,
   &.focus {
     outline: 0;
     box-shadow: $btn-focus-box-shadow;
   }
+
   &.disabled,
   &:disabled {
     opacity: $btn-disabled-opacity;
     pointer-events: none;
   }
+
   &:not(:disabled):not(.disabled) {
     cursor: pointer;
   }
@@ -92,42 +94,40 @@ $prefix-cls: 'dk-btn';
   // Button Sizes
   //
   &-large {
-    @include button-size(
-      $btn-height-lg,
-      $btn-padding-x-lg,
-      $font-size-lg,
-      $btn-line-height-lg,
-      $btn-border-radius-lg
-    );
+    @include button-size($btn-height-lg,
+    $btn-padding-x-lg,
+    $font-size-lg,
+    $btn-line-height-lg,
+    $btn-border-radius-lg);
 
-    &.#{$prefix-cls}-rounded {
+    &.#{$btn-prefix-cls}-rounded {
       border-radius: $btn-height-lg / 2;
     }
   }
 
   &-small {
-    @include button-size(
-      $btn-height-sm,
-      $btn-padding-x-sm,
-      $font-size-sm,
-      $btn-line-height-sm,
-      $btn-border-radius-sm
-    );
+    @include button-size($btn-height-sm,
+    $btn-padding-x-sm,
+    $font-size-sm,
+    $btn-line-height-sm,
+    $btn-border-radius-sm);
 
-    &.#{$prefix-cls}-rounded {
+    &.#{$btn-prefix-cls}-rounded {
       border-radius: $btn-height-sm / 2;
     }
   }
 
   // Alternate buttons
   //
-  @each $type, $color in $btn-type-colors {
+  @each $type,
+  $color in $btn-type-colors {
     &-#{$type} {
       @include button-variant($color);
     }
   }
 
-  @each $type, $color in $btn-type-colors {
+  @each $type,
+  $color in $btn-type-colors {
     &-outline-#{$type} {
       @include button-outline-variant($color);
     }
@@ -135,8 +135,7 @@ $prefix-cls: 'dk-btn';
 }
 
 // Future-proof disabling of clicks on `<a>` elements
-a.#{$prefix-cls}.disabled,
-fieldset:disabled a.#{$prefix-cls} {
+a.#{$btn-prefix-cls}.disabled,
+fieldset:disabled a.#{$btn-prefix-cls} {
   pointer-events: none;
 }
-

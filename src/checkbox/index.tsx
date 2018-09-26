@@ -1,31 +1,26 @@
 import './style.scss';
 
-import * as classNames from 'classnames';
 import * as React from 'react';
+import * as classNames from 'classnames';
 
-export type SwitchSize = 'small' | 'default' | 'large';
 
 export type SwitchProps = {
+  prefixCls?: string;
   className?: string;
   style?: React.CSSProperties;
-  prefixCls?: string;
-  size?: SwitchSize;
   checked?: boolean;
   disabled?: boolean;
   defaultChecked?: boolean;
-  checkedChildren?: React.ReactNode;
-  unCheckedChildren?: React.ReactNode;
   onChange?: (checked: boolean) => void;
 };
 
 export interface SwitchState {
   checked?: boolean;
 }
-class Switch extends React.Component<SwitchProps, SwitchState> {
+class checkbox extends React.Component<SwitchProps, SwitchState> {
   static defaultProps = {
     disabled: false,
-    prefixCls: 'dk-switch',
-    size: 'default' as SwitchSize,
+    prefixCls: 'dk-checkbox',
   };
 
   constructor(props: SwitchProps) {
@@ -37,36 +32,24 @@ class Switch extends React.Component<SwitchProps, SwitchState> {
   }
 
   render() {
-    const {
-      className,
-      style,
-      checkedChildren,
-      unCheckedChildren,
-      disabled,
-      size,
-      prefixCls,
-    } = this.props;
+    const { children, className, style, prefixCls, disabled } = this.props;
     const checked = this.getChecked();
-    const switchClassName = classNames(
+    const checkboxClassName = classNames(
       prefixCls,
       {
         [`${prefixCls}-checked`]: checked,
         [`${prefixCls}-disabled`]: disabled,
-        [`${prefixCls}-small`]: size === 'small',
-        [`${prefixCls}-large`]: size === 'large',
       },
       className,
     );
     return (
-      <button
-        className={switchClassName}
+      <label
+        className={checkboxClassName}
         onClick={this.handleChange}
         style={style}
       >
-        <span className={`${prefixCls}-inner`}>
-          {checked ? checkedChildren : unCheckedChildren}
-        </span>
-      </button>
+        {children}
+      </label>
     );
   }
 
@@ -76,13 +59,13 @@ class Switch extends React.Component<SwitchProps, SwitchState> {
 
   handleChange = () => {
     const { onChange } = this.props;
-    const checked = !this.getChecked();
+    const checked = !this.state.checked;
     this.setState({
       checked,
     });
-    if (typeof onChange === 'function') {
+    if (onChange) {
       onChange(checked);
     }
   }
 }
-export default Switch;
+export default checkbox;
