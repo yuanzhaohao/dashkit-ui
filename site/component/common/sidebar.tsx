@@ -16,16 +16,17 @@ class AppSidebar extends React.PureComponent<SidebarProps> {
   const { pages } = this.props;
     return (
       <Sidebar className="sidebar">
-        <div className="sidebar-logo">
-          <LogoSvg className="sidebar-logo-img" />
-          <div className="sidebar-logo-title">Dashkit UI</div>
-        </div>
         <Menu
           className="sidebar-menu"
           defaultActive="Dashboard"
           defaultOpeneds={['Components']}
           onSelect={this.onMenuSelect}
         >
+          <div className="sidebar-logo">
+            <LogoSvg className="sidebar-logo-img" />
+            <div className="sidebar-logo-title">Dashkit UI</div>
+          </div>
+
           <Item icon="home" index="Dashboard">Dashboard</Item>
           <SubMenu icon="book-open" title="Components" index="Components">
             {pages && pages.length
@@ -42,7 +43,7 @@ class AppSidebar extends React.PureComponent<SidebarProps> {
 
   onMenuSelect = (index: string) => {
     const { pages, location, history } = this.props;
-    const page = pages.indexOf(index) !== -1 ? index : `/components/${index}`;
+    const page = pages.indexOf(index) === -1 ? index : `/components/${index}`;
 
     if (location.pathname !== page) {
       history.push(page);
