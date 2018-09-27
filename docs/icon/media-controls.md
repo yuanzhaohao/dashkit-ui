@@ -1,5 +1,5 @@
 ---
-order: 1
+order: 2
 title:
   zh-CN: 媒体
   en-US: Media
@@ -9,32 +9,15 @@ subtitle:
 ---
 
 ```js
-import { Icon, Grid } from 'dashkit-ui';
-const { Row, Col }  = Grid;
+import { Icon } from 'dashkit-ui';
 
 class IconList extends React.Component {
   render() {
-    const media = [
-    'fast-forward',
-    'pause-circle',
-    'pause',
-    'play-circle',
-    'play',
-    'repeat',
-    'rewind',
-    'shuffle',
-    'skip-back',
-    'skip-forward',
-    'stop-circle',
-    'volume-1',
-    'volume-2',
-    'volume-x',
-    'volume',
-  ];
+    const dataSource = Icon.types['media-controls'];
 
     return (
       <div className="icon-list clearfix">
-        {media.map((name, key) =>
+        {dataSource.map((name, key) =>
           <div className="icon-item-wrapper" key={key}>
             <div className="icon-item">
               <Icon type={name} />
