@@ -152,22 +152,20 @@
   cursor: pointer;
   transition: all .2s;
 
-  > p {
+  > span {
+    display: block;
     margin-top: 8px;
-    margin-bottom: 0;
-    word-wrap: break-word;
     text-align: center;
     font-size: 12px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   &:hover {
     color: #2c7be5;
     background-color: #f9fbfd;
     box-shadow: 0 0 8px 0 rgba(232, 237, 250, .6), 0 2px 4px 0 rgba(232, 237, 250, .5);
-
-    > p {
-      color: #2c7be5;
-    }
   }
 }
 

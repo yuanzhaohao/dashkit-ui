@@ -16,7 +16,7 @@ ReactDOM.render(
     <div className="icon-item-wrapper">
       <div className="icon-item">
         <Icon type="home" />
-        <p>home</p>
+        <span>home</span>
       </div>
     </div>
   </div>,
