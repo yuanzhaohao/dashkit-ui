@@ -22,7 +22,7 @@ class IconList extends React.Component {
           <div className="icon-item-wrapper" key={key}>
             <div className="icon-item">
               <Icon type={name} />
-              <span>{name}</span>
+              <p>{name}</p>
             </div>
           </div>
         )}
