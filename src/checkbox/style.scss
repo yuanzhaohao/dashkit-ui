@@ -13,11 +13,93 @@ $checkbox-prefix-cls: 'dk-checkbox';
   vertical-align: middle;
   cursor: pointer;
 
-  input[type=checkbox],
-  input[type=radio] {
+  &-input {
+    outline: none;
     position: absolute;
-    left: 0;
-    top: 0;
-    clip: rect(0, 0, 0, 0);
+    width: 0;
+    height: 0;
+    margin: 0;
+    z-index: -1;
+    opacity: 0;
+  }
+
+  &-indicator {
+    position: relative;
+    display: inline-block;
+    box-sizing: content-box;
+    width: $checkbox-size;
+    height: $checkbox-size;
+    overflow: hidden;
+    border: 1px solid $border-color;
+    border-radius: $checkbox-border-radius;
+    vertical-align: middle;
+    line-height: 1;
+    white-space: nowrap;
+    transition: $checkbox-indicator-transtion;
+
+    & + span {
+      padding-left: 7px;
+      line-height: 18px;
+      vertical-align: middle;
+    }
+
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      z-index: 10;
+      top: 20%;
+      left: 2px;
+      height: 35%;
+      width: $checkbox-size - 4;
+      border: 2px solid #fff;
+      border-top: 0;
+      border-right: 0;
+      transition: transform .15s ease-in .05s;
+      transform-origin: center;
+      transform: rotate(-45deg) scaleY(0);
+    }
+
+
+    &:hover {
+      border-color: $checkbox-active-color;
+    }
+  }
+
+  &-checked &-indicator {
+    border-color: $checkbox-active-color;
+    background-color: $checkbox-active-color;
+
+    &:after {
+      transform: rotate(-45deg) scaleY(1);
+    }
+  }
+
+  &-disabled {
+    pointer-events: none;
+  }
+
+  &-indeterminate &-indicator {
+    border-color: $checkbox-active-color;
+    background: $checkbox-active-color;
+
+    &:after {
+      border-left-width: 0;
+      border-color: #fff;
+      transform: rotate(0deg) scaleY(1);
+    }
+  }
+
+  &-disabled,
+  &-disabled:hover,
+  &-disabled &-checked {
+    .#{$checkbox-prefix-cls}-indicator {
+      border-color: $gray-500;
+      background-color: $input-disabled-bg;
+
+      &:after {
+        border-color: $gray-500;
+      }
+    }
   }
 }

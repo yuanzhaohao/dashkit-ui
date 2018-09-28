@@ -4,15 +4,15 @@ title:
   zh-CN: 基本
   en-US: Basic
 subtitle:
-  zh-CN: 基本用法，可以用`type`、`outline`、 `round` 和 `circle`来定义button的样式。
-  en-US: Use `type`, `outline`, `round` and `circle` to define Button's style.
+  zh-CN: 基本用法，可以用`defaultChecked`来定义checkbox默认的值。
+  en-US: Use `defaultChecked` to define Checkbox's value.
 ---
 
 ```js
 import { Checkbox } from 'dashkit-ui';
 
 ReactDOM.render(
-  <Checkbox>Option</Checkbox>,
+  <Checkbox defaultChecked>Option</Checkbox>,
   mountNode
 );
 ```

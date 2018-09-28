@@ -9,14 +9,11 @@ Buttons for actions in forms, dialogs, and more with support for multiple sizes,
 Property    | Description    | Type      | Default   |
 |---------- |-------- |---------- |-------------  |-------- |
 | className | className of the component | - | - |
-| size     | button size, can be set to `small` `large` or omitted   | string  | default  |
-| type     | button type, can be set to `primary` `success` `warning` `danger` `info` `link` or ommited   | string |  default   |
-| outline   | determine whether it's a outline button   | boolean | false   |
-| round     | determine whether it's a round button   | boolean | false   |
-| disabled  | disable the button    | boolean | false   |
-| loading   | determine whether it's loading   | boolean | false  |
-| icon  | button icon, see `Icon` component | string  |  -  |
-| onClick | `click` event handler | - | - |
+| style | style of the component | - | - |
+| disabled  | disable the checkbox   | boolean | false   |
+| checked  | value of checkbox | boolean  |  -  |
+| defaultChecked  | default value | boolean  |  -  |
+| onChange | `change` event handler | `(event: React.ChangeEvent<HTMLInputElement>) => void` | - |
 
 ### Checkbox.Group
 Property    | Description    | Type      | Default   |
@@ -24,5 +21,5 @@ Property    | Description    | Type      | Default   |
 | className | className of the component | - | - |
 | defaultValue | Default selected value  | -   | - |
 | size      | button size, can be set to `small` `large` or omitted   | string  | default  |
-| onChange  | `change` event handler | `Function(e: event)` | - |
+| onChange  | `change` event handler | `(event: React.ChangeEvent<HTMLInputElement>) => void` | - |
 
