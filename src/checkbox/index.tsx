@@ -19,7 +19,6 @@ export interface CheckboxState {
   checked?: boolean;
 }
 class Checkbox extends React.PureComponent<CheckboxProps, CheckboxState> {
-  id: string;
   static defaultProps = {
     disabled: false,
     prefixCls: 'dk-checkbox',
@@ -33,7 +32,6 @@ class Checkbox extends React.PureComponent<CheckboxProps, CheckboxState> {
     this.state = {
       checked,
     };
-    this.id = `toggle_${Math.random().toString().replace(/0\./, '')}`
   }
 
   render() {
