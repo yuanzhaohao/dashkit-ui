@@ -2,7 +2,7 @@ import './style.scss';
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import * as classNames from 'classnames';
-import MenuItem from './menu-item';
+import MenuItem from './item';
 import SubMenu from './sub-menu';
 
 export type MenuProps = {

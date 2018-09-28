@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { TransitionGroup } from 'react-transition-group';
-import MessageItem from './messageItem';
+import MessageItem from './item';
 import { MessageProps, MessageState, MessageItemProps } from './types';
 
 class Message extends React.PureComponent<MessageProps, MessageState> {

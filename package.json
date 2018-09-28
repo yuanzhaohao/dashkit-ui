@@ -25,6 +25,7 @@
   "homepage": "https://github.com/yuanzhaohao/dashkit-ui#readme",
   "dependencies": {
     "classnames": "^2.2.5",
+    "create-react-context": "^0.2.3",
     "prop-types": "^15.6.2",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
