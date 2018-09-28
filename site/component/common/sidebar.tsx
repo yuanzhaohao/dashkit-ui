@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Layout, Menu } from '../../../src';
-// @ts-ignore
 import LogoSvg from '../../assets/logo.svg';
 import './sidebar.scss';
 const { Sidebar } = Layout;

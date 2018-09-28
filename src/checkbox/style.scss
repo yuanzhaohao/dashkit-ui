@@ -35,7 +35,8 @@ $checkbox-prefix-cls: 'dk-checkbox';
     vertical-align: middle;
     line-height: 1;
     white-space: nowrap;
-    transition: $checkbox-indicator-transtion;
+    // transition: $checkbox-indicator-transtion;
+    transition: all .3s;
 
     & + span {
       padding-left: 7px;
@@ -55,9 +56,10 @@ $checkbox-prefix-cls: 'dk-checkbox';
       border: 2px solid #fff;
       border-top: 0;
       border-right: 0;
-      transition: transform .15s ease-in .05s;
-      transform-origin: center;
-      transform: rotate(-45deg) scaleY(0);
+      transition: all .1s $ease-in-back, opacity .1s;
+      // transform-origin: center;
+      transform: rotate(-45deg);
+      opacity: 0;
     }
 
 
@@ -71,7 +73,8 @@ $checkbox-prefix-cls: 'dk-checkbox';
     background-color: $checkbox-active-color;
 
     &:after {
-      transform: rotate(-45deg) scaleY(1);
+      transition: all .2s $ease-out-back, opacity .1s;
+      opacity: 1;
     }
   }
 
@@ -86,7 +89,8 @@ $checkbox-prefix-cls: 'dk-checkbox';
     &:after {
       border-left-width: 0;
       border-color: #fff;
-      transform: rotate(0deg) scaleY(1);
+      transform: rotate(0deg);
+      opacity: 1;
     }
   }
 

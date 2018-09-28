@@ -11,8 +11,12 @@ subtitle:
 ```js
 import { Checkbox } from 'dashkit-ui';
 
+function onChange(e) {
+  console.log(`change to ${e.target.checked}`)
+}
+
 ReactDOM.render(
-  <Checkbox defaultChecked>Option</Checkbox>,
+  <Checkbox defaultChecked onChange={onChange}>Option</Checkbox>,
   mountNode
 );
 ```
