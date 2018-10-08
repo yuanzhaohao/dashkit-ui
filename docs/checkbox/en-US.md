@@ -20,6 +20,7 @@ Property    | Description    | Type      | Default   |
 |---------- |-------- |---------- |-------------  |-------- |
 | className | className of the component | - | - |
 | defaultValue | Default selected value  | -   | - |
-| size      | button size, can be set to `small` `large` or omitted   | string  | default  |
-| onChange  | `change` event handler | `(event: React.ChangeEvent<HTMLInputElement>) => void` | - |
+| min       | Minimum   | number  | -  |
+| max       | Maximum   | number  | -  |
+| onChange  | `change` event handler | `(options: string[]) => void` | - |
 

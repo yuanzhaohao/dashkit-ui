@@ -73,14 +73,20 @@ class Checkbox extends React.PureComponent<CheckboxProps, CheckboxState> {
   }
 
   handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { onChange, label } = this.props;
+    const { onChange } = this.props;
     const { checked } = event.target;
     const { groupHook } = this.context;
 
-    // if (groupHook) {
-    //   console.log(groupHook)
-    //   groupHook.handleChange(checked, label);
-    // }
+    if (groupHook) {
+      const length = groupHook.state.options.length + (checked ? 1 : -1);
+      if (groupHook.props.min !== undefined && length < groupHook.props.min) {
+        return;
+      }
+
+      if (groupHook.props.max !== undefined && length > groupHook.props.max) {
+        return;
+      }
+    }
 
     this.setState({
       checked,

@@ -54,7 +54,7 @@ class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGrou
   }
 
   render() {
-    const { className, style, prefixCls } = this.props;
+    const { className, style, prefixCls, children } = this.props;
     const { options } = this.state;
     const groupClassName = classNames(
       {
@@ -63,12 +63,12 @@ class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGrou
       className,
     );
 
-    const children = React.Children.map(this.props.children, (child: React.ReactChild, index) => {
+    const realChildren = React.Children.map(children, (child: React.ReactElement<CheckboxProps>, index) => {
       if (!child || child.type.elementType !== 'Checkbox') {
         return null;
       }
 
-      const props: CheckboxProps = child.props;
+      const { props } = child;
       const checked = options.indexOf(props.label) !== -1;
 
       return React.cloneElement(
@@ -83,7 +83,7 @@ class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGrou
 
     return (
       <div className={groupClassName} style={style}>
-        {children}
+        {realChildren}
       </div>
     );
   }
@@ -97,7 +97,6 @@ class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGrou
 
   handleChange = (checked: boolean, label: string) => {
     const options = this.getOptions();
-    console.log(options)
     const { onChange } = this.props;
     const newOptions = !checked
       ? Array.from(new Set([...options, label]))

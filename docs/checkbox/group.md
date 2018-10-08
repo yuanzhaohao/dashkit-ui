@@ -15,7 +15,7 @@ const cityOptions = ['Shanghai', 'Beijing', 'Guangzhou', 'Shenzhen'];
 
 class App extends React.Component {
   state = {
-    checkedCities: ['Shanghai', 'Beijing'],
+    checkedCities: cityOptions.slice(0, 2),
     indeterminate: true,
     checkAll: false,
   };

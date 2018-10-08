@@ -1,7 +1,7 @@
 import './style.scss';
-import Item from './checkbox';
+import Checkbox from './checkbox';
 import Group from './group';
 
-Item.Group = Group;
+Checkbox.Group = Group;
 
-export default Item;
+export default Checkbox;
