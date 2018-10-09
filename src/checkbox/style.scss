@@ -35,8 +35,8 @@ $checkbox-prefix-cls: 'dk-checkbox';
     vertical-align: middle;
     line-height: 1;
     white-space: nowrap;
-    // transition: $checkbox-indicator-transtion;
-    transition: all .3s;
+    transition: $checkbox-indicator-transtion;
+    // transition: all .3s;
 
     & + span {
       padding-left: 7px;

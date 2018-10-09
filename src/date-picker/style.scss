@@ -1,0 +1,9 @@
+@import '../style/functions';
+@import '../style/theme';
+@import '../style/mixins';
+
+$datepicker-prefix-cls: 'dk-datepicker';
+
+.#{$datepicker-prefix-cls} {
+
+}
