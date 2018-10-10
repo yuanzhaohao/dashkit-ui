@@ -1,36 +1,19 @@
 import * as React from 'react';
-import * as classNames from 'classnames';
-import * as PropTypes from 'prop-types';
-import Input from '../input';
+import { PickerProps } from './types';
+import Basic from './basic';
 
-export type DatePickerProps = {
-  prefixCls?: string;
-  className?: string;
-  disabled?: boolean;
-  onChange?: () => void;
-};
+export type DatePickerProps = PickerProps;
 
-export type DatePickerState = {
-};
-
-class DatePicker extends React.PureComponent<DatePickerProps, DatePickerState> {
-  static defaultProps = {
-    prefixCls: 'dk-datepicker',
-    disabled: false,
-  };
-
-  constructor(props: DatePickerProps) {
-    super(props);
-  }
-
+class DatePicker extends React.PureComponent<DatePickerProps> {
   render() {
-    const { className, prefixCls, children } = this.props;
-    const dateClassName = classNames({
-      [`${prefixCls}`]: true,
-    }, className);
+    const { ...attributes } = this.props;
 
     return (
-      <div className={dateClassName}>{children}</div>
+      <Basic
+        type="date"
+        placeholder="Select date"
+        {...attributes}
+      />
     );
   }
 }

@@ -38,11 +38,11 @@ function getComponent() {
     element = div;
     document.body.appendChild(div);
     component = ReactDOM.render(
-      <Message 
-        prefixCls={prefixCls} 
-        max={defaultMax} 
+      <Message
+        prefixCls={prefixCls}
+        max={defaultMax}
         transitionDuration={defaultTransitionDuration}
-        onDestory={destroy} 
+        onDestory={destroy}
       />,
       div,
     )

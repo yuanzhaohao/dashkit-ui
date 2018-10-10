@@ -1,11 +1,11 @@
-# Checkbox
+# DatePicker
 
-A group of options for multiple choices.
+To select or input a date.
 
 <Demos />
 
 ## API
-### Checkbox
+### DatePicker
 Property    | Description    | Type      | Default   |
 |---------- |-------- |---------- |-------------  |-------- |
 | className | className of the component | - | - |
@@ -15,7 +15,7 @@ Property    | Description    | Type      | Default   |
 | defaultChecked  | default value | boolean  |  -  |
 | onChange | `change` event handler | `(event: React.ChangeEvent<HTMLInputElement>) => void` | - |
 
-### Checkbox.Group
+### TimePicker
 Property    | Description    | Type      | Default   |
 |---------- |-------- |---------- |-------------  |-------- |
 | className | className of the component | - | - |

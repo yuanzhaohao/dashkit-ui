@@ -13,6 +13,7 @@
 
   color: $white;
   border-color: $border;
+  // background: $background;
   @include gradient-bg($background);
 
   @include hover {
@@ -56,13 +57,4 @@
     color: $color;
     background-color: transparent;
   }
-}
-
-// Button sizes
-@mixin button-size($height, $padding-x, $font-size, $line-height, $border-radius) {
-  height: $height;
-  padding: 0 $padding-x;
-  font-size: $font-size;
-  line-height: $line-height;
-  border-radius: $border-radius;
 }

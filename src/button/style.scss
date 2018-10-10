@@ -6,18 +6,17 @@ $btn-prefix-cls: 'dk-btn';
 
 .#{$btn-prefix-cls} {
   display: inline-block;
-  font-weight: $btn-font-weight;
+  height: $btn-height;
+  padding: 0 $btn-padding-x;
+  border: $border-width solid transparent;
+  border-radius: $border-radius;
+  font-weight: $font-weight-normal;
+  font-size: $font-size-base;
+  transition: $btn-transition;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
   user-select: none;
-  border: $btn-border-width solid transparent;
-  transition: $btn-transition;
-  @include button-size($btn-height,
-  $btn-padding-x,
-  $font-size-base,
-  $btn-line-height,
-  $btn-border-radius);
 
   @include hover-focus {
     text-decoration: none;
@@ -94,11 +93,10 @@ $btn-prefix-cls: 'dk-btn';
   // Button Sizes
   //
   &-large {
-    @include button-size($btn-height-lg,
-    $btn-padding-x-lg,
-    $font-size-lg,
-    $btn-line-height-lg,
-    $btn-border-radius-lg);
+    height: $btn-height-lg;
+    padding: 0 $btn-padding-x-lg;
+    font-size: $font-size-lg;
+    border-radius: $border-radius-lg;
 
     &.#{$btn-prefix-cls}-rounded {
       border-radius: $btn-height-lg / 2;
@@ -106,11 +104,10 @@ $btn-prefix-cls: 'dk-btn';
   }
 
   &-small {
-    @include button-size($btn-height-sm,
-    $btn-padding-x-sm,
-    $font-size-sm,
-    $btn-line-height-sm,
-    $btn-border-radius-sm);
+    height: $btn-height-sm;
+    padding: 0 $btn-padding-x-sm;
+    font-size: $font-size-sm;
+    border-radius: $border-radius-sm;
 
     &.#{$btn-prefix-cls}-rounded {
       border-radius: $btn-height-sm / 2;

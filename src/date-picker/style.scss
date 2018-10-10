@@ -2,8 +2,45 @@
 @import '../style/theme';
 @import '../style/mixins';
 
-$datepicker-prefix-cls: 'dk-datepicker';
+$calendar-prefix-cls: 'dk-calendar';
 
-.#{$datepicker-prefix-cls} {
+.#{$calendar-prefix-cls} {
+  position: relative;
+  display: inline-block;
+  width: 220px;
 
+  &-input {
+    padding-right: 30px;
+    outline: none;
+  }
+
+  &-icon {
+    position: absolute;
+    width: $calendar-icon-size;
+    height: $calendar-icon-size;
+    right: 12px;
+    top: 50%;
+    margin-top: -$calendar-icon-size / 2;
+    font-size: $calendar-icon-size;
+    color: $calendar-icon-color;
+    user-select: none;
+    z-index: 1;
+  }
+
+  &-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: $calendar-container-width;
+    margin-top: 5px;
+    padding: $calendar-container-padding;
+    box-shadow: $calendar-shadow;
+    background-color: $white;
+    border-radius: $border-radius;
+    z-index: 2;
+
+    span {
+      user-select: none;
+    }
+  }
 }

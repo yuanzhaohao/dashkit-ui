@@ -90,21 +90,11 @@ $link-hover-decoration:       underline !default;
 
 $border-width:                1px !default;
 $border-color:              #e3ebf6 !default;
-
 $border-radius:               4px !default;
 $border-radius-lg:            5px !default;
 $border-radius-sm:            3px !default;
-
-$box-shadow-sm:               0 2px 4px rgba($black, .075) !default;
-$box-shadow:                  0 8px 16px rgba($black, .15) !default;
-$box-shadow-lg:               0 16px 48px rgba($black, .175) !default;
-
 $component-active-color:      $white !default;
 $component-active-bg:         $primary !default;
-
-$transition-base:             all .2s ease-in-out !default;
-$transition-fade:             opacity .15s linear !default;
-$transition-collapse:         height .35s ease !default;
 
 // Fonts
 //
@@ -198,40 +188,23 @@ $btn-type-colors: map-merge(
   ),
   $btn-type-colors
 );
-$btn-height:                  34px !default;
-$btn-padding-x:               12px !default;
-$btn-line-height:             $line-height-base !default;
 
-$btn-height-sm:               26px !default;
-$btn-padding-x-sm:            8px !default;
-$btn-line-height-sm:          $line-height-base !default;
-
-$btn-height-lg:               42px !default;
-$btn-padding-x-lg:            16px !default;
-$btn-line-height-lg:          $line-height-base !default;
-
-$btn-border-width:            $border-width !default;
-
-$btn-font-weight:             $font-weight-normal !default;
-$btn-box-shadow:              inset 0 1px 0 rgba($white, .15), 0 1px 1px rgba($black, .075) !default;
-$btn-focus-width:             2.5px !default;
-$btn-focus-box-shadow:        0 0 0 $btn-focus-width rgba($component-active-bg, .25) !default;
-$btn-disabled-opacity:        .65 !default;
-$btn-active-box-shadow:       inset 0 3px 5px rgba($black, .125) !default;
-
-$btn-link-disabled-color:     $gray-600 !default;
-
-$btn-block-spacing-y:         8px !default;
-
-$btn-border-radius:           $border-radius !default;
-$btn-border-radius-lg:        $border-radius-lg !default;
-$btn-border-radius-sm:        $border-radius-sm !default;
-
-$btn-transition:              color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
+$btn-height:                        34px !default;
+$btn-height-lg:                     42px !default;
+$btn-height-sm:                     26px !default;
+$btn-padding-x:                     12px !default;
+$btn-padding-x-lg:                  16px !default;
+$btn-padding-x-sm:                  8px !default;
+$btn-box-shadow:                    inset 0 1px 0 rgba($white, .15), 0 1px 1px rgba($black, .075) !default;
+$btn-focus-width:                   2.5px !default;
+$btn-focus-box-shadow:              0 0 0 $btn-focus-width rgba($component-active-bg, .25) !default;
+$btn-disabled-opacity:              .65 !default;
+$btn-link-disabled-color:           $gray-600 !default;
+$btn-transition:                    color .15s $ease-in-out, background-color .15s $ease-in-out, border-color .15s $ease-in-out, box-shadow .15s $ease-in-out !default;
 
 // Input
 //
-$input-height:                      32px !default;
+$input-height:                      34px !default;
 $input-padding-y:                   6px !default;
 $input-padding-x:                   12px !default;
 
@@ -241,7 +214,7 @@ $input-disabled-bg:                 $gray-200 !default;
 
 $input-border-color:                #d2ddec !default;
 $input-box-shadow:                  inset 0 1px 1px rgba($primary, .075) !default;
-$input-transition:                  border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
+$input-transition:                  border-color .15s $ease-in-out, box-shadow .15s $ease-in-out !default;
 $input-placeholder-color:           #b1c2d9 !default;
 $input-border-radius:               $border-radius !default;
 $input-border-radius-lg:            $border-radius-lg !default;
@@ -252,6 +225,14 @@ $input-focus-border-color:          $primary !default;
 $input-focus-box-shadow:            0 0 0 2px lighten($component-active-bg, 25%) !default;
 
 $input-hover-border-color:          $input-focus-border-color !default;
+
+// Calendar
+//
+$calendar-icon-size:                14px !default;
+$calendar-icon-color:               $input-placeholder-color !default;
+$calendar-container-width:          252px !default;
+$calendar-container-padding:        12px !default;
+$calendar-shadow:                   0 2px 8px rgba($black, .25) !default;
 
 // Checkbox
 //
