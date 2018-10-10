@@ -9,14 +9,14 @@ subtitle:
 ---
 
 ```js
-import { DatePicker } from 'dashkit-ui';
+import { Calendar } from 'dashkit-ui';
 
 function onChange(value) {
   console.log(`value: ${value}`);
 }
 
 ReactDOM.render(
-  <DatePicker onChange={onChange} />,
+  <Calendar onChange={onChange} />,
   mountNode
 );
 ```

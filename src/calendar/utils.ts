@@ -1,19 +1,21 @@
-import addDays from 'date-fns/addDays';
-import addMonths from 'date-fns/addMonths';
-import addSeconds from 'date-fns/addSeconds';
-import addYears from 'date-fns/addYears';
-import compareAsc from 'date-fns/compareAsc';
-import endOfMonth from 'date-fns/endOfMonth';
-import endOfWeek from 'date-fns/endOfWeek';
-import format from 'date-fns/format';
-import isSameDay from 'date-fns/isSameDay';
-import isSameMonth from 'date-fns/isSameMonth';
-import isSameWeek from 'date-fns/isSameWeek';
-import isValid from 'date-fns/isValid';
-import parse from 'date-fns/parse';
-import startOfMonth from 'date-fns/startOfMonth';
-import startOfWeek from 'date-fns/startOfWeek';
-import toDate from 'date-fns/toDate';
+import {
+  addDays,
+  addMonths,
+  addSeconds,
+  addYears,
+  compareAsc,
+  endOfMonth,
+  endOfWeek,
+  format,
+  isSameDay,
+  isSameMonth,
+  isSameWeek,
+  isValid,
+  parse,
+  startOfMonth,
+  startOfWeek,
+  toDate,
+} from 'date-fns';
 
 function getDaysOfMonth(dirtyDate) {
   const date = toDate(dirtyDate);

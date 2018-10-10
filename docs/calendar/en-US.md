@@ -1,11 +1,11 @@
-# DatePicker
+# Calendar
 
 To select or input a date.
 
 <Demos />
 
 ## API
-### DatePicker
+### Calendar
 Property    | Description    | Type      | Default   |
 |---------- |-------- |---------- |-------------  |-------- |
 | className | className of the component | - | - |
@@ -14,13 +14,3 @@ Property    | Description    | Type      | Default   |
 | checked  | value of checkbox | boolean  |  -  |
 | defaultChecked  | default value | boolean  |  -  |
 | onChange | `change` event handler | `(event: React.ChangeEvent<HTMLInputElement>) => void` | - |
-
-### TimePicker
-Property    | Description    | Type      | Default   |
-|---------- |-------- |---------- |-------------  |-------- |
-| className | className of the component | - | - |
-| defaultValue | Default selected value  | -   | - |
-| min       | Minimum   | number  | -  |
-| max       | Maximum   | number  | -  |
-| onChange  | `change` event handler | `(options: string[]) => void` | - |
-

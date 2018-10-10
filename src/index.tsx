@@ -7,7 +7,7 @@ export { default as Button } from './button';
 export { default as Checkbox } from './checkbox';
 export { default as Switch } from './switch';
 export { default as Input } from './input';
-export { DatePicker } from './date-picker';
+export { default as Calendar } from './calendar';
 export { default as Menu } from './menu';
 export { default as Spin } from './spin';
 export { default as Alert } from './alert';

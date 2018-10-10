@@ -2,9 +2,9 @@
 @import '../style/theme';
 @import '../style/mixins';
 
-$checkbox-prefix-cls: 'dk-checkbox';
+$checkbox-prefix: 'dk-checkbox';
 
-.#{$checkbox-prefix-cls} {
+.#{$checkbox-prefix} {
   position: relative;
   display: inline-block;
   margin: 0;
@@ -97,7 +97,7 @@ $checkbox-prefix-cls: 'dk-checkbox';
   &-disabled,
   &-disabled:hover,
   &-disabled &-checked {
-    .#{$checkbox-prefix-cls}-indicator {
+    .#{$checkbox-prefix}-indicator {
       border-color: $gray-500;
       background-color: $input-disabled-bg;
 
