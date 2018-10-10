@@ -17,6 +17,7 @@ export type InputProps = {
   digits?: number;
   onChange?: (value: string) => void;
   onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onFocus?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyUp?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 };
 
@@ -74,6 +75,7 @@ class Input extends React.Component<InputProps> {
         onChange={this.handleChange}
         onKeyUp={this.handleKeyUp}
         onBlur={this.handleBlur}
+        onFocus={this.handleFocus}
       />
     );
   }
@@ -99,6 +101,13 @@ class Input extends React.Component<InputProps> {
     }
     if (this.invalidNumber(value)) {
       return;
+    }
+  }
+
+  handleFocus = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { onFocus } = this.props;
+    if (onFocus) {
+      onFocus(event);
     }
   }
 

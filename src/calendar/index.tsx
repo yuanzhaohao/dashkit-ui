@@ -3,6 +3,7 @@ import './style.scss';
 import * as React from 'react';
 import * as classNames from 'classnames';
 import * as PropTypes from 'prop-types';
+import { CSSTransition } from 'react-transition-group';
 import { PickerProps } from './types';
 import Input from '../input';
 import Icon from '../icon';
@@ -17,6 +18,7 @@ export type BasicPickerProps = PickerProps & {
 
 export type BasicPickerState = {
   current: Date;
+  active: boolean;
 };
 
 class BasicPicker extends React.PureComponent<BasicPickerProps, BasicPickerState> {
@@ -24,13 +26,14 @@ class BasicPicker extends React.PureComponent<BasicPickerProps, BasicPickerState
     prefixCls: 'dk-calendar',
     type: 'day',
     disabled: false,
-    value: '2018-10-10',
+    value: new Date,
   };
 
   constructor(props: BasicPickerProps) {
     super(props);
     this.state = {
       current: this.getCurrent(),
+      active: false,
     };
   }
 
@@ -44,11 +47,23 @@ class BasicPicker extends React.PureComponent<BasicPickerProps, BasicPickerState
 
     return (
       <span className={dateClassName}>
-        <Input className={`${prefixCls}-input`} placeholder={this.getPlaceholder()} />
+        <Input
+          className={`${prefixCls}-input`}
+          placeholder={this.getPlaceholder()}
+          onFocus={this.handleInputFocus}
+          onBlur={this.handleInputBlur}
+        />
         <Icon type="calendar" className={`${prefixCls}-icon`} />
-        <div className={`${prefixCls}-content`}>
-          {this.renderContent()}
-        </div>
+        <CSSTransition
+          in={this.state.active}
+          unmountOnExit
+          timeout={300}
+          classNames={`${prefixCls}-content`}
+        >
+          <div className={`${prefixCls}-content`}>
+            {this.renderContent()}
+          </div>
+        </CSSTransition>
       </span>
     );
   }
@@ -126,6 +141,18 @@ class BasicPicker extends React.PureComponent<BasicPickerProps, BasicPickerState
     }
 
     return current
+  }
+
+  handleInputFocus = () => {
+    this.setState({
+      active: true,
+    });
+  }
+
+  handleInputBlur = () => {
+    this.setState({
+      active: false,
+    });
   }
 }
 

@@ -37,11 +37,35 @@ $calendar-prefix: 'dk-calendar';
     background-color: $white;
     border-radius: $border-radius;
     z-index: 2;
+    transition: $calendar-transition;
+    transform-origin: center top;
 
     span {
       user-select: none;
     }
+
+    &-enter {
+      opacity: 0;
+      transform: scaleY(0);
+    }
+
+    &-enter-active {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+
+    &-exit {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+
+    &-exit-active {
+      opacity: 0;
+      transform: scaleY(0);
+    }
   }
+
+
 
   &-day-picker {
     width: $calendar-item-size * 7;
