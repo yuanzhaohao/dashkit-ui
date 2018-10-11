@@ -4,14 +4,14 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 import { CSSTransition } from 'react-transition-group';
 import { format as fnsFormat } from 'date-fns';
-import { PickerProps, ValueProps } from './types';
+import { BasicProps, ValueProps } from './types';
 import Input from '../input';
 import Icon from '../icon';
 import Day from './day';
 import { toDateWithFormat, isInvalid } from './utils';
 
 export type CalendarType = 'day' | 'week' | 'month' | 'time' | 'datetime';
-export type CalendarProps = PickerProps & {
+export type CalendarProps = BasicProps & {
   type?: CalendarType;
   placeholder?: string;
   range?: boolean;

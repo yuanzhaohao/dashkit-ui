@@ -1,11 +1,11 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 import { isSameDay, addMonths } from 'date-fns';
-import { PickerProps } from './types';
+import { BasicProps } from './types';
 import { monthValues, weekdayValues, getDaysOfMonth } from './utils';
 import Icon from '../icon';
 
-export type DayProps = PickerProps & {
+export type DayProps = BasicProps & {
   current: Date;
   onChange: (date: Date, isSelectDay?: boolean) => void;
 };
