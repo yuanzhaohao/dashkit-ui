@@ -8,6 +8,7 @@ import { BasicProps, ValueProps } from './types';
 import Input from '../input';
 import Icon from '../icon';
 import Day from './day';
+import Month from './month';
 import { toDateWithFormat, isInvalid } from './utils';
 
 export type CalendarType = 'day' | 'week' | 'month' | 'time' | 'datetime';
@@ -98,6 +99,17 @@ class BasicPicker extends React.PureComponent<CalendarProps, CalendarState> {
     const { current, value } = this.state;
 
     switch (type) {
+      case 'month': {
+        return (
+          <Month
+            current={current}
+            prefixCls={prefixCls}
+            disabled={disabled}
+            onChange={this.handleChange}
+            value={value}
+          />
+        );
+      }
       default: {
         return (
           <Day

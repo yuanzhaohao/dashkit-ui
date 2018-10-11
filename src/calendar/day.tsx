@@ -24,37 +24,40 @@ class Day extends React.PureComponent<DayProps> {
     const days = this.getDays();
 
     return (
-      <div className={`${prefixCls}-day-picker`}>
-        <div className={`${prefixCls}-day-header`}>
-          <Icon
-            className={`${prefixCls}-day-prev-year`}
-            type="chevrons-left"
-            onClick={this.handlePrevYear}
-          />
-          <Icon
-            className={`${prefixCls}-day-prev-month`}
-            type="chevron-left"
-            onClick={this.handlePrevMonth}
-          />
-          <div className={`${prefixCls}-day-select`}>
-            <span>{monthValues.long[current.getMonth()]}</span>
-            <span>{current.getFullYear()}</span>
+      <div className={`${prefixCls}-day`}>
+        <div className={`${prefixCls}-header`}>
+          <div className={`${prefixCls}-config`}>
+            <Icon
+              className={`${prefixCls}-prev-year`}
+              type="chevrons-left"
+              onClick={this.handlePrevYear}
+            />
+            <Icon
+              className={`${prefixCls}-prev-month`}
+              type="chevron-left"
+              onClick={this.handlePrevMonth}
+            />
+            <div className={`${prefixCls}-select`}>
+              <span>{monthValues.long[current.getMonth()]}</span>
+              <span>{current.getFullYear()}</span>
+            </div>
+            <Icon
+              className={`${prefixCls}-next-month`}
+              type="chevron-right"
+              onClick={this.handleNextMonth}
+            />
+            <Icon
+              className={`${prefixCls}-next-year`}
+              type="chevrons-right"
+              onClick={this.handleNextYear}
+            />
           </div>
-          <Icon
-            className={`${prefixCls}-day-next-month`}
-            type="chevron-right"
-            onClick={this.handleNextMonth}
-          />
-          <Icon
-            className={`${prefixCls}-day-next-year`}
-            type="chevrons-right"
-            onClick={this.handleNextYear}
-          />
+
+          <div className={`${prefixCls}-week`}>
+            {weekdayValues.short.map((w) => <span key={w}>{w}</span>)}
+          </div>
         </div>
-        <div className={`${prefixCls}-day-week`}>
-          {weekdayValues.short.map((w) => <span key={w}>{w}</span>)}
-        </div>
-        <div className={`${prefixCls}-day-list`}>
+        <div className={`${prefixCls}-list`}>
           {days.map((date: Date) =>
             this.renderDay(date)
           )}
