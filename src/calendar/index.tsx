@@ -2,25 +2,26 @@ import './style.scss';
 
 import * as React from 'react';
 import * as classNames from 'classnames';
-import * as PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
-import { PickerProps } from './types';
+import { format as fnsFormat } from 'date-fns';
+import { PickerProps, ValueProps } from './types';
 import Input from '../input';
 import Icon from '../icon';
 import Day from './day';
-import utils from './utils';
+import { toDateWithFormat, isInvalid } from './utils';
 
-export type BasicPickerType = 'day' | 'week' | 'month' | 'time' | 'datetime' | 'range';
-export type BasicPickerProps = PickerProps & {
-  type?: BasicPickerType;
+export type CalendarType = 'day' | 'week' | 'month' | 'time' | 'datetime';
+export type CalendarProps = PickerProps & {
+  type?: CalendarType;
   placeholder?: string;
+  range?: boolean;
   onChange?: (date: Date, dateStr: string) => void;
 };
 
-export type BasicPickerState = {
+export type CalendarState = {
   current: Date;
-  active: boolean;
-  value?: string;
+  active?: boolean;
+  value?: ValueProps;
 };
 const allPlaceholders = {
   'day': 'Select date',
@@ -39,18 +40,17 @@ const allFormats = {
   'range': 'yyyy-MM-dd',
 }
 
-class BasicPicker extends React.PureComponent<BasicPickerProps, BasicPickerState> {
-  readonly contentDiv: React.RefObject<HTMLDivElement>;
+class BasicPicker extends React.PureComponent<CalendarProps, CalendarState> {
+  readonly dateElement: React.RefObject<HTMLDivElement>;
 
   static defaultProps = {
     prefixCls: 'dk-calendar',
     type: 'day',
-    disabled: false,
   };
 
-  constructor(props: BasicPickerProps) {
+  constructor(props: CalendarProps) {
     super(props);
-    this.contentDiv = React.createRef();
+    this.dateElement = React.createRef();
     this.state = {
       current: this.getCurrent(),
       active: false,
@@ -63,14 +63,18 @@ class BasicPicker extends React.PureComponent<BasicPickerProps, BasicPickerState
     const dateClassName = classNames({
       [`${prefixCls}`]: true,
     }, className);
+    const { value } = this.state;
+    const date = this.parseDate(value);
+    const format = this.getFormat();
 
     return (
-      <span className={dateClassName}>
+      <span className={dateClassName} ref={this.dateElement}>
         <Input
           className={`${prefixCls}-input`}
           placeholder={this.getPlaceholder()}
           onFocus={this.handleInputFocus}
-          value={this.state.value}
+          onChange={this.handleInputChange}
+          value={isInvalid(date) ? undefined : fnsFormat(date, format)}
         />
         <Icon type="calendar" className={`${prefixCls}-icon`} />
         <CSSTransition
@@ -81,7 +85,7 @@ class BasicPicker extends React.PureComponent<BasicPickerProps, BasicPickerState
           onEntered={this.bindDocumentClick}
           onExited={this.clearDocumentClick}
         >
-          <div className={`${prefixCls}-content`} ref={this.contentDiv}>
+          <div className={`${prefixCls}-content`}>
             {this.renderContent()}
           </div>
         </CSSTransition>
@@ -91,7 +95,7 @@ class BasicPicker extends React.PureComponent<BasicPickerProps, BasicPickerState
 
   renderContent = () => {
     const { type, prefixCls, disabled } = this.props;
-    const { current } = this.state;
+    const { current, value } = this.state;
 
     switch (type) {
       default: {
@@ -101,6 +105,7 @@ class BasicPicker extends React.PureComponent<BasicPickerProps, BasicPickerState
             prefixCls={prefixCls}
             disabled={disabled}
             onChange={this.handleChange}
+            value={value}
            />
         );
       }
@@ -119,8 +124,8 @@ class BasicPicker extends React.PureComponent<BasicPickerProps, BasicPickerState
     return allFormats[type];
   }
 
-  parseDate(value: any) {
-    return utils.toDateWithFormat(value, this.getFormat());
+  parseDate(value: ValueProps) {
+    return toDateWithFormat(value, this.getFormat());
   }
 
   getCurrent = () => {
@@ -141,6 +146,15 @@ class BasicPicker extends React.PureComponent<BasicPickerProps, BasicPickerState
     });
   }
 
+  handleInputChange = (date: any) => {
+    // const format = this.getFormat();
+    // const value = fnsFormat(date, format);
+    // const { onChange } = this.props;
+    this.setState({
+      value: date
+    });
+  }
+
   bindDocumentClick = () => {
     document.addEventListener('click', this.handleDocumentClick);
   }
@@ -150,7 +164,7 @@ class BasicPicker extends React.PureComponent<BasicPickerProps, BasicPickerState
   }
 
   handleDocumentClick = (event: any) => {
-    const element = this.contentDiv.current;
+    const element = this.dateElement.current;
     if (!(event.target === element || (element && element.contains(event.target)))) {
       this.setState({
         active: false,
@@ -158,16 +172,22 @@ class BasicPicker extends React.PureComponent<BasicPickerProps, BasicPickerState
     }
   }
 
-  handleChange = (date: Date) => {
+  handleChange = (date: Date, isSelectDay?: boolean) => {
     const { onChange } = this.props;
     const format = this.getFormat();
-    const value = utils.format(date, format)
+    const value = fnsFormat(date, format);
 
-    this.setState({
-      current: date,
-      value,
-      active: false,
-    });
+    if (isSelectDay) {
+      this.setState({
+        current: date,
+        value,
+        active: false,
+      });
+    } else {
+      this.setState({
+        current: date,
+      });
+    }
     if (typeof onChange === 'function') {
       onChange(date, value);
     }

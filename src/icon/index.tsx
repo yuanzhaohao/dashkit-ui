@@ -8,6 +8,7 @@ export type IconProps = {
   prefixCls?: string;
   type: string;
   className?: string;
+  onClick?: React.MouseEventHandler<HTMLElement>;
 };
 
 class Icon extends React.PureComponent<IconProps> {

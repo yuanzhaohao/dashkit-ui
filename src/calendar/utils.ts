@@ -1,23 +1,17 @@
-import {
-  addDays,
-  addMonths,
-  addSeconds,
-  addYears,
-  compareAsc,
-  endOfMonth,
-  endOfWeek,
-  format,
-  isSameDay,
-  isSameMonth,
-  isSameWeek,
-  isValid,
-  parse,
-  startOfMonth,
-  startOfWeek,
-  toDate,
-} from 'date-fns';
+import { addDays, endOfMonth, endOfWeek, parse, startOfMonth, startOfWeek, toDate } from 'date-fns';
+import { ValueProps } from './types';
 
-function getDaysOfMonth(dirtyDate: any) {
+export const weekdayValues = {
+  short: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+  long: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+};
+
+export const monthValues = {
+  short: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  long: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+};
+
+export function getDaysOfMonth(dirtyDate: Date) {
   const date = toDate(dirtyDate);
   const end = endOfWeek(endOfMonth(date));
   let current = startOfWeek(startOfMonth(date));
@@ -35,60 +29,26 @@ function getDaysOfMonth(dirtyDate: any) {
   return days;
 }
 
-function isInvalid(date: any) {
+export function isInvalid(date: any) {
   return isNaN(date);
 }
 
-function toDateWithFormat(dirtyDate: any, fmt: string) {
-  let date
-  if (typeof dirtyDate === 'string') date = parse(dirtyDate, fmt, new Date())
-  else date = toDate(dirtyDate)
-
-  if (isInvalid(date)) date = toDate(dirtyDate)
-
-  return date
+export function toDateWithFormat(dirtyDate: ValueProps, fmt: string) {
+  if (typeof dirtyDate === 'string') {
+    return parse(dirtyDate, fmt, new Date());
+  }
+  return toDate(dirtyDate);
 }
 
-function compareMonth(dateLeft, dateRight, pad = 0) {
-  if (!dateLeft || !dateRight) return 0
-  const left = new Date(dateLeft.getFullYear(), dateLeft.getMonth(), 1)
-  const right = new Date(dateRight.getFullYear(), dateRight.getMonth() + pad, 1)
-  return compareAsc(left, right)
-}
+export function cloneTime(date: Date, old: Date, fmt: string) {
+  old = toDateWithFormat(old, fmt);
+  if (isInvalid(old)) {
+    return date;
+  }
 
-function newDate() {
-  const date = new Date()
-  return new Date(date.getFullYear(), date.getMonth(), date.getDate())
-}
+  date.setHours(old.getHours());
+  date.setMinutes(old.getMinutes());
+  date.setSeconds(old.getSeconds());
 
-function cloneTime(date, old, fmt) {
-  old = toDateWithFormat(old, fmt)
-  if (isInvalid(old)) return date
-
-  date.setHours(old.getHours())
-  date.setMinutes(old.getMinutes())
-  date.setSeconds(old.getSeconds())
-
-  return date
-}
-
-export default {
-  addDays,
-  addMonths,
-  addYears,
-  addSeconds,
-  cloneTime,
-  compareAsc,
-  compareMonth,
-  getDaysOfMonth,
-  format,
-  isInvalid,
-  isSameDay,
-  isSameMonth,
-  isSameWeek,
-  isValid,
-  newDate,
-  parse,
-  toDate,
-  toDateWithFormat,
+  return date;
 }

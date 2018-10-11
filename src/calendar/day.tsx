@@ -1,16 +1,14 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import * as PropTypes from 'prop-types';
+import { isSameDay, addMonths } from 'date-fns';
 import { PickerProps } from './types';
+import { monthValues, weekdayValues, getDaysOfMonth } from './utils';
 import Icon from '../icon';
-import utils from './utils';
 
 export type DayProps = PickerProps & {
   current: Date;
-  onChange?: (date: Date) => void;
+  onChange: (date: Date, isSelectDay?: boolean) => void;
 };
-
-const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 class Day extends React.PureComponent<DayProps> {
   cachedDate: Date | null;
@@ -22,27 +20,43 @@ class Day extends React.PureComponent<DayProps> {
   }
 
   render() {
-    const { prefixCls, disabled } = this.props;
+    const { prefixCls, current } = this.props;
     const days = this.getDays();
 
     return (
       <div className={`${prefixCls}-day-picker`}>
         <div className={`${prefixCls}-day-header`}>
-          <Icon className={`${prefixCls}-day-prev-year`} type="chevrons-left" />
-          <Icon className={`${prefixCls}-day-prev-month`} type="chevron-left" />
+          <Icon
+            className={`${prefixCls}-day-prev-year`}
+            type="chevrons-left"
+            onClick={this.handlePrevYear}
+          />
+          <Icon
+            className={`${prefixCls}-day-prev-month`}
+            type="chevron-left"
+            onClick={this.handlePrevMonth}
+          />
           <div className={`${prefixCls}-day-select`}>
-            <span>November</span>
-            <span>2018</span>
+            <span>{monthValues.long[current.getMonth()]}</span>
+            <span>{current.getFullYear()}</span>
           </div>
-          <Icon className={`${prefixCls}-day-next-month`} type="chevron-right" />
-          <Icon className={`${prefixCls}-day-next-year`} type="chevrons-right" />
+          <Icon
+            className={`${prefixCls}-day-next-month`}
+            type="chevron-right"
+            onClick={this.handleNextMonth}
+          />
+          <Icon
+            className={`${prefixCls}-day-next-year`}
+            type="chevrons-right"
+            onClick={this.handleNextYear}
+          />
         </div>
         <div className={`${prefixCls}-day-week`}>
-          {weekdays.map((w) => <span key={w}>{w}</span>)}
+          {weekdayValues.short.map((w) => <span key={w}>{w}</span>)}
         </div>
         <div className={`${prefixCls}-day-list`}>
           {days.map((date: Date) =>
-              this.renderDay(date)
+            this.renderDay(date)
           )}
         </div>
       </div>
@@ -50,18 +64,18 @@ class Day extends React.PureComponent<DayProps> {
   }
 
   renderDay = (date: Date) => {
-    const { prefixCls, disabled, current } = this.props;
+    const { prefixCls, current, value } = this.props;
     const itemClassName = classNames({
       [`${prefixCls}-day-item`]: true,
       [`${prefixCls}-day-item-other`]: current.getMonth() !== date.getMonth(),
-      [`${prefixCls}-day-item-active`]: utils.isSameDay(date, current),
+      [`${prefixCls}-day-item-active`]: value && isSameDay(date, value),
     });
 
     return (
       <div
         key={date.getTime()}
         className={itemClassName}
-        onClick={disabled ? undefined : this.handleDayClick.bind(this, date)}
+        onClick={this.handleDayClick.bind(this, date)}
       >
         <span>{date.getDate()}</span>
       </div>
@@ -73,25 +87,52 @@ class Day extends React.PureComponent<DayProps> {
     if (this.cachedDate && this.cachedDate.getTime() === current.getTime() && this.cachedDays) {
       return this.cachedDays;
     }
-    this.cachedDays = utils.getDaysOfMonth(current);
+    this.cachedDays = getDaysOfMonth(current);
     this.cachedDate = current;
 
     return this.cachedDays;
   }
 
   handleDayClick = (date: Date) => {
-    const { current, onChange } = this.props;
-    if (typeof onChange === 'function') {
-      const newDate = new Date(
-        date.getFullYear(),
-        date.getMonth(),
-        date.getDate(),
-        current.getHours(),
-        current.getMinutes(),
-        current.getSeconds(),
-      );
-      onChange(newDate);
+    const { current, onChange, disabled } = this.props;
+
+    if (disabled) {
+      return;
     }
+
+    const newDate = new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate(),
+      current.getHours(),
+      current.getMinutes(),
+      current.getSeconds(),
+    );
+    onChange(newDate, true);
+  }
+
+  handleMouth = (month: number) => {
+    const { current, onChange, disabled } = this.props;
+    if (disabled) {
+      return;
+    }
+    onChange(addMonths(current, month));
+  }
+
+  handlePrevYear = () => {
+    this.handleMouth(-12);
+  }
+
+  handleNextYear = () => {
+    this.handleMouth(12);
+  }
+
+  handlePrevMonth = () => {
+    this.handleMouth(-1);
+  }
+
+  handleNextMonth = () => {
+    this.handleMouth(1);
   }
 }
 
