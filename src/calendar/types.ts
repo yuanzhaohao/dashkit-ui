@@ -2,7 +2,6 @@ export type PickerProps = {
   prefixCls?: string;
   className?: string;
   disabled?: boolean;
-  value?: string;
+  value?: string | number | Date;
   format?: string;
-  onChange?: () => void;
 };

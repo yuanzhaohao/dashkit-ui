@@ -14,26 +14,47 @@ export type BasicPickerType = 'day' | 'week' | 'month' | 'time' | 'datetime' | '
 export type BasicPickerProps = PickerProps & {
   type?: BasicPickerType;
   placeholder?: string;
+  onChange?: (date: Date, dateStr: string) => void;
 };
 
 export type BasicPickerState = {
   current: Date;
   active: boolean;
+  value?: string;
 };
+const allPlaceholders = {
+  'day': 'Select date',
+  'month': 'Select Month',
+  'time': 'Select Time',
+  'week': 'Select Week',
+  'datetime': 'Select Datetime',
+  'range': 'Select date',
+};
+const allFormats = {
+  'day': 'yyyy-MM-dd',
+  'month': 'yyyy-MM',
+  'time': 'HH:mm:ss',
+  'week': 'yyyy WW',
+  'datetime': 'yyyy-MM-dd HH:mm:ss',
+  'range': 'yyyy-MM-dd',
+}
 
 class BasicPicker extends React.PureComponent<BasicPickerProps, BasicPickerState> {
+  readonly contentDiv: React.RefObject<HTMLDivElement>;
+
   static defaultProps = {
     prefixCls: 'dk-calendar',
     type: 'day',
     disabled: false,
-    value: new Date,
   };
 
   constructor(props: BasicPickerProps) {
     super(props);
+    this.contentDiv = React.createRef();
     this.state = {
       current: this.getCurrent(),
       active: false,
+      value: undefined,
     };
   }
 
@@ -43,15 +64,13 @@ class BasicPicker extends React.PureComponent<BasicPickerProps, BasicPickerState
       [`${prefixCls}`]: true,
     }, className);
 
-    console.log(this.state.current);
-
     return (
       <span className={dateClassName}>
         <Input
           className={`${prefixCls}-input`}
           placeholder={this.getPlaceholder()}
           onFocus={this.handleInputFocus}
-          onBlur={this.handleInputBlur}
+          value={this.state.value}
         />
         <Icon type="calendar" className={`${prefixCls}-icon`} />
         <CSSTransition
@@ -59,8 +78,10 @@ class BasicPicker extends React.PureComponent<BasicPickerProps, BasicPickerState
           unmountOnExit
           timeout={300}
           classNames={`${prefixCls}-content`}
+          onEntered={this.bindDocumentClick}
+          onExited={this.clearDocumentClick}
         >
-          <div className={`${prefixCls}-content`}>
+          <div className={`${prefixCls}-content`} ref={this.contentDiv}>
             {this.renderContent()}
           </div>
         </CSSTransition>
@@ -79,6 +100,7 @@ class BasicPicker extends React.PureComponent<BasicPickerProps, BasicPickerState
             current={current}
             prefixCls={prefixCls}
             disabled={disabled}
+            onChange={this.handleChange}
            />
         );
       }
@@ -86,61 +108,31 @@ class BasicPicker extends React.PureComponent<BasicPickerProps, BasicPickerState
   }
 
   getPlaceholder = () => {
-    const { placeholder, type } = this.props;
+    const { placeholder, type = 'day' } = this.props;
     if (placeholder !== undefined) return placeholder;
-    switch (type) {
-      case 'day':
-        return 'Select date';
-      case 'month':
-        return 'Select Month';
-      case 'time':
-        return 'Select Time';
-      case 'week':
-        return 'Select Week';
-      default:
-        return 'Select Datetime';
-    }
+    return allPlaceholders[type];
   }
 
   getFormat = () => {
-    const { format, type } = this.props;
+    const { format, type = 'day' } = this.props;
     if (format) return format;
-    switch (type) {
-      case 'day':
-        return 'yyyy-MM-dd';
-      case 'month':
-        return 'yyyy-MM';
-      case 'time':
-        return 'HH:mm:ss';
-      case 'week':
-        return 'yyyy WW';
-      default:
-        return 'yyyy-MM-dd HH:mm:ss';
-    }
+    return allFormats[type];
   }
 
-  parseDate(value) {
-    return utils.toDateWithFormat(value, this.getFormat(), undefined);
+  parseDate(value: any) {
+    return utils.toDateWithFormat(value, this.getFormat());
   }
 
   getCurrent = () => {
+    const { value } = this.props;
     let current;
-    if (this.props.type === 'range') {
-      current = (this.props.value || []).map((v) => {
-        v = this.parseDate(v)
-        if (utils.isInvalid(v)) v = utils.newDate()
-        return v
-      })
-      if (current.length === 0) current = [utils.newDate(), utils.newDate()]
 
-      if (utils.compareMonth(current[0], current[1], -1) >= 0) {
-        current[1] = utils.addMonths(current[0], 1)
-      }
+    if (value !== undefined)  {
+      current = this.parseDate(value);
     } else {
-      current = this.parseDate(this.props.value)
+      current = new Date;
     }
-
-    return current
+    return current;
   }
 
   handleInputFocus = () => {
@@ -149,10 +141,36 @@ class BasicPicker extends React.PureComponent<BasicPickerProps, BasicPickerState
     });
   }
 
-  handleInputBlur = () => {
+  bindDocumentClick = () => {
+    document.addEventListener('click', this.handleDocumentClick);
+  }
+
+  clearDocumentClick = () => {
+    document.removeEventListener('click', this.handleDocumentClick);
+  }
+
+  handleDocumentClick = (event: any) => {
+    const element = this.contentDiv.current;
+    if (!(event.target === element || (element && element.contains(event.target)))) {
+      this.setState({
+        active: false,
+      });
+    }
+  }
+
+  handleChange = (date: Date) => {
+    const { onChange } = this.props;
+    const format = this.getFormat();
+    const value = utils.format(date, format)
+
     this.setState({
+      current: date,
+      value,
       active: false,
     });
+    if (typeof onChange === 'function') {
+      onChange(date, value);
+    }
   }
 }
 

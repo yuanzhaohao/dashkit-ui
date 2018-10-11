@@ -66,12 +66,7 @@ $ease-in-out:                 cubic-bezier(0.645, 0.045, 0.355, 1);
 $ease-out-back:               cubic-bezier(0.12, 0.4, 0.29, 1.46);
 $ease-in-back:                cubic-bezier(0.71, -0.46, 0.88, 0.6);
 $ease-in-out-back:            cubic-bezier(0.71, -0.46, 0.29, 1.46);
-$ease-out-circ:               cubic-bezier(0.08, 0.82, 0.17, 1);
-$ease-in-circ:                cubic-bezier(0.6, 0.04, 0.98, 0.34);
-$ease-in-out-circ:            cubic-bezier(0.78, 0.14, 0.15, 0.86);
-$ease-out-quint:              cubic-bezier(0.23, 1, 0.32, 1);
-$ease-in-quint:               cubic-bezier(0.755, 0.05, 0.855, 0.06);
-$ease-in-out-quint:           cubic-bezier(0.86, 0, 0.07, 1);
+$ease-fade:                   cubic-bezier(0.23, 1, 0.32, 1);
 
 //Body
 //
@@ -87,7 +82,6 @@ $link-hover-decoration:       underline !default;
 
 // Components
 //
-
 $border-width:                1px !default;
 $border-color:              #e3ebf6 !default;
 $border-radius:               4px !default;
@@ -116,32 +110,11 @@ $h3-font-size:                $font-size-base * 1.75 !default;
 $h4-font-size:                $font-size-base * 1.5 !default;
 $h5-font-size:                $font-size-base * 1.25 !default;
 $h6-font-size:                $font-size-base !default;
-
 $headings-margin-bottom:      8px !default;
 $headings-font-family:        inherit !default;
 $headings-font-weight:        500 !default;
 $headings-line-height:        1.2 !default;
 $headings-color:              inherit !default;
-
-$lead-font-size:              ($font-size-base * 1.25) !default;
-$lead-font-weight:            300 !default;
-
-$text-muted:                  $gray-600 !default;
-
-$blockquote-small-color:      $gray-600 !default;
-$blockquote-font-size:        ($font-size-base * 1.25) !default;
-
-$hr-border-color:             rgba($black, .1) !default;
-$hr-border-width:             $border-width !default;
-$hr-margin-y:                 16px !default;
-
-$mark-padding:                .2em !default;
-
-$kbd-box-shadow:              inset 0 -2px 0 rgba($black, .25) !default;
-$nested-kbd-font-weight:      $font-weight-bold !default;
-
-$list-inline-padding:         8px !default;
-$mark-bg:                     #fcf8e3 !default;
 
 // Icon
 //
@@ -173,7 +146,7 @@ $table-dark-color:            $body-bg !default;
 
 $table-striped-order:         odd !default;
 
-$table-caption-color:         $text-muted !default;
+$table-caption-color:         $gray-600 !default;
 
 // Buttons
 //
@@ -216,9 +189,6 @@ $input-border-color:                #d2ddec !default;
 $input-box-shadow:                  inset 0 1px 1px rgba($primary, .075) !default;
 $input-transition:                  border-color .15s $ease-in-out, box-shadow .15s $ease-in-out !default;
 $input-placeholder-color:           #b1c2d9 !default;
-$input-border-radius:               $border-radius !default;
-$input-border-radius-lg:            $border-radius-lg !default;
-$input-border-radius-sm:            $border-radius-sm !default;
 
 $input-focus-bg:                    $input-bg !default;
 $input-focus-border-color:          $primary !default;
@@ -229,14 +199,17 @@ $input-hover-border-color:          $input-focus-border-color !default;
 // Calendar
 //
 $calendar-color:                    $input-color !default;
+$calendar-other-color:              $input-placeholder-color !default;
 $calendar-border-color:             $input-border-color !default;
 $calendar-item-size:                36px !default;
 $calendar-item-bg:                  #edf2f9 !default;
+$calendar-active-bg:                $component-active-bg !default;
+$calendar-active-border-color:      $calendar-active-bg !default;
 $calendar-icon-size:                14px !default;
 $calendar-icon-color:               $input-placeholder-color !default;
 $calendar-container-padding:        12px !default;
 $calendar-shadow:                   0 2px 8px rgba($black, .25) !default;
-$calendar-transition:               transform 300ms cubic-bezier(0.23, 1, 0.32, 1), opacity 300ms cubic-bezier(0.23, 1, 0.32, 1) !default;
+$calendar-transition:               transform 300ms $ease-fade, opacity 300ms $ease-fade !default;
 
 // Checkbox
 //
@@ -244,7 +217,7 @@ $checkbox-size:                     $font-size-base !default;
 $checkbox-margin-right:             24px !default;
 $checkbox-active-color:             $primary !default;
 $checkbox-border-radius:            2px !default;
-$checkbox-indicator-transtion:      border-color .25s cubic-bezier(.71, -.46, .29, 1.46), background-color .25s cubic-bezier(.71, -.46, .29, 1.46) !default;
+$checkbox-indicator-transtion:      border-color .25s $ease-in-out-back, background-color .25s $ease-in-out-back !default;
 
 // Switch
 //
@@ -253,7 +226,7 @@ $switch-height-sm:                  16px !default;
 $switch-height-lg:                  28px !default;
 $switch-bg:                       #e3ebf6 !default;
 $switch-bg-checked:                 $primary !default;
-$switch-transition:                 background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+$switch-transition:                 background-color .15s $ease-in-out, border-color .15s $ease-in-out, box-shadow .15s ease-in-out;
 $switch-focus-box-shadow:           0 0 0 1px #fff, 0 0 0 2.5px rgba($component-active-bg, .25) !default;
 $switch-disabled-opacity:           .4 !default;
 
@@ -282,7 +255,7 @@ $pagination-focus-box-shadow:       0 0 0 2px rgba($component-active-bg, .25) !d
 $pagination-focus-outline:          0 !default;
 
 $pagination-hover-color:            $primary !default;
-$pagination-hover-bg:               #f9fbfd !default;
+$pagination-hover-bg:               #edf2f9 !default;
 $pagination-hover-border-color:     $border-width !default;
 
 $pagination-active-color:           $component-active-color !default;
@@ -297,16 +270,12 @@ $pagination-disabled-opacity:       .65 !default;
 
 // Alert
 //
-$alert-type-colors: () !default;
-$alert-type-colors: map-merge(
-  (
-    "info":       $info,
-    "success":    $success,
-    "warning":    $warning,
-    "error":      $danger
-  ),
-  $alert-type-colors
-);
+$alert-type-colors: (
+  "info":       $info,
+  "success":    $success,
+  "warning":    $warning,
+  "error":      $danger
+) !default;
 $alert-padding-y:                   8px !default;
 $alert-padding-x:                   20px !default;
 $alert-margin-bottom:               16px !default;
@@ -336,10 +305,6 @@ $grid-breakpoints: (
   sm: 48em,
   md: 62em,
   lg: 75em
-  // sm: 576px,
-  // md: 768px,
-  // lg: 992px,
-  // xl: 1200px
 ) !default;
 $grid-gutter-compensation:          $grid-gutter-width * 0.5 * -1;
 $grid-half-gutter-width:            $grid-gutter-width * 0.5;

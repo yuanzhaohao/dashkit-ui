@@ -17,7 +17,7 @@ import {
   toDate,
 } from 'date-fns';
 
-function getDaysOfMonth(dirtyDate) {
+function getDaysOfMonth(dirtyDate: any) {
   const date = toDate(dirtyDate);
   const end = endOfWeek(endOfMonth(date));
   let current = startOfWeek(startOfMonth(date));
@@ -35,18 +35,16 @@ function getDaysOfMonth(dirtyDate) {
   return days;
 }
 
-function isInvalid(date) {
-  // eslint-disable-next-line
-  return isNaN(date)
+function isInvalid(date: any) {
+  return isNaN(date);
 }
 
-function toDateWithFormat(dirtyDate, fmt, def) {
+function toDateWithFormat(dirtyDate: any, fmt: string) {
   let date
   if (typeof dirtyDate === 'string') date = parse(dirtyDate, fmt, new Date())
   else date = toDate(dirtyDate)
 
   if (isInvalid(date)) date = toDate(dirtyDate)
-  if (isInvalid(date)) date = def
 
   return date
 }
