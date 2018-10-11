@@ -1,4 +1,4 @@
-export type ValueProps = string | number | Date | undefined;
+export type ValueProps = string | number | Date;
 
 export type PickerProps = {
   prefixCls?: string;

@@ -39,16 +39,3 @@ export function toDateWithFormat(dirtyDate: ValueProps, fmt: string) {
   }
   return toDate(dirtyDate);
 }
-
-export function cloneTime(date: Date, old: Date, fmt: string) {
-  old = toDateWithFormat(old, fmt);
-  if (isInvalid(old)) {
-    return date;
-  }
-
-  date.setHours(old.getHours());
-  date.setMinutes(old.getMinutes());
-  date.setSeconds(old.getSeconds());
-
-  return date;
-}

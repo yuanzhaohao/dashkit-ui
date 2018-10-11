@@ -64,7 +64,7 @@ class BasicPicker extends React.PureComponent<CalendarProps, CalendarState> {
       [`${prefixCls}`]: true,
     }, className);
     const { value } = this.state;
-    const date = this.parseDate(value);
+    const date = value ? this.parseDate(value) : undefined;
     const format = this.getFormat();
 
     return (
@@ -74,7 +74,7 @@ class BasicPicker extends React.PureComponent<CalendarProps, CalendarState> {
           placeholder={this.getPlaceholder()}
           onFocus={this.handleInputFocus}
           onChange={this.handleInputChange}
-          value={isInvalid(date) ? undefined : fnsFormat(date, format)}
+          value={!isInvalid(date) && date ? fnsFormat(date, format) : undefined}
         />
         <Icon type="calendar" className={`${prefixCls}-icon`} />
         <CSSTransition
@@ -150,9 +150,9 @@ class BasicPicker extends React.PureComponent<CalendarProps, CalendarState> {
     // const format = this.getFormat();
     // const value = fnsFormat(date, format);
     // const { onChange } = this.props;
-    this.setState({
-      value: date
-    });
+    // this.setState({
+    //   value: date
+    // });
   }
 
   bindDocumentClick = () => {
