@@ -33,7 +33,7 @@ ReactDOM.render(
       </Col>
     </Row>
 
-    <h4 className="grid-title grid-title-first">.between-</h4>
+    <h4 className="grid-title">.between-</h4>
     <Row>
       <Col xs={12}>
         <div className="grid-box">

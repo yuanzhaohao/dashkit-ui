@@ -11,7 +11,6 @@ $calendar-prefix: 'dk-calendar';
 
   &-input {
     padding-right: 30px;
-    outline: none;
   }
 
   &-icon {
@@ -90,7 +89,7 @@ $calendar-prefix: 'dk-calendar';
     flex: 1;
     justify-content: center;
 
-    >span {
+    > span {
       display: inline-block;
       color: $gray-800;
       font-weight: bold;
@@ -147,7 +146,6 @@ $calendar-prefix: 'dk-calendar';
         border: 1px solid transparent;
         border-radius: 6px;
         cursor: pointer;
-        font-size: $font-size-base;
         color: $calendar-color;
 
         &:hover {
@@ -171,6 +169,40 @@ $calendar-prefix: 'dk-calendar';
         color: #fff;
       }
     }
+
+    &-item-hover-start {
+      border-top-left-radius: 50%;
+      border-bottom-left-radius: 50%;
+    }
+
+    &-item-hover-end {
+      border-top-right-radius: 50%;
+      border-bottom-right-radius: 50%;
+    }
+
+    &-item-hover {
+      background-color: var(--calendar-item-bg);
+
+      >span,
+      >span:hover {
+        background-color: transparent;
+        border-color: transparent;
+      }
+    }
+
+    &-item-week-active {
+      background-color: var(--calendar-item-bg);
+
+      &.#{$calendar-prefix}-day-item-hover-start,
+      &.#{$calendar-prefix}-day-item-hover-end {
+
+        >span,
+        >span:hover {
+          border-color: var(--calendar-active-border-color);
+          border-radius: 50%;
+        }
+      }
+    }
   }
 
   &-month {
@@ -191,7 +223,6 @@ $calendar-prefix: 'dk-calendar';
         height: 100%;
         border-radius: 3px;
         cursor: pointer;
-        font-size: $font-size-base;
         color: $calendar-color;
 
         &:hover {

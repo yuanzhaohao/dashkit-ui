@@ -71,7 +71,7 @@ class Day extends React.PureComponent<DayProps> {
     const itemClassName = classNames({
       [`${prefixCls}-day-item`]: true,
       [`${prefixCls}-day-item-other`]: current.getMonth() !== date.getMonth(),
-      [`${prefixCls}-day-item-active`]: value && isSameDay(date, value),
+      [`${prefixCls}-day-item-active`]: !!(value && isSameDay(date, value)),
     });
 
     return (

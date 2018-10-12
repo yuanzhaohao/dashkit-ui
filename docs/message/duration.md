@@ -3,7 +3,7 @@ order: 1
 title:
   zh-CN: 时间
   en-US: Duration
-subtitle: 
+subtitle:
   zh-CN: 可以设置`duration`控制展示的时间。
   en-US: Use `duration` to control display time.
 ---
@@ -12,7 +12,7 @@ subtitle:
 import { Message, Button } from 'dashkit-ui';
 
 const show = () => {
-  Message.show('Setup a callback function', 10);
+  Message.show('Display a 10s time message', 10);
 };
 
 ReactDOM.render(

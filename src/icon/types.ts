@@ -15,7 +15,7 @@ export default {
     'chevrons-down',
     'chevrons-left',
     'chevrons-right',
-    'chevrons-up'
+    'chevrons-up',
   ],
   'communication': [
     'mail',
@@ -28,7 +28,7 @@ export default {
     'phone-off',
     'phone-outgoing',
     'phone',
-    'voicemail'
+    'voicemail',
   ],
   'core': [
     'activity',
@@ -72,12 +72,12 @@ export default {
     'disc',
     'download-cloud',
     'download',
+    'edit',
     'edit-2',
     'edit-3',
-    'edit',
     'external-link',
-    'eye-off',
     'eye',
+    'eye-off',
     'feather',
     'file',
     'filter',
@@ -168,7 +168,7 @@ export default {
     'x',
     'zap',
     'zoom-in',
-    'zoom-out'
+    'zoom-out',
   ],
   'location': [
     'compass',
@@ -177,7 +177,7 @@ export default {
     'map-pin',
     'map',
     'navigation-2',
-    'navigation'
+    'navigation',
   ],
   'logos': [
     'chrome',
@@ -187,7 +187,7 @@ export default {
     'instagram',
     'pocket',
     'slack',
-    'twitter'
+    'twitter',
   ],
   'media-controls': [
     'fast-forward',
@@ -204,7 +204,7 @@ export default {
     'volume-1',
     'volume-2',
     'volume-x',
-    'volume'
+    'volume',
   ],
   'photo-and-video': [
     'aperture',
@@ -213,7 +213,7 @@ export default {
     'film',
     'image',
     'video-off',
-    'video'
+    'video',
   ],
   'weather': [
     'cloud-drizzle',
@@ -227,6 +227,6 @@ export default {
     'sunset',
     'thermometer',
     'umbrella',
-    'wind'
-  ]
-}
+    'wind',
+  ],
+};

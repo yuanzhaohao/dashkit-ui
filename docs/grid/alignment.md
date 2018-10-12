@@ -5,7 +5,7 @@ title:
   en-US: Alignment
 subtitle:
   zh-CN: 可以使用`start` `middle` `end`, `center`, `top`, 将元素对齐到行开头或结尾以及列的顶部、底部或中心
-  en-US: Add classes to align elements to the start or end of row as well as the top, bottom, or center of a column
+  en-US: Add classes to align elements to the start or end of row as well as the top, bottom, or center of a column.
 ---
 
 ```js

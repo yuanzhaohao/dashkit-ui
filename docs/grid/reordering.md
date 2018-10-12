@@ -42,7 +42,7 @@ ReactDOM.render(
       </Col>
     </Row>
 
-    <h4 className="grid-title grid-title">.last-</h4>
+    <h4 className="grid-title">.last-</h4>
     <Row>
       <Col xs={12}>
         <div className="grid-box">
