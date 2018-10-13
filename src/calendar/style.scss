@@ -216,7 +216,7 @@ $calendar-prefix: 'dk-calendar';
       display: inline-block;
       width: $calendar-month-item-width;
       height: $calendar-month-item-height;
-      padding: 4px 4px 0 4px;
+      padding: 4px 8px 0 8px;
 
       > span {
         display: flex;
