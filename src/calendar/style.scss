@@ -113,6 +113,7 @@ $calendar-prefix: 'dk-calendar';
 
   &-list {
     position: relative;
+    margin-top: 8px;
     z-index: 10;
   }
 
@@ -136,6 +137,7 @@ $calendar-prefix: 'dk-calendar';
       width: $calendar-item-size;
       height: $calendar-item-size;
       padding: 3px;
+      margin: 3px 0;
 
       > span {
         display: flex;
@@ -181,7 +183,8 @@ $calendar-prefix: 'dk-calendar';
     }
 
     &-item-hover {
-      background-color: var(--calendar-item-bg);
+      background-color: $calendar-item-bg;
+      cursor: pointer;
 
       >span,
       >span:hover {
@@ -191,14 +194,14 @@ $calendar-prefix: 'dk-calendar';
     }
 
     &-item-week-active {
-      background-color: var(--calendar-item-bg);
+      background-color: $calendar-item-bg;
 
       &.#{$calendar-prefix}-day-item-hover-start,
       &.#{$calendar-prefix}-day-item-hover-end {
 
         >span,
         >span:hover {
-          border-color: var(--calendar-active-border-color);
+          border-color: $calendar-active-border-color;
           border-radius: 50%;
         }
       }

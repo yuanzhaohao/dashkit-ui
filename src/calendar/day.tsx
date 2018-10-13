@@ -1,22 +1,33 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import { isSameDay, addMonths } from 'date-fns';
+import { isSameDay, addMonths, addDays, isSameWeek } from 'date-fns';
 import { BasicProps } from './types';
 import { monthValues, weekdayValues, getDaysOfMonth } from './utils';
 import Icon from '../icon';
 
 export type DayProps = BasicProps & {
   current: Date;
+  type?: 'day' | 'week';
   onChange: (date: Date, isSelectDay?: boolean) => void;
 };
 
-class Day extends React.PureComponent<DayProps> {
+export type DayState = {
+  hoverDate: null | Date;
+};
+
+class Day extends React.PureComponent<DayProps, DayState> {
   cachedDate: Date | null;
   cachedDays: any;
+  static defaultProps = {
+    type: 'day',
+  };
   constructor(props: DayProps) {
     super(props);
     this.cachedDate = null;
     this.cachedDays = null;
+    this.state = {
+      hoverDate: null,
+    };
   }
 
   render() {
@@ -67,22 +78,39 @@ class Day extends React.PureComponent<DayProps> {
   }
 
   renderDay = (date: Date) => {
-    const { prefixCls, current, value } = this.props;
-    const itemClassName = classNames({
-      [`${prefixCls}-day-item`]: true,
-      [`${prefixCls}-day-item-other`]: current.getMonth() !== date.getMonth(),
-      [`${prefixCls}-day-item-active`]: !!(value && isSameDay(date, value)),
-    });
-
+    const { type } = this.props;
+    const itemClassName = this.getClassNames(date);
     return (
       <div
         key={date.getTime()}
         className={itemClassName}
         onClick={this.handleDayClick.bind(this, date)}
+        onMouseEnter={type === 'week' ? this.handleHoverWeek.bind(this, date) : undefined}
+        onMouseLeave={type === 'week' ? this.handleHoverWeekLeave : undefined}
       >
         <span>{date.getDate()}</span>
       </div>
     );
+  }
+
+  getClassNames = (date: Date) => {
+    const { prefixCls, current, value, type } = this.props;
+    if (type === 'week') {
+      const { hoverDate } = this.state;
+      return classNames({
+        [`${prefixCls}-day-item`]: true,
+        [`${prefixCls}-day-item-other`]: current.getMonth() !== date.getMonth(),
+        [`${prefixCls}-day-item-week-active`]: !!(value && isSameWeek(date, value)),
+        [`${prefixCls}-day-item-hover`]: !!(hoverDate && isSameWeek(date, hoverDate)),
+        [`${prefixCls}-day-item-hover-start`]: date.getDay() === 0,
+        [`${prefixCls}-day-item-hover-end`]: date.getDay() === 6,
+      });
+    }
+    return classNames({
+      [`${prefixCls}-day-item`]: true,
+      [`${prefixCls}-day-item-other`]: current.getMonth() !== date.getMonth(),
+      [`${prefixCls}-day-item-active`]: !!value && isSameDay(date, value),
+    });
   }
 
   getDays = () => {
@@ -97,21 +125,28 @@ class Day extends React.PureComponent<DayProps> {
   }
 
   handleDayClick = (date: Date) => {
-    const { current, onChange, disabled } = this.props;
+    const { current, onChange, disabled, type } = this.props;
 
     if (disabled) {
       return;
     }
 
-    const newDate = new Date(
-      date.getFullYear(),
-      date.getMonth(),
-      date.getDate(),
-      current.getHours(),
-      current.getMinutes(),
-      current.getSeconds(),
-    );
-    onChange(newDate, true);
+    if (type === 'week') {
+      if (date.getDay() === 0) {
+        date = addDays(date, 1);
+      }
+      onChange(date, true);
+    } else {
+      const newDate = new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate(),
+        current.getHours(),
+        current.getMinutes(),
+        current.getSeconds(),
+      );
+      onChange(newDate, true);
+    }
   }
 
   handleMouth = (month: number) => {
@@ -136,6 +171,18 @@ class Day extends React.PureComponent<DayProps> {
 
   handleNextMonth = () => {
     this.handleMouth(1);
+  }
+
+  handleHoverWeek = (date: Date) => {
+    this.setState({
+      hoverDate: date,
+    });
+  }
+
+  handleHoverWeekLeave = () => {
+    this.setState({
+      hoverDate: null,
+    });
   }
 }
 

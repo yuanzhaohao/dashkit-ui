@@ -21,6 +21,9 @@ ReactDOM.render(
       <Calendar onChange={onChange} />
     </div>
     <div style={{marginTop: '10px'}}>
+      <Calendar onChange={onChange} type="week" />
+    </div>
+    <div style={{marginTop: '10px'}}>
       <Calendar onChange={onChange} type="month" />
     </div>
   </div>,

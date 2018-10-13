@@ -36,7 +36,7 @@ const allFormats = {
   'day': 'yyyy-MM-dd',
   'month': 'yyyy-MM',
   'time': 'HH:mm:ss',
-  'week': 'yyyy WW',
+  'week': 'yyyy ww',
   'datetime': 'yyyy-MM-dd HH:mm:ss',
   'range': 'yyyy-MM-dd',
 }
@@ -95,10 +95,23 @@ class BasicPicker extends React.PureComponent<CalendarProps, CalendarState> {
   }
 
   renderContent = () => {
-    const { type, prefixCls, disabled } = this.props;
+    const { type = 'day', prefixCls, disabled } = this.props;
     const { current, value } = this.state;
 
     switch (type) {
+      case 'day':
+      case 'week': {
+        return (
+          <Day
+            type={type}
+            current={current}
+            prefixCls={prefixCls}
+            disabled={disabled}
+            onChange={this.handleChange}
+            value={this.parseDate(value)}
+          />
+        );
+      }
       case 'month': {
         return (
           <Month
@@ -106,19 +119,8 @@ class BasicPicker extends React.PureComponent<CalendarProps, CalendarState> {
             prefixCls={prefixCls}
             disabled={disabled}
             onChange={this.handleChange}
-            value={value}
+            value={this.parseDate(value)}
           />
-        );
-      }
-      default: {
-        return (
-          <Day
-            current={current}
-            prefixCls={prefixCls}
-            disabled={disabled}
-            onChange={this.handleChange}
-            value={value}
-           />
         );
       }
     }
