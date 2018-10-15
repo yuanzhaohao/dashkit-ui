@@ -1,10 +1,10 @@
-export type ValueProps = string | number | Date;
+export type DateProps = string | number | Date;
 
 export type BasicProps = {
   prefixCls?: string;
   className?: string;
   disabled?: boolean;
-  value?: ValueProps;
+  value?: DateProps;
   format?: string;
 };
 

@@ -1,8 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import { isSameDay, addMonths, addDays, isSameWeek } from 'date-fns';
 import { BasicProps } from './types';
-import { monthValues, weekdayValues, getDaysOfMonth } from './utils';
+import { monthValues, weekdayValues, getDaysOfMonth, isSameDay, isSameWeek, addDays, addMonths } from './utils';
 import Icon from '../icon';
 
 export type DayProps = BasicProps & {
