@@ -1,7 +1,7 @@
 import { parse } from 'date-fns';
 import { DateProps } from './types';
 
-const token = /d{1,4}|M{1,4}|yy(?:yy)?|S{1,3}|Do|ZZ|WW|([HhMsDm])\1?|[aA]|"[^"]*"|'[^']*'/g;
+const token = /d{1,4}|M{1,4}|yy(?:yy)?|S{1,3}|Do|ZZ|WW|Wo|([HhMsDm])\1?|[aA]|"[^"]*"|'[^']*'/g;
 const twoDigits = /\d\d?/;
 const threeDigits = /\d{3}/;
 const fourDigits = /\d{4}/;
@@ -315,8 +315,10 @@ const formatFlags: any = {
     return date.getHours() < 12 ? amPm[0].toUpperCase() : amPm[1].toUpperCase();
   },
   WW: function (date: Date) {
-    console.log(date)
     return pad(getWeekNumberOfYear(date));
+  },
+  Wo: function (date: Date) {
+    return DoFn(getWeekNumberOfYear(date));
   },
   ZZ: function (date: Date) {
     var o = date.getTimezoneOffset();
