@@ -9,7 +9,7 @@ import Input from '../input';
 import Icon from '../icon';
 import Day from './day';
 import Month from './month';
-import { toDateWithFormat, isDate, formatDate } from './utils';
+import { parseDate, isDate, formatDate } from './utils';
 
 export type CalendarType = 'day' | 'week' | 'month' | 'time' | 'datetime';
 export type CalendarProps = BasicProps & {
@@ -65,7 +65,6 @@ class BasicPicker extends React.PureComponent<CalendarProps, CalendarState> {
       [`${prefixCls}`]: true,
     }, className);
     const { value } = this.state;
-    const date = value ? this.parseDate(value) : undefined;
     const format = this.getFormat();
 
     return (
@@ -75,7 +74,7 @@ class BasicPicker extends React.PureComponent<CalendarProps, CalendarState> {
           placeholder={this.getPlaceholder()}
           onFocus={this.handleInputFocus}
           onChange={this.handleInputChange}
-          value={date && isDate(date) ? formatDate(date, format) : undefined}
+          value={value ? formatDate(value, format) : undefined}
         />
         <Icon type="calendar" className={`${prefixCls}-icon`} />
         <CSSTransition
@@ -108,7 +107,7 @@ class BasicPicker extends React.PureComponent<CalendarProps, CalendarState> {
             prefixCls={prefixCls}
             disabled={disabled}
             onChange={this.handleChange}
-            value={value ? this.parseDate(value) : undefined}
+            value={value}
           />
         );
       }
@@ -119,7 +118,7 @@ class BasicPicker extends React.PureComponent<CalendarProps, CalendarState> {
             prefixCls={prefixCls}
             disabled={disabled}
             onChange={this.handleChange}
-            value={value ? this.parseDate(value) : undefined}
+            value={value}
           />
         );
       }
@@ -139,7 +138,7 @@ class BasicPicker extends React.PureComponent<CalendarProps, CalendarState> {
   }
 
   parseDate(value: DateProps) {
-    return toDateWithFormat(value, this.getFormat());
+    return parseDate(value, this.getFormat());
   }
 
   getCurrent = () => {
@@ -188,18 +187,19 @@ class BasicPicker extends React.PureComponent<CalendarProps, CalendarState> {
 
   handleChange = (date: Date, isSelectDay?: boolean) => {
     const { onChange } = this.props;
-    const format = this.getFormat();
-    const value = formatDate(date, format);
-    console.log(formatDate(date, format))
+    // const format = this.getFormat();
+    // const value = formatDate(date, format);
 
     if (isSelectDay) {
       this.setState({
         current: date,
-        value,
+        value: date,
         active: false,
       });
       if (typeof onChange === 'function') {
-        onChange(date, value);
+        const format = this.getFormat();
+        const dateStr = formatDate(date, format);
+        onChange(date, dateStr);
       }
     } else {
       this.setState({
