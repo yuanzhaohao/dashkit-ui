@@ -1,4 +1,3 @@
-import { parse } from 'date-fns';
 import { DateProps } from './types';
 
 const token = /d{1,4}|M{1,4}|yy(?:yy)?|S{1,3}|Do|ZZ|WW|Wo|([HhMsDm])\1?|[aA]|"[^"]*"|'[^']*'/g;

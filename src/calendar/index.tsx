@@ -3,7 +3,6 @@ import './style.scss';
 import * as React from 'react';
 import * as classNames from 'classnames';
 import { CSSTransition } from 'react-transition-group';
-import { format as fnsFormat } from 'date-fns';
 import { BasicProps, DateProps } from './types';
 import Input from '../input';
 import Icon from '../icon';
