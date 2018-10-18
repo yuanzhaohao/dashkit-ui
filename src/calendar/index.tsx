@@ -99,8 +99,10 @@ class BasicPicker extends React.PureComponent<CalendarProps, CalendarState> {
 
     switch (type) {
       case 'time': {
+        const format = this.getFormat();
         return (
           <Time
+            format={format}
             current={current}
             value={value}
             prefixCls={prefixCls}

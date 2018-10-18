@@ -12,7 +12,7 @@ const amPm = ['am', 'pm'];
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-function shorten(arr: string[], sLen: number) {
+export function shorten(arr: string[], sLen: number) {
   var newArr = [];
   for (var i = 0, len = arr.length; i < len; i++) {
     newArr.push(arr[i].substr(0, sLen));
@@ -20,13 +20,13 @@ function shorten(arr: string[], sLen: number) {
   return newArr;
 }
 
-function getDaySuffix(d: number) {
+export function getDaySuffix(d: number) {
   const s = ['th', 'st', 'nd', 'rd'];
   const v = d % 100;
   return d + (s[(v - 20) % 10] || s[v] || s[0]);
 }
 
-function pad(val: number, len = 2) {
+export function pad(val: number, len = 2) {
   let newVal = String(val);
   while (newVal.length < len) {
     newVal = '0' + val;
