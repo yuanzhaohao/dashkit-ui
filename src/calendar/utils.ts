@@ -9,6 +9,8 @@ const literal = /\[([^]*?)\]/gm;
 const noop = function () {
 };
 const amPm = ['am', 'pm'];
+const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 function shorten(arr: string[], sLen: number) {
   var newArr = [];
@@ -18,12 +20,20 @@ function shorten(arr: string[], sLen: number) {
   return newArr;
 }
 
-function DoFn(D: number) {
-  return D + ['th', 'st', 'nd', 'rd'][D % 10 > 3 ? 0 : (D - D % 10 !== 10) * D % 10];
+function getDaySuffix(d: number) {
+  const s = ['th', 'st', 'nd', 'rd'];
+  const v = d % 100;
+  return d + (s[(v - 20) % 10] || s[v] || s[0]);
 }
 
-const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+function pad(val: number, len = 2) {
+  let newVal = String(val);
+  while (newVal.length < len) {
+    newVal = '0' + val;
+  }
+  return newVal;
+}
+
 export const weekdayValues = {
   short: shorten(weekdays, 3),
   long: weekdays,
@@ -50,14 +60,6 @@ export function toDate(dirtyDate: DateProps) {
   }
 
   return new Date(NaN);
-}
-
-function pad(val: number, len = 2) {
-  let newVal = String(val);
-  while (newVal.length < len) {
-    newVal = '0' + val;
-  }
-  return newVal;
 }
 
 export function addDays(dirtyDate: DateProps, amount: number) {
@@ -254,7 +256,7 @@ const formatFlags: any = {
     return pad(date.getDay());
   },
   Do: function (date: Date) {
-    return DoFn(date.getDate());
+    return getDaySuffix(date.getDate());
   },
   d: function (date: Date) {
     return date.getDate();
@@ -317,7 +319,7 @@ const formatFlags: any = {
     return pad(getWeekNumberOfYear(date));
   },
   Wo: function (date: Date) {
-    return DoFn(getWeekNumberOfYear(date));
+    return getDaySuffix(getWeekNumberOfYear(date));
   },
   ZZ: function (date: Date) {
     var o = date.getTimezoneOffset();
