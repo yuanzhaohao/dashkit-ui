@@ -30,7 +30,6 @@ $calendar-prefix: 'dk-calendar';
     position: absolute;
     top: 100%;
     left: 0;
-    width: $calendar-item-size * 7 + $calendar-container-padding * 2;
     margin-top: 5px;
     padding: $calendar-container-padding;
     box-shadow: $calendar-shadow;
@@ -115,6 +114,7 @@ $calendar-prefix: 'dk-calendar';
   &-list {
     position: relative;
     margin-top: 8px;
+    width: $calendar-item-size * 7;
     z-index: 10;
   }
 
@@ -214,20 +214,39 @@ $calendar-prefix: 'dk-calendar';
     width: 100%;
     flex-direction: row;
 
+    &:before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: $calendar-container-padding;
+      right: $calendar-container-padding;
+      margin-top: - $calendar-time-item-height / 2;
+      height: $calendar-time-item-height;
+      border-top: 1px solid $border-color;
+      border-bottom: 1px solid $border-color;
+    }
+
     &-scroll {
-      width: 1 / 3 * 100%;
-      height: 150px;
-      border-right: 1px solid $border-color;
+      width: $calendar-time-item-width;
+      height: $calendar-time-item-height * 7;
+      // border-right: 1px solid $border-color;
       flex-direction: column;
       overflow: hidden;
 
-      &:last-child {
-        border-right: 0;
-      }
+      // &:last-child {
+      //   border-right: 0;
+      // }
     }
 
-    &-pad {
-      height: $calendar-time-item-height * 2;
+    &-list {
+      padding: 0;
+
+      &:before,
+      &:after {
+        content: '';
+        display: block;
+        height: $calendar-time-item-height * 3;
+      }
     }
 
     &-item {

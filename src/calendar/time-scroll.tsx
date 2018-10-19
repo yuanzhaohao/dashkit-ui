@@ -19,16 +19,16 @@ class Time extends React.PureComponent<TimeScrollProps> {
 
     return (
       <div className={`${prefixCls}-time-scroll`}>
-        <div className={`${prefixCls}-time-pad`} />
-        {rangeNumber(total, 0).map(num =>
-          <span
-            key={num}
-            className={`${prefixCls}-time-item`}
-          >
-            {pad(num)}
-          </span>
-        )}
-        <div className={`${prefixCls}-time-pad`} />
+        <div className={`${prefixCls}-time-list`}>
+          {rangeNumber(total, 0).map(num =>
+            <span
+              key={num}
+              className={`${prefixCls}-time-item`}
+            >
+              {pad(num)}
+            </span>
+          )}
+        </div>
       </div>
     );
   }

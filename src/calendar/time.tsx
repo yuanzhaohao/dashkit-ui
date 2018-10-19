@@ -36,11 +36,11 @@ class Time extends React.PureComponent<TimeProps> {
         }
         {
           format.indexOf('m') >= 0 &&
-          <TimeScroll prefixCls={prefixCls} value={date.getMinutes()} onChange={this.handleChange} />
+          <TimeScroll prefixCls={prefixCls} total={60} value={date.getMinutes()} onChange={this.handleChange} />
         }
         {
           format.indexOf('s') >= 0 &&
-          <TimeScroll prefixCls={prefixCls} value={date.getSeconds()} onChange={this.handleChange} />
+          <TimeScroll prefixCls={prefixCls} total={60} value={date.getSeconds()} onChange={this.handleChange} />
         }
       </div>
     );
