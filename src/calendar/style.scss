@@ -252,8 +252,12 @@ $calendar-prefix: 'dk-calendar';
     &-item {
       display: block;
       text-align: center;
-      font-size: 12px;
       line-height: $calendar-time-item-height;
+      cursor: pointer;
+
+      &:hover {
+        background: $calendar-item-bg;
+      }
     }
   }
 
@@ -278,7 +282,7 @@ $calendar-prefix: 'dk-calendar';
         color: $calendar-color;
 
         &:hover {
-          background-color: $calendar-item-bg;
+          background: $calendar-item-bg;
         }
       }
     }
@@ -286,7 +290,7 @@ $calendar-prefix: 'dk-calendar';
     &-item-active {
       > span,
       > span:hover {
-        background-color: $calendar-active-bg;
+        background: $calendar-active-bg;
         color: #fff;
       }
     }

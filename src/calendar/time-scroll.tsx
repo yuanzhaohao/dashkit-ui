@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { rangeNumber } from '../utils/number';
 import { pad } from './utils';
+import { Scrollbars } from 'react-custom-scrollbars';
 
 export type TimeScrollProps = {
   prefixCls?: string;
@@ -18,7 +19,8 @@ class Time extends React.PureComponent<TimeScrollProps> {
     const { prefixCls, total = 0 } = this.props;
 
     return (
-      <div className={`${prefixCls}-time-scroll`}>
+      <Scrollbars style={{ width: 66, height: 224 }}>
+      {/* <div className={`${prefixCls}-time-scroll`}> */}
         <div className={`${prefixCls}-time-list`}>
           {rangeNumber(total, 0).map(num =>
             <span
@@ -29,7 +31,8 @@ class Time extends React.PureComponent<TimeScrollProps> {
             </span>
           )}
         </div>
-      </div>
+      {/* </div> */}
+      </Scrollbars>
     );
   }
 }
