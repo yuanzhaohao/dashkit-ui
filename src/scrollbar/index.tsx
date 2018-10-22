@@ -279,8 +279,8 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
     const thumbHorizontalDiv = this.thumbHorizontalRef.current as HTMLDivElement;
     const thumbVerticalDiv = this.thumbVerticalRef.current as HTMLDivElement;
 
-    trackHorizontalDiv.addEventListener('mouseenter', this.handleTrackMouseEnter);
-    trackHorizontalDiv.addEventListener('mouseleave', this.handleTrackMouseLeave);
+    // trackHorizontalDiv.addEventListener('mouseenter', this.handleTrackMouseEnter);
+    // trackHorizontalDiv.addEventListener('mouseleave', this.handleTrackMouseLeave);
     trackHorizontalDiv.addEventListener('mousedown', this.handleHorizontalTrackMouseDown);
     // trackVerticalDiv.addEventListener('mouseenter', this.handleTrackMouseEnter);
     // trackVerticalDiv.addEventListener('mouseleave', this.handleTrackMouseLeave);
@@ -299,8 +299,8 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
     const thumbHorizontalDiv = this.thumbHorizontalRef.current as HTMLDivElement;
     const thumbVerticalDiv = this.thumbVerticalRef.current as HTMLDivElement;
 
-    trackHorizontalDiv.removeEventListener('mouseenter', this.handleTrackMouseEnter);
-    trackHorizontalDiv.removeEventListener('mouseleave', this.handleTrackMouseLeave);
+    // trackHorizontalDiv.removeEventListener('mouseenter', this.handleTrackMouseEnter);
+    // trackHorizontalDiv.removeEventListener('mouseleave', this.handleTrackMouseLeave);
     trackHorizontalDiv.removeEventListener('mousedown', this.handleHorizontalTrackMouseDown);
     // trackVerticalDiv.removeEventListener('mouseenter', this.handleTrackMouseEnter);
     // trackVerticalDiv.removeEventListener('mouseleave', this.handleTrackMouseLeave);
