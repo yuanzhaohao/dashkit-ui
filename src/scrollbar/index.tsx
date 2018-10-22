@@ -271,7 +271,6 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
   }
 
   addListeners = () => {
-    /* istanbul ignore if */
     if (typeof document === 'undefined' || !this.viewRef.current) return;
     this.viewRef.current.addEventListener('scroll', this.handleScroll);
     const trackHorizontalDiv = this.trackHorizontalRef.current as HTMLDivElement;
@@ -279,11 +278,7 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
     const thumbHorizontalDiv = this.thumbHorizontalRef.current as HTMLDivElement;
     const thumbVerticalDiv = this.thumbVerticalRef.current as HTMLDivElement;
 
-    // trackHorizontalDiv.addEventListener('mouseenter', this.handleTrackMouseEnter);
-    // trackHorizontalDiv.addEventListener('mouseleave', this.handleTrackMouseLeave);
     trackHorizontalDiv.addEventListener('mousedown', this.handleHorizontalTrackMouseDown);
-    // trackVerticalDiv.addEventListener('mouseenter', this.handleTrackMouseEnter);
-    // trackVerticalDiv.addEventListener('mouseleave', this.handleTrackMouseLeave);
     trackVerticalDiv.addEventListener('mousedown', this.handleVerticalTrackMouseDown);
     thumbHorizontalDiv.addEventListener('mousedown', this.handleHorizontalThumbMouseDown);
     thumbVerticalDiv.addEventListener('mousedown', this.handleVerticalThumbMouseDown);
@@ -291,7 +286,6 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
   }
 
   removeListeners = () => {
-    /* istanbul ignore if */
     if (typeof document === 'undefined' || !this.viewRef.current) return;
     this.viewRef.current.removeEventListener('scroll', this.handleScroll);
     const trackHorizontalDiv = this.trackHorizontalRef.current as HTMLDivElement;
@@ -299,16 +293,11 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
     const thumbHorizontalDiv = this.thumbHorizontalRef.current as HTMLDivElement;
     const thumbVerticalDiv = this.thumbVerticalRef.current as HTMLDivElement;
 
-    // trackHorizontalDiv.removeEventListener('mouseenter', this.handleTrackMouseEnter);
-    // trackHorizontalDiv.removeEventListener('mouseleave', this.handleTrackMouseLeave);
     trackHorizontalDiv.removeEventListener('mousedown', this.handleHorizontalTrackMouseDown);
-    // trackVerticalDiv.removeEventListener('mouseenter', this.handleTrackMouseEnter);
-    // trackVerticalDiv.removeEventListener('mouseleave', this.handleTrackMouseLeave);
     trackVerticalDiv.removeEventListener('mousedown', this.handleVerticalTrackMouseDown);
     thumbHorizontalDiv.removeEventListener('mousedown', this.handleHorizontalThumbMouseDown);
     thumbVerticalDiv.removeEventListener('mousedown', this.handleVerticalThumbMouseDown);
     window.removeEventListener('resize', this.handleWindowResize);
-    // Possibly setup by `handleDragStart`
     this.teardownDragging();
   }
 
@@ -402,6 +391,7 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
     document.body.style.userSelect = 'none';
     document.addEventListener('mousemove', this.handleDrag);
     document.addEventListener('mouseup', this.handleDragEnd);
+    // tslint:disable-next-line
     document.onselectstart = () => false;
   }
 
@@ -409,6 +399,7 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
     document.body.style.userSelect = '';
     document.removeEventListener('mousemove', this.handleDrag);
     document.removeEventListener('mouseup', this.handleDragEnd);
+    // tslint:disable-next-line
     document.onselectstart = undefined;
   }
 

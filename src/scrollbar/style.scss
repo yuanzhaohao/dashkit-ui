@@ -16,8 +16,6 @@ $scrollbar-prefix: 'dk-scrollbar';
     left: 0;
     right: 0;
     bottom: 0;
-    // margin-left: -$scrollbar-thumb-size;
-    // margin-right: -$scrollbar-thumb-size;
     overflow: scroll;
     -webkit-overflow-scrolling: touch;
 
@@ -26,13 +24,6 @@ $scrollbar-prefix: 'dk-scrollbar';
       height: 0;
     }
   }
-
-  // &:hover {
-  //   .#{$scrollbar-prefix}-track-horizontal,
-  //   .#{$scrollbar-prefix}-track-vertical {
-  //     opacity: 1;
-  //   }
-  // }
 
   &-track-horizontal,
   &-track-vertical {

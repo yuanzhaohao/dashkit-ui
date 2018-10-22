@@ -28,25 +28,25 @@ class Time extends React.PureComponent<TimeProps> {
       <div className={`${prefixCls}-time`}>
         {
           format.indexOf('H') >= 0 &&
-          <TimeScroll prefixCls={prefixCls} value={date.getHours()} total={24} onChange={this.handleChange} />
+          <TimeScroll prefixCls={prefixCls} value={date.getHours()} total={24} onChange={this.handleChange.bind(this, 'hour')} />
         }
         {
           format.indexOf('h') >= 0 &&
-          <TimeScroll prefixCls={prefixCls} value={hours} total={12} onChange={this.handleChange} />
+          <TimeScroll prefixCls={prefixCls} value={hours} total={12} onChange={this.handleChange.bind(this, 'hour')} />
         }
         {
           format.indexOf('m') >= 0 &&
-          <TimeScroll prefixCls={prefixCls} total={60} value={date.getMinutes()} onChange={this.handleChange} />
+          <TimeScroll prefixCls={prefixCls} total={60} value={date.getMinutes()} onChange={this.handleChange.bind(this, 'minute')} />
         }
         {
           format.indexOf('s') >= 0 &&
-          <TimeScroll prefixCls={prefixCls} total={60} value={date.getSeconds()} onChange={this.handleChange} />
+          <TimeScroll prefixCls={prefixCls} total={60} value={date.getSeconds()} onChange={this.handleChange.bind(this, 'second')} />
         }
       </div>
     );
   }
 
-  handleChange = () => {
+  handleChange = (type: string, num: number) => {
 
   }
 }

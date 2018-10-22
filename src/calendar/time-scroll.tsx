@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as classNames from 'classnames';
 import Scrollbars from '../scrollbar';
 import { rangeNumber } from '../utils/number';
 import { pad } from './utils';
@@ -6,25 +7,39 @@ import { pad } from './utils';
 export type TimeScrollProps = {
   prefixCls?: string;
   total?: number;
-  value?: number;
-  onChange?: (date: string) => void;
+  value: number;
+  onChange: (num: number) => void;
 };
+const itemHeight = 32;
 
 class Time extends React.PureComponent<TimeScrollProps> {
   constructor(props: TimeScrollProps) {
     super(props);
+    this.state = {
+      autoHide: false,
+    }
+  }
+
+  componentDidMount() {
+    const { value } = this.props;
+    this.refs.scrollbars.scrollTop(value * itemHeight);
   }
 
   render() {
-    const { prefixCls, total = 0 } = this.props;
+    const { prefixCls, value, total = 0 } = this.props;
+    console.log(value)
 
     return (
-      <Scrollbars className={`${prefixCls}-time-scroll`}>
+      <Scrollbars className={`${prefixCls}-time-scroll`} ref="scrollbars">
         <div className={`${prefixCls}-time-list`}>
           {rangeNumber(total, 0).map(num =>
             <span
               key={num}
-              className={`${prefixCls}-time-item`}
+              className={classNames({
+                [`${prefixCls}-time-item`]: true,
+                [`${prefixCls}-time-item-active`]: num === value
+              })}
+              onClick={this.handleItemClick.bind(this, num)}
             >
               {pad(num)}
             </span>
@@ -32,6 +47,12 @@ class Time extends React.PureComponent<TimeScrollProps> {
         </div>
       </Scrollbars>
     );
+  }
+
+  handleItemClick = (num: number) => {
+    const { onChange } = this.props;
+    this.refs.scrollbars.scrollTop(num * itemHeight);
+    onChange(num);
   }
 }
 
