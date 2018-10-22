@@ -20,7 +20,7 @@ export function getScrollbarWidth() {
   if (!scrollbarWidth) return 0;
 
   const div = document.createElement('div');
-  div.setAttribute('style', 'display:block;position:absolute;width:100px;height:100px;top:-9999px;overflow:scroll;');\
+  div.setAttribute('style', 'display:block;position:absolute;width:100px;height:100px;top:-9999px;overflow:scroll;');
 
   document.body.appendChild(div);
   scrollbarWidth = (div.offsetWidth - div.clientWidth);

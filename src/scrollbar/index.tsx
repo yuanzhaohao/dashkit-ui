@@ -1,13 +1,7 @@
 import './style.scss';
 import * as React from 'react';
 import * as classNames from 'classnames';
-import * as css from 'dom-css';
 import { getInnerWidth, getInnerHeight, getScrollbarWidth, raf, caf } from './utils';
-import {
-  disableSelectStyle,
-  disableSelectStyleReset
-} from './styles';
-
 
 type ValueProps = {
   left: number;
@@ -325,7 +319,6 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
     }
     this.update((values: ValueProps) => {
       const { scrollLeft, scrollTop } = values;
-      console.log(scrollTop)
       this.viewScrollLeft = scrollLeft;
       this.viewScrollTop = scrollTop;
       if (typeof onScrollFrame === 'function') {
@@ -406,14 +399,14 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
   }
 
   setupDragging = () => {
-    css(document.body, disableSelectStyle);
+    document.body.style.userSelect = 'none';
     document.addEventListener('mousemove', this.handleDrag);
     document.addEventListener('mouseup', this.handleDragEnd);
     document.onselectstart = () => false;
   }
 
   teardownDragging = () => {
-    css(document.body, disableSelectStyleReset);
+    document.body.style.userSelect = '';
     document.removeEventListener('mousemove', this.handleDrag);
     document.removeEventListener('mouseup', this.handleDragEnd);
     document.onselectstart = undefined;
@@ -486,8 +479,10 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
 
   showTracks = () => {
     clearTimeout(this.hideTracksTimeout);
-    css(this.trackHorizontalRef.current, { opacity: 1 });
-    css(this.trackVerticalRef.current, { opacity: 1 });
+    const trackHorizontalDiv = this.trackHorizontalRef.current as HTMLDivElement;
+    const trackVerticalDiv = this.trackVerticalRef.current as HTMLDivElement;
+    trackHorizontalDiv.style.opacity = '1';
+    trackVerticalDiv.style.opacity = '1';
   }
 
   hideTracks = () => {
@@ -497,8 +492,10 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
     const { autoHideTimeout } = this.props;
     clearTimeout(this.hideTracksTimeout);
     this.hideTracksTimeout = window.setTimeout(() => {
-      css(this.trackHorizontalRef.current, { opacity: 0 });
-      css(this.trackVerticalRef.current, { opacity: 0 });
+      const trackHorizontalDiv = this.trackHorizontalRef.current as HTMLDivElement;
+      const trackVerticalDiv = this.trackVerticalRef.current as HTMLDivElement;
+      trackHorizontalDiv.style.opacity = '0';
+      trackVerticalDiv.style.opacity = '0';
     }, autoHideTimeout);
   }
 
@@ -536,25 +533,26 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
     const { onUpdate } = this.props;
     const values = this.getValues();
     const { scrollLeft, clientWidth, scrollWidth } = values;
+
     const trackHorizontalDiv = this.trackHorizontalRef.current as HTMLDivElement;
     const trackHorizontalWidth = getInnerWidth(trackHorizontalDiv);
     const thumbHorizontalWidth = this.getThumbHorizontalWidth();
     const thumbHorizontalX = scrollLeft / (scrollWidth - clientWidth) * (trackHorizontalWidth - thumbHorizontalWidth);
-    const thumbHorizontalStyle = {
-      width: thumbHorizontalWidth,
-      transform: `translateX(${thumbHorizontalX}px)`
-    };
+
     const { scrollTop, clientHeight, scrollHeight } = values;
     const trackVerticalDiv = this.trackVerticalRef.current as HTMLDivElement;
     const trackVerticalHeight = getInnerHeight(trackVerticalDiv);
     const thumbVerticalHeight = this.getThumbVerticalHeight();
     const thumbVerticalY = scrollTop / (scrollHeight - clientHeight) * (trackVerticalHeight - thumbVerticalHeight);
-    const thumbVerticalStyle = {
-      height: thumbVerticalHeight,
-      transform: `translateY(${thumbVerticalY}px)`
-    };
-    css(this.thumbHorizontalRef.current, thumbHorizontalStyle);
-    css(this.thumbVerticalRef.current, thumbVerticalStyle);
+
+    const thumbHorizontalDiv = this.thumbHorizontalRef.current as HTMLDivElement;
+    const thumbVerticalDiv = this.thumbVerticalRef.current as HTMLDivElement;
+
+    thumbHorizontalDiv.style.height = `${thumbHorizontalWidth}px`;
+    thumbHorizontalDiv.style.transform = `translateX(${thumbHorizontalX}px)`;
+    thumbVerticalDiv.style.height = `${thumbVerticalHeight}px`;
+    thumbVerticalDiv.style.transform = `translateY(${thumbVerticalY}px)`;
+
     if (typeof onUpdate === 'function') {
       onUpdate(values);
     }
@@ -563,5 +561,4 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
     }
   }
 }
-
 export default Scrollbar;
