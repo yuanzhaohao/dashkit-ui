@@ -4,6 +4,7 @@ export { default as Grid } from './grid';
 export { default as Layout } from './layout';
 export { default as Icon } from './icon';
 export { default as Button } from './button';
+export { default as Scrollbar } from './scrollbar';
 export { default as Checkbox } from './checkbox';
 export { default as Switch } from './switch';
 export { default as Input } from './input';

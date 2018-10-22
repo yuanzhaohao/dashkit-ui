@@ -1,0 +1,79 @@
+@import '../style/functions';
+@import '../style/theme';
+@import '../style/mixins';
+
+$scrollbar-prefix: 'dk-scrollbar';
+
+.#{$scrollbar-prefix} {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  &-view {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    // margin-left: -$scrollbar-thumb-size;
+    // margin-right: -$scrollbar-thumb-size;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+  }
+
+  // &:hover {
+  //   .#{$scrollbar-prefix}-track-horizontal,
+  //   .#{$scrollbar-prefix}-track-vertical {
+  //     opacity: 1;
+  //   }
+  // }
+
+  &-track-horizontal,
+  &-track-vertical {
+    position: absolute;
+    opacity: 1;
+    transition: opacity 200ms;
+    border-radius: $scrollbar-thumb-size / 2;
+  }
+
+  &-track-horizontal {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: $scrollbar-thumb-size;
+  }
+
+  &-track-vertical {
+    top: 0;
+    right: 0;
+    width: $scrollbar-thumb-size;
+    height: 100%;
+  }
+
+  &-hide-track {
+    opacity: 0;
+  }
+
+  &-thumb-horizontal,
+  &-thumb-vertical {
+    position: relative;
+    display: block;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: $scrollbar-thumb-size / 2;
+    cursor: pointer;
+  }
+
+  &-thumb-vertical {
+    width: 100%;
+  }
+
+  &-thumb-horizontal {
+    height: 100%;
+  }
+}

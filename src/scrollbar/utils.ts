@@ -1,5 +1,3 @@
-import css from 'dom-css';
-
 export function getInnerWidth(el: Element) {
   const { clientWidth } = el;
   const { paddingLeft, paddingRight } = getComputedStyle(el);
@@ -16,25 +14,23 @@ export function getInnerHeight(el: Element) {
     - (paddingBottom ? parseFloat(paddingBottom) : 0);
 }
 
-let scrollbarWidth: boolean | number = false;
+let scrollbarWidth: number;
 
 export function getScrollbarWidth() {
-  if (scrollbarWidth !== false) return scrollbarWidth;
-  if (typeof document !== 'undefined') {
-    const div = document.createElement('div');
-    css(div, {
-      width: 100,
-      height: 100,
-      position: 'absolute',
-      top: -9999,
-      overflow: 'scroll',
-      MsOverflowStyle: 'scrollbar'
-    });
-    document.body.appendChild(div);
-    scrollbarWidth = (div.offsetWidth - div.clientWidth);
-    document.body.removeChild(div);
-  } else {
-    scrollbarWidth = 0;
-  }
+  if (!scrollbarWidth) return 0;
+
+  const div = document.createElement('div');
+  div.setAttribute('style', 'display:block;position:absolute;width:100px;height:100px;top:-9999px;overflow:scroll;');\
+
+  document.body.appendChild(div);
+  scrollbarWidth = (div.offsetWidth - div.clientWidth);
+  document.body.removeChild(div);
   return scrollbarWidth || 0;
 }
+
+export const raf = window.requestAnimationFrame ||
+  function requestAnimationFrameTimeout() {
+    return setTimeout(arguments[0], 10);
+  };
+
+export const caf = window.cancelAnimationFrame;

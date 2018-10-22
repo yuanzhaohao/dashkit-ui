@@ -2,9 +2,9 @@
 @import '../style/theme';
 @import '../style/mixins';
 
-$menu-prefix-cls: 'dk-menu';
+$menu-prefix: 'dk-menu';
 
-.#{$menu-prefix-cls} {
+.#{$menu-prefix} {
   position: relative;
   outline: none;
   margin: 0;
@@ -113,12 +113,12 @@ $menu-prefix-cls: 'dk-menu';
   }
 }
 
-.#{$menu-prefix-cls}-dark {
+.#{$menu-prefix}-dark {
   border-color: $menu-dark-border-color;
   background: $menu-dark-bg;
 
-  .#{$menu-prefix-cls}-item,
-  .#{$menu-prefix-cls}-submenu-title {
+  .#{$menu-prefix}-item,
+  .#{$menu-prefix}-submenu-title {
     color: $menu-dark-item-color;
 
     &-active {
