@@ -189,24 +189,24 @@ $calendar-prefix: 'dk-calendar';
     }
 
     &-item-hover {
-      background-color: $calendar-item-bg;
+      background: $light;
       cursor: pointer;
 
-      >span,
-      >span:hover {
-        background-color: transparent;
+      > span,
+      > span:hover {
+        background: transparent;
         border-color: transparent;
       }
     }
 
     &-item-week-active {
-      background-color: $calendar-item-bg;
+      background: $calendar-item-bg;
 
       &.#{$calendar-prefix}-day-item-hover-start,
       &.#{$calendar-prefix}-day-item-hover-end {
 
-        >span,
-        >span:hover {
+        > span,
+        > span:hover {
           border-color: $calendar-active-border-color;
           border-radius: 50%;
         }

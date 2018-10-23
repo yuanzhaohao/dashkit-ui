@@ -1,12 +1,9 @@
 import * as React from 'react';
 import { toDate } from './utils';
-import { BasicProps } from './types';
+import { PickerProps } from './types';
 import TimeScroll from './time-scroll';
 
-export type TimeProps = BasicProps & {
-  current: Date;
-  format: string;
-};
+export type TimeProps = PickerProps;
 
 class Time extends React.PureComponent<TimeProps> {
   constructor(props: TimeProps) {

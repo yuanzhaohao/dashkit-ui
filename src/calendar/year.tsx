@@ -1,12 +1,13 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import { BasicProps } from './types';
+import { BasicProps, CalendarType } from './types';
 import { addYears, toDate } from './utils';
 import { rangeNumber } from '../utils/number';
 import Icon from '../icon';
 
 export type YearProps = BasicProps & {
   current: Date;
+  onModeChange: (type: CalendarType) => void;
 };
 
 const rangeTotal = 12;
@@ -60,14 +61,18 @@ class Year extends React.PureComponent<YearProps> {
   }
 
   handleYearClick = (year: number) => {
-    const { current, onChange, disabled } = this.props;
+    const { current, onChange, disabled, type } = this.props;
 
     if (disabled) {
       return;
     }
     const date = new Date(current.getTime());
+    const isYear = type === 'year';
     date.setFullYear(year);
-    onChange(date, true);
+    onChange(date, isYear);
+    if (!isYear) {
+      this.props.onModeChange(type);
+    }
   }
 
   handleYear = (year: number) => {

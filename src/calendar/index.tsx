@@ -7,11 +7,9 @@ import { BasicProps, DateProps } from './types';
 import Input from '../input';
 import Icon from '../icon';
 import Picker from './picker';
-import { parseDate, isDate, formatDate } from './utils';
+import { parseDate, formatDate } from './utils';
 
-export type CalendarType = 'time' | 'day' | 'week' | 'month' | 'year';
 export type CalendarProps = BasicProps & {
-  type?: CalendarType;
   placeholder?: string;
   range?: boolean;
   onChange?: (date: Date, dateStr: string) => void;

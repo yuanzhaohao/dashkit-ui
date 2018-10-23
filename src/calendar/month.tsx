@@ -1,12 +1,12 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import { BasicProps, CalendarMode } from './types';
+import { BasicProps, CalendarType } from './types';
 import { monthValues, addYears, isSameMonth } from './utils';
 import Icon from '../icon';
 
 export type MonthProps = BasicProps & {
   current: Date;
-  onModeChange: (type: CalendarMode) => void;
+  onModeChange: (type: CalendarType) => void;
 };
 
 class Month extends React.PureComponent<MonthProps> {
@@ -67,15 +67,19 @@ class Month extends React.PureComponent<MonthProps> {
   }
 
   handleMonthClick = (i: number) => {
-    const { current, onChange, disabled } = this.props;
+    const { current, onChange, type, disabled } = this.props;
 
     if (disabled) {
       return;
     }
     const date = new Date(current.getTime());
+    const isMonth = type === 'month';
 
     date.setMonth(i, 1);
-    onChange(date, true);
+    onChange(date, isMonth);
+    if (!isMonth) {
+      this.props.onModeChange(type);
+    }
   }
 
   handleYear = (year: number) => {

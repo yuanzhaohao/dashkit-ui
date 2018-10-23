@@ -4,10 +4,8 @@ import Time from './time';
 import Day from './day';
 import Month from './month';
 import Year from './year';
-import { CalendarType } from './index';
 
 export type PickerProps = BasicProps & {
-  type: CalendarType;
   format: string;
   current: Date;
 };
@@ -19,21 +17,18 @@ export type PickerState = {
 class Picker extends React.PureComponent<PickerProps, PickerState> {
   constructor(props: PickerProps) {
     super(props);
-    let mode
+    let mode: CalendarMode;
     switch (props.type) {
       case 'year':
-        mode = 'year';
-        break;
       case 'month':
-        mode = 'month';
-        break;
+      case 'day':
       case 'time':
-        mode = 'time';
-        break
+        mode = props.type;
+        break;
       default:
         mode = 'day';
+        break;
     }
-
     this.state = {
       mode,
     };
@@ -47,11 +42,14 @@ class Picker extends React.PureComponent<PickerProps, PickerState> {
       case 'year': {
         return (
           <Year
+            type={type}
+            format={format}
             current={current}
             prefixCls={prefixCls}
             disabled={disabled}
             onChange={onChange}
             value={value}
+            onModeChange={this.handleModeChange}
           />
         );
       }
@@ -59,7 +57,9 @@ class Picker extends React.PureComponent<PickerProps, PickerState> {
       case 'month': {
         return (
           <Month
+            type={type}
             current={current}
+            format={format}
             prefixCls={prefixCls}
             disabled={disabled}
             onChange={onChange}
@@ -72,12 +72,14 @@ class Picker extends React.PureComponent<PickerProps, PickerState> {
       case 'time': {
         return (
           <Time
+            type={type}
             format={format}
             current={current}
             value={value}
             prefixCls={prefixCls}
             disabled={disabled}
             onChange={onChange}
+            onModeChange={this.handleModeChange}
           />
         );
       }
@@ -86,6 +88,7 @@ class Picker extends React.PureComponent<PickerProps, PickerState> {
         return (
           <Day
             type={type === 'week' ? 'week' : 'day'}
+            format={format}
             current={current}
             prefixCls={prefixCls}
             disabled={disabled}
