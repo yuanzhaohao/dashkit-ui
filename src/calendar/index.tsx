@@ -192,23 +192,35 @@ class BasicPicker extends React.PureComponent<CalendarProps, CalendarState> {
   }
 
   handleChange = (date: Date, isSelectDay?: boolean) => {
-    const { onChange } = this.props;
+    const { onChange, type } = this.props;
 
-    if (isSelectDay) {
-      this.setState({
-        current: date,
-        value: date,
-        active: false,
-      });
-      if (typeof onChange === 'function') {
-        const format = this.getFormat();
-        const dateStr = formatDate(date, format);
-        onChange(date, dateStr);
+    switch (type) {
+      case 'time': {
+        this.setState({
+          current: date,
+          value: date,
+        });
       }
-    } else {
-      this.setState({
-        current: date,
-      });
+      case 'day':
+      case 'week':
+      case 'month': {
+        if (isSelectDay) {
+          this.setState({
+            current: date,
+            value: date,
+            active: false,
+          });
+          if (typeof onChange === 'function') {
+            const format = this.getFormat();
+            const dateStr = formatDate(date, format);
+            onChange(date, dateStr);
+          }
+        } else {
+          this.setState({
+            current: date,
+          });
+        }
+      }
     }
   }
 }

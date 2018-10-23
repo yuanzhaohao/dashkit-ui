@@ -228,7 +228,7 @@ $calendar-prefix: 'dk-calendar';
 
     &-scroll {
       width: $calendar-time-item-width;
-      height: $calendar-time-item-height * 5;
+      height: $calendar-time-item-height * 6;
       border-right: 1px solid $border-color;
       flex-direction: column;
       overflow: hidden;
@@ -241,11 +241,11 @@ $calendar-prefix: 'dk-calendar';
     &-list {
       padding: 0;
 
-      &:before,
+      // &:before,
       &:after {
         content: '';
         display: block;
-        height: $calendar-time-item-height * 2;
+        height: $calendar-time-item-height * 5;
       }
     }
 

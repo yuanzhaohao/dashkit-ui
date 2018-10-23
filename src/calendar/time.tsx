@@ -17,13 +17,11 @@ class Time extends React.PureComponent<TimeProps> {
 
   render() {
     const { prefixCls, value, current, format } = this.props;
-    console.log(value, format)
     const date = toDate(value || current);
     const hours = format.indexOf('h') >= 0 && date.getHours() >= 12
       ? date.getHours() - 12
       : date.getHours();
 
-    console.log(format.indexOf('H') >= 0);
     return (
       <div className={`${prefixCls}-time`}>
         {
@@ -46,8 +44,35 @@ class Time extends React.PureComponent<TimeProps> {
     );
   }
 
-  handleChange = (type: string, num: number) => {
+  handleChange = (type: string, val: number) => {
+    const { value, current, format, onChange } = this.props;
 
+    const date = toDate(value || current);
+    switch (type) {
+      case 'hour':
+        if (format.indexOf('h') >= 0 && date.getHours() >= 12) {
+          date.setHours(val + 12);
+        } else {
+          date.setHours(val);
+        }
+        break
+      case 'minute':
+        date.setMinutes(val)
+        break
+      case 'second':
+        date.setSeconds(val);
+        break
+      case 'ampm':
+        const hours = date.getHours();
+        if (val === 1 && hours < 12) {
+          date.setHours(hours + 12);
+        } else if (val === 0 && hours >= 12) {
+          date.setHours(hours - 12);
+        }
+        break
+      default:
+    }
+    onChange(date);
   }
 }
 

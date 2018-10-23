@@ -10,13 +10,16 @@ export type TimeScrollProps = {
   value: number;
   onChange: (num: number) => void;
 };
+export type TimeScrollState = {
+  hideTrack: boolean;
+};
 const itemHeight = 32;
 
-class Time extends React.PureComponent<TimeScrollProps> {
+class Time extends React.PureComponent<TimeScrollProps, TimeScrollState> {
   constructor(props: TimeScrollProps) {
     super(props);
     this.state = {
-      autoHide: false,
+      hideTrack: false,
     }
   }
 
@@ -27,10 +30,12 @@ class Time extends React.PureComponent<TimeScrollProps> {
 
   render() {
     const { prefixCls, value, total = 0 } = this.props;
-    console.log(value)
 
     return (
-      <Scrollbars className={`${prefixCls}-time-scroll`} ref="scrollbars">
+      <Scrollbars
+        className={`${prefixCls}-time-scroll`}
+        ref="scrollbars"
+      >
         <div className={`${prefixCls}-time-list`}>
           {rangeNumber(total, 0).map(num =>
             <span
@@ -51,7 +56,7 @@ class Time extends React.PureComponent<TimeScrollProps> {
 
   handleItemClick = (num: number) => {
     const { onChange } = this.props;
-    this.refs.scrollbars.scrollTop(num * itemHeight);
+    this.refs.scrollbars.scrollTop(num * itemHeight, 120);
     onChange(num);
   }
 }

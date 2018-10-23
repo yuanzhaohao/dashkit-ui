@@ -20,7 +20,6 @@ export type ScrollbarProps = {
   className?: string;
   thumbSize?: number;
   thumbMinSize: number;
-  showTrack: boolean;
   autoHide: boolean;
   autoHideTimeout: number;
   onScroll?: (event: MouseEvent) => void;
@@ -28,6 +27,36 @@ export type ScrollbarProps = {
   onScrollStop?: () => void;
   onScrollFrame?: (value: ValueProps) => void;
   onUpdate?: UpdateCallback;
+};
+
+const scrollAnimateTop = (element: Element, to: number, duration: number) => {
+  if (duration <= 0) {
+    element.scrollTop = to;
+    return;
+  }
+  const difference = to - element.scrollTop;
+  const perTick = difference / duration * 10;
+
+  raf(() => {
+    element.scrollTop = element.scrollTop + perTick;
+    if (element.scrollTop === to) return;
+    scrollAnimateTop(element, to, duration - 10);
+  });
+};
+
+const scrollAnimateLeft = (element: Element, to: number, duration: number) => {
+  if (duration <= 0) {
+    element.scrollLeft = to;
+    return;
+  }
+  const difference = to - element.scrollLeft;
+  const perTick = difference / duration * 10;
+
+  raf(() => {
+    element.scrollLeft = element.scrollLeft + perTick;
+    if (element.scrollLeft === to) return;
+    scrollAnimateLeft(element, to, duration - 10);
+  });
 };
 
 class Scrollbar extends React.PureComponent<ScrollbarProps> {
@@ -54,7 +83,6 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
   static defaultProps = {
     prefixCls: 'dk-scrollbar',
     thumbMinSize: 30,
-    showTrack: false,
     autoHide: true,
     autoHideTimeout: 1000,
   };
@@ -240,14 +268,22 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
     return offset / (trackHeight - thumbHeight) * (scrollHeight - clientHeight);
   }
 
-  scrollLeft = (left = 0) => {
+  scrollLeft = (left = 0, duration = 0) => {
     if (!this.viewRef.current) return;
-    this.viewRef.current.scrollLeft = left;
+    if (duration === 0) {
+      this.viewRef.current.scrollLeft = left;
+    } else {
+      scrollAnimateLeft(this.viewRef.current, left, duration);
+    }
   }
 
-  scrollTop = (top = 0) => {
+  scrollTop = (top = 0, duration = 0) => {
     if (!this.viewRef.current) return;
-    this.viewRef.current.scrollTop = top;
+    if (duration === 0) {
+      this.viewRef.current.scrollTop = top;
+    } else {
+      scrollAnimateTop(this.viewRef.current, top, duration);
+    }
   }
 
   scrollToLeft = () => {
