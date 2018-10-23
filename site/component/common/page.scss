@@ -235,3 +235,18 @@
     margin-bottom: 10px;
   }
 }
+
+// Calendar
+//
+.calendar-item {
+  padding: 12px 0;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  p {
+    margin-bottom: 7px;
+    font-size: 16px;
+  }
+}
