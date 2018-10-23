@@ -44,7 +44,7 @@ export const monthValues = {
   long: months,
 };
 
-export function toDate(dirtyDate: DateProps) {
+export function toDate(dirtyDate?: DateProps) {
   if (arguments.length < 1) {
     throw new TypeError(
       '1 argument required, but only ' + arguments.length + ' present',
@@ -127,7 +127,7 @@ export function startOfWeek(dirtyDate: DateProps) {
   return date;
 }
 
-export function isDate(dirtyDate: DateProps) {
+export function isDate(dirtyDate?: DateProps) {
   if (dirtyDate === null || dirtyDate === undefined) {
     return false;
   }
@@ -186,21 +186,6 @@ export function isSameMonth(
     dateLeft.getFullYear() === dateRight.getFullYear() &&
     dateLeft.getMonth() === dateRight.getMonth()
   );
-}
-
-export function isSameYear(
-  dirtyDateLeft: DateProps,
-  dirtyDateRight: DateProps,
-) {
-  if (arguments.length < 2) {
-    throw new TypeError(
-      '2 arguments required, but only ' + arguments.length + ' present',
-    );
-  }
-
-  const dateLeft = toDate(dirtyDateLeft);
-  const dateRight = toDate(dirtyDateRight);
-  return dateLeft.getFullYear() === dateRight.getFullYear()
 }
 
 export function getDayNumberOfMouth(dirtyDate: DateProps) {

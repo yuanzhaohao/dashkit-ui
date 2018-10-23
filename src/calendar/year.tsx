@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 import { BasicProps } from './types';
-import { addYears, isSameYear } from './utils';
+import { addYears, toDate } from './utils';
 import { rangeNumber } from '../utils/number';
 import Icon from '../icon';
 
@@ -18,8 +18,8 @@ class Year extends React.PureComponent<YearProps> {
 
   render() {
     const { prefixCls, current, value } = this.props;
-    const year = current.getFullYear() - Math.floor(rangeTotal / 2);
-    const years = rangeNumber(rangeTotal, 0).map(i => year + i);
+    const startYear = Math.floor(current.getFullYear() / 10) * 10;
+    const years = rangeNumber(11, -1).map(i => startYear + i);
 
     return (
       <div className={`${prefixCls}-year`}>
@@ -31,7 +31,7 @@ class Year extends React.PureComponent<YearProps> {
               onClick={this.handlePrevRange}
             />
             <div className={`${prefixCls}-select`}>
-              <span>{years[0]} ~ {years[years.length - 1]}</span>
+              <span>{years[1]} ~ {years[years.length - 2]}</span>
             </div>
             <Icon
               className={`${prefixCls}-next`}
@@ -41,12 +41,13 @@ class Year extends React.PureComponent<YearProps> {
           </div>
         </div>
         <div className={`${prefixCls}-list`}>
-          {years.map((year) =>
+          {years.map((year, i) =>
             <div
               key={year}
               className={classNames({
                 [`${prefixCls}-month-item`]: true,
-                [`${prefixCls}-month-item-active`]: value && isSameYear(year, value),
+                [`${prefixCls}-month-item-other`]: i === 0 || i === years.length - 1,
+                [`${prefixCls}-month-item-active`]: year === toDate(value).getFullYear(),
               })}
               onClick={this.handleYearClick.bind(this, year)}
             >
@@ -78,11 +79,11 @@ class Year extends React.PureComponent<YearProps> {
   }
 
   handlePrevRange = () => {
-    this.handleYear(-rangeTotal);
+    this.handleYear(-10);
   }
 
   handleNextRange = () => {
-    this.handleYear(rangeTotal);
+    this.handleYear(10);
   }
 }
 

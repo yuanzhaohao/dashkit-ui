@@ -301,6 +301,12 @@ $calendar-prefix: 'dk-calendar';
       }
     }
 
+    &-item-other {
+      > span {
+        color: $calendar-other-color;
+      }
+    }
+
     &-item-active {
       > span,
       > span:hover {
