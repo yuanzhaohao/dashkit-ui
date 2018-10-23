@@ -188,6 +188,21 @@ export function isSameMonth(
   );
 }
 
+export function isSameYear(
+  dirtyDateLeft: DateProps,
+  dirtyDateRight: DateProps,
+) {
+  if (arguments.length < 2) {
+    throw new TypeError(
+      '2 arguments required, but only ' + arguments.length + ' present',
+    );
+  }
+
+  const dateLeft = toDate(dirtyDateLeft);
+  const dateRight = toDate(dirtyDateRight);
+  return dateLeft.getFullYear() === dateRight.getFullYear()
+}
+
 export function getDayNumberOfMouth(dirtyDate: DateProps) {
   const date = toDate(dirtyDate);
   const year = date.getFullYear();

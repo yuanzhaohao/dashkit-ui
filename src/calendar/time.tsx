@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as classNames from 'classnames';
 import { toDate } from './utils';
 import { BasicProps } from './types';
 import TimeScroll from './time-scroll';
@@ -7,7 +6,6 @@ import TimeScroll from './time-scroll';
 export type TimeProps = BasicProps & {
   current: Date;
   format: string;
-  onChange: (date: Date, isSelectDay?: boolean) => void;
 };
 
 class Time extends React.PureComponent<TimeProps> {

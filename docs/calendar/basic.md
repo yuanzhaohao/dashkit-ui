@@ -29,6 +29,9 @@ ReactDOM.render(
     <div style={{marginTop: '10px'}}>
       <Calendar onChange={onChange} type="month" />
     </div>
+    <div style={{marginTop: '10px'}}>
+      <Calendar onChange={onChange} type="year" />
+    </div>
   </div>,
   mountNode
 );

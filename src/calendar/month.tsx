@@ -1,12 +1,12 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import { BasicProps } from './types';
+import { BasicProps, CalendarMode } from './types';
 import { monthValues, addYears, isSameMonth } from './utils';
 import Icon from '../icon';
 
 export type MonthProps = BasicProps & {
   current: Date;
-  onChange: (date: Date, isSelectDay?: boolean) => void;
+  onModeChange: (type: CalendarMode) => void;
 };
 
 class Month extends React.PureComponent<MonthProps> {
@@ -22,15 +22,15 @@ class Month extends React.PureComponent<MonthProps> {
         <div className={`${prefixCls}-header`}>
           <div className={`${prefixCls}-config`}>
             <Icon
-              className={`${prefixCls}-prev-year`}
+              className={`${prefixCls}-prev`}
               type="chevrons-left"
               onClick={this.handlePrevYear}
             />
             <div className={`${prefixCls}-select`}>
-              <span>{current.getFullYear()}</span>
+              <span onClick={() => this.props.onModeChange('year')}>{current.getFullYear()}</span>
             </div>
             <Icon
-              className={`${prefixCls}-next-year`}
+              className={`${prefixCls}-next`}
               type="chevrons-right"
               onClick={this.handleNextYear}
             />

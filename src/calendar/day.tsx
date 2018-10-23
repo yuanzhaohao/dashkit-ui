@@ -1,13 +1,13 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import { BasicProps } from './types';
+import { BasicProps, CalendarMode } from './types';
 import { monthValues, weekdayValues, getDaysOfMonth, isSameDay, isSameWeek, addDays, addMonths } from './utils';
 import Icon from '../icon';
 
 export type DayProps = BasicProps & {
+  type: 'day' | 'week';
   current: Date;
-  type?: 'day' | 'week';
-  onChange: (date: Date, isSelectDay?: boolean) => void;
+  onModeChange: (type: CalendarMode) => void;
 };
 
 export type DayState = {
@@ -38,7 +38,7 @@ class Day extends React.PureComponent<DayProps, DayState> {
         <div className={`${prefixCls}-header`}>
           <div className={`${prefixCls}-config`}>
             <Icon
-              className={`${prefixCls}-prev-year`}
+              className={`${prefixCls}-prev`}
               type="chevrons-left"
               onClick={this.handlePrevYear}
             />
@@ -48,8 +48,8 @@ class Day extends React.PureComponent<DayProps, DayState> {
               onClick={this.handlePrevMonth}
             />
             <div className={`${prefixCls}-select`}>
-              <span>{monthValues.long[current.getMonth()]}</span>
-              <span>{current.getFullYear()}</span>
+              <span onClick={() => this.props.onModeChange('month')}>{monthValues.long[current.getMonth()]}</span>
+              <span onClick={() => this.props.onModeChange('year')}>{current.getFullYear()}</span>
             </div>
             <Icon
               className={`${prefixCls}-next-month`}
@@ -57,7 +57,7 @@ class Day extends React.PureComponent<DayProps, DayState> {
               onClick={this.handleNextMonth}
             />
             <Icon
-              className={`${prefixCls}-next-year`}
+              className={`${prefixCls}-next`}
               type="chevrons-right"
               onClick={this.handleNextYear}
             />
