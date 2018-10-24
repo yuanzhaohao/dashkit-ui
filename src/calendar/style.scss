@@ -117,12 +117,13 @@ $calendar-prefix: 'dk-calendar';
 
   &-list {
     position: relative;
-    margin-top: 8px;
-    width: $calendar-item-size * 7;
+    width: 100%;
+    margin-top: 12px;
     z-index: 10;
   }
 
   &-header {
+    width: 100%;
     border-bottom: 1px solid $calendar-border-color;
   }
 
@@ -134,7 +135,7 @@ $calendar-prefix: 'dk-calendar';
   }
 
   &-day {
-    width: auto;
+    width: $calendar-picker-width;
     text-align: center;
 
     &-item {
@@ -276,7 +277,7 @@ $calendar-prefix: 'dk-calendar';
   }
 
   &-ym {
-    width: 100%;
+    width: $calendar-picker-width;
 
     &-item {
       display: inline-block;

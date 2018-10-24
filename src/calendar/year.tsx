@@ -66,7 +66,7 @@ class Year extends React.PureComponent<YearProps> {
     date.setFullYear(year);
     onChange(date, isYear);
     if (!isYear) {
-      this.props.onModeChange(type);
+      this.props.onModeChange('month');
     }
   }
 

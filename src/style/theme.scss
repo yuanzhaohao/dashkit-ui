@@ -213,6 +213,7 @@ $calendar-item-bg:                  #edf2f9 !default;
 $calendar-time-item-width:          66px !default;
 $calendar-time-item-height:         32px !default;
 $calendar-ym-item-height:           32px !default;
+$calendar-picker-width:             $calendar-item-size * 7 !default;
 $calendar-icon-color:               $input-placeholder-color !default;
 $calendar-container-padding:        12px !default;
 $calendar-shadow:                   0 2px 8px rgba($black, .25) !default;
