@@ -11,21 +11,34 @@ export type TimeScrollProps = {
   onChange: (num: number) => void;
 };
 export type TimeScrollState = {
-  hideTrack: boolean;
+  autoHide: boolean;
 };
 const itemHeight = 32;
 
 class Time extends React.PureComponent<TimeScrollProps, TimeScrollState> {
+  readonly scrollRef: React.RefObject<Scrollbars>;
+
   constructor(props: TimeScrollProps) {
     super(props);
     this.state = {
-      hideTrack: false,
-    }
+      autoHide: false,
+    };
+    this.scrollRef = React.createRef();
   }
 
   componentDidMount() {
     const { value } = this.props;
-    this.refs.scrollbars.scrollTop(value * itemHeight);
+    const scrollbarElement = this.scrollRef.current;
+    if (scrollbarElement) {
+      setTimeout(() => {
+        scrollbarElement.scrollTop(value * itemHeight);
+        setTimeout(() => {
+          this.setState({
+            autoHide: true,
+          });
+        }, 50);
+      }, 0);
+    }
   }
 
   render() {
@@ -34,7 +47,8 @@ class Time extends React.PureComponent<TimeScrollProps, TimeScrollState> {
     return (
       <Scrollbars
         className={`${prefixCls}-time-scroll`}
-        ref="scrollbars"
+        ref={this.scrollRef}
+        autoHide={this.state.autoHide}
       >
         <div className={`${prefixCls}-time-list`}>
           {rangeNumber(total, 0).map(num =>
@@ -56,7 +70,10 @@ class Time extends React.PureComponent<TimeScrollProps, TimeScrollState> {
 
   handleItemClick = (num: number) => {
     const { onChange } = this.props;
-    this.refs.scrollbars.scrollTop(num * itemHeight, 120);
+    const scrollbarElement = this.scrollRef.current;
+    if (scrollbarElement) {
+      scrollbarElement.scrollTop(num * itemHeight, 120);
+    }
     onChange(num);
   }
 }

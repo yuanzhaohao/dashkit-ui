@@ -1,16 +1,11 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import { BasicProps, CalendarType } from './types';
+import { PickerProps } from './types';
 import { addYears, toDate } from './utils';
 import { rangeNumber } from '../utils/number';
 import Icon from '../icon';
 
-export type YearProps = BasicProps & {
-  current: Date;
-  onModeChange: (type: CalendarType) => void;
-};
-
-const rangeTotal = 12;
+export type YearProps = PickerProps;
 
 class Year extends React.PureComponent<YearProps> {
   constructor(props: YearProps) {
@@ -23,7 +18,7 @@ class Year extends React.PureComponent<YearProps> {
     const years = rangeNumber(11, -1).map(i => startYear + i);
 
     return (
-      <div className={`${prefixCls}-year`}>
+      <div className={`${prefixCls}-ym`}>
         <div className={`${prefixCls}-header`}>
           <div className={`${prefixCls}-config`}>
             <Icon
@@ -46,9 +41,9 @@ class Year extends React.PureComponent<YearProps> {
             <div
               key={year}
               className={classNames({
-                [`${prefixCls}-month-item`]: true,
-                [`${prefixCls}-month-item-other`]: i === 0 || i === years.length - 1,
-                [`${prefixCls}-month-item-active`]: year === toDate(value).getFullYear(),
+                [`${prefixCls}-ym-item`]: true,
+                [`${prefixCls}-ym-item-other`]: i === 0 || i === years.length - 1,
+                [`${prefixCls}-ym-item-active`]: year === toDate(value).getFullYear(),
               })}
               onClick={this.handleYearClick.bind(this, year)}
             >

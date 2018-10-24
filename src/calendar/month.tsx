@@ -1,13 +1,10 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import { BasicProps, CalendarType } from './types';
+import { PickerProps } from './types';
 import { monthValues, addYears, isSameMonth } from './utils';
 import Icon from '../icon';
 
-export type MonthProps = BasicProps & {
-  current: Date;
-  onModeChange: (type: CalendarType) => void;
-};
+export type MonthProps = PickerProps;
 
 class Month extends React.PureComponent<MonthProps> {
   constructor(props: MonthProps) {
@@ -18,7 +15,7 @@ class Month extends React.PureComponent<MonthProps> {
     const { prefixCls, current } = this.props;
 
     return (
-      <div className={`${prefixCls}-month`}>
+      <div className={`${prefixCls}-ym`}>
         <div className={`${prefixCls}-header`}>
           <div className={`${prefixCls}-config`}>
             <Icon
@@ -51,8 +48,8 @@ class Month extends React.PureComponent<MonthProps> {
     date.setMonth(key);
 
     const itemClassName = classNames({
-      [`${prefixCls}-month-item`]: true,
-      [`${prefixCls}-month-item-active`]: value && isSameMonth(date, value),
+      [`${prefixCls}-ym-item`]: true,
+      [`${prefixCls}-ym-item-active`]: value && isSameMonth(date, value),
     });
 
     return (

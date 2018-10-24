@@ -143,6 +143,10 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
     document.removeEventListener('click', this.handleDocumentClick);
   }
 
+  handleExited = () => {
+    this.clearDocumentClick();
+  }
+
   handleDocumentClick = (event: any) => {
     const element = this.dateElement.current;
     if (!(event.target === element || (element && element.contains(event.target)))) {

@@ -6,15 +6,23 @@ const threeDigits = /\d{3}/;
 const fourDigits = /\d{4}/;
 const word = /[0-9]*['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+|[\u0600-\u06FF\/]+(\s*?[\u0600-\u06FF]+){1,2}/i;
 const literal = /\[([^]*?)\]/gm;
-const noop = function () {
 };
 const amPm = ['am', 'pm'];
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+export const weekdayValues = {
+  short: shorten(weekdays, 3),
+  long: weekdays,
+};
+
+export const monthValues = {
+  short: shorten(months, 3),
+  long: months,
+};
 
 export function shorten(arr: string[], sLen: number) {
-  var newArr = [];
-  for (var i = 0, len = arr.length; i < len; i++) {
+  const newArr = [];
+  for (let i = 0, len = arr.length; i < len; i++) {
     newArr.push(arr[i].substr(0, sLen));
   }
   return newArr;
@@ -33,16 +41,6 @@ export function pad(val: number, len = 2) {
   }
   return newVal;
 }
-
-export const weekdayValues = {
-  short: shorten(weekdays, 3),
-  long: weekdays,
-};
-
-export const monthValues = {
-  short: shorten(months, 3),
-  long: months,
-};
 
 export function toDate(dirtyDate?: DateProps) {
   if (arguments.length < 1) {
@@ -249,128 +247,129 @@ export function getDaysOfMonth(dirtyDate: DateProps) {
 }
 
 const formatFlags: any = {
-  D: function (date: Date) {
+  D: function(date: Date) {
     return date.getDay();
   },
-  DD: function (date: Date) {
+  DD: function(date: Date) {
     return pad(date.getDay());
   },
-  Do: function (date: Date) {
+  Do: function(date: Date) {
     return getDaySuffix(date.getDate());
   },
-  d: function (date: Date) {
+  d: function(date: Date) {
     return date.getDate();
   },
-  dd: function (date: Date) {
+  dd: function(date: Date) {
     return pad(date.getDate());
   },
-  M: function (date: Date) {
+  M: function(date: Date) {
     return date.getMonth() + 1;
   },
-  MM: function (date: Date) {
+  MM: function(date: Date) {
     return pad(date.getMonth() + 1);
   },
-  yy: function (date: Date) {
+  yy: function(date: Date) {
     return String(date.getFullYear()).substr(2);
   },
-  yyyy: function (date: Date) {
+  yyyy: function(date: Date) {
     return date.getFullYear();
   },
-  h: function (date: Date) {
+  h: function(date: Date) {
     return date.getHours() % 12 || 12;
   },
-  hh: function (date: Date) {
+  hh: function(date: Date) {
     return pad(date.getHours() % 12 || 12);
   },
-  H: function (date: Date) {
+  H: function(date: Date) {
     return date.getHours();
   },
-  HH: function (date: Date) {
+  HH: function(date: Date) {
     return pad(date.getHours());
   },
-  m: function (date: Date) {
+  m: function(date: Date) {
     return date.getMinutes();
   },
-  mm: function (date: Date) {
+  mm: function(date: Date) {
     return pad(date.getMinutes());
   },
-  s: function (date: Date) {
+  s: function(date: Date) {
     return date.getSeconds();
   },
-  ss: function (date: Date) {
+  ss: function(date: Date) {
     return pad(date.getSeconds());
   },
-  S: function (date: Date) {
+  S: function(date: Date) {
     return Math.round(date.getMilliseconds() / 100);
   },
-  SS: function (date: Date) {
+  SS: function(date: Date) {
     return pad(Math.round(date.getMilliseconds() / 10), 2);
   },
-  SSS: function (date: Date) {
+  SSS: function(date: Date) {
     return pad(date.getMilliseconds(), 3);
   },
-  a: function (date: Date) {
+  a: function(date: Date) {
     return date.getHours() < 12 ? amPm[0] : amPm[1];
   },
-  A: function (date: Date) {
+  A: function(date: Date) {
     return date.getHours() < 12 ? amPm[0].toUpperCase() : amPm[1].toUpperCase();
   },
-  WW: function (date: Date) {
+  WW: function(date: Date) {
     return pad(getWeekNumberOfYear(date));
   },
-  Wo: function (date: Date) {
+  Wo: function(date: Date) {
     return getDaySuffix(getWeekNumberOfYear(date));
   },
-  ZZ: function (date: Date) {
-    var o = date.getTimezoneOffset();
+  ZZ: function(date: Date) {
+    const o = date.getTimezoneOffset();
     return (o > 0 ? '-' : '+') + pad(Math.floor(Math.abs(o) / 60) * 100 + Math.abs(o) % 60, 4);
   }
 };
 
 type ParseDataType = { [key: string]: any }
 const parseFlags: any = {
-  d: [twoDigits, function (d: ParseDataType, v: number) {
+  d: [twoDigits, function(d: ParseDataType, v: number) {
     d.day = v;
   }],
-  M: [twoDigits, function (d: ParseDataType, v: number) {
+  M: [twoDigits, function(d: ParseDataType, v: number) {
     d.month = v - 1;
   }],
-  h: [twoDigits, function (d: ParseDataType, v: number) {
+  h: [twoDigits, function(d: ParseDataType, v: number) {
     d.hour = v;
   }],
-  m: [twoDigits, function (d: ParseDataType, v: number) {
+  m: [twoDigits, function(d: ParseDataType, v: number) {
     d.minute = v;
   }],
-  s: [twoDigits, function (d: ParseDataType, v: number) {
+  s: [twoDigits, function(d: ParseDataType, v: number) {
     d.second = v;
   }],
-  yy: [twoDigits, function (d: ParseDataType, v: number) {
-    var da = new Date(), cent = +('' + da.getFullYear()).substr(0, 2);
+  yy: [twoDigits, function(d: ParseDataType, v: number) {
+    const da = new Date()
+    const cent = +('' + da.getFullYear()).substr(0, 2);
     d.year = '' + (v > 68 ? cent - 1 : cent) + v;
   }],
-  yyyy: [fourDigits, function (d: ParseDataType, v: number) {
+  yyyy: [fourDigits, function(d: ParseDataType, v: number) {
     d.year = v;
   }],
-  S: [/\d/, function (d: ParseDataType, v: number) {
+  S: [/\d/, function(d: ParseDataType, v: number) {
     d.millisecond = v * 100;
   }],
-  SS: [/\d{2}/, function (d: ParseDataType, v: number) {
+  SS: [/\d{2}/, function(d: ParseDataType, v: number) {
     d.millisecond = v * 10;
   }],
-  SSS: [threeDigits, function (d: ParseDataType, v: number) {
+  SSS: [threeDigits, function(d: ParseDataType, v: number) {
     d.millisecond = v;
   }],
-  D: [twoDigits, noop],
-  ddd: [word, noop],
-  a: [word, function (d: ParseDataType, v: string) {
-    var val = v.toLowerCase();
+  D: [twoDigits],
+  ddd: [word],
+  a: [word, function(d: ParseDataType, v: string) {
+    const val = v.toLowerCase();
     if (val === amPm[0]) {
       d.isPm = false;
     } else if (val === amPm[1]) {
       d.isPm = true;
     }
   }],
-  ZZ: [/[\+\-]\d\d:?\d\d/, function (d: ParseDataType, v: number) {
+  ZZ: [/[\+\-]\d\d:?\d\d/, function(d: ParseDataType, v: number) {
     const parts: any = (v + '').match(/([\+\-]|\d\d)/gi);
 
     if (parts && parts[1]) {
@@ -396,21 +395,21 @@ export function formatDate(dirtyDate: DateProps, fmt: string) {
   const date = toDate(dirtyDate);
   const literals: any = [];
 
-  fmt = fmt.replace(literal, function ($0, $1) {
+  fmt = fmt.replace(literal, function($0, $1) {
     literals.push($1);
     return '??';
   });
-  fmt = fmt.replace(token, function ($0) {
+  fmt = fmt.replace(token, function($0) {
     return $0 in formatFlags
       ? formatFlags[$0](date)
       : $0.slice(1, $0.length - 1);
   });
-  return fmt.replace(/\?\?/g, function () {
+  return fmt.replace(/\?\?/g, function() {
     return literals.shift();
   });
 };
 
-export function parseDate(dirtyDateString: String, dirtyFormatString: string) {
+export function parseDate(dirtyDateString: string, dirtyFormatString: string) {
   if (arguments.length < 2) {
     throw new TypeError(
       '2 argument required, but only ' + arguments.length + ' present',
@@ -423,15 +422,17 @@ export function parseDate(dirtyDateString: String, dirtyFormatString: string) {
   const dateInfo: ParseDataType = {};
   let isValid = true;
 
-  dirtyFormatString.replace(token, function ($0) {
+  dirtyFormatString.replace(token, function($0) {
     if (parseFlags[$0]) {
-      var info = parseFlags[$0];
-      var index = dirtyDateString.search(info[0]);
+      const info = parseFlags[$0];
+      const index = dirtyDateString.search(info[0]);
       if (!~index) {
         isValid = false;
       } else {
-        dirtyDateString.replace(info[0], function (result) {
-          info[1](dateInfo, result);
+        dirtyDateString.replace(info[0], function(result) {
+          if (typeof info[1] === 'function') {
+            info[1](dateInfo, result);
+          }
           dirtyDateString = dirtyDateString.substr(index + result.length);
           return result;
         });

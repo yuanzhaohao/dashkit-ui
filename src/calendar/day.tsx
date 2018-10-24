@@ -1,13 +1,11 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import { BasicProps, CalendarType } from './types';
+import { PickerProps } from './types';
 import { monthValues, weekdayValues, getDaysOfMonth, isSameDay, isSameWeek, addDays, addMonths } from './utils';
 import Icon from '../icon';
 
-export type DayProps = BasicProps & {
+export type DayProps = PickerProps & {
   type: 'day' | 'week';
-  current: Date;
-  onModeChange: (type: CalendarType) => void;
 };
 
 export type DayState = {
