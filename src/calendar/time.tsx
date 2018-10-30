@@ -1,24 +1,45 @@
 import * as React from 'react';
+import * as classNames from 'classnames';
 import { toDate } from './utils';
-import { PickerProps } from './types';
+import { PickerChildProps } from './types';
 import TimeScroll from './time-scroll';
 
-export type TimeProps = PickerProps;
+export type TimeProps = PickerChildProps;
 
-class Time extends React.PureComponent<TimeProps> {
+export type TimeState = {
+  current: Date;
+};
+
+class Time extends React.PureComponent<TimeProps, TimeState> {
+  static getDerivedStateFromProps(nextProps: TimeProps, prevState: TimeState) {
+    if (nextProps.current.getTime() !== prevState.current.getTime()) {
+      return {
+        current:
+          nextProps.type === 'time' ? prevState.current : nextProps.current,
+      };
+    }
+    return null;
+  }
   constructor(props: TimeProps) {
     super(props);
+
+    this.state = {
+      current: props.current,
+    };
   }
 
   render() {
-    const { prefixCls, value, current, format } = this.props;
-    const date = toDate(value || current);
-    const hours = format.indexOf('h') >= 0 && date.getHours() >= 12
-      ? date.getHours() - 12
-      : date.getHours();
+    const { format, className, prefixCls } = this.props;
+    const { current } = this.state;
+    const date = toDate(current);
+    const hours =
+      format.indexOf('h') >= 0 && date.getHours() >= 12
+        ? date.getHours() - 12
+        : date.getHours();
 
     return (
-      <div className={`${prefixCls}-time`}>
+      <div className={classNames(`${prefixCls}-time`, className)}>
+        <div className={`${prefixCls}-time-container`}>
         {
           format.indexOf('H') >= 0 &&
           <TimeScroll prefixCls={prefixCls} value={date.getHours()} total={24} onChange={this.handleChange.bind(this, 'hour')} />
@@ -35,14 +56,29 @@ class Time extends React.PureComponent<TimeProps> {
           format.indexOf('s') >= 0 &&
           <TimeScroll prefixCls={prefixCls} total={60} value={date.getSeconds()} onChange={this.handleChange.bind(this, 'second')} />
         }
+        </div>
+        <div className={`${prefixCls}-time-footer`}>
+          <div
+            className={`${prefixCls}-time-cancel`}
+            onClick={this.handleCancel}
+          >
+            Cancel
+            </div>
+          <div
+            className={`${prefixCls}-time-confirm`}
+            onClick={this.handleConfirm}
+          >
+            OK
+            </div>
+        </div>
       </div>
     );
   }
 
   handleChange = (type: string, val: number) => {
-    const { value, current, format, onChange } = this.props;
+    const { current, format, onChange } = this.props;
 
-    const date = toDate(value || current);
+    const date = toDate(current);
     switch (type) {
       case 'hour':
         if (format.indexOf('h') >= 0 && date.getHours() >= 12) {
@@ -67,7 +103,27 @@ class Time extends React.PureComponent<TimeProps> {
         break
       default:
     }
-    onChange(date);
+    this.setState({
+      current: date,
+    });
+    if (type === 'datetime') {
+      onChange(date);
+    }
+  }
+
+  handleConfirm = () => {
+    const { onChange } = this.props;
+    const { current } = this.state;
+    const date = toDate(current);
+    onChange(date, true);
+  }
+
+  handleCancel = () => {
+    const { current, onChange } = this.props;
+    this.setState({
+      current,
+    });
+    onChange(current, true);
   }
 }
 

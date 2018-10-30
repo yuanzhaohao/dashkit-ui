@@ -8,7 +8,7 @@ import Input from '../input';
 import Icon from '../icon';
 import Picker from './picker';
 import Range from './range';
-import { addMonths, compareAsc, parseDate, formatDate } from './utils';
+import { allPlaceholders, allFormats, addMonths, compareAsc, parseDate, formatDate } from './utils';
 
 export type CalendarProps = BasicProps & {
   placeholder?: string;
@@ -21,22 +21,6 @@ export type CalendarState = {
   active?: boolean;
   value?: DateProps;
 };
-const allPlaceholders = {
-  'time': 'Select Time',
-  'day': 'Select Date',
-  'week': 'Select Week',
-  'month': 'Select Month',
-  'year': 'Select Year',
-  'datetime': 'Select Datetime',
-};
-const allFormats = {
-  'time': 'HH:mm:ss',
-  'day': 'yyyy-MM-dd',
-  'week': 'yyyy WW',
-  'month': 'yyyy-MM',
-  'year': 'yyyy',
-  'datetime': 'yyyy-MM-dd HH:mm:ss',
-}
 
 class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
   readonly dateElement: React.RefObject<HTMLDivElement>;
@@ -57,21 +41,47 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
   }
 
   render() {
-    const { className, prefixCls, type } = this.props;
+    const { className, prefixCls, type, range } = this.props;
     const dateClassName = classNames({
       [`${prefixCls}`]: true,
     }, className);
+    const inputClassName = classNames({
+      [`${prefixCls}-input`]: true,
+      [`${prefixCls}-input-range`]: range,
+    });
     const { value } = this.state;
     const format = this.getFormat();
+    const placeholder = this.getPlaceholder();
 
     return (
       <span className={dateClassName} ref={this.dateElement}>
-        <Input
-          className={`${prefixCls}-input`}
-          placeholder={this.getPlaceholder()}
-          onFocus={this.handleInputFocus}
-          value={value ? formatDate(value, format) : undefined}
-        />
+        <div className={`${prefixCls}-inner`}>
+          {range
+            ? <>
+              <input
+                className={inputClassName}
+                placeholder={placeholder[0]}
+                onFocus={this.handleInputFocus}
+                value={value && value instanceof Array && value.length ? formatDate(value[0], format) : undefined}
+              />
+              <span>~</span>
+              <input
+                className={inputClassName}
+                placeholder={placeholder[1]}
+                onFocus={this.handleInputFocus}
+                value={value && value instanceof Array && value.length ? formatDate(value[1], format) : undefined}
+              />
+            </>
+            : (
+              <input
+                className={inputClassName}
+                placeholder={placeholder}
+                onFocus={this.handleInputFocus}
+                value={value ? formatDate(value, format) : undefined}
+              />
+            )
+          }
+        </div>
         <Icon type={type === 'time' ? 'clock' : 'calendar'} className={`${prefixCls}-icon`} />
         <CSSTransition
           in={this.state.active}
@@ -109,8 +119,13 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
   }
 
   getPlaceholder = () => {
-    const { placeholder, type = 'day' } = this.props;
-    if (placeholder !== undefined) return placeholder;
+    const { placeholder, type = 'day', range } = this.props;
+    if (placeholder !== undefined) {
+      return placeholder;
+    }
+    if (range) {
+      return allPlaceholders.range[type];
+    }
     return allPlaceholders[type];
   }
 

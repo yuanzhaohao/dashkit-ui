@@ -19,6 +19,31 @@ export const monthValues = {
   long: months,
 };
 
+export const allPlaceholders: { [key: string]: any } = {
+  day: 'Select date',
+  time: 'Select time',
+  week: 'Select week',
+  month: 'Select month',
+  year: 'Select year',
+  datetime: 'Select Datetime',
+  range: {
+    day: ['Start day', 'End day'],
+    time: ['Start time', 'End time'],
+    week: ['Start week', 'End week'],
+    month: ['Start month', 'End month'],
+    year: ['Start year', 'End year'],
+    datetime: ['Start time', 'End time'],
+  },
+};
+export const allFormats = {
+  day: 'yyyy-MM-dd',
+  time: 'HH:mm:ss',
+  week: 'yyyy WW',
+  month: 'yyyy-MM',
+  year: 'yyyy',
+  datetime: 'yyyy-MM-dd HH:mm:ss',
+};
+
 export function shorten(arr: string[], sLen: number) {
   const newArr = [];
   for (let i = 0, len = arr.length; i < len; i++) {
