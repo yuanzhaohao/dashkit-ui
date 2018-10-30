@@ -6,10 +6,10 @@ import Month from './month';
 import Year from './year';
 
 export type PickerProps = BasicProps & {
-  format: string;
   current: Date;
+  format: string;
+  onDayHover?: (date: Date) => void;
 };
-
 export type PickerState = {
   mode: CalendarMode;
 };
@@ -19,14 +19,12 @@ class Picker extends React.PureComponent<PickerProps, PickerState> {
     super(props);
     let mode: CalendarMode;
     switch (props.type) {
-      case 'year':
-      case 'month':
-      case 'day':
-      case 'time':
-        mode = props.type;
+      case 'week':
+      case 'datetime':
+        mode = 'day';
         break;
       default:
-        mode = 'day';
+        mode = props.type;
         break;
     }
     this.state = {
@@ -35,70 +33,29 @@ class Picker extends React.PureComponent<PickerProps, PickerState> {
   }
 
   render() {
-    const { type, value, current, format, prefixCls, disabled, onChange } = this.props;
     const { mode } = this.state;
-
+    let PickerChild;
     switch (mode) {
-      case 'year': {
-        return (
-          <Year
-            type={type}
-            format={format}
-            current={current}
-            prefixCls={prefixCls}
-            disabled={disabled}
-            onChange={onChange}
-            value={value}
-            onModeChange={this.handleModeChange}
-          />
-        );
-      }
-
-      case 'month': {
-        return (
-          <Month
-            type={type}
-            current={current}
-            format={format}
-            prefixCls={prefixCls}
-            disabled={disabled}
-            onChange={onChange}
-            value={value}
-            onModeChange={this.handleModeChange}
-          />
-        );
-      }
-
       case 'time': {
-        return (
-          <Time
-            type={type}
-            format={format}
-            current={current}
-            value={value}
-            prefixCls={prefixCls}
-            disabled={disabled}
-            onChange={onChange}
-            onModeChange={this.handleModeChange}
-          />
-        );
+        PickerChild = Time;
+        break;
       }
-
+      case 'month': {
+        PickerChild = Month;
+        break;
+      }
+      case 'year': {
+        PickerChild = Year;
+        break;
+      }
       default: {
-        return (
-          <Day
-            type={type === 'week' ? 'week' : 'day'}
-            format={format}
-            current={current}
-            prefixCls={prefixCls}
-            disabled={disabled}
-            onChange={onChange}
-            value={value}
-            onModeChange={this.handleModeChange}
-          />
-        );
+        PickerChild = Day;
+        break;
       }
     }
+    return (
+      <PickerChild {...this.props} onModeChange={this.handleModeChange} />
+    );
   }
 
   handleModeChange = (mode: CalendarMode) => {

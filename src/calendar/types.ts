@@ -4,18 +4,19 @@ export type CalendarMode = 'time' | 'day' | 'month' | 'year';
 export type CalendarType = 'time' | 'day' | 'week' | 'month' | 'year' | 'datetime';
 
 export type BasicProps = {
-  className?: string;
   prefixCls?: string;
+  className?: string;
   disabled?: boolean;
-  value?: DateProps;
+  value?: DateProps | DateProps[];
   format?: string;
-  type?: CalendarType;
-  onChange: (date: Date, isSelectDay?: boolean) => void;
+  type: CalendarType;
+  range?: boolean;
+  rangeDate?: DateProps[];
+  onChange: (date: DateProps | DateProps[], isSelectDay?: boolean) => void;
 };
 
-export type PickerProps = BasicProps & {
-  type: CalendarType;
-  format: string;
+export type PickerChildProps = BasicProps & {
   current: Date;
-  onModeChange: (type: CalendarType) => void;
+  format: string;
+  onModeChange: (mode: CalendarMode) => void;
 };

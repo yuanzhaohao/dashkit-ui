@@ -7,16 +7,17 @@ import { BasicProps, DateProps } from './types';
 import Input from '../input';
 import Icon from '../icon';
 import Picker from './picker';
-import { parseDate, formatDate } from './utils';
+import Range from './range';
+import { addMonths, compareAsc, parseDate, formatDate } from './utils';
 
 export type CalendarProps = BasicProps & {
   placeholder?: string;
   range?: boolean;
-  onChange?: (date: Date, dateStr: string) => void;
+  onChange?: (date: Date | Date[], dateStr: string) => void;
 };
 
 export type CalendarState = {
-  current: Date;
+  current: Date | Date[];
   active?: boolean;
   value?: DateProps;
 };
@@ -69,7 +70,6 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
           className={`${prefixCls}-input`}
           placeholder={this.getPlaceholder()}
           onFocus={this.handleInputFocus}
-          // onChange={this.handleInputChange}
           value={value ? formatDate(value, format) : undefined}
         />
         <Icon type={type === 'time' ? 'clock' : 'calendar'} className={`${prefixCls}-icon`} />
@@ -92,7 +92,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
   renderContent = () => {
     const { range, type = 'day', prefixCls, disabled } = this.props;
     const { current, value } = this.state;
-    const Component = range ? Picker : Picker;
+    const Component = range ? Range : Picker;
     const format = this.getFormat();
 
     return (
@@ -120,13 +120,43 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
     return allFormats[type];
   }
 
-  getCurrent = () => {
-    const { value } = this.props;
-
-    if (value && typeof value === 'string')  {
-      return parseDate(value, this.getFormat());
+  getDateFromValue(val?: DateProps | DateProps[]) {
+    if (val && typeof val === 'string') {
+      return parseDate(val, this.getFormat());
     }
-    return new Date;
+    return new Date();
+  }
+
+  getCurrent = () => {
+    const { value, range, type } = this.props;
+
+    if (range) {
+      let current = [new Date(), new Date()];
+      if (value instanceof Array) {
+        current = value.map((v) => {
+          return this.getDateFromValue(v);
+        });
+        if (current.length === 1) {
+          current[1] = new Date();
+        }
+      }
+      if (
+        (type === 'day' || type === 'datetime') &&
+        compareAsc(current[0], current[1]) >= 0
+      ) {
+        current[1] = addMonths(current[0], 1);
+      }
+      if (type === 'datetime') {
+        current[0].setHours(0);
+        current[0].setMinutes(0);
+        current[0].setSeconds(0);
+        current[1].setHours(0);
+        current[1].setMinutes(0);
+        current[1].setSeconds(0);
+      }
+      return current;
+    }
+    return this.getDateFromValue(value);
   }
 
   handleInputFocus = () => {

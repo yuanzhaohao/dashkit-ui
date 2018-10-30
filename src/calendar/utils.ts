@@ -185,6 +185,27 @@ export function isSameMonth(
   );
 }
 
+export function compareAsc(dirtyDateLeft: DateProps, dirtyDateRight: DateProps) {
+  if (arguments.length < 2) {
+    throw new TypeError(
+      '2 arguments required, but only ' + arguments.length + ' present',
+    );
+  }
+
+  const dateLeft = toDate(dirtyDateLeft);
+  const dateRight = toDate(dirtyDateRight);
+
+  const diff = dateLeft.getTime() - dateRight.getTime();
+
+  if (diff < 0) {
+    return -1;
+  } else if (diff > 0) {
+    return 1;
+  } else {
+    return diff;
+  }
+}
+
 export function getDayNumberOfMouth(dirtyDate: DateProps) {
   const date = toDate(dirtyDate);
   const year = date.getFullYear();
