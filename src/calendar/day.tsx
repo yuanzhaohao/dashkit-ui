@@ -84,7 +84,7 @@ class Day extends React.PureComponent<DayProps, DayState> {
       itemClassName = classNames(itemClassName, {
         [`${prefixCls}-day-item-other`]: current.getMonth() !== date.getMonth(),
         [`${prefixCls}-day-item-hover`]: !!(hoverDate && isSameWeek(date, hoverDate)),
-        [`${prefixCls}-day-item-hover-active`]: !!value && !(value instanceof Array) && isSameWeek(date, value),
+        [`${prefixCls}-day-item-hover-active`]: value && isSameWeek(date, value),
         [`${prefixCls}-day-item-hover-start`]: date.getDay() === 0,
         [`${prefixCls}-day-item-hover-end`]: date.getDay() === 6,
       });
@@ -101,8 +101,7 @@ class Day extends React.PureComponent<DayProps, DayState> {
 
       itemClassName = classNames(itemClassName, {
         [`${prefixCls}-day-item-other`]: current.getMonth() !== date.getMonth(),
-        [`${prefixCls}-day-item-active`]:
-          !!value && !(value instanceof Array) && isSameDay(date, value),
+        [`${prefixCls}-day-item-active`]: value && isSameDay(date, value),
       });
     }
     return (

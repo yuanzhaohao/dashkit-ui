@@ -176,10 +176,7 @@ export function isSameDay(dirtyDateLeft: DateProps, dirtyDateRight: DateProps) {
   return dateLeftStartOfDay.getTime() === dateRightStartOfDay.getTime();
 }
 
-export function isSameWeek(
-  dirtyDateLeft: DateProps,
-  dirtyDateRight: DateProps,
-) {
+export function isSameWeek(dirtyDateLeft: DateProps, dirtyDateRight: DateProps) {
   if (arguments.length < 2) {
     throw new TypeError(
       '2 arguments required, but only ' + arguments.length + ' present',
@@ -192,10 +189,7 @@ export function isSameWeek(
   return dateLeftStartOfWeek.getTime() === dateRightStartOfWeek.getTime();
 }
 
-export function isSameMonth(
-  dirtyDateLeft: DateProps,
-  dirtyDateRight: DateProps,
-) {
+export function isSameMonth(dirtyDateLeft: DateProps, dirtyDateRight: DateProps) {
   if (arguments.length < 2) {
     throw new TypeError(
       '2 arguments required, but only ' + arguments.length + ' present',
@@ -208,6 +202,18 @@ export function isSameMonth(
     dateLeft.getFullYear() === dateRight.getFullYear() &&
     dateLeft.getMonth() === dateRight.getMonth()
   );
+}
+
+export function isSameYear(dirtyDateLeft: DateProps, dirtyDateRight: DateProps) {
+  if (arguments.length < 2) {
+    throw new TypeError(
+      '2 arguments required, but only ' + arguments.length + ' present',
+    );
+  }
+
+  const dateLeft = toDate(dirtyDateLeft);
+  const dateRight = toDate(dirtyDateRight);
+  return dateLeft.getFullYear() === dateRight.getFullYear();
 }
 
 export function compareAsc(dirtyDateLeft: DateProps, dirtyDateRight: DateProps) {

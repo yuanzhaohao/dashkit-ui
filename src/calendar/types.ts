@@ -18,5 +18,6 @@ export type BasicProps = {
 export type PickerChildProps = BasicProps & {
   current: Date;
   format: string;
+  value?: Date;
   onModeChange: (mode: CalendarMode) => void;
 };

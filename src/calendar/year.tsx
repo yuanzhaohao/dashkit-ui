@@ -1,11 +1,11 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import { PickerProps } from './types';
-import { addYears, toDate } from './utils';
+import { PickerChildProps } from './types';
+import { addYears, toDate, isSameYear } from './utils';
 import { rangeNumber } from '../utils/number';
 import Icon from '../icon';
 
-export type YearProps = PickerProps;
+export type YearProps = PickerChildProps;
 
 class Year extends React.PureComponent<YearProps> {
   constructor(props: YearProps) {
@@ -43,7 +43,7 @@ class Year extends React.PureComponent<YearProps> {
               className={classNames({
                 [`${prefixCls}-ym-item`]: true,
                 [`${prefixCls}-ym-item-other`]: i === 0 || i === years.length - 1,
-                [`${prefixCls}-ym-item-active`]: year === toDate(value).getFullYear(),
+                [`${prefixCls}-ym-item-active`]: value &&  isSameYear(year, value),
               })}
               onClick={this.handleYearClick.bind(this, year)}
             >

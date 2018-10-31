@@ -1,10 +1,10 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import { PickerProps } from './types';
+import { PickerChildProps } from './types';
 import { monthValues, addYears, isSameMonth } from './utils';
 import Icon from '../icon';
 
-export type MonthProps = PickerProps;
+export type MonthProps = PickerChildProps;
 
 class Month extends React.PureComponent<MonthProps> {
   constructor(props: MonthProps) {
@@ -75,7 +75,7 @@ class Month extends React.PureComponent<MonthProps> {
     date.setMonth(i, 1);
     onChange(date, isMonth);
     if (!isMonth) {
-      this.props.onModeChange(type);
+      this.props.onModeChange('day');
     }
   }
 

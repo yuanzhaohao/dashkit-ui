@@ -8,6 +8,7 @@ import Year from './year';
 export type PickerProps = BasicProps & {
   current: Date;
   format: string;
+  value?: Date;
   onDayHover?: (date: Date) => void;
 };
 export type PickerState = {

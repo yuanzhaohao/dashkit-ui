@@ -62,14 +62,14 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
                 className={inputClassName}
                 placeholder={placeholder[0]}
                 onFocus={this.handleInputFocus}
-                value={value && value instanceof Array && value.length ? formatDate(value[0], format) : undefined}
+                value={value instanceof Array && value.length ? formatDate(value[0], format) : undefined}
               />
               <span>~</span>
               <input
                 className={inputClassName}
                 placeholder={placeholder[1]}
                 onFocus={this.handleInputFocus}
-                value={value && value instanceof Array && value.length ? formatDate(value[1], format) : undefined}
+                value={value instanceof Array && value.length ? formatDate(value[1], format) : undefined}
               />
             </>
             : (
@@ -77,7 +77,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
                 className={inputClassName}
                 placeholder={placeholder}
                 onFocus={this.handleInputFocus}
-                value={value ? formatDate(value, format) : undefined}
+                value={value && !(value instanceof Array) ? formatDate(value, format) : undefined}
               />
             )
           }
