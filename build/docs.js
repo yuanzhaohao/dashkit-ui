@@ -14,7 +14,7 @@ const CleanCSS = require('clean-css')
 const exists = require('fs').existsSync
 const config = require('./config')
 const utils = require('./utils')
-const webpackConfig = require('./webpack.prod.config')
+const webpackConfig = require('./webpack.docs.config')
 const assetsRoot = utils.resolve(config.assetsRoot)
 const startTime = +new Date
 

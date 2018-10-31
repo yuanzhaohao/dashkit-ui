@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npm run dev",
     "dev": "node build/dev.js",
-    "build": "node build/build.js"
+    "build:docs": "node build/docs.js",
+    "build:publish": "node build/publish.js"
   },
   "repository": {
     "type": "git",
