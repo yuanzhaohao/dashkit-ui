@@ -8,18 +8,18 @@ import Input from '../input';
 import Icon from '../icon';
 import Picker from './picker';
 import Range from './range';
-import { allPlaceholders, allFormats, addMonths, compareAsc, parseDate, formatDate } from './utils';
+import { allPlaceholders, allFormats, addMonths, compareAsc, parseDate, formatDate, isSameMonth } from './utils';
 
 export type CalendarProps = BasicProps & {
   placeholder?: string;
   range?: boolean;
-  onChange?: (date: Date | Date[], dateStr: string) => void;
+  onChange?: (date: Date | Date[], dateStr: string | string[]) => void;
 };
 
 export type CalendarState = {
   current: Date | Date[];
   active?: boolean;
-  value?: DateProps;
+  value?: DateProps | DateProps[];
 };
 
 class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
@@ -91,7 +91,9 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
           onEntered={this.bindDocumentClick}
           onExited={this.clearDocumentClick}
         >
-          <div className={`${prefixCls}-content`}>
+          <div className={classNames(`${prefixCls}-content`, {
+            [`${prefixCls}-content-time`]: type === 'time'
+          })}>
             {this.renderContent()}
           </div>
         </CSSTransition>
@@ -201,31 +203,42 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
     }
   }
 
-  handleChange = (date: Date, isSelectDay?: boolean) => {
+  handleChange = (date: Date | Date[], isSelect?: boolean) => {
     const { onChange, type } = this.props;
+
+    let current = date;
+    if (date instanceof Array) {
+      current = [...date];
+      if (isSameMonth(current[0], current[1])) {
+        current[1] = addMonths(current[1], 1);
+      }
+    }
 
     if (type === 'time') {
       this.setState({
-        current: date,
+        current,
         value: date,
+        active: !isSelect,
       });
-    } else {
-      if (isSelectDay) {
-        this.setState({
-          current: date,
-          value: date,
-          active: false,
-        });
-        if (typeof onChange === 'function') {
-          const format = this.getFormat();
-          const dateStr = formatDate(date, format);
-          onChange(date, dateStr);
-        }
-      } else {
-        this.setState({
-          current: date,
-        });
+    } else if (isSelect) {
+      this.setState({
+        current,
+        value: date,
+        active: false,
+      });
+      if (typeof onChange === 'function') {
+        const format = this.getFormat();
+        const dateStr = date instanceof Array
+          ? date.map((d) => {
+            return formatDate(d, format);
+          })
+          : formatDate(date, format);
+        onChange(date, dateStr);
       }
+    } else {
+      this.setState({
+        current,
+      });
     }
   }
 }

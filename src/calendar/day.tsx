@@ -1,8 +1,9 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 import { PickerChildProps } from './types';
-import { monthValues, weekdayValues, compareAsc, getDaysOfMonth, isSameDay, isSameWeek, addDays, addMonths } from './utils';
+import { monthValues, weekdayValues, addDays, addMonths, compareAsc, getDaysOfMonth, isSameDay, isSameWeek, formatDate } from './utils';
 import Icon from '../icon';
+import Time from './time';
 
 export type DayProps = PickerChildProps & {
   onDayHover?: (date: Date) => void;
@@ -27,7 +28,7 @@ class Day extends React.PureComponent<DayProps, DayState> {
   }
 
   render() {
-    const { prefixCls, current } = this.props;
+    const { prefixCls, current, type } = this.props;
     const days = this.getDays();
 
     return (
@@ -65,16 +66,15 @@ class Day extends React.PureComponent<DayProps, DayState> {
           </div>
         </div>
         <div className={`${prefixCls}-list`}>
-          {days.map((date: Date) =>
-            this.renderDay(date)
-          )}
+          {days.map((date: Date) => this.renderDay(date) )}
         </div>
+        {type === 'datetime' ? this.renderDatetime() : null}
       </div>
     );
   }
 
   renderDay = (date: Date) => {
-    const { current, value, type, prefixCls, rangeDate } = this.props;
+    const { current, value, type, range, prefixCls, rangeDate } = this.props;
     const hoverProps: any = {};
     let itemClassName = `${prefixCls}-day-item`;
     if (type === 'week') {
@@ -117,6 +117,26 @@ class Day extends React.PureComponent<DayProps, DayState> {
     );
   }
 
+  renderDatetime = () => {
+    const { format, current, prefixCls, ...attributes } = this.props;
+    const match = format.match(/[H|h].*/);
+    const newFormat = match ? match[0] : format;
+
+    return (
+      <div className={`${prefixCls}-day-datetime`}>
+        <Time
+          {...attributes}
+          prefixCls={prefixCls}
+          current={current}
+          format={newFormat}
+          className={`${prefixCls}-day-datetime-timer`}
+          onChange={this.handleTimerChange}
+        />
+        <span>{formatDate(current, newFormat)}</span>
+      </div>
+    );
+  }
+
   getDays = () => {
     const { current } = this.props
     if (this.cachedDate && this.cachedDate.getTime() === current.getTime() && this.cachedDays) {
@@ -133,6 +153,11 @@ class Day extends React.PureComponent<DayProps, DayState> {
     if (typeof onDayHover === 'function') {
       onDayHover(date);
     }
+  }
+
+  handleTimerChange = (date: Date) => {
+    const { onChange } = this.props;
+    onChange(date);
   }
 
   handleDayClick = (date: Date) => {

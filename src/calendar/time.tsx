@@ -29,7 +29,7 @@ class Time extends React.PureComponent<TimeProps, TimeState> {
   }
 
   render() {
-    const { format, className, prefixCls } = this.props;
+    const { type, format, className, prefixCls } = this.props;
     const { current } = this.state;
     const date = toDate(current);
     const hours =
@@ -57,29 +57,32 @@ class Time extends React.PureComponent<TimeProps, TimeState> {
           <TimeScroll prefixCls={prefixCls} total={60} value={date.getSeconds()} onChange={this.handleChange.bind(this, 'second')} />
         }
         </div>
-        <div className={`${prefixCls}-time-footer`}>
-          <div
-            className={`${prefixCls}-time-cancel`}
-            onClick={this.handleCancel}
-          >
-            Cancel
+        {type !== 'datetime'
+          ? <div className={`${prefixCls}-time-footer`}>
+            <div
+              className={`${prefixCls}-time-cancel`}
+              onClick={this.handleCancel}
+            >
+              Cancel
             </div>
-          <div
-            className={`${prefixCls}-time-confirm`}
-            onClick={this.handleConfirm}
-          >
-            OK
+            <div
+              className={`${prefixCls}-time-confirm`}
+              onClick={this.handleConfirm}
+            >
+              OK
             </div>
-        </div>
+          </div>
+          : null
+        }
       </div>
     );
   }
 
-  handleChange = (type: string, val: number) => {
-    const { current, format, onChange } = this.props;
-
+  handleChange = (mode: string, val: number) => {
+    const { format, type, onChange } = this.props;
+    const { current } = this.state;
     const date = toDate(current);
-    switch (type) {
+    switch (mode) {
       case 'hour':
         if (format.indexOf('h') >= 0 && date.getHours() >= 12) {
           date.setHours(val + 12);

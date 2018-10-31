@@ -204,15 +204,17 @@ $input-hover-border-color:          $input-focus-border-color !default;
 //
 $calendar-width:                    220px !default;
 $calendar-color:                    $input-color !default;
-$calendar-item-bg:                  #edf2f9 !default;
 $calendar-other-color:              $input-placeholder-color !default;
 $calendar-border-color:             $input-border-color !default;
 $calendar-active-bg:                $component-active-bg !default;
 $calendar-active-border-color:      $calendar-active-bg !default;
 $calendar-icon-size:                14px !default;
 $calendar-item-size:                36px !default;
+$calendar-hover-bg:               #edf2f9 !default;
+$calendar-time-active-bg:         #edf2f9 !default;
 $calendar-time-item-width:          66px !default;
 $calendar-time-item-height:         32px !default;
+$calendar-time-shadow:              0 0 1px 1px rgba(0, 0, 0, .02), 0 -2px 12px rgba(0, 0, 0, .175) !default;
 $calendar-ym-item-height:           32px !default;
 $calendar-picker-width:             $calendar-item-size * 7 !default;
 $calendar-icon-color:               $input-placeholder-color !default;
