@@ -7,7 +7,8 @@
     "start": "npm run dev",
     "dev": "node build/dev.js",
     "build:docs": "node build/docs.js",
-    "build:publish": "node build/publish.js"
+    "build:publish": "node build/publish.js",
+    "build:ts": "babel src --out-dir dist/es --extensions \".ts,.tsx\" --source-maps inlines"
   },
   "repository": {
     "type": "git",
@@ -42,6 +43,7 @@
     "@types/react-router-dom": "^4.2.7",
     "@types/react-transition-group": "^2.0.14",
     "autoprefixer": "^8.6.3",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
