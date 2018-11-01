@@ -1,6 +1,6 @@
 'use strict'
 
-process.env.NODE_ENV = 'production'
+process.env.NODE_ENV = 'document'
 
 const path = require('path')
 const fs = require('fs-extra')
@@ -15,13 +15,13 @@ const exists = require('fs').existsSync
 const config = require('./config')
 const utils = require('./utils')
 const webpackConfig = require('./webpack.docs.config')
-const assetsRoot = utils.resolve(config.assetsRoot)
+const siteAssetsRoot = utils.resolve(config.siteAssetsRoot)
 const startTime = +new Date
 
-const spinner = ora('building for production...')
+const spinner = ora('building for documents website...')
 spinner.start()
 
-rm(assetsRoot, err => {
+rm(siteAssetsRoot, function(err) {
   if (err) throw err
 
   webpack(webpackConfig, function(err, stats) {
@@ -44,9 +44,9 @@ rm(assetsRoot, err => {
     }
 
     // @note: copy static & minify static
-    const staticPath = path.join(utils.resolve(config.basePath), config.staticPath);
-    if (config.staticPath && exists(staticPath)) {
-      const staticDistPath = path.join(assetsRoot, config.staticPath)
+    const staticPath = path.join(utils.resolve(config.sitePath), './static');
+    if (exists(staticPath)) {
+      const staticDistPath = path.join(siteAssetsRoot, './static')
       fs.copySync(staticPath, staticDistPath)
 
       glob.sync(path.join(staticDistPath, './*.js')).forEach(filepath => {

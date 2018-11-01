@@ -36,3 +36,5 @@ config/base.yaml
 yarn.lock
 package-lock.json
 /.history
+gh-pages
+publish

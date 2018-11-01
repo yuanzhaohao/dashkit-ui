@@ -3,34 +3,27 @@
 const path = require('path')
 
 module.exports = {
-  indexPage: 'index',
-  basePath: './site',
-  staticPath: './static',
-  assetsRoot: './dist',
+  sitePath: './site',
+  siteAssetsRoot: './gh-pages',
+  publishPath: './publish',
   proxyTable: {},
-  mockData: true,
+  mockData: false,
   optimizeCommon: {
     'vendor-lib': [
       'prop-types',
-      'classnames'
+      'classnames',
+      'react-transition-group'
     ],
-    // 'vendor-redux': [
-    //   'redux',
-    //   'redux-promise-middleware',
-    //   'redux-thunk',
-    //   'react-redux'
-    // ],
     'vendor-react': [
       'react',
       'react-dom',
-      'react-router'
+      'react-router-dom'
     ]
   },
   host: 'localhost',
   port: 8999,
   autoOpen: true,
   useEslint: false,
-  visualizer: true,
   extractStyle: false,
   mockData: true
 }

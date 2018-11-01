@@ -5,23 +5,16 @@ const merge = require('webpack-merge')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
-const Visualizer = require('webpack-visualizer-plugin')
-const baseConfig = require('./webpack.base.config')
+const siteConfig = require('./webpack.site.config')
 const config = require('./config')
 
-module.exports = merge(baseConfig, {
+module.exports = merge(siteConfig, {
   devtool: '#source-map',
   output: {
     filename: 'js/[name].[chunkhash:7].js',
     chunkFilename: 'js/[id].[chunkhash:7].js'
   },
   plugins: [
-    ...(config.visualizer
-      ? [new Visualizer({
-        filename: './statistics.html'
-      })]
-      : []
-    ),
     ...(config.extractStyle
       ? [
         new OptimizeCSSPlugin({

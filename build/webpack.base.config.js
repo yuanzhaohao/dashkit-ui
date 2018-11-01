@@ -1,52 +1,21 @@
 'use strict'
 
-const path = require('path')
-const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const exists = require('fs').existsSync
 const utils = require('./utils')
 const config = require('./config')
 const sitePath = utils.resolve('site')
 const srcPath = utils.resolve('src')
-const entry = utils.getEntry(path.join(sitePath, './entry'))
-const vendors = config.optimizeCommon && typeof config.optimizeCommon === 'object'
-  ? config.optimizeCommon
-  : {}
 
 const createLintingRule = () => ({
   test: /\.(js|ts|tsx)$/,
   loader: 'eslint-loader',
   enforce: 'pre',
-  include: [sitePath],
+  include: [sitePath, srcPath],
   options: {
     formatter: require('eslint-friendly-formatter'),
     emitWarning: true
   }
 })
-
-const createHtmlPlugin = () => {
-  let defaultTplPath = path.join(sitePath, './template.html')
-  return Object.keys(entry).map(page => {
-    let pageTplPath = path.join(sitePath, `./${page}.html`)
-    let templatePath = defaultTplPath
-    let chunks = Object.keys(vendors).concat(page)
-
-    if (exists(pageTplPath)) templatePath = pageTplPath
-
-    return new HtmlWebpackPlugin({
-      filename: `${page}.html`,
-      template: templatePath,
-      inject: 'body',
-      chunksSortMode: 'dependency',
-      minify: {
-        removeComments: true,
-        collapseWhitespace: false
-      },
-      chunks
-    })
-  })
-}
 
 const createHappypackPlugin = () => {
   const os = require('os')
@@ -81,11 +50,6 @@ const createHappypackPlugin = () => {
 }
 
 module.exports = {
-  entry: Object.assign({}, entry, vendors),
-  output: {
-    path: utils.resolve(config.assetsRoot),
-    filename: '[name].js'
-  },
   resolve: {
     extensions: ['.js', '.ts', '.tsx', '.json', 'css', 'scss', 'svg', 'md'],
     alias: {
@@ -99,15 +63,7 @@ module.exports = {
     ]
   },
   plugins: [
-    ...(createHtmlPlugin()),
     ...(createHappypackPlugin()),
-    ...(config.optimizeCommon && typeof config.optimizeCommon === 'object'
-      ? [new webpack.optimize.CommonsChunkPlugin({
-        names: Object.keys(config.optimizeCommon),
-        minChunks: Infinity
-      })]
-      : []
-    ),
   ],
   module: {
     rules: [
@@ -124,7 +80,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: config.extractStyle === true && process.env.NODE_ENV === 'production'
+        loader: config.extractStyle === true && process.env.NODE_ENV === 'document'
           ? ExtractTextPlugin.extract(['happypack/loader?id=css', 'postcss-loader', 'happypack/loader?id=sass'])
           : ['style-loader', 'happypack/loader?id=css', 'postcss-loader', 'happypack/loader?id=sass']
       },

@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 process.env.NODE_ENV = 'development';
 
@@ -24,7 +24,7 @@ const devMiddleware = require('webpack-dev-middleware')(compiler, {
 })
 
 app.use('/static', express.static(
-  path.join(utils.resolve(config.basePath), config.staticPath)
+  path.join(utils.resolve(config.sitePath), './static')
 ))
 app.use(require('connect-history-api-fallback')())
 app.use(devMiddleware)
@@ -66,8 +66,7 @@ if (config.mockData && fs.existsSync(mockPath)) {
 
 utils.log('starting dev server...')
 devMiddleware.waitUntilValid(function() {
-  const page = config.indexPage || 'index';
-  const uri = `${URI}${page}.html`
+  const uri = `${URI}.html`
 
   utils.success(`Listening at ${uri}\n`)
   openBrowser(uri);
