@@ -2,11 +2,8 @@
 
 const webpack = require('webpack')
 const merge = require('webpack-merge')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const siteConfig = require('./webpack.site.config')
-const config = require('./config')
 
 module.exports = merge(siteConfig, {
   devtool: '#source-map',
@@ -15,18 +12,6 @@ module.exports = merge(siteConfig, {
     chunkFilename: 'js/[id].[chunkhash:7].js'
   },
   plugins: [
-    ...(config.extractStyle
-      ? [
-        new OptimizeCSSPlugin({
-          cssProcessorOptions: {
-            safe: true,
-            map: { inline: false }
-          }
-        }),
-        new ExtractTextPlugin('[name].[contenthash:7].css', { allChunks: true })
-      ]
-      : []
-    ),
     new webpack.optimize.UglifyJsPlugin({
       beautify: false,
       comments: false,

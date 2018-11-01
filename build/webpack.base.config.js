@@ -80,7 +80,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: config.extractStyle === true && process.env.NODE_ENV === 'document'
+        loader: process.env.NODE_ENV === 'production'
           ? ExtractTextPlugin.extract(['happypack/loader?id=css', 'postcss-loader', 'happypack/loader?id=sass'])
           : ['style-loader', 'happypack/loader?id=css', 'postcss-loader', 'happypack/loader?id=sass']
       },

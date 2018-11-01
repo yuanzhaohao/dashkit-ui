@@ -66,7 +66,7 @@ if (config.mockData && fs.existsSync(mockPath)) {
 
 utils.log('starting dev server...')
 devMiddleware.waitUntilValid(function() {
-  const uri = `${URI}.html`
+  const uri = `${URI}index.html`
 
   utils.success(`Listening at ${uri}\n`)
   openBrowser(uri);
