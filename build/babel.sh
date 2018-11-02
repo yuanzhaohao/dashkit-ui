@@ -1,0 +1,1 @@
+babel src --out-dir publish/dist/src --copy-files

@@ -4,6 +4,7 @@ process.env.NODE_ENV = 'production'
 
 const fs = require('fs')
 const path = require('path')
+const exec = require('child_process').exec
 const chalk = require('chalk')
 const rm = require('rimraf')
 const webpack = require('webpack')
@@ -30,8 +31,7 @@ const distConfig = {
       }
     }),
   ]
-};
-
+}
 const devConfig = {
   output: {
     filename: 'dashkit.js',
@@ -50,6 +50,17 @@ rm(publishPath, function(err) {
 
       delete pkg.devDependencies
       fs.writeFileSync(path.resolve(publishPath, './package.json'), JSON.stringify(pkg, null, 2))
+
+      exec(`babel src --out-dir publish/dist/src --copy-files`, (err, stdout, stderr) => {
+        if (err) {
+          // node couldn't execute the command
+          return;
+        }
+
+        // the *entire* stdout and stderr (buffered)
+        console.log(`stdout: ${stdout}`);
+        console.log(`stderr: ${stderr}`);
+      });
     })
   })
 })
@@ -60,11 +71,11 @@ function callback(err, stats) {
   if (err) throw err
 
   process.stdout.write(stats.toString({
-    // colors: true,
-    // modules: false,
+    colors: true,
+    modules: false,
     children: false,
-    // chunks: false,
-    // chunkModules: false
+    chunks: false,
+    chunkModules: false
   }) + '\n\n')
 
   if (stats.hasErrors()) {

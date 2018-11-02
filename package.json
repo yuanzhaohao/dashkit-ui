@@ -8,7 +8,7 @@
     "dev": "node build/dev.js",
     "build:docs": "node build/docs.js",
     "build:publish": "node build/publish.js",
-    "build:ts": "babel src --out-dir dist/es --extensions \".ts,.tsx\" --source-maps inlines"
+    "build:babel": "babel src --out-dir publish/dist/src --copy-files"
   },
   "repository": {
     "type": "git",
