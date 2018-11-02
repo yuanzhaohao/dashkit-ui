@@ -9,30 +9,20 @@ const utils = require('./utils')
 const config = require('./config')
 const baseConfig = require('./webpack.base.config')
 const publishPath = utils.resolve(config.publishPath)
-console.log(publishPath)
 
 module.exports = merge(baseConfig, {
   entry: utils.resolve('src/index.tsx'),
-  stats: {
-    children: false
-  },
   output: {
     path: path.join(publishPath, './dist'),
     libraryTarget: 'umd',
     library: 'Dashkit',
-    filename: 'dashkit.min.js',
+  },
+  externals: {
+    'react': 'React',
+    'react-dom': 'ReactDOM',
+    'prop-types': 'PropTypes'
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      beautify: false,
-      comments: false,
-      sourceMap: true,
-      compress: {
-        warnings: false,
-        collapse_vars: true,
-        reduce_vars: true
-      }
-    }),
     new OptimizeCSSPlugin({
       cssProcessorOptions: {
         safe: true,
@@ -41,8 +31,9 @@ module.exports = merge(baseConfig, {
         }
       }
     }),
-    new ExtractTextPlugin('[name].[contenthash:7].css', {
+    new ExtractTextPlugin('dashkit.css', {
       allChunks: true
-    })
+    }),
+    new webpack.optimize.ModuleConcatenationPlugin(),
   ]
 })
