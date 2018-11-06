@@ -3,6 +3,7 @@
 const path = require('path')
 
 module.exports = {
+  srcPath: './src',
   sitePath: './site',
   siteAssetsRoot: './gh-pages',
   publishPath: './publish',

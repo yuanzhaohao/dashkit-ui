@@ -51,16 +51,8 @@ rm(publishPath, function(err) {
       delete pkg.devDependencies
       fs.writeFileSync(path.resolve(publishPath, './package.json'), JSON.stringify(pkg, null, 2))
 
-      exec(`babel src --out-dir publish/dist/src --copy-files`, (err, stdout, stderr) => {
-        if (err) {
-          // node couldn't execute the command
-          return;
-        }
 
-        // the *entire* stdout and stderr (buffered)
-        console.log(`stdout: ${stdout}`);
-        console.log(`stderr: ${stderr}`);
-      });
+      const srcPath = utils.resolve(config.srcPath);
     })
   })
 })
