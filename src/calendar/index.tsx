@@ -111,8 +111,8 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
       <Component
         type={type}
         format={format}
-        current={current}
-        value={value}
+        current={current}// @ts-ignore
+        value={value}// @ts-ignore
         prefixCls={prefixCls}
         disabled={disabled}
         onChange={this.handleChange}

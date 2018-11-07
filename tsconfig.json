@@ -3,18 +3,20 @@
     "module": "esnext",
     "target": "es5",
     "lib": ["es6", "dom"],
-    "sourceMap": true,
-    "allowJs": true,
     "jsx": "react",
     "moduleResolution": "node",
     "rootDir": "src",
-    "strict": true,
+    "outDir": "./publish/es",
+    "strict": false,
+    "declaration": true,
     "strictFunctionTypes": false,
     "baseUrl": ".",
+    "sourceMap": false,
     "paths": {
       "dashkit-ui": ["./src"]
     }
   },
+  "include": ["./src/**/*", "./custom.d.ts"],
   "exclude": [
     "node_modules"
   ]

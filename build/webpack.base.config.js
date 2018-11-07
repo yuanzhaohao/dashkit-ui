@@ -3,8 +3,8 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const utils = require('./utils')
 const config = require('./config')
-const sitePath = utils.resolve('site')
-const srcPath = utils.resolve('src')
+const sitePath = utils.resolve(config.sitePath)
+const srcPath = utils.resolve(config.srcPath)
 
 const createLintingRule = () => ({
   test: /\.(js|ts|tsx)$/,
