@@ -49,14 +49,14 @@ rm(siteAssetsRoot, function(err) {
       const staticDistPath = path.join(siteAssetsRoot, './static')
       fs.copySync(staticPath, staticDistPath)
 
-      glob.sync(path.join(staticDistPath, './*.js')).forEach(filepath => {
-        const miniJS = uglifyJs.minify(fs.readFileSync(filepath, 'utf8'))
-        fs.writeFileSync(filepath, miniJS.code, 'utf8')
+      glob.sync(path.join(staticDistPath, './*.js')).forEach(filePath => {
+        const miniJS = uglifyJs.minify(fs.readFileSync(filePath, 'utf8'))
+        fs.writeFileSync(filePath, miniJS.code, 'utf8')
       })
 
-      glob.sync(path.join(staticDistPath, './*.css')).forEach(filepath => {
-        const miniCSS = new CleanCSS({}).minify(fs.readFileSync(filepath, 'utf8'))
-        fs.writeFileSync(filepath, miniCSS.styles, 'utf8')
+      glob.sync(path.join(staticDistPath, './*.css')).forEach(filePath => {
+        const miniCSS = new CleanCSS({}).minify(fs.readFileSync(filePath, 'utf8'))
+        fs.writeFileSync(filePath, miniCSS.styles, 'utf8')
       })
     }
 

@@ -13,9 +13,16 @@ const publishPath = utils.resolve(config.publishPath)
 module.exports = merge(baseConfig, {
   entry: utils.resolve('src/index.tsx'),
   output: {
+    filename: 'dashkit.development.js',
     path: path.join(publishPath, './dist'),
     libraryTarget: 'umd',
     library: 'Dashkit',
+  },
+  stats: {
+    modules: false,
+    children: false,
+    chunks: false,
+    chunkModules: false
   },
   externals: {
     'react': 'React',
@@ -25,9 +32,7 @@ module.exports = merge(baseConfig, {
     new OptimizeCSSPlugin({
       cssProcessorOptions: {
         safe: true,
-        map: {
-          inline: false
-        }
+        map: false,
       }
     }),
     new ExtractTextPlugin('dashkit.css', {
