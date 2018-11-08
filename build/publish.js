@@ -21,12 +21,6 @@ const tsConfig = require('../tsconfig.json')
 const publishSrcPath = path.join(publishPath, './src')
 const publishEsPath = path.join(publishPath, './es')
 
-// ts.transpileModule(source, {
-//   compilerOptions: {
-//     module: ts.ModuleKind.CommonJS
-//   }
-// });
-
 Array.prototype.concat(
   glob.sync(path.join(publishSrcPath, './**/*.ts')),
   glob.sync(path.join(publishSrcPath, './**/*.tsx'))
@@ -36,6 +30,9 @@ Array.prototype.concat(
     .replace(publishSrcPath, '')
     .replace(/\.[^\.]+$/g, '.js')
   const result = tsc.transpileModule(source, tsConfig)
+  const declation = tsc.transpileModule(source, tsConfig)
+  console.log(declation)
+
 
   if (!fs.existsSync(newFilePath)) {
     fs.createFileSync(newFilePath)
