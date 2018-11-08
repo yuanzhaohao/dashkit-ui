@@ -4,7 +4,6 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 import { CSSTransition } from 'react-transition-group';
 import Icon from '../icon';
-import { SvgIcon } from '../utils';
 
 export type AlertType = 'default' | 'success' | 'error' | 'warning' | 'info' | 'loading';
 
@@ -49,8 +48,13 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
       type,
       style,
     } = this.props;
-    const iconChild = SvgIcon[type || 'default'];
-    const isShowIcon = icon && iconChild;
+    const iconType: { [key: string]: string } = {
+      success: 'check-circle',
+      error: 'x-circle',
+      warning: 'alert-circle',
+      info: 'info',
+    };
+    const isShowIcon = icon && iconType[type];
     const alertClassName = classNames(
       prefixCls,
       {
@@ -63,7 +67,7 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
 
     const dismiss = ('dismiss' in this.props)
       ? this.props.dismiss
-      : this.state.dismiss
+      : this.state.dismiss;
 
     return (
       <CSSTransition
@@ -76,7 +80,9 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
         <div className={alertClassName} style={style}>
           {isShowIcon
             ? (
-              <div className={`${prefixCls}-icon`}>{iconChild}</div>
+              <div className={`${prefixCls}-icon-box`}>
+                <Icon type={iconType[type]} className={`${prefixCls}-icon`} />
+              </div>
             )
             : null
           }

@@ -3,6 +3,13 @@
   "version": "0.0.1",
   "description": "A ui library.",
   "main": "./lib/index.js",
+  "author": "yuanzhaohao",
+  "keywords": [
+    "ui",
+    "react",
+    "component"
+  ],
+  "license": "MIT",
   "scripts": {
     "start": "npm run dev",
     "dev": "node build/dev.js",
@@ -15,17 +22,12 @@
     "type": "git",
     "url": "git+https://github.com/yuanzhaohao/dashkit-ui.git"
   },
-  "keywords": [
-    "ui",
-    "react",
-    "component"
-  ],
-  "author": "yuanzhaohao",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/yuanzhaohao/dashkit-ui/issues"
+  "homepage": "http://yuanzhaohao.github.io/dashkit-ui/#/",
+  "peerDependencies": {
+    "react": ">=16.0.0",
+    "react-dom": ">=16.0.0",
+    "prop-types": "^15.6.0"
   },
-  "homepage": "https://github.com/yuanzhaohao/dashkit-ui#readme",
   "dependencies": {
     "classnames": "^2.2.5",
     "lodash": "^4.17.11",

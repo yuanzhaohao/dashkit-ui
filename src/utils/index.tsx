@@ -1,2 +1,3 @@
 
-export { default as SvgIcon } from './svg-icon';
+export * from './dom';
+export * from './number';

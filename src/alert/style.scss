@@ -67,19 +67,18 @@ $alert-prefix-cls: 'dk-alert';
     padding-left: $alert-padding-x + 22;
   }
 
-  &-icon {
+  &-icon-box {
     position: absolute;
     top: 0;
     left: $alert-padding-x;
     height: 100%;
     display: flex;
     align-items: center;
+  }
 
-
-    > svg {
-      width: 15px;
-      height: 15px;
-    }
+  &-icon {
+    font-size: 16px;
+    font-weight: bold;
   }
 
   &-default {
