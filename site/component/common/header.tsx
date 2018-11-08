@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Layout } from '../../../src';
+import { Layout } from 'dashkit-ui';
 import './header.scss';
 
 const { Header } = Layout;

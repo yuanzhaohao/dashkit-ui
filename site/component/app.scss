@@ -3,7 +3,9 @@
 }
 
 .app-layout {
+  width: calc(100vw - 250px);
   margin-left: 250px;
+  overflow: hidden;
 }
 
 .app-content {
