@@ -19,8 +19,7 @@ module.exports = merge(baseConfig, {
   },
   externals: {
     'react': 'React',
-    'react-dom': 'ReactDOM',
-    'prop-types': 'PropTypes'
+    'react-dom': 'ReactDOM'
   },
   plugins: [
     new OptimizeCSSPlugin({

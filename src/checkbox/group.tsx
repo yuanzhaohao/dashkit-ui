@@ -49,7 +49,17 @@ class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGrou
 
   getChildContext() {
     return {
-      groupHook: this,
+      groupHook: {
+        getOptions() {
+          return this.state.options;
+        },
+        getMin() {
+          return this.props.min;
+        },
+        getMax() {
+          return this.props.max;
+        }
+      },
     }
   }
 
@@ -64,7 +74,7 @@ class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGrou
     );
 
     const realChildren = React.Children.map(children, (child: React.ReactElement<CheckboxProps>, index) => {
-      if (!child || child.type.elementType !== 'Checkbox') {
+      if (!child) {
         return null;
       }
 

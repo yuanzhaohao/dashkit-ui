@@ -17,9 +17,9 @@ export type CalendarProps = BasicProps & {
 };
 
 export type CalendarState = {
-  current: Date | Date[];
+  current: any; //Date | Date[];
   active?: boolean;
-  value?: DateProps | DateProps[];
+  value: any;
 };
 
 class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
@@ -111,8 +111,8 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
       <Component
         type={type}
         format={format}
-        current={current}// @ts-ignore
-        value={value}// @ts-ignore
+        current={current}
+        value={value}
         prefixCls={prefixCls}
         disabled={disabled}
         onChange={this.handleChange}

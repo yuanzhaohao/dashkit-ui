@@ -78,12 +78,14 @@ class Checkbox extends React.PureComponent<CheckboxProps, CheckboxState> {
     const { groupHook } = this.context;
 
     if (groupHook) {
-      const length = groupHook.state.options.length + (checked ? 1 : -1);
-      if (groupHook.props.min !== undefined && length < groupHook.props.min) {
+      const length = groupHook.getOptions().length + (checked ? 1 : -1);
+      const min = groupHook.getMin();
+      if (min !== undefined && length < min) {
         return;
       }
 
-      if (groupHook.props.max !== undefined && length > groupHook.props.max) {
+      const max = groupHook.getMax();
+      if (max !== undefined && length > max) {
         return;
       }
     }
