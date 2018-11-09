@@ -9,6 +9,7 @@
     "outDir": "./publish/es",
     "strict": false,
     "declaration": true,
+    "declarationDir": "./publish/@types",
     "strictFunctionTypes": false,
     "baseUrl": ".",
     "sourceMap": false,

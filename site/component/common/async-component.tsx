@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Spin } from '../../../src';
+import { Spin } from 'dashkit-ui';
 
 export default function asyncComponent(importComponent: any) {
   class AsyncComponent extends React.PureComponent<any, any> {

@@ -7,7 +7,7 @@ const path = require('path')
 const chalk = require('chalk')
 const rm = require('rimraf')
 const glob = require('glob')
-const utilTool = require('util')
+const babel = require('babel-core');
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const config = require('./config')
@@ -15,30 +15,63 @@ const utils = require('./utils')
 const webpackConfig = require('./webpack.publish.config')
 const publishPath = utils.resolve(config.publishPath)
 const srcPath = utils.resolve(config.srcPath)
-// const exec = utilTool.promisify(require('child_process').exec)
 const tsc = require('typescript')
 const tsConfig = require('../tsconfig.json')
 const publishSrcPath = path.join(publishPath, './src')
+const publishLibPath = path.join(publishPath, './lib')
 const publishEsPath = path.join(publishPath, './es')
 
-Array.prototype.concat(
-  glob.sync(path.join(publishSrcPath, './**/*.ts')),
-  glob.sync(path.join(publishSrcPath, './**/*.tsx'))
-).forEach((filePath) => {
-  const source = fs.readFileSync(filePath, 'utf8')
-  const newFilePath = publishEsPath + filePath
-    .replace(publishSrcPath, '')
-    .replace(/\.[^\.]+$/g, '.js')
-  const result = tsc.transpileModule(source, tsConfig)
-  const declation = tsc.transpileModule(source, tsConfig)
-  console.log(declation)
+const tsd = require('./tsd')
 
+rm(publishPath, function(err) {
+  if (err) throw err
+  fs.copySync(srcPath, publishSrcPath)
 
-  if (!fs.existsSync(newFilePath)) {
-    fs.createFileSync(newFilePath)
-  }
-  fs.writeFileSync(newFilePath, result.outputText, 'utf8')
+  copyScssFiles()
+  transpileTsFiles()
 })
+
+function transpileTsFiles() {
+  Array.prototype.concat(
+    glob.sync(path.join(publishSrcPath, './**/*.ts')),
+    glob.sync(path.join(publishSrcPath, './**/*.tsx'))
+  ).forEach((filePath) => {
+    const source = fs.readFileSync(filePath, 'utf8')
+    const result = tsc.transpileModule(source, tsConfig)
+
+    console.log(tsc.transpile(source));
+
+    const esFilePath = publishEsPath + filePath
+      .replace(publishSrcPath, '')
+      .replace(/\.[^\.]+$/g, '.js')
+
+    const libFilePath = publishLibPath + filePath
+      .replace(publishSrcPath, '')
+      .replace(/\.[^\.]+$/g, '.js')
+
+    if (!fs.existsSync(esFilePath)) {
+      fs.createFileSync(esFilePath)
+    }
+    if (!fs.existsSync(libFilePath)) {
+      fs.createFileSync(libFilePath)
+    }
+    fs.writeFileSync(esFilePath, result.outputText, 'utf8')
+    fs.writeFileSync(libFilePath, result.outputText, 'utf8')
+  })
+}
+
+function copyScssFiles() {
+  const files = glob.sync(path.join(publishSrcPath, './**/*.scss'))
+  files.forEach((filePath) => {
+    const newFilePath = publishEsPath + filePath.replace(publishSrcPath, '')
+    fs.copySync(filePath, newFilePath)
+  })
+
+  files.forEach((filePath) => {
+    const newFilePath = publishLibPath + filePath.replace(publishSrcPath, '')
+    fs.copySync(filePath, newFilePath)
+  })
+}
 
 // const distConfig = {
 //   output: {

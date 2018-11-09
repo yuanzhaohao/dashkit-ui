@@ -3,7 +3,7 @@ import './page.scss';
 
 import * as ReactDOM from 'react-dom';
 import { RouteComponentProps } from 'react-router-dom';
-import { Spin, Grid } from '../../../src';
+import { Spin, Grid } from 'dashkit-ui';
 import Example from './example';
 const { Row, Col } = Grid;
 

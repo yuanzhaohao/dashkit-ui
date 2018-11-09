@@ -51,7 +51,7 @@ const createHappypackPlugin = () => {
 
 module.exports = {
   resolve: {
-    extensions: ['.js', '.ts', '.tsx', '.json', 'css', 'scss', 'svg', 'md'],
+    extensions: ['.js', '.ts', '.tsx', '.json', '.css', '.scss', '.svg', '.md'],
     alias: {
       'dashkit-ui': srcPath,
       '@': srcPath
