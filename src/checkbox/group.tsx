@@ -3,6 +3,7 @@ import * as classNames from 'classnames';
 import * as PropTypes from 'prop-types';
 import { isEqual } from 'lodash';
 import { CheckboxProps } from './checkbox';
+import { Provider } from './context';
 
 export type CheckboxGroupProps = {
   prefixCls?: string;
@@ -50,13 +51,13 @@ class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGrou
   getChildContext() {
     return {
       groupHook: {
-        getOptions() {
+        getOptions: () => {
           return this.state.options;
         },
-        getMin() {
+        getMin: () => {
           return this.props.min;
         },
-        getMax() {
+        getMax: () => {
           return this.props.max;
         }
       },
@@ -112,6 +113,7 @@ class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGrou
       ? Array.from(new Set([...options, label]))
       : options.filter(option => option !== label);
 
+    console.log(checked, label)
     this.setState({
       options: newOptions,
     });

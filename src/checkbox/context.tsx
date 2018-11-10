@@ -6,4 +6,4 @@ const createConsumer = (Component: any) => () => (
   <Consumer>{(context) => <Component { ...context } />}</Consumer>
 );
 
-export { Provider, createConsumer };
+export { Provider, Consumer, createConsumer };

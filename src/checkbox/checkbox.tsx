@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import * as classNames from 'classnames';
+import { Consumer } from './context';
 
 export type CheckboxProps = {
   prefixCls?: string;
@@ -51,17 +52,21 @@ class Checkbox extends React.PureComponent<CheckboxProps, CheckboxState> {
       className,
     );
     return (
-      <label className={checkboxClassName} style={style}>
-        <input
-          className={`${prefixCls}-input`}
-          type="checkbox"
-          disabled={disabled}
-          onChange={this.handleChange}
-          checked={!!checked}
-        />
-        <i className={`${prefixCls}-indicator`} />
-        <span>{children || label}</span>
-      </label>
+      <Consumer>
+        {() => (
+          <label className={checkboxClassName} style={style}>
+            <input
+              className={`${prefixCls}-input`}
+              type="checkbox"
+              disabled={disabled}
+              onChange={this.handleChange}
+              checked={checked}
+            />
+            <i className={`${prefixCls}-indicator`} />
+            <span>{children || label}</span>
+          </label>
+        )}
+      </Consumer>
     );
   }
 

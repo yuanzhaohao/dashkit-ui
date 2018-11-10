@@ -228,7 +228,7 @@ $checkbox-size:                     $font-size-base !default;
 $checkbox-margin-right:             24px !default;
 $checkbox-active-color:             $primary !default;
 $checkbox-border-radius:            2px !default;
-$checkbox-indicator-transtion:      border-color .25s $ease-in-out-back, background-color .25s $ease-in-out-back !default;
+$checkbox-indicator-transtion:      border-color .25s ease, background-color .25s ease !default;
 
 // Switch
 //
