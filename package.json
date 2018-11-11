@@ -12,13 +12,13 @@
   "license": "MIT",
   "scripts": {
     "start": "npm run dev",
-    "dev": "node build/dev.js",
-    "docs": "node build/docs.js",
+    "dev": "node scripts/dev.js",
+    "docs": "node scripts/docs.js",
     "publish": "node build/publish.js && npm run publish:ts && npm run publish:babel",
     "publish:ts": "tsc -p tsconfig.json",
     "publish:babel": "babel publish/lib --out-dir publish/lib",
-    "publish:dev": "webpack --config build/webpack.publish.config.js",
-    "publish:prod": "webpack --config build/webpack.publish.prod.config.js"
+    "publish:dev": "webpack --config scripts/webpack.publish.config.js",
+    "publish:prod": "webpack --config scripts/webpack.publish.prod.config.js"
   },
   "repository": {
     "type": "git",
