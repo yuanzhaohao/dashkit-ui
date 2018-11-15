@@ -5,19 +5,23 @@
     "lib": ["es6", "dom"],
     "jsx": "react",
     "moduleResolution": "node",
-    "rootDir": "src",
+    "rootDir": "./src",
     "outDir": "./publish/es",
     "strict": false,
     "declaration": true,
     "declarationDir": "./publish/@types",
     "strictFunctionTypes": false,
-    "baseUrl": ".",
     "sourceMap": false,
+    "removeComments": true,
+    "baseUrl": ".",
     "paths": {
-      "dashkit-ui": ["./src"]
+      "dashkit-ui": ["./src/"]
     }
   },
-  "include": ["./src/**/*", "./custom.d.ts"],
+  "include": [
+    "./src/**/*",
+    "./custom.d.ts",
+  ],
   "exclude": [
     "node_modules"
   ]

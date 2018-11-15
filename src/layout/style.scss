@@ -2,9 +2,9 @@
 @import '../style/theme';
 @import '../style/mixins';
 
-$layout-prefix-cls: 'dk-layout';
+$layout-prefix: 'dk-layout';
 
-.#{$layout-prefix-cls} {
+.#{$layout-prefix} {
   display: flex;
   flex-direction: column;
   flex: auto;

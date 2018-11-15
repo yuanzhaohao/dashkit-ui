@@ -18,12 +18,6 @@ module.exports = merge(baseConfig, {
     libraryTarget: 'umd',
     library: 'Dashkit',
   },
-  stats: {
-    modules: false,
-    children: false,
-    chunks: false,
-    chunkModules: false
-  },
   externals: {
     'react': 'React',
     'react-dom': 'ReactDOM'
