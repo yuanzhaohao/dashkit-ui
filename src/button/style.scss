@@ -97,7 +97,11 @@ $btn-prefix: 'dk-btn';
   }
 
   &-icon {
-    font-size: 16px;
+    font-size: $font-size-base;
+  }
+
+  &-icon-with-child {
+    margin-right: 6px;
   }
 
   &-icon-only {
@@ -105,7 +109,6 @@ $btn-prefix: 'dk-btn';
     height: $btn-size;
     padding: 0;
   }
-
 
   // Button Sizes
   //
@@ -123,6 +126,14 @@ $btn-prefix: 'dk-btn';
       width: $btn-size-lg;
       height: $btn-size-lg;
     }
+
+    .#{$btn-prefix}-icon {
+      font-size: $font-size-lg;
+    }
+
+    .#{$btn-prefix}-icon-with-child {
+      margin-right: 8px;
+    }
   }
 
   &-small {
@@ -138,6 +149,14 @@ $btn-prefix: 'dk-btn';
     &.#{$btn-prefix}-icon-only {
       width: $btn-size-sm;
       height: $btn-size-sm;
+    }
+
+    .#{$btn-prefix}-icon {
+      font-size: $font-size-sm;
+    }
+
+    .#{$btn-prefix}-icon-with-child {
+      margin-right: 4px;
     }
   }
 

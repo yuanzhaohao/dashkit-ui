@@ -55,7 +55,11 @@ class Button extends React.PureComponent<ButtonProps, ButtonState> {
       className,
     );
     const iconType = loading ? 'loading' : icon;
-    const iconNode = iconType ? <Icon type={iconType} className={`${prefixCls}-icon`} /> : null;
+    const iconNode = iconType
+      ? <Icon type={iconType} className={classNames(`${prefixCls}-icon`, {
+        [`${prefixCls}-icon-with-child`]: !!children
+      })} />
+      : null;
     return (
       <button
         {...attibutes}
