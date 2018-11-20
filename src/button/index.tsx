@@ -2,6 +2,7 @@ import './style.scss';
 
 import * as classNames from 'classnames';
 import * as React from 'react';
+import Icon from '../icon';
 
 export type ButtonSize = 'small' | 'default' | 'large';
 export type ButtonType = 'default' | 'primary' | 'success' | 'danger' | 'warning' | 'info' | 'link';
@@ -13,6 +14,8 @@ export type ButtonProps = {
   outline?: boolean;
   round?: boolean;
   disabled?: boolean;
+  icon?: string;
+  loading?: boolean;
 };
 export type ButtonState = {
   spinning?: boolean;
@@ -21,9 +24,6 @@ export type ButtonState = {
 class Button extends React.PureComponent<ButtonProps, ButtonState> {
   static defaultProps = {
     prefixCls: 'dk-btn',
-    outline: false,
-    round: false,
-    disabled: false,
     size: 'default' as ButtonSize,
     type: 'default' as ButtonType,
   };
@@ -38,26 +38,31 @@ class Button extends React.PureComponent<ButtonProps, ButtonState> {
       size,
       className,
       disabled,
+      icon,
+      loading,
       ...attibutes
     } = this.props;
     const buttonClassName = classNames(
       prefixCls,
       {
-        [`${prefixCls}-${type}`]: !outline && true,
+        [`${prefixCls}-${type}`]: !outline,
         [`${prefixCls}-large`]: size === 'large',
         [`${prefixCls}-small`]: size === 'small',
         [`${prefixCls}-outline-${type}`]: outline,
         [`${prefixCls}-rounded`]: round,
+        [`${prefixCls}-icon-only`]: icon && !children,
       },
       className,
     );
+    const iconType = loading ? 'loading' : icon;
+    const iconNode = iconType ? <Icon type={iconType} className={`${prefixCls}-icon`} /> : null;
     return (
       <button
         {...attibutes}
         className={buttonClassName}
         disabled={disabled}
       >
-        {children}
+        {iconNode}{children}
       </button>
     );
   }

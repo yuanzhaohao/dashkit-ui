@@ -40,6 +40,15 @@ ReactDOM.render(
       <Button type="danger" round>Danger</Button>
       <Button type="info" round>Info</Button>
     </div>
+
+    <div className="button-list">
+      <Button round icon="search" />
+      <Button round type="primary" icon="download" />
+      <Button round type="success" icon="check-circle" />
+      <Button round type="warning" icon="x-circle" />
+      <Button round type="danger" icon="alert-circle" />
+      <Button round type="info" icon="info" />
+    </div>
   </div>,
   mountNode
 );
