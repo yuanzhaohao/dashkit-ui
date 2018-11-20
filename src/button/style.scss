@@ -18,14 +18,10 @@ $btn-prefix: 'dk-btn';
   vertical-align: middle;
   user-select: none;
 
-  @include hover-focus {
-    text-decoration: none;
-  }
-
   &:focus,
   &.focus {
     outline: 0;
-    // box-shadow: $btn-focus-box-shadow;
+    text-decoration: none;
   }
 
   &.disabled,
@@ -47,7 +43,7 @@ $btn-prefix: 'dk-btn';
     color: $link-color;
     background-color: transparent;
 
-    @include hover {
+    &:hover {
       color: $link-hover-color;
       text-decoration: $link-hover-decoration;
       background-color: transparent;

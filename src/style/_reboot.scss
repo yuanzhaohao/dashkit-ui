@@ -168,7 +168,7 @@ a {
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
 
-  @include hover {
+  &:hover {
     color: $link-hover-color;
     text-decoration: $link-hover-decoration;
   }
@@ -177,7 +177,8 @@ a {
 a:not([href]):not([tabindex]) {
   text-decoration: none;
 
-  @include hover-focus {
+  &:hover,
+  &:focus {
     text-decoration: none;
   }
 

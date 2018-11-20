@@ -26,12 +26,9 @@
 
   &:active {
     background-color: $active-background;
+    // @include gradient-bg($active-background);
     border-color: $active-border;
   }
-
-  // &:focus {
-  //   box-shadow: 0 0 0 $btn-focus-width rgba($border, .5);
-  // }
 
   &.disabled,
   &:disabled {
@@ -67,10 +64,6 @@
     @include gradient-bg($active-background);
     border-color: $active-border;
   }
-
-  // &:focus {
-  //   box-shadow: 0 0 0 $btn-focus-width rgba($color, .5);
-  // }
 
   &.disabled,
   &:disabled {
