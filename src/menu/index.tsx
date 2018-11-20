@@ -1,6 +1,5 @@
 import './style.scss';
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
 import * as classNames from 'classnames';
 import MenuItem from './item';
 import SubMenu from './sub-menu';
@@ -31,8 +30,8 @@ class Menu extends React.PureComponent<MenuProps, MenuState> {
     theme: 'light',
   };
   static childContextTypes = {
-    itemHook: PropTypes.object,
-    subMenuHook: PropTypes.object,
+    itemHook: Object,
+    subMenuHook: Object,
   };
 
   constructor(props: MenuProps) {

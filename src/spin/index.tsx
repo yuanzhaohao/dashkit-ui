@@ -16,13 +16,14 @@ export interface SpinState {
   spinning?: boolean;
 }
 class Spin extends React.Component<SpinProps, SpinState> {
-  public static defaultProps = {
+  static defaultProps = {
     prefixCls: 'dk-spin',
     spinning: true,
     size: 'default' as SpinSize,
   };
-  private delayTimeout: number;
-  private debounceTimeout: number;
+  delayTimeout: number;
+  debounceTimeout: number;
+
   constructor(props: SpinProps) {
     super(props);
 
@@ -34,7 +35,7 @@ class Spin extends React.Component<SpinProps, SpinState> {
     };
   }
 
-  public componentDidMount() {
+  componentDidMount() {
     const { spinning, delay } = this.props;
     if (spinning && delay) {
       this.setState({
@@ -48,7 +49,7 @@ class Spin extends React.Component<SpinProps, SpinState> {
     }
   }
 
-  public componentWillReceiveProps(nextProps: SpinProps) {
+  componentWillReceiveProps(nextProps: SpinProps) {
     const currentSpinning = this.props.spinning;
     const spinning = nextProps.spinning;
     const { delay } = this.props;
@@ -79,7 +80,7 @@ class Spin extends React.Component<SpinProps, SpinState> {
     }
   }
 
-  public componentWillUnmount() {
+  componentWillUnmount() {
     if (this.debounceTimeout) {
       clearTimeout(this.debounceTimeout);
     }
@@ -87,10 +88,11 @@ class Spin extends React.Component<SpinProps, SpinState> {
       window.clearTimeout(this.delayTimeout);
     }
   }
-  public render() {
-    const { className, size, text, prefixCls } = this.props;
+
+  render() {
+    const { children, className, size, text, prefixCls } = this.props;
     const { spinning } = this.state;
-    const isNestedPattern = !!(this.props && this.props.children);
+    const isNestedPattern = !!children;
     const spinClassName = classNames([
       prefixCls,
       {
@@ -122,7 +124,7 @@ class Spin extends React.Component<SpinProps, SpinState> {
       );
       return (
         <div className={`${prefixCls}-box`}>
-          <div className={containerClassName}>{this.props.children}</div>
+          <div className={containerClassName}>{children}</div>
           {spinning ? (
             <div className={`${prefixCls}-loading`}>{spinElement}</div>
           ) : null}

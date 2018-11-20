@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
 import * as classNames from 'classnames';
 import { CSSTransition } from 'react-transition-group';
 import { removeClass } from '../utils/dom';
@@ -20,7 +19,7 @@ class SubMenu extends React.Component<MenuProps> {
     theme: 'light',
   };
   static contextTypes = {
-    subMenuHook: PropTypes.object,
+    subMenuHook: Object,
   };
 
   render() {

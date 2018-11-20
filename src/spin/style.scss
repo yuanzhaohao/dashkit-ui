@@ -11,6 +11,7 @@ $spin-prefix: 'dk-spin';
   vertical-align: middle;
   text-align: center;
   opacity: 0;
+
   &.#{$spin-prefix}-spinning {
     opacity: 1;
     position: static;

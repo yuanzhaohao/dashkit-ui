@@ -1,6 +1,5 @@
 import './style.scss';
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
 import * as classNames from 'classnames';
 import Icon from '../icon';
 
@@ -19,7 +18,7 @@ class MenuItem extends React.Component<MenuItemProps> {
   };
 
   static contextTypes = {
-    itemHook: PropTypes.object,
+    itemHook: Object,
   };
 
   render() {
