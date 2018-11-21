@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
+import * as PropTyps from 'prop-types';
 import { isEqual } from 'lodash';
 import { CheckboxProps } from './checkbox';
 import { Provider } from './context';
@@ -26,7 +27,7 @@ class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGrou
   };
 
   static childContextTypes = {
-    groupHook: Object,
+    groupHook: PropTyps.object,
   };
 
   static getDerivedStateFromProps(nextProps: CheckboxGroupProps, prevState: CheckboxGroupState) {

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
+import * as PropTypes from 'prop-types';
 
 export type SidebarProps = {
   className?: string;
@@ -15,7 +16,7 @@ const generateId = (() => {
 
 class Sidebar extends React.Component<SidebarProps> {
   static contextTypes = {
-    sidebarHook: Object,
+    sidebarHook: PropTypes.object,
   };
 
   uniqueId: string;

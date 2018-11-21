@@ -320,21 +320,24 @@ $grid-half-gutter-width:            $grid-gutter-width * 0.5;
 
 //  Menu
 //
-$menu-bg:                           $white !default;
-$menu-width:                        240px !default;
-$menu-border-color:                 $border-color !default;
-$menu-item-height:                  40px !default;
-$menu-item-color:                   #6e84a3 !default;
-$menu-item-active-color:            $primary !default;
-$menu-item-active-bg:               mix($white, $primary, 90%) !default;
-$menu-item-padding-x:               24px !default;
-$menu-item-icon-margin-x:           10px !default;
-$menu-item-icon-size:               16px !default;
-$menu-disabled-opacity:             .5 !default;
+$menu-bg:                               $white !default;
+$menu-width:                            240px !default;
+$menu-border-color:                     $border-color !default;
+$menu-vertical-item-height:             40px !default;
+$menu-vertical-item-padding-x:          20px !default;
+$menu-horizontal-item-height:           60px !default;
+$menu-horizontal-item-padding-x:        18px !default;
+$menu-item-color:                       #6e84a3 !default;
+$menu-item-active-color:                $primary !default;
+$menu-item-active-bg:                   mix($white, $primary, 90%) !default;
+$menu-item-icon-margin-x:               10px !default;
+$menu-item-icon-size:                   16px !default;
+$menu-disabled-opacity:                 .5 !default;
 
-$menu-dark-bg:                      #152e4d !default;
-$menu-dark-border-color:            $gray-900 !default;
-$menu-dark-item-color:              #6e84a3 !default;
-$menu-dark-item-active-color:       $white !default;
-$menu-dark-item-active-bg:          mix($black, $primary, 75%) !default;
+$menu-dark-bg:                          #152e4d !default;
+$menu-dark-border-color:                $gray-900 !default;
+$menu-dark-item-color:                  #6e84a3 !default;
+$menu-dark-item-active-color:           $white !default;
+$menu-dark-item-active-bg:              mix($black, $primary, 75%) !default;
+$menu-shadow:                           0 2px 8px rgba($black, .25) !default;
 

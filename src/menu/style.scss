@@ -10,11 +10,8 @@ $menu-prefix: 'dk-menu';
   margin: 0;
   padding: 0;
   list-style: none;
-  width: $menu-width;
-  height: 100%;
-  background: $menu-bg;
-  border-right: 1px solid $menu-border-color;
-  transition: background .3s, width .2s;
+  background-color: $menu-bg;
+  transition: background-color .3s, width .2s;
 
   ul,
   ol {
@@ -27,27 +24,15 @@ $menu-prefix: 'dk-menu';
   &-submenu-title {
     position: relative;
     display: flex;
-    width: 100%;
-    height: $menu-item-height;
-    padding: 0 $menu-item-padding-x;
     margin-bottom: 0;
     color: $menu-item-color;
     align-items: center;
     cursor: pointer;
     transition: background-color .2s ease-in-out;
 
-    &:hover {
-      background-color: $menu-item-active-bg;
-    }
-
     &:before {
       content: '';
       position: absolute;
-      top: 8px;
-      bottom: 8px;
-      left: 0;
-      width: 2px;
-      background-color: transparent;
       transition: background-color .2s ease-in-out;
     }
 
@@ -72,21 +57,8 @@ $menu-prefix: 'dk-menu';
     font-size: $menu-item-icon-size;
   }
 
-  &-submenu &-item {
-    padding-left: $menu-item-padding-x + $menu-item-icon-size + $menu-item-icon-margin-x;
-  }
-
-  &-submenu &-submenu &-submenu-title {
-    padding-left: $menu-item-padding-x + $menu-item-icon-size + $menu-item-icon-margin-x;
-  }
-
-  &-submenu &-submenu &-item {
-    padding-left: $menu-item-padding-x * 2 + $menu-item-icon-size + $menu-item-icon-margin-x;
-  }
-
   &-submenu-list {
     height: 0;
-    overflow: hidden;
     transition: height 0.35s ease;
 
     &-opened,
@@ -101,8 +73,6 @@ $menu-prefix: 'dk-menu';
   }
 
   &-arrow {
-    position: absolute;
-    right: $menu-item-padding-x;
     font-size: $menu-item-icon-size;
     transform: rotate(0);
     transition: transform .35s ease;
@@ -111,11 +81,132 @@ $menu-prefix: 'dk-menu';
       transform: rotate(-180deg);
     }
   }
+
+  &-vertical {
+    width: $menu-width;
+    height: 100%;
+    border-right: 1px solid $menu-border-color;
+
+    .#{$menu-prefix}-item,
+    .#{$menu-prefix}-submenu-title {
+      width: 100%;
+      height: $menu-vertical-item-height;
+      padding: 0 $menu-vertical-item-padding-x;
+
+      &:hover {
+        background-color: $menu-item-active-bg;
+      }
+
+      &:before {
+        top: 8px;
+        bottom: 8px;
+        left: 0;
+        width: 2px;
+      }
+    }
+
+    .#{$menu-prefix}-arrow {
+      position: absolute;
+      right: $menu-vertical-item-padding-x;
+    }
+
+    .#{$menu-prefix}-submenu-list {
+      overflow: hidden;
+    }
+
+    .#{$menu-prefix}-submenu .#{$menu-prefix}-item {
+      padding-left: $menu-vertical-item-padding-x + $menu-item-icon-size + $menu-item-icon-margin-x;
+    }
+
+    .#{$menu-prefix}-submenu .#{$menu-prefix}-submenu .#{$menu-prefix}-submenu-title {
+      padding-left: $menu-vertical-item-padding-x + $menu-item-icon-size + $menu-item-icon-margin-x;
+    }
+
+    .#{$menu-prefix}-submenu .#{$menu-prefix}-submenu .#{$menu-prefix}-item {
+      padding-left: $menu-vertical-item-padding-x * 2 + $menu-item-icon-size + $menu-item-icon-margin-x;
+    }
+  }
+
+
+  &-horizontal {
+    @include clearfix();
+    border-bottom: 1px solid $menu-border-color;
+
+    .#{$menu-prefix}-item,
+    .#{$menu-prefix}-submenu-title {
+      float: left;
+      height: $menu-horizontal-item-height;
+      padding: 0 $menu-horizontal-item-padding-x;
+
+      &:before {
+        bottom: -1px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        z-index: 9;
+      }
+
+      &:hover {
+        color: $menu-item-active-color;
+      }
+    }
+
+    .#{$menu-prefix}-arrow {
+      position: relative;
+      margin-left: $menu-item-icon-margin-x;
+    }
+
+    .#{$menu-prefix}-submenu-list {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: $menu-width - 40px;
+      margin-top: 7px;
+      background-color: $menu-bg;
+      z-index: 10;
+      box-shadow: $menu-shadow;
+      max-height: $menu-horizontal-item-height * 7;
+      overflow: auto;
+
+      .#{$menu-prefix}-submenu,
+      .#{$menu-prefix}-item,
+      .#{$menu-prefix}-submenu-title {
+        float: none;
+        width: 100%;
+        height: $menu-vertical-item-height;
+
+        &:hover {
+          background-color: $menu-item-active-bg;
+          color: $menu-item-color;
+        }
+
+        &:before {
+          top: 8px;
+          bottom: 8px;
+          left: 1px;
+          width: 2px;
+          height: auto;
+        }
+      }
+
+      .#{$menu-prefix}-arrow {
+        position: absolute;
+        right: $menu-vertical-item-padding-x;
+        transform: rotate(-90deg);
+      }
+
+      .#{$menu-prefix}-submenu-list {
+        top: 0;
+        left: 100%;
+      }
+
+    }
+  }
 }
 
 .#{$menu-prefix}-dark {
   border-color: $menu-dark-border-color;
-  background: $menu-dark-bg;
+  background-color: $menu-dark-bg;
 
   .#{$menu-prefix}-item,
   .#{$menu-prefix}-submenu-title {
@@ -128,6 +219,23 @@ $menu-prefix: 'dk-menu';
     &:hover {
       background-color: $menu-dark-item-active-bg;
       color: $menu-dark-item-active-color;
+    }
+  }
+
+  .#{$menu-prefix}-submenu-list {
+    background-color: $menu-dark-bg;
+
+    .#{$menu-prefix}-submenu,
+    .#{$menu-prefix}-item,
+    .#{$menu-prefix}-submenu-title {
+      float: none;
+      width: 100%;
+      height: $menu-vertical-item-height;
+
+      &:hover {
+        background-color: $menu-dark-item-active-bg;
+        color: $menu-dark-item-color;
+      }
     }
   }
 }

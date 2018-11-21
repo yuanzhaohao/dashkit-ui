@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
+import * as PropTyps from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 import { removeClass } from '../utils/dom';
 import Icon from '../icon';
@@ -19,26 +20,64 @@ class SubMenu extends React.Component<MenuProps> {
     theme: 'light',
   };
   static contextTypes = {
-    subMenuHook: Object,
+    subMenuHook: PropTyps.object,
   };
+
+  hoverTimer: number;
+
+  constructor(props: MenuProps) {
+    super(props);
+
+    this.hoverTimer = 0;
+  }
 
   render() {
     const { children, index, prefixCls, className, icon, title, ...attributes } = this.props;
     const { subMenuHook } = this.context;
     const submenuPrefixCls = `${prefixCls}-submenu`;
     const active = subMenuHook.existOpenedMenu(index);
+    const isHorizontal = subMenuHook.getProps().mode === 'horizontal';
 
     const iconNode = icon && typeof icon === 'string'
       ? <Icon type={icon} className={`${prefixCls}-icon`} />
       : null;
+
+    const childNode = (
+      children
+        ? <CSSTransition
+          in={active}
+          timeout={350}
+          onEnter={this.handleEnter}
+          onEntered={this.handleEntered}
+          onExit={this.handleExit}
+          onExiting={this.handleExiting}
+          classNames={`${submenuPrefixCls}-list`}
+        >
+          <ul className={classNames({
+            [`${submenuPrefixCls}-list`]: true,
+            [`${submenuPrefixCls}-list-opened`]: !isHorizontal && active,
+          })}>{children}</ul>
+        </CSSTransition>
+        : null
+    );
+    const titleClassName = classNames({
+      [`${submenuPrefixCls}-title`]: true,
+      [`${prefixCls}-active`]: active,
+    });
     const titleNode = (
-      <div className={`${submenuPrefixCls}-title`} onClick={this.handleClick}>
+      <div
+        className={titleClassName}
+        onClick={!isHorizontal ? this.handleClick : null}
+        onMouseEnter={isHorizontal ? this.handleMouseEnter : null}
+        onMouseLeave={isHorizontal ? this.handleMouseLeave : null}
+      >
         {iconNode}
         {title}
         <Icon type="chevron-down" className={classNames({
           [`${prefixCls}-arrow`]: true,
           [`${prefixCls}-arrow-active`]: active,
         })} />
+        {isHorizontal ? childNode : null}
       </div>
     );
 
@@ -50,38 +89,44 @@ class SubMenu extends React.Component<MenuProps> {
         {...attributes}
       >
         {titleNode}
-        {children
-          ? <CSSTransition
-            in={active}
-            timeout={350}
-            onEnter={this.handleEnter}
-            onEntered={this.handleEntered}
-            onExit={this.handleExit}
-            onExiting={this.handleExiting}
-            classNames={`${submenuPrefixCls}-list`}
-          >
-            <ul className={classNames({
-              [`${submenuPrefixCls}-list`]: true,
-              [`${submenuPrefixCls}-list-opened`]: active,
-            })}>{children}</ul>
-          </CSSTransition>
-          : null
-        }
+        {!isHorizontal ? childNode : null}
       </div>
     );
   }
 
   handleClick = () => {
     const { subMenuHook } = this.context;
+    const { index } = this.props;
 
-    if (subMenuHook) {
-      const { index } = this.props;
-      if (!subMenuHook.existOpenedMenu(index)) {
-        subMenuHook.addOpenedMenu(index);
-      } else {
-        subMenuHook.removeOpenedMenu(index);
-      }
+    if (!subMenuHook.existOpenedMenu(index)) {
+      subMenuHook.addOpenedMenu(index);
+    } else {
+      subMenuHook.removeOpenedMenu(index);
     }
+  }
+
+  handleMouseEnter = () => {
+    console.log('handleMouseEnter')
+    const { subMenuHook } = this.context;
+    const { index } = this.props;
+
+    clearTimeout(this.hoverTimer);
+    this.hoverTimer = window.setTimeout(() => {
+      if (!subMenuHook.existOpenedMenu(index)) {
+        console.log('open menu')
+        subMenuHook.addOpenedMenu(index);
+      }
+    }, 300);
+  }
+
+  handleMouseLeave = () => {
+    const { subMenuHook } = this.context;
+    const { index } = this.props;
+
+    clearTimeout(this.hoverTimer);
+    this.hoverTimer = window.setTimeout(() => {
+      subMenuHook.removeOpenedMenu(index);
+    }, 300);
   }
 
   handleEnter = (el: HTMLDivElement) => {

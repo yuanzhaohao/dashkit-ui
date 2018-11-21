@@ -1,11 +1,11 @@
 ---
-order: 0
+order: 1
 title:
-  zh-CN: 侧边栏
-  en-US: Sidebar
+  zh-CN: 顶部导航
+  en-US: Topbar
 subtitle:
-  zh-CN: 垂直排列的菜单。
-  en-US: Vertical Menu.
+  zh-CN: 水平排列的菜单。
+  en-US: Horizontal Menu.
 ---
 
 ```js
@@ -19,13 +19,12 @@ class MenuDemo extends React.Component {
     return (
       <Menu
         defaultActive="Dashboard"
-        defaultOpeneds={['Layouts', 'Menu']}
         theme={theme}
+        mode="horizontal"
         onSelect={this.onMenuSelect}
         onOpen={this.onSubMenuOpen}
       >
         <Item icon="home" index="Dashboard">Dashboard</Item>
-        <Item icon="clipboard" index="Getting started">Getting started</Item>
         <SubMenu icon="book-open" title="Components" index="Components">
           <Item index="Alert">Alert</Item>
           <Item index="button">Button</Item>
@@ -41,8 +40,6 @@ class MenuDemo extends React.Component {
           <Item index="Slidenav">Slidenav</Item>
           <Item index="Topnav">Topnav</Item>
         </SubMenu>
-        <SubMenu icon="file" index="Empty submenu" title="Empty submenu">
-        </SubMenu>
       </Menu>
     );
   }
@@ -57,14 +54,16 @@ class MenuDemo extends React.Component {
 }
 
 ReactDOM.render(
-  <Row>
-    <Col xs={6} className="menu-vertical-item">
-      <MenuDemo theme="light" />
-    </Col>
-    <Col xs={6} className="menu-vertical-item">
-      <MenuDemo theme="dark" />
-    </Col>
-  </Row>,
+  <div>
+    <Row>
+      <Col xs={12} className="menu-horizontal-item">
+        <MenuDemo theme="light" />
+      </Col>
+      <Col xs={12} className="menu-horizontal-item">
+        <MenuDemo theme="dark" />
+      </Col>
+    </Row>
+  </div>,
   mountNode
 );
 ```

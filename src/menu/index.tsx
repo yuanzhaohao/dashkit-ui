@@ -1,6 +1,7 @@
 import './style.scss';
 import * as React from 'react';
 import * as classNames from 'classnames';
+import * as PropTypes from 'prop-types';
 import MenuItem from './item';
 import SubMenu from './sub-menu';
 
@@ -10,8 +11,8 @@ export type MenuProps = {
   style?: React.CSSProperties;
   defaultActive?: string;
   defaultOpeneds?: string[];
-  mode?: 'horizontal' | 'vertical',
-  theme?: 'dark' | 'light';
+  mode: 'horizontal' | 'vertical',
+  theme: 'dark' | 'light';
   onSelect?: (index: string) => void;
   onOpen?: (index: string) => void;
 };
@@ -26,12 +27,12 @@ class Menu extends React.PureComponent<MenuProps, MenuState> {
   static SubMenu: any;
   static defaultProps = {
     prefixCls: 'dk-menu',
-    mode: 'horizontal',
+    mode: 'vertical',
     theme: 'light',
   };
   static childContextTypes = {
-    itemHook: Object,
-    subMenuHook: Object,
+    itemHook: PropTypes.object,
+    subMenuHook: PropTypes.object,
   };
 
   constructor(props: MenuProps) {
@@ -46,6 +47,9 @@ class Menu extends React.PureComponent<MenuProps, MenuState> {
     const defaultContext = {
       getState: () => {
         return this.state;
+      },
+      getProps: () => {
+        return this.props;
       }
     };
     return {
@@ -92,9 +96,11 @@ class Menu extends React.PureComponent<MenuProps, MenuState> {
   }
 
   render() {
-    const { children, prefixCls, className, style, theme } = this.props;
+    const { children, prefixCls, className, style, theme, mode } = this.props;
     const menuClassName = classNames({
       [`${prefixCls}`]: true,
+      [`${prefixCls}-vertical`]: mode === 'vertical',
+      [`${prefixCls}-horizontal`]: mode === 'horizontal',
       [`${prefixCls}-dark`]: theme === 'dark',
     }, className);
 

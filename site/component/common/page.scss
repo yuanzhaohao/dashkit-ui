@@ -215,10 +215,14 @@
 
 // Menu
 //
-.menu-item {
+.menu-vertical-item {
   display: flex;
   justify-content: center;
   padding: 15px 0;
+}
+
+.menu-horizontal-item {
+  margin-bottom: 20px;
 }
 
 .menu-theme {

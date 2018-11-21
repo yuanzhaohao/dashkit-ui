@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
+import * as PropTyps from 'prop-types';
 import { Consumer } from './context';
 
 export type CheckboxProps = {
@@ -21,7 +22,7 @@ class Checkbox extends React.PureComponent<CheckboxProps, CheckboxState> {
   static Group: any;
   static elementType = 'Checkbox';
   static contextTypes = {
-    groupHook: Object,
+    groupHook: PropTyps.object,
   };
   static defaultProps = {
     disabled: false,

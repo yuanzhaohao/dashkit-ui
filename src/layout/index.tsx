@@ -1,5 +1,6 @@
 import './style.scss';
 import * as classNames from 'classnames';
+import * as PropTyps from 'prop-types';
 import * as React from 'react';
 import Sidebar from './sidebar';
 
@@ -22,7 +23,7 @@ class Layout extends React.Component<LayoutProps, LayoutState> {
   static Content: any;
   static Sidebar: any;
   static childContextTypes = {
-    sidebarHook: Object,
+    sidebarHook: PropTyps.object,
   };
   static defaultProps = {
     prefixCls: 'dk-layout',
