@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import * as PropTyps from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
+import { createConsumer } from './context';
 import { removeClass } from '../utils/dom';
 import Icon from '../icon';
 
@@ -11,6 +11,7 @@ export type MenuProps = {
   index: string;
   icon?: string;
   title?: string;
+  rootContext: any;
 };
 
 class SubMenu extends React.Component<MenuProps> {
@@ -18,9 +19,6 @@ class SubMenu extends React.Component<MenuProps> {
   static defaultProps = {
     prefixCls: 'dk-menu',
     theme: 'light',
-  };
-  static contextTypes = {
-    subMenuHook: PropTyps.object,
   };
 
   hoverTimer: number;
@@ -32,11 +30,10 @@ class SubMenu extends React.Component<MenuProps> {
   }
 
   render() {
-    const { children, index, prefixCls, className, icon, title, ...attributes } = this.props;
-    const { subMenuHook } = this.context;
+    const { children, index, prefixCls, className, icon, title, rootContext, ...attributes } = this.props;
+    const active = rootContext.existOpenedMenu(index);
+    const isHorizontal = rootContext.getProps().mode === 'horizontal';
     const submenuPrefixCls = `${prefixCls}-submenu`;
-    const active = subMenuHook.existOpenedMenu(index);
-    const isHorizontal = subMenuHook.getProps().mode === 'horizontal';
 
     const iconNode = icon && typeof icon === 'string'
       ? <Icon type={icon} className={`${prefixCls}-icon`} />
@@ -95,37 +92,32 @@ class SubMenu extends React.Component<MenuProps> {
   }
 
   handleClick = () => {
-    const { subMenuHook } = this.context;
-    const { index } = this.props;
+    const { index, rootContext } = this.props;
 
-    if (!subMenuHook.existOpenedMenu(index)) {
-      subMenuHook.addOpenedMenu(index);
+    if (!rootContext.existOpenedMenu(index)) {
+      rootContext.addOpenedMenu(index);
     } else {
-      subMenuHook.removeOpenedMenu(index);
+      rootContext.removeOpenedMenu(index);
     }
   }
 
   handleMouseEnter = () => {
-    console.log('handleMouseEnter')
-    const { subMenuHook } = this.context;
-    const { index } = this.props;
+    const { index, rootContext } = this.props;
 
     clearTimeout(this.hoverTimer);
     this.hoverTimer = window.setTimeout(() => {
-      if (!subMenuHook.existOpenedMenu(index)) {
-        console.log('open menu')
-        subMenuHook.addOpenedMenu(index);
+      if (!rootContext.existOpenedMenu(index)) {
+        rootContext.addOpenedMenu(index);
       }
     }, 300);
   }
 
   handleMouseLeave = () => {
-    const { subMenuHook } = this.context;
-    const { index } = this.props;
+    const { index, rootContext } = this.props;
 
     clearTimeout(this.hoverTimer);
     this.hoverTimer = window.setTimeout(() => {
-      subMenuHook.removeOpenedMenu(index);
+      rootContext.removeOpenedMenu(index);
     }, 300);
   }
 
@@ -150,13 +142,6 @@ class SubMenu extends React.Component<MenuProps> {
       el.style.height = '0';
     }
   }
-
-  getRootState = () => {
-    if (this.context.subMenuHook) {
-      return this.context.subMenuHook.getState();
-    }
-    return {};
-  }
 }
 
-export default SubMenu;
+export default createConsumer(SubMenu);

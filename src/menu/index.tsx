@@ -1,7 +1,7 @@
 import './style.scss';
 import * as React from 'react';
 import * as classNames from 'classnames';
-import * as PropTypes from 'prop-types';
+import { MenuProvider } from './context';
 import MenuItem from './item';
 import SubMenu from './sub-menu';
 
@@ -30,10 +30,6 @@ class Menu extends React.PureComponent<MenuProps, MenuState> {
     mode: 'vertical',
     theme: 'light',
   };
-  static childContextTypes = {
-    itemHook: PropTypes.object,
-    subMenuHook: PropTypes.object,
-  };
 
   constructor(props: MenuProps) {
     super(props);
@@ -41,58 +37,6 @@ class Menu extends React.PureComponent<MenuProps, MenuState> {
       activeIndex: props.defaultActive,
       openedMenus: props.defaultOpeneds || [],
     };
-  }
-
-  getChildContext() {
-    const defaultContext = {
-      getState: () => {
-        return this.state;
-      },
-      getProps: () => {
-        return this.props;
-      }
-    };
-    return {
-      itemHook: Object.assign({
-        selectItem: (index: string) => {
-          const { activeIndex } = this.state;
-          const { onSelect } = this.props;
-          if (index !== activeIndex) {
-            this.setState({
-              activeIndex: index,
-            });
-            if (typeof onSelect === 'function') {
-              onSelect(index);
-            }
-          }
-        }
-      }, defaultContext),
-
-      subMenuHook: Object.assign({
-        addOpenedMenu: (index: string) => {
-          const { openedMenus } = this.state;
-          const { onOpen } = this.props;
-          this.setState({
-            openedMenus: Array.from(new Set([...openedMenus, index])),
-          });
-
-          if (typeof onOpen === 'function') {
-            onOpen(index);
-          }
-        },
-
-        removeOpenedMenu: (index: string) => {
-          const { openedMenus } = this.state;
-          this.setState({
-            openedMenus: openedMenus.filter(m => m !== index),
-          });
-        },
-
-        existOpenedMenu: (index: string) => {
-          return this.state.openedMenus.indexOf(index) !== -1;
-        }
-      }, defaultContext),
-    }
   }
 
   render() {
@@ -105,8 +49,55 @@ class Menu extends React.PureComponent<MenuProps, MenuState> {
     }, className);
 
     return (
-      <ul className={menuClassName} style={style}>{children}</ul>
+      <ul className={menuClassName} style={style}>
+        <MenuProvider value={this.getMenuContext()}>{children}</MenuProvider>
+      </ul>
     );
+  }
+
+  getMenuContext() {
+    return {
+      getState: () => {
+        return this.state;
+      },
+      getProps: () => {
+        return this.props;
+      },
+      selectItem: (index: string) => {
+        const { activeIndex } = this.state;
+        const { onSelect } = this.props;
+        if (index !== activeIndex) {
+          this.setState({
+            activeIndex: index,
+          });
+          if (typeof onSelect === 'function') {
+            onSelect(index);
+          }
+        }
+      },
+      addOpenedMenu: (index: string) => {
+        const { openedMenus } = this.state;
+        const { onOpen } = this.props;
+        this.setState({
+          openedMenus: Array.from(new Set([...openedMenus, index])),
+        });
+
+        if (typeof onOpen === 'function') {
+          onOpen(index);
+        }
+      },
+
+      removeOpenedMenu: (index: string) => {
+        const { openedMenus } = this.state;
+        this.setState({
+          openedMenus: openedMenus.filter(m => m !== index),
+        });
+      },
+
+      existOpenedMenu: (index: string) => {
+        return this.state.openedMenus.indexOf(index) !== -1;
+      }
+    };
   }
 }
 

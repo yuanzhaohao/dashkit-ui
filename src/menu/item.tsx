@@ -1,7 +1,6 @@
-import './style.scss';
 import * as React from 'react';
 import * as classNames from 'classnames';
-import * as PropTyps from 'prop-types';
+import { createConsumer } from './context';
 import Icon from '../icon';
 
 export type MenuItemProps = {
@@ -10,6 +9,7 @@ export type MenuItemProps = {
   index: string;
   disabled?: boolean;
   icon?: string;
+  rootContext: any;
 };
 
 class MenuItem extends React.Component<MenuItemProps> {
@@ -18,13 +18,9 @@ class MenuItem extends React.Component<MenuItemProps> {
     disabled: false,
   };
 
-  static contextTypes = {
-    itemHook: PropTyps.object,
-  };
-
   render() {
-    const { children, prefixCls, className, index, disabled, icon, ...attributes } = this.props;
-    const rootState = this.getRootState();
+    const { children, prefixCls, className, index, disabled, rootContext, icon, ...attributes } = this.props;
+    const rootState = rootContext.getState();
     const itemClassName = classNames({
       [`${prefixCls}-item`]: true,
       [`${prefixCls}-item-active`]: rootState.activeIndex === index,
@@ -48,20 +44,9 @@ class MenuItem extends React.Component<MenuItemProps> {
   handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    const { itemHook } = this.context;
-    if (itemHook) {
-      const { index } = this.props;
-      itemHook.selectItem(index);
-    }
-  }
-
-  getRootState = () => {
-    if (this.context.itemHook) {
-      return this.context.itemHook.getState();
-    }
-
-    return {};
+    const { rootContext, index } = this.props;
+    rootContext.selectItem(index);
   }
 }
 
-export default MenuItem;
+export default createConsumer(MenuItem);

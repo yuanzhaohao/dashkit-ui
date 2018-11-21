@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { MenuProps } from './index';
-const { Provider, Consumer } = React.createContext<MenuProps | null>(null);
+const MenuContext = React.createContext<any>(null);
 
-const createConsumer = (Component: any) => () => (
-  <Consumer>{(context) => <Component {...context} />}</Consumer>
+export const MenuProvider = MenuContext.Provider;
+export const MenuConsumer = MenuContext.Consumer;
+export const createConsumer = (Component: any) => (props: any) => (
+  <MenuConsumer>
+    {(context: any) => <Component {...props} rootContext={context} />}
+  </MenuConsumer>
 );
-
-export { Provider, Consumer, createConsumer };

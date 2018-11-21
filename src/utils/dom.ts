@@ -14,8 +14,8 @@ export function hasClass(el: HTMLElement, cls: string) {
 
 export function addClass(el: HTMLElement, cls: string) {
   if (!el) return;
-  var curClass = el.className;
-  var classes = (cls || '').split(' ');
+  let curClass = el.className;
+  const classes = (cls || '').split(' ');
 
   for (var i = 0, j = classes.length; i < j; i++) {
     var clsName = classes[i];
@@ -34,11 +34,11 @@ export function addClass(el: HTMLElement, cls: string) {
 
 export function removeClass(el: HTMLElement, cls: string) {
   if (!el || !cls) return;
-  var classes = cls.split(' ');
-  var curClass = ' ' + el.className + ' ';
+  let classes = cls.split(' ');
+  let curClass = ' ' + el.className + ' ';
 
-  for (var i = 0, j = classes.length; i < j; i++) {
-    var clsName = classes[i];
+  for (let i = 0, j = classes.length; i < j; i++) {
+    const clsName = classes[i];
     if (!clsName) continue;
 
     if (el.classList) {
