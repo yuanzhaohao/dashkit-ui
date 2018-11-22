@@ -1,9 +1,11 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import * as PropTypes from 'prop-types';
+import { createConsumer } from './context';
 
 export type SidebarProps = {
   className?: string;
+  addSidebar?: any;
+  removeSidebar?: any;
 };
 
 const generateId = (() => {
@@ -15,10 +17,6 @@ const generateId = (() => {
 })();
 
 class Sidebar extends React.Component<SidebarProps> {
-  static contextTypes = {
-    sidebarHook: PropTypes.object,
-  };
-
   uniqueId: string;
   constructor(props: SidebarProps) {
     super(props);
@@ -26,19 +24,22 @@ class Sidebar extends React.Component<SidebarProps> {
   }
 
   componentDidMount() {
-    if (this.context.sidebarHook) {
-      this.context.sidebarHook.addSidebar(this.uniqueId);
+    if (this.props.addSidebar) {
+      console.log('call addSidebar')
+      this.props.addSidebar(this.uniqueId);
     }
   }
 
   componentWillUnmount() {
-    if (this.context.sidebarHook) {
-      this.context.sidebarHook.removeSidebar(this.uniqueId);
+    console.log('call componentWillUnmount removeSidebar')
+    if (this.props.removeSidebar) {
+      console.log('call removeSidebar')
+      this.props.removeSidebar(this.uniqueId);
     }
   }
 
   render() {
-    const { className, children, ...attributes } = this.props;
+    const { className, children, addSidebar, removeSidebar, ...attributes } = this.props;
     const layoutClassName = classNames(
       'dk-layout-sidebar',
       className,
@@ -49,4 +50,4 @@ class Sidebar extends React.Component<SidebarProps> {
   }
 }
 
-export default Sidebar;
+export default createConsumer(Sidebar);

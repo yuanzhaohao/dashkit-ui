@@ -1,8 +1,8 @@
 import './style.scss';
 import * as classNames from 'classnames';
-import * as PropTyps from 'prop-types';
 import * as React from 'react';
 import Sidebar from './sidebar';
+import { LayoutProvider } from './context';
 
 export type LayoutProps = {
   prefixCls?: string;
@@ -22,34 +22,17 @@ class Layout extends React.Component<LayoutProps, LayoutState> {
   static Footer: any;
   static Content: any;
   static Sidebar: any;
-  static childContextTypes = {
-    sidebarHook: PropTyps.object,
-  };
   static defaultProps = {
     prefixCls: 'dk-layout',
     hasSidebar: false,
   };
+
   state = {
     sidebars: [],
   };
-  getChildContext() {
-    return {
-      sidebarHook: {
-        addSidebar: (id: string) => {
-          this.setState({
-            sidebars: [...this.state.sidebars, id],
-          });
-        },
-        removeSidebar: (id: string) => {
-          this.setState({
-            sidebars: this.state.sidebars.filter(currentId => currentId !== id),
-          });
-        }
-      }
-    };
-  }
+
   render() {
-    const { prefixCls, className, children, hasSidebar } = this.props;
+    const { prefixCls, className, children, hasSidebar, ...attibutes } = this.props;
     const layoutClassName = classNames(
       {
         [`${prefixCls}`]: true,
@@ -58,8 +41,25 @@ class Layout extends React.Component<LayoutProps, LayoutState> {
       className,
     )
     return (
-      <div className={layoutClassName}>{children}</div>
+      <div className={layoutClassName} {...attibutes}>
+        <LayoutProvider value={this.getLayoutContext()}>{children}</LayoutProvider>
+      </div>
     );
+  }
+
+  getLayoutContext() {
+    return {
+      addSidebar: (id: string) => {
+        this.setState({
+          sidebars: [...this.state.sidebars, id],
+        });
+      },
+      removeSidebar: (id: string) => {
+        this.setState({
+          sidebars: this.state.sidebars.filter(currentId => currentId !== id),
+        });
+      }
+    };
   }
 }
 
