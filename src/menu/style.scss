@@ -58,6 +58,8 @@ $menu-prefix: 'dk-menu';
   }
 
   &-submenu-list {
+    padding: 0;
+    margin: 0;
     height: 0;
     transition: height 0.35s ease;
 
@@ -132,8 +134,8 @@ $menu-prefix: 'dk-menu';
     @include clearfix();
     border-bottom: 1px solid $menu-border-color;
 
-    .#{$menu-prefix}-item,
-    .#{$menu-prefix}-submenu-title {
+    &-item,
+    &-submenu-title {
       float: left;
       height: $menu-horizontal-item-height;
       padding: 0 $menu-horizontal-item-padding-x;
@@ -156,7 +158,7 @@ $menu-prefix: 'dk-menu';
       margin-left: $menu-item-icon-margin-x;
     }
 
-    .#{$menu-prefix}-submenu-list {
+    &-submenu-list {
       position: absolute;
       top: 100%;
       left: 0;
@@ -193,11 +195,6 @@ $menu-prefix: 'dk-menu';
         position: absolute;
         right: $menu-vertical-item-padding-x;
         transform: rotate(-90deg);
-      }
-
-      .#{$menu-prefix}-submenu-list {
-        top: 0;
-        left: 100%;
       }
 
     }

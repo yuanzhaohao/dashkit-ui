@@ -21,8 +21,10 @@ class MenuItem extends React.Component<MenuItemProps> {
   render() {
     const { children, prefixCls, className, index, disabled, rootContext, icon, ...attributes } = this.props;
     const rootState = rootContext.getState();
+    const isHorizontal = rootContext.getProps().mode === 'horizontal';
     const itemClassName = classNames({
       [`${prefixCls}-item`]: true,
+      [`${prefixCls}-horizontal-item`]: isHorizontal,
       [`${prefixCls}-item-active`]: rootState.activeIndex === index,
       [`${prefixCls}-item-disabled`]: disabled,
     }, className);
