@@ -25,15 +25,12 @@ class Sidebar extends React.Component<SidebarProps> {
 
   componentDidMount() {
     if (this.props.addSidebar) {
-      console.log('call addSidebar')
       this.props.addSidebar(this.uniqueId);
     }
   }
 
   componentWillUnmount() {
-    console.log('call componentWillUnmount removeSidebar')
     if (this.props.removeSidebar) {
-      console.log('call removeSidebar')
       this.props.removeSidebar(this.uniqueId);
     }
   }

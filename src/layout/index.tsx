@@ -69,10 +69,10 @@ function generator(cls: string) {
       prefixCls: 'dk-layout',
     };
     render() {
-      const { prefixCls, className, children } = this.props;
+      const { prefixCls, className, children, ...attibutes } = this.props;
       const basicClassName = classNames(`${prefixCls}-${cls}`, className);
       return (
-        <div className={basicClassName}>{children}</div>
+        <div className={basicClassName} {...attibutes}>{children}</div>
       );
     }
   }
