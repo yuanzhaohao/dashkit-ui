@@ -1,5 +1,7 @@
 import * as React from 'react';
-const MenuContext = React.createContext<any>(null);
+import createReactContext from 'create-react-context';
+
+const MenuContext = createReactContext<any>(null);
 
 export const MenuProvider = MenuContext.Provider;
 export const MenuConsumer = MenuContext.Consumer;

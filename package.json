@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "create-react-context": "^0.2.3",
     "lodash": "^4.17.11",
     "prop-types": "^15.6.2",
     "react": "^16.1.1",
