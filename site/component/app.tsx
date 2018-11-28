@@ -13,7 +13,7 @@ const Index = asyncComponent(() => import('./index'));
 
 const pages = [
   'grid', 'layout', 'icon', 'button', 'checkbox', 'switch', 'input', 'calendar',
-  'alert', 'message', 'menu', 'spin', 'pagination',
+  'alert', 'message', 'menu', 'spin', 'pagination', 'tooltip',
 ]
 
 export default () => (

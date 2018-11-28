@@ -47,36 +47,34 @@ class SubMenu extends React.Component<MenuProps, MenuState> {
     const active = isHorizontal ? this.state.active : opened;
     const submenuPrefixCls = `${prefixCls}-submenu`;
 
-    const iconNode = icon && typeof icon === 'string'
-      ? <Icon type={icon} className={`${prefixCls}-icon`} />
-      : null;
+    const iconNode = icon && typeof icon === 'string' && (
+      <Icon type={icon} className={`${prefixCls}-icon`} />
+    );
 
-    const childNode = (
-      children
-        ? <CSSTransition
-          in={active}
-          timeout={350}
-          onEnter={this.handleEnter}
-          onEntered={this.handleEntered}
-          onExit={this.handleExit}
-          onExiting={this.handleExiting}
-          onExited={this.handleExited}
-          classNames={`${submenuPrefixCls}-list`}
+    const childNode = children && (
+      <CSSTransition
+        in={active}
+        timeout={350}
+        onEnter={this.handleEnter}
+        onEntered={this.handleEntered}
+        onExit={this.handleExit}
+        onExiting={this.handleExiting}
+        onExited={this.handleExited}
+        classNames={`${submenuPrefixCls}-list`}
+      >
+        <ul
+          className={classNames({
+            [`${submenuPrefixCls}-list`]: true,
+            [`${prefixCls}-horizontal-submenu-list`]: isHorizontal,
+            [`${submenuPrefixCls}-list-opened`]: !isHorizontal && opened,
+          })}
+          style={isHorizontal ? this.position : undefined}
+          onMouseEnter={isHorizontal ? this.handleMouseEnter : undefined}
+          onMouseLeave={isHorizontal ? this.handleMouseLeave : undefined}
         >
-          <ul
-            className={classNames({
-              [`${submenuPrefixCls}-list`]: true,
-              [`${prefixCls}-horizontal-submenu-list`]: isHorizontal,
-              [`${submenuPrefixCls}-list-opened`]: !isHorizontal && opened,
-            })}
-            style={isHorizontal ? this.position : undefined}
-            onMouseEnter={isHorizontal ? this.handleMouseEnter : undefined}
-            onMouseLeave={isHorizontal ? this.handleMouseLeave : undefined}
-          >
-            {children}
-          </ul>
-        </CSSTransition>
-        : null
+          {children}
+        </ul>
+      </CSSTransition>
     );
     const titleClassName = classNames({
       [`${submenuPrefixCls}-title`]: true,
