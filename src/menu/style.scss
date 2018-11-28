@@ -134,6 +134,11 @@ $menu-prefix: 'dk-menu';
     @include clearfix();
     border-bottom: 1px solid $menu-border-color;
 
+    .#{$menu-prefix}-arrow {
+      position: relative;
+      margin-left: $menu-item-icon-margin-x;
+    }
+
     &-item,
     &-submenu-title {
       float: left;
@@ -151,11 +156,6 @@ $menu-prefix: 'dk-menu';
       &:hover {
         color: $menu-item-active-color;
       }
-    }
-
-    .#{$menu-prefix}-arrow {
-      position: relative;
-      margin-left: $menu-item-icon-margin-x;
     }
 
     &-submenu-list {
