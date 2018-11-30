@@ -6,7 +6,27 @@ $tooltip-prefix: 'dk-tooltip';
 
 .#{$tooltip-prefix} {
   position: absolute;
-  border-radius: 4px;
+  padding: $tooltip-padding;
+  border-radius: $tooltip-border-radius;
   line-height: 1.2;
   min-width: 10px;
+
+  &-arrow,
+  &-arrow::after {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+  }
+
+  &-arrow {
+    border-width: $tooltip-arrow-size;
+  }
+
+  .popper__arrow::after {
+    content: " ";
+    border-width: 5px;
+  }
 }

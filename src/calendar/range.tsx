@@ -1,11 +1,17 @@
 import * as React from 'react';
 import Picker from './picker';
-import { DateProps, PickerChildProps } from './types';
+import { DateProps, CalendarType } from './types';
 import { compareAsc } from './utils';
 
-export type RangeProps = PickerChildProps & {
+export type RangeProps = {
+  prefixCls?: string;
   current: Date[];
   value: DateProps[];
+  format: string;
+  type: CalendarType;
+  range?: boolean;
+  rangeDate?: DateProps[];
+  onChange: (date: DateProps | DateProps[], isSelectDay?: boolean) => void;
 };
 
 export type RangeState = {
@@ -23,7 +29,7 @@ class Range extends React.PureComponent<RangeProps, RangeState> {
   }
 
   render() {
-    const { current, type, prefixCls, ...attributes } = this.props;
+    const { current, type, value, prefixCls, ...attributes } = this.props;
     const { rangeDate } = this.state;
     const newType = type === 'week' ? 'day' : type;
     return (

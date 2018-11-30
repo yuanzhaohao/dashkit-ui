@@ -1,16 +1,23 @@
 import * as React from 'react';
-import { BasicProps, CalendarMode } from './types';
+import { CalendarType, DateProps, CalendarMode } from './types';
 import Time from './time';
 import Day from './day';
 import Month from './month';
 import Year from './year';
 
-export type PickerProps = BasicProps & {
+export type PickerProps = {
+  prefixCls?: string;
+  disabled?: boolean;
   current: Date;
   format: string;
-  value?: Date;
+  type: CalendarType;
+  value?: DateProps;
+  range?: boolean;
+  rangeDate?: DateProps[];
+  onChange: (date: DateProps | DateProps[], isSelectDay?: boolean) => void;
   onDayHover?: (date: Date) => void;
 };
+
 export type PickerState = {
   mode: CalendarMode;
 };

@@ -341,3 +341,9 @@ $menu-dark-item-active-color:           $white !default;
 $menu-dark-item-active-bg:              mix($black, $primary, 75%) !default;
 $menu-shadow:                           0 2px 8px rgba($black, .25) !default;
 
+// Tooltip
+//
+$tooltip-padding:                       10px !default;
+$tooltip-arrow-size:                    6px !default;
+$tooltip-font-size:                     12px !default;
+$tooltip-color:                         $white !default;
