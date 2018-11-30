@@ -29,6 +29,10 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
   };
   render() {
     const { children, prefixCls, disabled, content } = this.props;
+    const tooltopClassName = classNames({
+      [prefixCls]: true,
+      [`${prefixCls}-top`]: true,
+    })
     return <>
       {children}
       {!disabled && (
@@ -37,7 +41,7 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
         //   timeout={350}
         //   classNames={`${prefixCls}`}
         // >
-          <div className={prefixCls}>
+        <div className={tooltopClassName}>
             <div className={`${prefixCls}-arrow`}></div>
             <div className={`${prefixCls}-inner`}>{content}</div>
           </div>

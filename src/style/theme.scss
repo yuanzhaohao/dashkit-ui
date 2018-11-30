@@ -343,9 +343,13 @@ $menu-shadow:                           0 2px 8px rgba($black, .25) !default;
 
 // Tooltip
 //
-$tooltip-dark-bg:                       #303133 !default;
-$tooltip-dark-color:                    $white !default;
-$tooltip-padding:                       10px !default;
+$tooltip-bg:                          rgba(0, 0, 0, .75) !default;
+$tooltip-color:                         $white !default;
+$tooltip-padding-x:                     6px !default;
+$tooltip-padding-y:                     8px !default;
 $tooltip-border-radius:                 $border-radius !default;
 $tooltip-arrow-size:                    6px !default;
+$tooltip-arrow-color:                   $tooltip-bg !default;
+$tooltip-distance:                      $tooltip-arrow-size - 1px + 4px !default;
 $tooltip-font-size:                     12px !default;
+$tooltip-max-width:                     250px !default;
