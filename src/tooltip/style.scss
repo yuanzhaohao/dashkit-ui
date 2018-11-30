@@ -10,6 +10,8 @@ $tooltip-prefix: 'dk-tooltip';
   border-radius: $tooltip-border-radius;
   line-height: 1.2;
   min-width: 10px;
+  background: $tooltip-dark-bg;
+  color: $tooltip-dark-color;
 
   &-arrow,
   &-arrow::after {
@@ -25,8 +27,12 @@ $tooltip-prefix: 'dk-tooltip';
     border-width: $tooltip-arrow-size;
   }
 
-  .popper__arrow::after {
-    content: " ";
+  &-arrow::after {
+    content: '';
     border-width: 5px;
+  }
+
+  &-top {
+
   }
 }

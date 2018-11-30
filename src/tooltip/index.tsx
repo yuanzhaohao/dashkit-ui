@@ -32,15 +32,16 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
     return <>
       {children}
       {!disabled && (
-        <CSSTransition
-          timeout={350}
-          classNames={`${prefixCls}`}
-        >
+        // <CSSTransition
+        //   in={true}
+        //   timeout={350}
+        //   classNames={`${prefixCls}`}
+        // >
           <div className={prefixCls}>
             <div className={`${prefixCls}-arrow`}></div>
             <div className={`${prefixCls}-inner`}>{content}</div>
           </div>
-        </CSSTransition>
+        // </CSSTransition>
       )}
     </>;
   }
