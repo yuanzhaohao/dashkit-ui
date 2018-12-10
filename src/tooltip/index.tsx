@@ -82,6 +82,9 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
       onMouseLeave: trigger === 'hover' ? this.handleMouseLeave : undefined,
       ref: this.childRef,
     });
+
+    console.log(children, childNode)
+
     return <>
       {childNode}
       {!disabled && (
@@ -94,6 +97,7 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
     const { placement } = this.props;
 
     const el = this.childRef.current;
+    console.log(el)
     const tooltipEl = this.contentRef.current;
     const rect = el.getBoundingClientRect();
     const tooltipRect = tooltipEl.getBoundingClientRect();
