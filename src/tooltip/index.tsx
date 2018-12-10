@@ -17,7 +17,6 @@ export type TooltipProps = {
   theme: TooltipTheme;
   content: string;
   placement: TooltipPlacement;
-  children: React.ReactElement<any>;
 };
 
 export type TooltipState = {
@@ -77,30 +76,35 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
         </div>
       </CSSTransition>
     );
-    const childNode = React.cloneElement(children, {
-      onMouseEnter: trigger === 'hover' ? this.handleMouseEnter : undefined,
-      onMouseLeave: trigger === 'hover' ? this.handleMouseLeave : undefined,
-      ref: this.childRef,
-    });
+    const childNode = React.Children.map(children, (child: React.ReactElement<any>) => {
+      return React.cloneElement(children, {
+        onMouseEnter: trigger === 'hover' ? this.handleMouseEnter : undefined,
+        onMouseLeave: trigger === 'hover' ? this.handleMouseLeave : undefined,
+        ref: this.childRef,
+      });
+    })
 
     console.log(children, childNode)
 
-    return <>
-      {childNode}
-      {!disabled && (
-        createPortal(tooltipNode, document.body)
-      )}
-    </>;
+    return (
+      <>
+        {childNode}
+        {!disabled && (
+          createPortal(tooltipNode, document.body)
+        )}
+      </>
+    );
   }
 
   getPosition = () => {
     const { placement } = this.props;
 
-    const el = this.childRef.current;
-    console.log(el)
-    const tooltipEl = this.contentRef.current;
+    // const el = this.childRef.current;
+    const el = findDOMNode(this);
+    console.log(this.contentRef.current)
+    const contentEl = this.contentRef.current;
     const rect = el.getBoundingClientRect();
-    const tooltipRect = tooltipEl.getBoundingClientRect();
+    const contentRect = contentEl.getBoundingClientRect();
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
     const scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
 
@@ -110,15 +114,15 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
     switch (placement) {
       case 'top-start':
         left = scrollLeft + rect.left;
-        top = scrollTop + rect.top - tooltipRect.height;
+        top = scrollTop + rect.top - contentRect.height;
         break;
       case 'top':
-        left = scrollLeft + rect.left + rect.width / 2 - tooltipRect.width / 2;
-        top = scrollTop + rect.top - tooltipRect.height;
+        left = scrollLeft + rect.left + rect.width / 2 - contentRect.width / 2;
+        top = scrollTop + rect.top - contentRect.height;
         break;
       case 'top-end':
-        left = scrollLeft + rect.left + rect.width - tooltipRect.width;
-        top = scrollTop + rect.top - tooltipRect.height;
+        left = scrollLeft + rect.left + rect.width - contentRect.width;
+        top = scrollTop + rect.top - contentRect.height;
         break;
       case 'right-start':
         left = scrollLeft + rect.right;
@@ -126,7 +130,7 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
         break;
       case 'right':
         left = scrollLeft + rect.right;
-        top = scrollTop + rect.top + rect.height / 2 - tooltipRect.height / 2;
+        top = scrollTop + rect.top + rect.height / 2 - contentRect.height / 2;
         break;
       case 'right-end':
         left = scrollLeft + rect.right;
@@ -137,23 +141,23 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
         top = scrollTop + rect.top + rect.height;
         break;
       case 'bottom':
-        left = scrollLeft + rect.left + rect.width / 2 - tooltipRect.width / 2;
+        left = scrollLeft + rect.left + rect.width / 2 - contentRect.width / 2;
         top = scrollTop + rect.top + rect.height;
         break;
       case 'bottom-end':
-        left = scrollLeft + rect.left + rect.width - tooltipRect.width;
+        left = scrollLeft + rect.left + rect.width - contentRect.width;
         top = scrollTop + rect.top + rect.height;
         break;
       case 'left-start':
-        left = scrollLeft + rect.left - tooltipRect.width;
+        left = scrollLeft + rect.left - contentRect.width;
         top = scrollTop + rect.top;
         break;
       case 'left':
-        left = scrollLeft + rect.left - tooltipRect.width;
-        top = scrollTop + rect.top + rect.height / 2 - tooltipRect.height / 2;
+        left = scrollLeft + rect.left - contentRect.width;
+        top = scrollTop + rect.top + rect.height / 2 - contentRect.height / 2;
         break;
       case 'left-end':
-        left = scrollLeft + rect.left - tooltipRect.width;
+        left = scrollLeft + rect.left - contentRect.width;
         top = scrollTop + rect.top - rect.height;
         break;
       default:
