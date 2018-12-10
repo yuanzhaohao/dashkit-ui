@@ -133,7 +133,7 @@ class SubMenu extends React.Component<MenuProps, MenuState> {
     window.clearTimeout(this.hoverTimer);
     this.hoverTimer = window.setTimeout(() => {
       if (!rootContext.existOpenedMenu(index)) {
-        this.position = this.getPostion();
+        this.position = this.getPosition();
         rootContext.addOpenedMenu(index);
         window.setTimeout(() => {
           this.setState({
@@ -180,16 +180,15 @@ class SubMenu extends React.Component<MenuProps, MenuState> {
     rootContext.removeOpenedMenu(index);
   }
 
-  getPostion = () => {
+  getPosition = () => {
     const titleDiv = this.titleRef.current;
     let left = 0;
     let top = 0;
     if (titleDiv && document.documentElement) {
       const rect = titleDiv.getBoundingClientRect();
-      const scrollTop =
-        document.documentElement.scrollTop || document.body.scrollTop;
-      const scrollLeft =
-        document.documentElement.scrollLeft || document.body.scrollLeft;
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+
       left = scrollLeft + rect.left;
       top = scrollTop + rect.top + rect.height;
     }

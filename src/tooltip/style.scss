@@ -25,32 +25,32 @@ $tooltip-prefix: 'dk-tooltip';
   }
 
   &-top,
-  &-topLeft,
-  &-topRight {
+  &-top-start,
+  &-top-end {
     padding-bottom: $tooltip-distance;
   }
 
   &-right,
-  &-rightTop,
-  &-rightBottom {
+  &-right-start,
+  &-right-end {
     padding-left: $tooltip-distance;
   }
 
   &-bottom,
-  &-bottomLeft,
-  &-bottomRight {
+  &-bottom-start,
+  &-bottom-end {
     padding-top: $tooltip-distance;
   }
 
   &-left,
-  &-leftTop,
-  &-leftBottom {
+  &-left-start,
+  &-left-end {
     padding-right: $tooltip-distance;
   }
 
   &-top &-arrow,
-  &-topLeft &-arrow,
-  &-topRight &-arrow {
+  &-top-start &-arrow,
+  &-top-end &-arrow {
     bottom: $tooltip-distance - $tooltip-arrow-size;
     border-width: $tooltip-arrow-size $tooltip-arrow-size 0;
     border-top-color: $tooltip-arrow-color;
@@ -61,17 +61,17 @@ $tooltip-prefix: 'dk-tooltip';
     margin-left: -$tooltip-arrow-size;
   }
 
-  &-topLeft &-arrow {
+  &-top-start &-arrow {
     left: 16px;
   }
 
-  &-topRight &-arrow {
+  &-top-end &-arrow {
     right: 16px;
   }
 
   &-right &-arrow,
-  &-rightTop &-arrow,
-  &-rightBottom &-arrow {
+  &-right-start &-arrow,
+  &-right-end &-arrow {
     left: $tooltip-distance - $tooltip-arrow-size;
     border-width: $tooltip-arrow-size $tooltip-arrow-size $tooltip-arrow-size 0;
     border-right-color: $tooltip-arrow-color;
@@ -82,17 +82,17 @@ $tooltip-prefix: 'dk-tooltip';
     margin-top: -$tooltip-arrow-size;
   }
 
-  &-rightTop &-arrow {
+  &-right-start &-arrow {
     top: 8px;
   }
 
-  &-rightBottom &-arrow {
+  &-right-end &-arrow {
     bottom: 8px;
   }
 
   &-left &-arrow,
-  &-leftTop &-arrow,
-  &-leftBottom &-arrow {
+  &-left-start &-arrow,
+  &-left-end &-arrow {
     right: $tooltip-distance - $tooltip-arrow-size;
     border-width: $tooltip-arrow-size 0 $tooltip-arrow-size $tooltip-arrow-size;
     border-left-color: $tooltip-arrow-color;
@@ -103,17 +103,17 @@ $tooltip-prefix: 'dk-tooltip';
     margin-top: -$tooltip-arrow-size;
   }
 
-  &-leftTop &-arrow {
+  &-left-start &-arrow {
     top: 8px;
   }
 
-  &-leftBottom &-arrow {
+  &-left-end &-arrow {
     bottom: 8px;
   }
 
   &-bottom &-arrow,
-  &-bottomLeft &-arrow,
-  &-bottomRight &-arrow {
+  &-bottom-start &-arrow,
+  &-bottom-end &-arrow {
     top: $tooltip-distance - $tooltip-arrow-size;
     border-width: 0 $tooltip-arrow-size $tooltip-arrow-size;
     border-bottom-color: $tooltip-arrow-color;
@@ -124,11 +124,11 @@ $tooltip-prefix: 'dk-tooltip';
     margin-left: -$tooltip-arrow-size;
   }
 
-  &-bottomLeft &-arrow {
+  &-bottom-start &-arrow {
     left: 16px;
   }
 
-  &-bottomRight &-arrow {
+  &-bottom-end &-arrow {
     right: 16px;
   }
 }
