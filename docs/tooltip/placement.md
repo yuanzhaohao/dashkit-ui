@@ -15,6 +15,7 @@ ReactDOM.render(
   <div className="tooltip-container">
     <Tooltip content="Top Left tooltip prompt text" placement="top-start">
       <Button>top-start</Button>
+      <Button>top-start</Button>
     </Tooltip>
   </div>,
   mountNode

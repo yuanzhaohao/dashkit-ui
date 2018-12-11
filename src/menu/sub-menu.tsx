@@ -153,7 +153,7 @@ class SubMenu extends React.Component<MenuProps, MenuState> {
     }, 300);
   }
 
-  handleEnter = (el: HTMLDivElement) => {
+  handleEnter = (el) => {
     const { prefixCls } = this.props;
     removeClass(el, `${prefixCls}-submenu-list-opened`);
     if (el.scrollHeight !== 0) {
@@ -161,21 +161,21 @@ class SubMenu extends React.Component<MenuProps, MenuState> {
     }
   }
 
-  handleEntered = (el: HTMLDivElement) => {
+  handleEntered = (el) => {
     el.style.height = '';
   }
 
-  handleExit = (el: HTMLDivElement) => {
+  handleExit = (el) => {
     el.style.height = el.scrollHeight + 'px';
   }
 
-  handleExiting = (el: HTMLDivElement) => {
+  handleExiting = (el) => {
     if (el.scrollHeight !== 0) {
       el.style.height = '0';
     }
   }
 
-  handleExited = (el: HTMLDivElement) => {
+  handleExited = () => {
     const { index, rootContext } = this.props;
     rootContext.removeOpenedMenu(index);
   }

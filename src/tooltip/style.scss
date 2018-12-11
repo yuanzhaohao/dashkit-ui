@@ -9,6 +9,28 @@ $tooltip-prefix: 'dk-tooltip';
   max-width: $tooltip-max-width;
   z-index: 1060;
 
+  &-enter {
+    opacity: 0;
+  }
+
+  &-enter-active {
+    opacity: 1;
+    transition: opacity 0.216s ease-in;
+  }
+
+  &-exit {
+    opacity: 1;
+  }
+
+  &-exit-active {
+    opacity: 0;
+    transition: opacity 0.216s ease-out;
+  }
+
+  &-reference {
+    display: inline-block;
+  }
+
   &-inner {
     padding: $tooltip-padding-x $tooltip-padding-y;
     border-radius: $tooltip-border-radius;
