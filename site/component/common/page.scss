@@ -254,3 +254,38 @@
     font-size: 16px;
   }
 }
+
+// Tooltip
+//
+.tooltip-box {
+  width: 400px;
+}
+.tooltip-button {
+  width: 100px;
+  margin: 4px;
+}
+.tooltip-box-top {
+  text-align: center;
+}
+.tooltip-box-left {
+  float: left;
+  width: 88px;
+
+  .tooltip-button {
+    margin-left: 0;
+  }
+}
+.tooltip-box-right {
+  float: right;
+  width: 88px;
+
+  .tooltip-button {
+    margin-right: 0;
+  }
+}
+.tooltip-box-bottom {
+  clear: both;
+  text-align: center;
+}
+
+

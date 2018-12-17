@@ -22,11 +22,12 @@ export type TooltipProps = {
 
 export type TooltipState = {
   visible: boolean;
+  left: number;
+  top: number;
 };
 
 class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
   hoverTimer: number;
-  position: { left: number; top: number };
   readonly childRef: React.RefObject<HTMLDivElement>;
   readonly contentRef: React.RefObject<HTMLDivElement>;
 
@@ -49,11 +50,12 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
     super(props);
 
     this.hoverTimer = 0;
-    this.position = { left: 0, top: 0 };
     this.contentRef = React.createRef();
     this.childRef = React.createRef();
     this.state = {
       visible: false,
+      left: 0,
+      top: 0,
     };
   }
 
@@ -63,7 +65,7 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
       [prefixCls]: true,
       [`${prefixCls}-${placement}`]: true,
     });
-    const { visible } = this.state;
+    const { visible, left, top } = this.state;
     const tooltipNode = (
       <CSSTransition
         in={visible}
@@ -72,7 +74,7 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
         onEnter={this.handleEnter}
         classNames={`${prefixCls}`}
       >
-        <div className={tooltopClassName} style={this.position}
+        <div className={tooltopClassName} style={{ left, top }}
           onMouseEnter={this.handleMouseEnter}
           onMouseLeave={this.handleMouseLeave}
         >
@@ -146,7 +148,7 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
         break;
       case 'right-end':
         left = scrollLeft + rect.right;
-        top = scrollTop + rect.top - rect.height;
+        top = scrollTop + rect.bottom - contentRect.height;
         break;
       case 'bottom-start':
         left = scrollLeft + rect.left;
@@ -170,7 +172,7 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
         break;
       case 'left-end':
         left = scrollLeft + rect.left - contentRect.width;
-        top = scrollTop + rect.top - rect.height;
+        top = scrollTop + rect.bottom - contentRect.height;
         break;
       default:
     }
@@ -179,18 +181,17 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
   }
 
   handleEnter = (el) => {
-    console.log(el)
-    this.position = this.getPosition(el);
+    const position = this.getPosition(el);
+    this.setState(position);
   }
 
   handleMouseEnter = () => {
     window.clearTimeout(this.hoverTimer);
     this.hoverTimer = window.setTimeout(() => {
-      // this.position = this.getPosition();
       this.setState({
         visible: true,
       });
-    }, 50);
+    }, 100);
   }
 
   handleMouseLeave = () => {
@@ -199,7 +200,7 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
       this.setState({
         visible: false,
       });
-    }, 50);
+    }, 100);
   }
 }
 
