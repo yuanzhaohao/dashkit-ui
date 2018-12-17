@@ -200,7 +200,7 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
       this.setState({
         visible: false,
       });
-    }, 100);
+    }, 50);
   }
 }
 
