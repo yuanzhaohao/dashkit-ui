@@ -6,7 +6,7 @@ import { CSSTransition } from 'react-transition-group';
 
 export type TooltipTheme = 'dark' | 'light';
 export type TooltipPlacement = 'top-start' | 'top' | 'top-end' | 'right-start' | 'right' | 'right-end' | 'bottom-start' | 'bottom' | 'bottom-end' | 'left-start' | 'left' | 'left-end';
-export type TooltipTrigger = 'hover' | 'click';
+export type TooltipTrigger = 'hover' | 'click' | 'focus';
 export type TooltipProps = {
   prefixCls?: string;
   className?: string;
@@ -107,19 +107,22 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
     const { trigger } = this.props;
 
     switch(trigger) {
-      case 'hover': {
-        return {
-          onMouseEnter: this.handleMouseEnter,
-          onMouseLeave: this.handleMouseLeave,
-        }
-      }
       case 'click': {
         return {
           onClick: this.handleClick,
         }
       }
+      case 'focus': {
+        return {
+          onFocus: this.handleFocus,
+          onBlur: this.handleBlur,
+        }
+      }
       default: {
-        return {};
+        return {
+          onMouseEnter: this.handleMouseEnter,
+          onMouseLeave: this.handleMouseLeave,
+        }
       }
     }
   }
@@ -201,6 +204,18 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
 
     this.setState({
       visible: !visible
+    });
+  }
+
+  handleFocus = () => {
+    this.setState({
+      visible: true,
+    });
+  }
+
+  handleBlur = () => {
+    this.setState({
+      visible: false,
     });
   }
 
