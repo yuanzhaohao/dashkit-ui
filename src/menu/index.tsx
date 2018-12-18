@@ -1,8 +1,10 @@
 import './style.scss';
+
 import * as React from 'react';
 import * as classNames from 'classnames';
 import { MenuProvider } from './context';
 import MenuItem from './item';
+import ItemGroup from './item-group';
 import SubMenu from './sub-menu';
 
 export type MenuProps = {
@@ -24,6 +26,7 @@ export type MenuState = {
 
 class Menu extends React.PureComponent<MenuProps, MenuState> {
   static Item: any;
+  static ItemGroup: any;
   static SubMenu: any;
   static defaultProps = {
     prefixCls: 'dk-menu',
@@ -103,6 +106,6 @@ class Menu extends React.PureComponent<MenuProps, MenuState> {
 
 Menu.Item = MenuItem;
 Menu.SubMenu = SubMenu;
-
+Menu.ItemGroup = ItemGroup;
 
 export default Menu;

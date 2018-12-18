@@ -11,7 +11,7 @@ subtitle:
 ```js
 import { Menu, Grid } from 'dashkit-ui';
 const { Row, Col } = Grid;
-const { Item, SubMenu } = Menu;
+const { Item, SubMenu, ItemGroup } = Menu;
 
 class MenuDemo extends React.Component {
   render() {
@@ -39,7 +39,10 @@ class MenuDemo extends React.Component {
         <Item icon="git-branch" index="Changelog" disabled>Changelog</Item>
         <SubMenu icon="layout" index="Layouts" title="Layouts">
           <Item index="Slidenav">Slidenav</Item>
-          <Item index="Topnav">Topnav</Item>
+          <ItemGroup title="ItemGroup">
+            <Item index="ItemGroup1">ItemGroup1</Item>
+            <Item index="ItemGroup2">ItemGroup2</Item>
+          </ItemGroup>
         </SubMenu>
         <SubMenu icon="file" index="Empty submenu" title="Empty submenu">
         </SubMenu>

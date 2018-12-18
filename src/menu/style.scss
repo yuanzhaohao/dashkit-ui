@@ -54,6 +54,17 @@ $menu-prefix: 'dk-menu';
     }
   }
 
+  &-item-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: $menu-item-group-height;
+    padding: 0;
+    margin: 0;
+    color: $menu-item-color;
+    opacity: 0.8;
+  }
+
   &-icon {
     width: $menu-item-icon-size;
     height: $menu-item-icon-size;
@@ -111,6 +122,10 @@ $menu-prefix: 'dk-menu';
       }
     }
 
+    .#{$menu-prefix}-item-group {
+      padding: 0 $menu-item-group-padding-x;
+    }
+
     .#{$menu-prefix}-arrow {
       position: absolute;
       right: $menu-vertical-item-padding-x;
@@ -130,6 +145,9 @@ $menu-prefix: 'dk-menu';
 
     .#{$menu-prefix}-submenu .#{$menu-prefix}-submenu .#{$menu-prefix}-item {
       padding-left: $menu-vertical-item-padding-x * 2 + $menu-item-icon-size + $menu-item-icon-margin-x;
+    }
+    .#{$menu-prefix}-submenu .#{$menu-prefix}-item-group {
+      padding-left: $menu-item-group-padding-x + $menu-item-icon-size + $menu-item-icon-margin-x;
     }
   }
 
@@ -225,6 +243,10 @@ $menu-prefix: 'dk-menu';
     &:hover {
       background-color: $menu-dark-item-active-bg;
     }
+  }
+
+  .#{$menu-prefix}-item-group {
+    color: $menu-dark-item-color;
   }
 
   &-submenu-list {
