@@ -69,7 +69,7 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
     const tooltipNode = (
       <CSSTransition
         in={visible}
-        timeout={216}
+        timeout={150}
         unmountOnExit
         onEnter={this.handleEnter}
         classNames={`${prefixCls}`}

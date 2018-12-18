@@ -15,7 +15,7 @@ $tooltip-prefix: 'dk-tooltip';
 
   &-enter-active {
     opacity: 1;
-    transition: opacity 0.216s ease-in;
+    transition: opacity 150ms ease-in;
   }
 
   &-exit {
@@ -24,7 +24,7 @@ $tooltip-prefix: 'dk-tooltip';
 
   &-exit-active {
     opacity: 0;
-    transition: opacity 0.216s ease-out;
+    transition: opacity 150ms ease-out;
   }
 
   &-reference {
