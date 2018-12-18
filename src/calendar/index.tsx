@@ -1,29 +1,42 @@
 import './style.scss';
 
 import * as React from 'react';
+import { createPortal, findDOMNode } from 'react-dom';
 import * as classNames from 'classnames';
 import { CSSTransition } from 'react-transition-group';
-import { BasicProps, DateProps } from './types';
-import Input from '../input';
+import { CalendarType, DateProps } from './types';
+// import Input from '../input';
 import Icon from '../icon';
 import Picker from './picker';
 import Range from './range';
 import { allPlaceholders, allFormats, addMonths, compareAsc, parseDate, formatDate, isSameMonth } from './utils';
 
-export type CalendarProps = BasicProps & {
-  placeholder?: string;
+
+export type CalendarProps = {
+  prefixCls?: string;
+  className?: string;
+  disabled?: boolean;
+  value?: DateProps | DateProps[];
+  format?: string;
+  type: CalendarType;
   range?: boolean;
+  placeholder?: string;
   onChange?: (date: Date | Date[], dateStr: string | string[]) => void;
 };
 
 export type CalendarState = {
-  current: any; //Date | Date[];
+  current: Date | Date[];
   active?: boolean;
-  value: any;
+  value: Date | Date[];
+  position: {
+    top: number;
+    left: number;
+  }
 };
 
 class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
   readonly dateElement: React.RefObject<HTMLDivElement>;
+  readonly contentElement: React.RefObject<HTMLDivElement>;
 
   static defaultProps = {
     prefixCls: 'dk-calendar',
@@ -33,15 +46,20 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
   constructor(props: CalendarProps) {
     super(props);
     this.dateElement = React.createRef();
+    this.contentElement = React.createRef();
     this.state = {
       current: this.getCurrent(),
       active: false,
       value: undefined,
+      position: {
+        top: 0,
+        left: 0,
+      },
     };
   }
 
   render() {
-    const { className, prefixCls, type, range } = this.props;
+    const { className, prefixCls, type, range, disabled } = this.props;
     const dateClassName = classNames({
       [`${prefixCls}`]: true,
     }, className);
@@ -49,9 +67,30 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
       [`${prefixCls}-input`]: true,
       [`${prefixCls}-input-range`]: range,
     });
-    const { value } = this.state;
+    const { value, position } = this.state;
     const format = this.getFormat();
     const placeholder = this.getPlaceholder();
+    const calendarNode = (
+      <CSSTransition
+        in={this.state.active}
+        unmountOnExit
+        timeout={300}
+        classNames={`${prefixCls}-content`}
+        onEntered={this.bindDocumentClick}
+        onExited={this.clearDocumentClick}
+        onEnter={this.handleEnter}
+      >
+        <div
+          className={classNames(`${prefixCls}-content`, {
+            [`${prefixCls}-content-time`]: type === 'time'
+          })}
+          style={position}
+          ref={this.contentElement}
+        >
+          {this.renderContent()}
+        </div>
+      </CSSTransition>
+    );
 
     return (
       <span className={dateClassName} ref={this.dateElement}>
@@ -83,20 +122,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
           }
         </div>
         <Icon type={type === 'time' ? 'clock' : 'calendar'} className={`${prefixCls}-icon`} />
-        <CSSTransition
-          in={this.state.active}
-          unmountOnExit
-          timeout={300}
-          classNames={`${prefixCls}-content`}
-          onEntered={this.bindDocumentClick}
-          onExited={this.clearDocumentClick}
-        >
-          <div className={classNames(`${prefixCls}-content`, {
-            [`${prefixCls}-content-time`]: type === 'time'
-          })}>
-            {this.renderContent()}
-          </div>
-        </CSSTransition>
+        {!disabled && createPortal(calendarNode, document.body)}
       </span>
     );
   }
@@ -118,6 +144,29 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
         onChange={this.handleChange}
       />
     );
+  }
+
+  getPosition = () => {
+    const el = findDOMNode(this);
+    const rect = el.getBoundingClientRect();
+    const scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop;
+    const scrollLeft =
+      document.documentElement.scrollLeft || document.body.scrollLeft;
+    const left = scrollLeft + rect.left;
+    const top = scrollTop + rect.top + rect.height;
+
+    return {
+      left,
+      top,
+    };
+  }
+
+  handleEnter = () => {
+    const position = this.getPosition();
+    this.setState({
+      position,
+    });
   }
 
   getPlaceholder = () => {
@@ -195,8 +244,17 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
   }
 
   handleDocumentClick = (event: any) => {
-    const element = this.dateElement.current;
-    if (!(event.target === element || (element && element.contains(event.target)))) {
+    const dateEl = this.dateElement.current;
+    const contentEl = this.contentElement.current;
+    const targetEl = event.target;
+    if (
+      !(
+        targetEl === dateEl ||
+        (dateEl && dateEl.contains(targetEl)) ||
+        targetEl === contentEl ||
+        (contentEl && contentEl.contains(targetEl))
+      )
+    ) {
       this.setState({
         active: false,
       });
