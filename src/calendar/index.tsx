@@ -27,7 +27,7 @@ export type CalendarProps = {
 export type CalendarState = {
   current: Date | Date[];
   active?: boolean;
-  value: Date | Date[];
+  value?: DateProps | DateProps[];
   position: {
     top: number;
     left: number;
@@ -42,6 +42,14 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
     prefixCls: 'dk-calendar',
     type: 'day',
   };
+
+  public static getDerivedStateFromProps(nextProps: CalendarProps) {
+    const state: Partial<CalendarState> = {};
+    if ('value' in nextProps) {
+      state.value = nextProps.value;
+    }
+    return state;
+  }
 
   constructor(props: CalendarProps) {
     super(props);
