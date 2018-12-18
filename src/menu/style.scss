@@ -28,12 +28,16 @@ $menu-prefix: 'dk-menu';
     color: $menu-item-color;
     align-items: center;
     cursor: pointer;
-    transition: background-color .2s ease-in-out;
+    transition: background-color .2s ease-in-out, color .2s ease-in-out;
 
     &:before {
       content: '';
       position: absolute;
       transition: background-color .2s ease-in-out;
+    }
+
+    &:hover {
+      color: $menu-item-active-color;
     }
 
     &-active {
@@ -95,15 +99,15 @@ $menu-prefix: 'dk-menu';
       height: $menu-vertical-item-height;
       padding: 0 $menu-vertical-item-padding-x;
 
-      &:hover {
-        background-color: $menu-item-active-bg;
-      }
-
       &:before {
         top: 8px;
         bottom: 8px;
         left: 0;
         width: 2px;
+      }
+
+      &-active {
+        background-color: $menu-item-active-bg;
       }
     }
 
@@ -193,10 +197,9 @@ $menu-prefix: 'dk-menu';
 
       .#{$menu-prefix}-arrow {
         position: absolute;
-        right: $menu-vertical-item-padding-x;
+        right: $menu-vertical-item-padding-x / 2;
         transform: rotate(-90deg);
       }
-
     }
   }
 }
@@ -209,30 +212,29 @@ $menu-prefix: 'dk-menu';
   .#{$menu-prefix}-submenu-title {
     color: $menu-dark-item-color;
 
-    &-active {
-      color: $menu-dark-item-active-color;
-    }
-
     &:hover {
-      background-color: $menu-dark-item-active-bg;
+      background-color: transparent;
       color: $menu-dark-item-active-color;
     }
   }
 
-  .#{$menu-prefix}-submenu-list {
+  .#{$menu-prefix}-item-active {
+    color: $menu-dark-item-active-color;
+    background-color: $menu-dark-item-active-bg;
+
+    &:hover {
+      background-color: $menu-dark-item-active-bg;
+    }
+  }
+
+  &-submenu-list {
     background-color: $menu-dark-bg;
 
     .#{$menu-prefix}-submenu,
-    .#{$menu-prefix}-item,
-    .#{$menu-prefix}-submenu-title {
+    .#{$menu-prefix}-item {
       float: none;
       width: 100%;
       height: $menu-vertical-item-height;
-
-      &:hover {
-        background-color: $menu-dark-item-active-bg;
-        color: $menu-dark-item-color;
-      }
     }
   }
 }

@@ -45,7 +45,6 @@ class SubMenu extends React.Component<MenuProps, MenuState> {
     const opened = rootContext.existOpenedMenu(index);
     const isHorizontal = rootContext.getProps().mode === 'horizontal';
     const active = isHorizontal ? this.state.active : opened;
-    const submenuPrefixCls = `${prefixCls}-submenu`;
 
     const iconNode = icon && typeof icon === 'string' && (
       <Icon type={icon} className={`${prefixCls}-icon`} />
@@ -60,13 +59,13 @@ class SubMenu extends React.Component<MenuProps, MenuState> {
         onExit={this.handleExit}
         onExiting={this.handleExiting}
         onExited={this.handleExited}
-        classNames={`${submenuPrefixCls}-list`}
+        classNames={`${prefixCls}-submenu-list`}
       >
         <ul
           className={classNames({
-            [`${submenuPrefixCls}-list`]: true,
+            [`${prefixCls}-submenu-list`]: true,
             [`${prefixCls}-horizontal-submenu-list`]: isHorizontal,
-            [`${submenuPrefixCls}-list-opened`]: !isHorizontal && opened,
+            [`${prefixCls}-submenu-list-opened`]: !isHorizontal && opened,
           })}
           style={isHorizontal ? this.position : undefined}
           onMouseEnter={isHorizontal ? this.handleMouseEnter : undefined}
@@ -77,7 +76,7 @@ class SubMenu extends React.Component<MenuProps, MenuState> {
       </CSSTransition>
     );
     const titleClassName = classNames({
-      [`${submenuPrefixCls}-title`]: true,
+      [`${prefixCls}-submenu-title`]: true,
       [`${prefixCls}-horizontal-submenu-title`]: isHorizontal,
       [`${prefixCls}-active`]: opened,
     });
@@ -101,7 +100,7 @@ class SubMenu extends React.Component<MenuProps, MenuState> {
     return (
       <div
         className={classNames({
-          [`${submenuPrefixCls}`]: true,
+          [`${prefixCls}-submenu`]: true,
         }, className)}
         {...attributes}
       >
