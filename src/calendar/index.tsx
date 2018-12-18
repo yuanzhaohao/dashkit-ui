@@ -155,12 +155,10 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
   }
 
   getPosition = () => {
-    const el = findDOMNode(this);
+    const el = this.dateElement.current;
     const rect = el.getBoundingClientRect();
-    const scrollTop =
-      document.documentElement.scrollTop || document.body.scrollTop;
-    const scrollLeft =
-      document.documentElement.scrollLeft || document.body.scrollLeft;
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    const scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
     const left = scrollLeft + rect.left;
     const top = scrollTop + rect.top + rect.height;
 
