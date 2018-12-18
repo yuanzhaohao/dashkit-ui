@@ -104,13 +104,24 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
   }
 
   getChildProps = () => {
-    if (this.props.trigger === 'hover') {
-      return {
-        onMouseEnter: this.handleMouseEnter,
-        onMouseLeave: this.handleMouseLeave,
+    const { trigger } = this.props;
+
+    switch(trigger) {
+      case 'hover': {
+        return {
+          onMouseEnter: this.handleMouseEnter,
+          onMouseLeave: this.handleMouseLeave,
+        }
+      }
+      case 'click': {
+        return {
+          onClick: this.handleClick,
+        }
+      }
+      default: {
+        return {};
       }
     }
-    return {};
   }
 
   getPosition = (contentEl: HTMLDivElement) => {
@@ -183,6 +194,14 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
   handleEnter = (el) => {
     const position = this.getPosition(el);
     this.setState(position);
+  }
+
+  handleClick = () => {
+    const { visible } = this.state;
+
+    this.setState({
+      visible: !visible
+    });
   }
 
   handleMouseEnter = () => {
