@@ -11,15 +11,38 @@ import Page from './common/page';
 const { Content, Footer } = Layout;
 const Index = asyncComponent(() => import('./index'));
 
-const pages = [
-  'grid', 'layout', 'icon', 'button', 'checkbox', 'switch', 'input', 'calendar',
-  'alert', 'message', 'menu', 'spin', 'pagination', 'tooltip',
-]
+// const pages = [
+//   'grid', 'layout', 'icon', 'button', 'checkbox', 'switch', 'input', 'calendar',
+//   'alert', 'message', 'menu', 'spin', 'pagination', 'tooltip',
+// ];
+
+const pageMap = {
+  Basic: [
+    'Layout', 'Grid', 'Button', 'Icon',
+  ],
+  Form: [
+    'Radio', 'Checkbox', 'Switch', 'Input', 'Select', 'Calendar', 'Form',
+  ],
+  Data: [
+    'Table', 'Pagination',
+  ],
+  Function: [
+    'Menu', 'Modal', 'Spin',
+  ],
+  Feedback: [
+    'Tooltip', 'Popover', 'Message',
+  ]
+};
+
+let pages = [];
+Object.keys(pageMap).forEach((key) => {
+  pages = pages.concat(pageMap[key])
+});
 
 export default () => (
   <HashRouter>
     <Layout>
-      <CommonSidebar pages={pages} />
+      <CommonSidebar pageMap={pageMap} />
       <Layout className="app-layout">
         <CommonHeader />
         <Content className="app-content">
@@ -27,7 +50,7 @@ export default () => (
             <Route exact path="/" component={Index} />
             <Route exact path="/index" component={Index} />
             {pages.map(page =>
-              <Route key={page} exact path={`/components/${page}`} component={Page} />
+              <Route key={page} exact path={`/components/${page.toLocaleLowerCase()}`} component={Page} />
             )}
             <Redirect to="/" />
           </Switch>

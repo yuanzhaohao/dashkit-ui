@@ -4,15 +4,17 @@ import { Layout, Menu } from 'dashkit-ui';
 import LogoSvg from '../../assets/logo.svg';
 import './sidebar.scss';
 const { Sidebar } = Layout;
-const { SubMenu, Item } = Menu;
+const { SubMenu, Item, ItemGroup } = Menu;
 
 interface SidebarProps extends RouteComponentProps<any> {
-  pages: string[];
+  pageMap: {
+    [key: string]: string[];
+  };
 };
 
 class AppSidebar extends React.PureComponent<SidebarProps> {
   render() {
-  const { pages } = this.props;
+    const { pageMap } = this.props;
     return (
       <Sidebar className="sidebar">
         <Menu
@@ -28,12 +30,13 @@ class AppSidebar extends React.PureComponent<SidebarProps> {
 
           <Item icon="home" index="Dashboard">Dashboard</Item>
           <SubMenu icon="book-open" title="Components" index="Components">
-            {pages && pages.length
-              ? pages.map(page =>
+            {Object.keys(pageMap).map((group) =>
+              <ItemGroup title={group}>
+                {pageMap[group].map((page) =>
                   <Item key={page} index={page}>{page}</Item>
-                )
-              : null
-            }
+                )}
+              </ItemGroup>
+            )}
           </SubMenu>
         </Menu>
       </Sidebar>
