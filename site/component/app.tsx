@@ -11,11 +11,6 @@ import Page from './common/page';
 const { Content, Footer } = Layout;
 const Index = asyncComponent(() => import('./index'));
 
-// const pages = [
-//   'grid', 'layout', 'icon', 'button', 'checkbox', 'switch', 'input', 'calendar',
-//   'alert', 'message', 'menu', 'spin', 'pagination', 'tooltip',
-// ];
-
 const pageMap = {
   Basic: [
     'Layout', 'Grid', 'Button', 'Icon',
@@ -30,7 +25,7 @@ const pageMap = {
     'Menu', 'Modal', 'Spin',
   ],
   Feedback: [
-    'Tooltip', 'Popover', 'Message',
+    'Tooltip', 'Popover', 'Alert', 'Message',
   ]
 };
 
