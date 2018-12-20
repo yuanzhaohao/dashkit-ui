@@ -6,6 +6,7 @@ export type MenuItemGroupProps = {
   prefixCls?: string;
   className?: string;
   title?: string;
+  rootContext: any;
 };
 
 class MenuItemGroup extends React.Component<MenuItemGroupProps> {
@@ -15,7 +16,7 @@ class MenuItemGroup extends React.Component<MenuItemGroupProps> {
   };
 
   render() {
-    const { children, prefixCls, className, title, ...attributes } = this.props;
+    const { children, prefixCls, className, title, rootContext, ...attributes } = this.props;
     const groupClassName = classNames({
       [`${prefixCls}-item-group`]: true,
     }, className);

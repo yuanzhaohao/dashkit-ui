@@ -30,7 +30,7 @@ class Page extends React.PureComponent<PageProps, PageState> {
   async componentDidMount() {
     const page = this.props.location.pathname.replace('/components/', '');
     const locale = window.localStorage.getItem('DASHKIT_UI_LOCALE') || 'en-US';
-    const dataSource = await import(`../../../docs/${page}/${locale}.md`);
+    const dataSource = await import(`../../../docs/${page.toLocaleLowerCase()}/${locale}.md`);
 
     this.setState({
       dataSource,

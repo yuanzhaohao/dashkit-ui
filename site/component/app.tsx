@@ -49,8 +49,8 @@ export default () => (
           <Switch>
             <Route exact path="/" component={Index} />
             <Route exact path="/index" component={Index} />
-            {pages.map(page =>
-              <Route key={page} exact path={`/components/${page.toLocaleLowerCase()}`} component={Page} />
+            {pages.map((page) =>
+              <Route key={page} exact path={`/components/${page}`} component={Page} />
             )}
             <Redirect to="/" />
           </Switch>
