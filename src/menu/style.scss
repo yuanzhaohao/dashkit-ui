@@ -101,7 +101,6 @@ $menu-prefix: 'dk-menu';
 
   &-vertical {
     width: $menu-width;
-    height: 100%;
     border-right: 1px solid $menu-border-color;
 
     .#{$menu-prefix}-item,

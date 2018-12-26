@@ -171,3 +171,280 @@
     color: #888;
   }
 }
+
+// Layout
+//
+.layout-list {
+  text-align: center;
+
+  >.dk-layout {
+    margin-bottom: 30px;
+  }
+
+  .dk-layout-header,
+  .dk-layout-footer {
+    background: #2c7be5;
+    color: #fff;
+    height: 64px;
+    line-height: 64px;
+  }
+
+  .dk-layout-content {
+    background: #036;
+    color: #fff;
+    min-height: 120px;
+    line-height: 120px;
+  }
+
+  .dk-layout-sidebar {
+    background: #06C;
+    color: #fff;
+    min-height: 120px;
+    line-height: 120px;
+  }
+}
+
+// Grid
+//
+@mixin grid-make-item() {
+  display: block;
+  position: relative;
+  box-sizing: border-box;
+  padding: 16px;
+  background: #2c7be5;
+  border: 1px solid #FFF;
+  border-radius: 2px;
+  overflow: hidden;
+  text-align: center;
+  color: #fff;
+}
+
+.grid-list {
+  div[class*="dk-grid-col-"] {
+    margin-bottom: 16px;
+
+    &::after {
+      content: '';
+      @include grid-make-item;
+    }
+  }
+}
+
+.grid-title {
+  margin-top: 24px;
+  color: #2c7be5;
+}
+
+.grid-title-first {
+  margin-top: 0;
+}
+
+.grid-nested,
+.grid-alignment {
+  .grid-box {
+    @include grid-make-item;
+  }
+
+  .grid-box-nested {
+    background: #036;
+    border-color: #2c7be5;
+  }
+
+  .grid-box-first {
+    background: #06C;
+    border-color: #2c7be5;
+  }
+
+  .grid-box-large {
+    height: 100px;
+  }
+}
+
+// Button
+//
+.button-list {
+  margin-top: 12px;
+
+  &:nth-of-type(1) {
+    margin-top: 0;
+  }
+
+  button {
+    margin-right: 12px;
+  }
+}
+
+// Checkbox
+//
+.checkbox-list {
+  >label {
+    margin-right: 20px;
+  }
+}
+
+.checkbox-checkall {
+  border-bottom: 1px solid #e3ebf6;
+  padding-bottom: 10px;
+}
+
+// Alert
+//
+.alert-list {
+  margin-top: 12px;
+}
+
+// Icon
+//
+.icon-list {
+  width: 100%;
+
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+.icon-item-wrapper {
+  float: left;
+  width: 1 / 5 * 100%;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.icon-item {
+  display: flex;
+  flex-direction: column;
+  padding: 15px 5px 8px 5px;
+  border: 1px solid #e3ebf6;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all .2s;
+
+  >span {
+    display: block;
+    margin-top: 8px;
+    text-align: center;
+    font-size: 12px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  &:hover {
+    color: #2c7be5;
+    background-color: #f9fbfd;
+    box-shadow: 0 0 8px 0 rgba(232, 237, 250, .6), 0 2px 4px 0 rgba(232, 237, 250, .5);
+  }
+}
+
+// Message
+//
+.message-wrapper {
+  button {
+    margin-right: 10px;
+  }
+}
+
+// Spin
+//
+.spin-list {
+  display: flex;
+  align-items: center;
+
+  .dk-spin {
+    margin-right: 20px;
+  }
+}
+
+// Switch
+//
+.switch-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .dk-switch {
+    margin-right: 10px;
+  }
+}
+
+// Menu
+//
+.menu-vertical-item {
+  display: flex;
+  justify-content: center;
+  padding: 15px 0;
+}
+
+.menu-horizontal-item {
+  margin-bottom: 20px;
+}
+
+.menu-theme {
+
+  &-switch {
+    margin-bottom: 20px;
+  }
+}
+
+// Pagination
+//
+.pagination-wrapper {
+  .dk-pagination {
+    margin-bottom: 10px;
+  }
+}
+
+// Calendar
+//
+.calendar-item {
+  padding: 12px 0;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  p {
+    margin-bottom: 7px;
+    font-size: 16px;
+  }
+}
+
+// Tooltip
+//
+.tooltip-box {
+  width: 400px;
+}
+
+.tooltip-button {
+  width: 100px;
+  margin: 4px;
+}
+
+.tooltip-box-top {
+  text-align: center;
+}
+
+.tooltip-box-left {
+  float: left;
+  width: 88px;
+
+  .tooltip-button {
+    margin-left: 0;
+  }
+}
+
+.tooltip-box-right {
+  float: right;
+  width: 88px;
+
+  .tooltip-button {
+    margin-right: 0;
+  }
+}
+
+.tooltip-box-bottom {
+  clear: both;
+  text-align: center;
+}

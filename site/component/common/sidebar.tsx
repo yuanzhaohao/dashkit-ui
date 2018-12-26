@@ -3,7 +3,7 @@ import './sidebar.scss';
 import * as React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Layout, Menu } from 'dashkit-ui';
-import LogoSvg from '../../assets/logo.svg';
+// import LogoSvg from '../../assets/logo.svg';
 const { Sidebar } = Layout;
 const { SubMenu, Item, ItemGroup } = Menu;
 
@@ -18,17 +18,16 @@ class AppSidebar extends React.PureComponent<SidebarProps> {
     const { pageMap } = this.props;
     return (
       <Sidebar className="sidebar">
+        <div className="sidebar-logo">
+          {/* <LogoSvg className="sidebar-logo-img" /> */}
+          <div className="sidebar-logo-title">Dashkit UI</div>
+        </div>
         <Menu
           className="sidebar-menu"
           defaultActive="Dashboard"
           defaultOpeneds={['Components']}
           onSelect={this.onMenuSelect}
         >
-          <div className="sidebar-logo">
-            <LogoSvg className="sidebar-logo-img" />
-            <div className="sidebar-logo-title">Dashkit UI</div>
-          </div>
-
           <Item icon="home" index="Dashboard">Dashboard</Item>
           <SubMenu icon="book-open" title="Components" index="Components">
             {Object.keys(pageMap).map((group) =>
@@ -40,6 +39,7 @@ class AppSidebar extends React.PureComponent<SidebarProps> {
             )}
           </SubMenu>
         </Menu>
+        <div className="sidebar-switch"></div>
       </Sidebar>
     )
   }
