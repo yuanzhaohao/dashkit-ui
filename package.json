@@ -14,7 +14,7 @@
     "start": "npm run dev",
     "dev": "node scripts/dev.js",
     "docs": "node scripts/docs.js",
-    "publish": "node build/publish.js && npm run publish:ts && npm run publish:babel",
+    "publish": "node scripts/publish.js && npm run publish:ts && npm run publish:babel",
     "publish:ts": "tsc -p tsconfig.json",
     "publish:babel": "babel publish/lib --out-dir publish/lib",
     "publish:dev": "webpack --config scripts/webpack.publish.config.js",

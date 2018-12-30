@@ -20,7 +20,7 @@
   },
   "include": [
     "./custom.d.ts",
-    "./src/**/*",
+    "./src/**/*"
   ],
   "exclude": [
     "node_modules"
