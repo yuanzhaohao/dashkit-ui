@@ -23,6 +23,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  &-disabled {
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
   &:before {
     display: block;
     font-family: 'feather' !important;

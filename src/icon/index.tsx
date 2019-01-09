@@ -8,6 +8,7 @@ export type IconProps = {
   prefixCls?: string;
   type: string;
   className?: string;
+  disabled?: boolean;
   onClick?: React.MouseEventHandler<HTMLElement>;
 };
 
@@ -19,10 +20,11 @@ class Icon extends React.PureComponent<IconProps> {
   static types = types;
 
   render() {
-    const { className, type, prefixCls, ...attributes } = this.props;
+    const { className, type, disabled, prefixCls, ...attributes } = this.props;
     const iconClassName = classNames({
       [`${prefixCls}`]: true,
       [`${prefixCls}-${type}`]: true,
+      [`${prefixCls}-disabled`]: disabled,
     }, className);
     return <i className={iconClassName} {...attributes} />;
   }
