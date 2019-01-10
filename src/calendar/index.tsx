@@ -9,7 +9,7 @@ import { CalendarType, DateProps } from './types';
 import Icon from '../icon';
 import Picker from './picker';
 import Range from './range';
-import { allPlaceholders, allFormats, addMonths, compareAsc, parseDate, formatDate, isSameMonth } from './utils';
+import { allPlaceholders, allFormats, isDate, addMonths, parseDate, formatDate, isSameMonth } from './utils';
 
 
 export type CalendarProps = {
@@ -20,6 +20,8 @@ export type CalendarProps = {
   format?: string;
   type: CalendarType;
   range?: boolean;
+  min?: DateProps;
+  max?: DateProps;
   placeholder?: string;
   onChange?: (date: Date | Date[], dateStr: string | string[]) => void;
 };
@@ -45,8 +47,14 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
 
   public static getDerivedStateFromProps(nextProps: CalendarProps) {
     const state: Partial<CalendarState> = {};
-    if ('value' in nextProps) {
-      state.value = nextProps.value;
+    if ('value' in nextProps && nextProps.value) {
+      if (nextProps.value instanceof Array) {
+        if (isDate(nextProps.value[0]) && isDate(nextProps.value[1])) {
+          state.value = nextProps.value;
+        }
+      } else if (isDate(nextProps.value)) {
+        state.value = nextProps.value;
+      }
     }
     return state;
   }
@@ -136,21 +144,21 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
   }
 
   renderContent = () => {
-    const { range, type = 'day', prefixCls, disabled } = this.props;
+    const { range, type = 'day', ...attributes } = this.props;
     const { current, value } = this.state;
-    const Component = range ? Range : Picker;
     const format = this.getFormat();
+    const childProps = {
+      ...attributes,
+      type,
+      format,
+      current,
+      value,
+      onChange: this.handleChange,
+    };
 
-    return (
-      <Component
-        type={type}
-        format={format}
-        current={current}
-        value={value}
-        prefixCls={prefixCls}
-        disabled={disabled}
-        onChange={this.handleChange}
-      />
+    return (current instanceof Date
+      ? <Picker {...childProps} current={current} />
+      : <Range {...childProps} current={current} />
     );
   }
 
@@ -212,10 +220,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
           current[1] = new Date();
         }
       }
-      if (
-        (type === 'day' || type === 'datetime') &&
-        compareAsc(current[0], current[1]) >= 0
-      ) {
+      if ((type === 'day' || type === 'datetime') && isSameMonth(current[0], current[1])) {
         current[1] = addMonths(current[0], 1);
       }
       if (type === 'datetime') {
@@ -300,9 +305,11 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
         onChange(date, dateStr);
       }
     } else {
-      this.setState({
-        current,
-      });
+      setTimeout(() => {
+        this.setState({
+          current,
+        });
+      }, 0);
     }
   }
 }

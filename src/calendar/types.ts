@@ -12,7 +12,11 @@ export type PickerChildProps = {
   current: Date;
   format: string;
   value?: DateProps;
+  min?: DateProps;
+  max?: DateProps;
   rangeDate?: DateProps[];
+  hideLeftIcon?: boolean;
+  hideRightIcon?: boolean;
   onModeChange: (mode: CalendarMode) => void;
   onChange: (date: DateProps | DateProps[], isSelectDay?: boolean) => void;
 };

@@ -13,6 +13,10 @@ export type PickerProps = {
   type: CalendarType;
   value?: DateProps;
   range?: boolean;
+  min?: DateProps;
+  max?: DateProps;
+  hideLeftIcon?: boolean;
+  hideRightIcon?: boolean;
   rangeDate?: DateProps[];
   onChange: (date: DateProps | DateProps[], isSelectDay?: boolean) => void;
   onDayHover?: (date: Date) => void;

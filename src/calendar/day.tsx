@@ -28,7 +28,7 @@ class Day extends React.PureComponent<DayProps, DayState> {
   }
 
   render() {
-    const { prefixCls, current, type } = this.props;
+    const { prefixCls, current, type, hideLeftIcon, hideRightIcon } = this.props;
     const days = this.getDays();
 
     return (
@@ -36,28 +36,32 @@ class Day extends React.PureComponent<DayProps, DayState> {
         <div className={`${prefixCls}-header`}>
           <div className={`${prefixCls}-config`}>
             <Icon
-              className={`${prefixCls}-prev`}
+              className={`${prefixCls}-config-icon`}
               type="chevrons-left"
               onClick={this.handlePrevYear}
+              disabled={hideLeftIcon}
             />
             <Icon
-              className={`${prefixCls}-prev-month`}
+              className={classNames(`${prefixCls}-config-icon`, `${prefixCls}-prev-month`)}
               type="chevron-left"
               onClick={this.handlePrevMonth}
+              disabled={hideLeftIcon}
             />
             <div className={`${prefixCls}-select`}>
               <span onClick={() => this.props.onModeChange('month')}>{monthValues.long[current.getMonth()]}</span>
               <span onClick={() => this.props.onModeChange('year')}>{current.getFullYear()}</span>
             </div>
             <Icon
-              className={`${prefixCls}-next-month`}
+              className={classNames(`${prefixCls}-config-icon`, `${prefixCls}-next-month`)}
               type="chevron-right"
               onClick={this.handleNextMonth}
+              disabled={hideRightIcon}
             />
             <Icon
-              className={`${prefixCls}-next`}
+              className={`${prefixCls}-config-icon`}
               type="chevrons-right"
               onClick={this.handleNextYear}
+              disabled={hideRightIcon}
             />
           </div>
 
@@ -74,9 +78,15 @@ class Day extends React.PureComponent<DayProps, DayState> {
   }
 
   renderDay = (date: Date) => {
-    const { current, value, type, range, prefixCls, rangeDate } = this.props;
+    const { current, value, type, prefixCls, rangeDate, min, max } = this.props;
     const hoverProps: any = {};
-    let itemClassName = `${prefixCls}-day-item`;
+    const isDisabled =
+      (!!min && compareAsc(date, min) < 0) ||
+      (!!max && compareAsc(date, max) > 0);
+    let itemClassName = classNames({
+      [`${prefixCls}-day-item`]: true,
+      [`${prefixCls}-day-item-disabled`]: isDisabled,
+    });
     if (type === 'week') {
       const { hoverDate } = this.state;
       hoverProps.onMouseEnter = this.handleHoverWeek.bind(this, date);
@@ -108,7 +118,7 @@ class Day extends React.PureComponent<DayProps, DayState> {
       <div
         key={date.getTime()}
         className={itemClassName}
-        onClick={this.handleDayClick.bind(this, date)}
+        onClick={isDisabled ? undefined : this.handleDayClick.bind(this, date)}
         {...hoverProps}
       >
         <span>{date.getDate()}</span>

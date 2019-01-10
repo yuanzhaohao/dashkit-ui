@@ -13,7 +13,7 @@ class Year extends React.PureComponent<YearProps> {
   }
 
   render() {
-    const { prefixCls, current, value } = this.props;
+    const { prefixCls, current, value, hideLeftIcon, hideRightIcon } = this.props;
     const startYear = Math.floor(current.getFullYear() / 10) * 10;
     const years = rangeNumber(11, -1).map(i => startYear + i);
 
@@ -22,17 +22,19 @@ class Year extends React.PureComponent<YearProps> {
         <div className={`${prefixCls}-header`}>
           <div className={`${prefixCls}-config`}>
             <Icon
-              className={`${prefixCls}-prev`}
+              className={`${prefixCls}-config-icon`}
               type="chevrons-left"
               onClick={this.handlePrevRange}
+              disabled={hideLeftIcon}
             />
             <div className={`${prefixCls}-select`}>
               <span>{years[1]} ~ {years[years.length - 2]}</span>
             </div>
             <Icon
-              className={`${prefixCls}-next`}
+              className={`${prefixCls}-config-icon`}
               type="chevrons-right"
               onClick={this.handleNextRange}
+              disabled={hideRightIcon}
             />
           </div>
         </div>

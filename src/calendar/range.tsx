@@ -1,15 +1,16 @@
 import * as React from 'react';
 import Picker from './picker';
 import { DateProps, CalendarType } from './types';
-import { compareAsc } from './utils';
+import { compareAsc, isSameMonth, addMonths } from './utils';
 
 export type RangeProps = {
   prefixCls?: string;
   current: Date[];
-  value: DateProps[];
+  value?: DateProps[];
   format: string;
   type: CalendarType;
-  range?: boolean;
+  min?: DateProps;
+  max?: DateProps;
   rangeDate?: DateProps[];
   onChange: (date: DateProps | DateProps[], isSelectDay?: boolean) => void;
 };
@@ -32,6 +33,8 @@ class Range extends React.PureComponent<RangeProps, RangeState> {
     const { current, type, value, prefixCls, ...attributes } = this.props;
     const { rangeDate } = this.state;
     const newType = type === 'week' ? 'day' : type;
+    const hideIcon = (newType === 'day' || newType === 'datetime') && isSameMonth(addMonths(current[0], 1), current[1]);
+
     return (
       <div className={`${prefixCls}-range`}>
         <Picker
@@ -40,6 +43,7 @@ class Range extends React.PureComponent<RangeProps, RangeState> {
           type={newType}
           current={current[0]}
           rangeDate={rangeDate}
+          hideRightIcon={hideIcon}
           onChange={this.handleChange.bind(this, 0)}
           onDayHover={this.handleDayHover}
         />
@@ -49,6 +53,7 @@ class Range extends React.PureComponent<RangeProps, RangeState> {
           type={newType}
           current={current[1]}
           rangeDate={rangeDate}
+          hideLeftIcon={hideIcon}
           onChange={this.handleChange.bind(this, 1)}
           onDayHover={this.handleDayHover}
         />

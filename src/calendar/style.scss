@@ -106,26 +106,6 @@ $calendar-prefix: 'dk-calendar';
     }
   }
 
-  &-prev,
-  &-next,
-  &-prev-month,
-  &-next-month {
-    cursor: pointer;
-    font-size: 14px;
-
-    &:hover {
-      color: $calendar-active-bg;
-    }
-  }
-
-  &-prev-month {
-    margin-left: 3px;
-  }
-
-  &-next-month {
-    margin-right: 3px;
-  }
-
   &-select {
     display: flex;
     flex: 1;
@@ -173,6 +153,23 @@ $calendar-prefix: 'dk-calendar';
     height: $calendar-item-size - 4px;
     padding: 4px 8px;
     align-items: center;
+
+    &-icon {
+      cursor: pointer;
+      font-size: 14px;
+
+      &:hover {
+        color: $calendar-active-bg;
+      }
+    }
+  }
+
+  &-prev-month {
+    margin-left: 3px;
+  }
+
+  &-next-month {
+    margin-right: 3px;
   }
 
   &-day {

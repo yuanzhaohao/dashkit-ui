@@ -15,7 +15,10 @@ interface SidebarProps extends RouteComponentProps<any> {
 
 class AppSidebar extends React.PureComponent<SidebarProps> {
   render() {
-    const { pageMap } = this.props;
+    const { pageMap, location } = this.props;
+    const { pathname } = location;
+    const pathnameAry = pathname.slice(1).split('/');
+    const activeIndex = pathnameAry.length === 1 ? 'Dashboard' : pathnameAry[1];
     return (
       <Sidebar className="sidebar">
         <div className="sidebar-logo">
@@ -24,7 +27,7 @@ class AppSidebar extends React.PureComponent<SidebarProps> {
         </div>
         <Menu
           className="sidebar-menu"
-          defaultActive="Dashboard"
+          defaultActive={activeIndex}
           defaultOpeneds={['Components']}
           onSelect={this.onMenuSelect}
         >

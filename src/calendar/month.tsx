@@ -12,24 +12,26 @@ class Month extends React.PureComponent<MonthProps> {
   }
 
   render() {
-    const { prefixCls, current } = this.props;
+    const { prefixCls, current, hideLeftIcon, hideRightIcon } = this.props;
 
     return (
       <div className={`${prefixCls}-ym`}>
         <div className={`${prefixCls}-header`}>
           <div className={`${prefixCls}-config`}>
             <Icon
-              className={`${prefixCls}-prev`}
+              className={`${prefixCls}-config-icon`}
               type="chevrons-left"
               onClick={this.handlePrevYear}
+              disabled={hideLeftIcon}
             />
             <div className={`${prefixCls}-select`}>
               <span onClick={() => this.props.onModeChange('year')}>{current.getFullYear()}</span>
             </div>
             <Icon
-              className={`${prefixCls}-next`}
+              className={`${prefixCls}-config-icon`}
               type="chevrons-right"
               onClick={this.handleNextYear}
+              disabled={hideRightIcon}
             />
           </div>
         </div>
