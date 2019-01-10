@@ -34,6 +34,15 @@ class Menu extends React.PureComponent<MenuProps, MenuState> {
     theme: 'light',
   };
 
+
+  static getDerivedStateFromProps(nextProps: MenuProps) {
+    const state: Partial<MenuState> = {};
+    if ('defaultActive' in nextProps) {
+      state.activeIndex = nextProps.defaultActive;
+    }
+    return state;
+  }
+
   constructor(props: MenuProps) {
     super(props);
     this.state = {
