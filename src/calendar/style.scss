@@ -252,6 +252,34 @@ $calendar-prefix: 'dk-calendar';
       }
     }
 
+    &-item-disabled {
+      cursor: not-allowed;
+      background: #f5f5f5;
+      opacity: 0.35;
+
+      >span {
+        color: $calendar-other-color;
+        // opacity: 0.35;
+
+        &:hover {
+          background: #f5f5f5;
+          border-color: transparent;
+        }
+      }
+
+      &.#{$calendar-prefix}-day-item-hover-start,
+      &.#{$calendar-prefix}-day-item-hover-end {
+        border-radius: 0;
+
+        >span,
+        >span:hover {
+          color: $calendar-other-color;
+          background: #f5f5f5;
+          border-radius: 0;
+        }
+      }
+    }
+
     &-datetime {
       position: relative;
       width: 100%;

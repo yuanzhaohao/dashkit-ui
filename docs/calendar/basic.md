@@ -54,6 +54,11 @@ ReactDOM.render(
         <Calendar onChange={onChange} type="day" range />
       </Col>
     </Row>
+    <Row className="calendar-item">
+      <Col xs>
+        <Calendar onChange={onChange} type="datetime" range />
+      </Col>
+    </Row>
   </div>,
   mountNode
 );
