@@ -12,7 +12,7 @@ subtitle:
 import { Pagination } from 'dashkit-ui';
 
 ReactDOM.render(
-  <Pagination total={500} current={10} pageSize={10} />,
+  <Pagination total={500} current={10} pageSize={10} disabled />,
   mountNode
 );
 ```
