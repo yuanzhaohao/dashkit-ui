@@ -14,50 +14,39 @@ $prefix-cls: 'dk-pagination';
     height: $pagination-size;
     margin-right: $pagination-margin-right;
     padding: 0 $pagination-padding-x;
-    border: $pagination-border-width solid $pagination-border-color;
-    border-radius: $pagination-border-radius;
-    background-color: $pagination-bg;
-    color: $pagination-color;
-    font-size: $pagination-font-size;
-    font-family: Arial;
+    border: $border-width solid $border-color;
+    border-radius: $border-radius;
+    background-color: $white;
     cursor: pointer;
     justify-content: center;
     align-items: center;
+    transition: $pagination-transition;
 
+    &:focus,
     &:hover {
-      z-index: 2;
-      color: $pagination-hover-color;
+      outline: 0;
       text-decoration: none;
-      background-color: $pagination-hover-bg;
-      border-color: $pagination-hover-border-color;
-      transition: all .3s;
     }
 
-    &:focus {
-      z-index: 2;
-      outline: $pagination-focus-outline;
-      box-shadow: $pagination-focus-box-shadow;
-      transition: all .3s;
+    &:hover {
+      border-color: $primary;
+      color: $primary;
+      background-color: lighten($primary, 70%);
     }
   }
 
   &-active {
     z-index: 1;
-    color: $pagination-active-color;
-    background-color: $pagination-active-bg;
-    border-color: $pagination-active-border-color;
+    color: $white;
+    background-color: $primary;
+    border-color: $primary;
     cursor: default;
 
-    &:hover {
-      color: $pagination-active-color;
-      background-color: $pagination-active-bg;
-      border-color: $pagination-active-border-color;
-    }
-
+    &:hover,
     &:focus {
-      color: $pagination-active-color;
-      background-color: $pagination-active-bg;
-      border-color: $pagination-active-border-color;
+      color: $white;
+      background-color: $primary;
+      border-color: $primary;
     }
   }
 
@@ -95,7 +84,8 @@ $prefix-cls: 'dk-pagination';
   &-small &-item {
     min-width: $pagination-size-sm;
     height: $pagination-size-sm;
-    font-size: $pagination-font-size-sm;
+    font-size: $font-size-sm;
+    border-radius: $border-radius-sm;
   }
 
   &-small &-prev,
@@ -110,7 +100,8 @@ $prefix-cls: 'dk-pagination';
   &-large &-item {
     min-width: $pagination-size-lg;
     height: $pagination-size-lg;
-    font-size: $pagination-font-size-lg;
+    font-size: $font-size-lg;
+    border-radius: $border-radius-lg;
   }
 
   &-large i {

@@ -9,9 +9,8 @@ subtitle:
 ---
 
 ```js
-import { Calendar, Grid } from 'dashkit-ui';
+import { Calendar } from 'dashkit-ui';
 import { addDays, addMonths } from 'dashkit-ui/Calendar/utils';
-const { Col, Row } = Grid;
 
 function onChange(value) {
   console.log(`value: ${value}`);
@@ -28,10 +27,16 @@ function getMinDate() {
   return addMonths(date, -6);
 }
 
+class Demo extends React.Component {
+  render() {
+    return (
+      <Calendar onChange={onChange} min={getMinDate()} max={getMaxDate()} type="datetime" range />
+    );
+  }
+}
+
 ReactDOM.render(
-  <div>
-    <Calendar onChange={onChange} min={getMinDate()} max={getMaxDate()} type="datetime" range />
-  </div>,
+  <Demo />,
   mountNode
 );
 ```

@@ -83,7 +83,7 @@ $link-hover-decoration:       underline !default;
 // Components
 //
 $border-width:                1px !default;
-$border-color:              #e3ebf6 !default;
+$border-color:                #d2ddec !default;// #e3ebf6 !default;
 $border-radius:               4px !default;
 $border-radius-lg:            5px !default;
 $border-radius-sm:            3px !default;
@@ -244,38 +244,12 @@ $switch-disabled-opacity:           .4 !default;
 $pagination-size:                   32px !default;
 $pagination-size-sm:                24px !default;
 $pagination-size-lg:                40px !default;
-$pagination-font-size:              $font-size-base !default;
-$pagination-font-size-sm:           $font-size-sm !default;
-$pagination-font-size-lg:           $font-size-lg !default;
 $pagination-padding-x:              4px !default;
 $pagination-padding-x-sm:           3px !default;
 $pagination-padding-x-lg:           5px !default;
 $pagination-margin-right:           8px !default;
-
-$pagination-color:                  $gray-600 !default;
-$pagination-bg:                     $white !default;
-$pagination-border-width:           $border-width !default;
-$pagination-border-color:           $border-color !default;
-$pagination-border-radius:          $border-radius !default;
-$pagination-border-radius-lg:       $border-radius-lg !default;
-$pagination-border-radius-sm:       $border-radius-sm !default;
-
-$pagination-focus-box-shadow:       0 0 0 2px rgba($component-active-bg, .25) !default;
-$pagination-focus-outline:          0 !default;
-
-$pagination-hover-color:            $primary !default;
-$pagination-hover-bg:               #edf2f9 !default;
-$pagination-hover-border-color:     $border-width !default;
-
-$pagination-active-color:           $component-active-color !default;
-$pagination-active-bg:              $component-active-bg !default;
-$pagination-active-border-color:    $pagination-active-bg !default;
-
-$pagination-disabled-color:         $gray-600 !default;
-$pagination-disabled-bg:            $white !default;
-$pagination-disabled-border-color:  $gray-300 !default;
 $pagination-disabled-opacity:       .65 !default;
-
+$pagination-transition:             color .15s $ease-in-out, background-color .15s $ease-in-out, border-color .15s $ease-in-out, box-shadow .15s $ease-in-out !default;
 
 // Alert
 //
