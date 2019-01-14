@@ -45,7 +45,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
     type: 'day',
   };
 
-  public static getDerivedStateFromProps(nextProps: CalendarProps) {
+  static getDerivedStateFromProps(nextProps: CalendarProps) {
     const state: Partial<CalendarState> = {};
     if ('value' in nextProps && nextProps.value) {
       if (nextProps.value instanceof Array) {

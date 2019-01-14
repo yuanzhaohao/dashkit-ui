@@ -8,6 +8,7 @@ export type PaginationSize = 'small' | 'default' | 'large';
 export type PaginationProps = {
   prefixCls?: string;
   current?: number;
+  defaultCurrent?: number;
   total?: number;
   size?: PaginationSize;
   pageSize?: number;
@@ -17,17 +18,41 @@ export type PaginationProps = {
   onChange?: (value: number) => void;
 };
 
-class Pagination extends React.Component<PaginationProps> {
-  public static defaultProps = {
+export type PaginationState = {
+  current: number;
+  pageSize: number;
+};
+
+class Pagination extends React.Component<PaginationProps, PaginationState> {
+  static defaultProps = {
     prefixCls: 'dk-pagination',
-    current: 1,
+    defaultCurrent: 1,
     pageSize: 20,
     total: 0,
     range: 7,
     size: 'default' as PaginationSize,
   };
-  public render() {
-    const { className, prefixCls, size, current = 1, disabled } = this.props;
+
+  static getDerivedStateFromProps(nextProps: PaginationProps) {
+    const state: Partial<PaginationState> = {};
+    if ('current' in nextProps && nextProps.current) {
+      state.current = nextProps.current;
+    }
+    return state;
+  }
+
+  constructor(props: PaginationProps) {
+    super(props)
+    this.state = {
+      current: props.current || props.defaultCurrent,
+      pageSize: props.pageSize,
+    }
+  }
+
+
+  render() {
+    const { className, prefixCls, size, disabled } = this.props;
+    const { current } = this.state;
     const paginationClassName = classNames(
       prefixCls,
       {
@@ -49,7 +74,7 @@ class Pagination extends React.Component<PaginationProps> {
       <button
         key="previous"
         onClick={
-          current > 1 && !disabled 
+          current > 1 && !disabled
             ? this.handleChange.bind(this, current - 1)
             : null
         }
@@ -110,10 +135,11 @@ class Pagination extends React.Component<PaginationProps> {
   }
 
   private getPages = () => {
-    const { pageSize = 20, total = 0, range = 7 } = this.props;
+    const { total, range } = this.props;
+    const { pageSize } = this.state;
     const max = Math.ceil(total / pageSize);
     const pages = [];
-    let { current = 1 } = this.props;
+    let { current } = this.state;
     let left;
     let right;
 
@@ -155,9 +181,10 @@ class Pagination extends React.Component<PaginationProps> {
     return { pages, max };
   }
 
-  private handleChange = (value: number) => {
+  handleChange(current) {
+    this.setState({ current });
     if (this.props.onChange) {
-      this.props.onChange(value);
+      this.props.onChange(current);
     }
   }
 }

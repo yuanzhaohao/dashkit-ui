@@ -1,6 +1,6 @@
 # Pagination
 
-Indicates a series of related content exists across multiple pages. 
+Indicates a series of related content exists across multiple pages.
 
 <Demos />
 
