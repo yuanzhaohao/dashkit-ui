@@ -207,7 +207,6 @@ svg {
 
 table {
   width: 100%;
-  margin-bottom: 24px;
   background-color: transparent;
   border-collapse: collapse;
   vertical-align: middle;
@@ -219,7 +218,7 @@ th {
   text-align: inherit;
   font-weight: 600;
   letter-spacing: .08em;
-  text-transform: uppercase;
+  // text-transform: uppercase;
   color: #95aac9;
   vertical-align: bottom;
   border-top: 1px solid #edf2f9;
