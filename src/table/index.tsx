@@ -35,9 +35,6 @@ export type TableState = {
   position?: 'left' | 'right' | 'both' | 'middle';
 };
 
-type ScrollbarEvent = MouseEvent & {
-  target: HTMLDivElement;
-};
 const defaultColumnWidth = 75;
 
 class TableList<T extends {[key: string]: any;}> extends React.Component<TableProps<T>, TableState> {
@@ -230,7 +227,7 @@ class TableList<T extends {[key: string]: any;}> extends React.Component<TablePr
     );
   }
 
-  handleBodyScrollLeft = (e: ScrollbarEvent) => {
+  handleBodyScrollLeft = (e: React.FormEvent<HTMLDivElement>) => {
     if (e.currentTarget !== e.target) {
       return;
     }
