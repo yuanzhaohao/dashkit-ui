@@ -35,8 +35,6 @@ export type TableState = {
   position?: 'left' | 'right' | 'both' | 'middle';
 };
 
-const defaultColumnWidth = 75;
-
 class TableList<T extends {[key: string]: any;}> extends React.Component<TableProps<T>, TableState> {
   static defaultProps = {
     prefixCls: 'dk-table',
@@ -112,6 +110,7 @@ class TableList<T extends {[key: string]: any;}> extends React.Component<TablePr
         </tr>
       </thead>
     );
+
     const bodyCell = dataSource && dataSource.length > 0 && (
       <tbody>
         {dataSource.map((itemData, index) => (
@@ -130,8 +129,7 @@ class TableList<T extends {[key: string]: any;}> extends React.Component<TablePr
       </tbody>
     );
 
-    const { position: paginationPosition = 'bottom', ...otherPaginationProps } =
-      pagination || {};
+    const { position: paginationPosition = 'bottom', ...otherPaginationProps } = pagination || {};
     const paginationCell = (
       <div className={`${prefixCls}-table-page`}>
         <Pagination {...otherPaginationProps} />
@@ -144,8 +142,8 @@ class TableList<T extends {[key: string]: any;}> extends React.Component<TablePr
           <col
             key={index}
             style={{
-              width: c.width || defaultColumnWidth,
-              minWidth: c.width || defaultColumnWidth,
+              width: c.width,
+              minWidth: c.width,
             }}
           />
         ))}
@@ -227,11 +225,11 @@ class TableList<T extends {[key: string]: any;}> extends React.Component<TablePr
     );
   }
 
-  handleBodyScrollLeft = (e: React.FormEvent<HTMLDivElement>) => {
+  handleBodyScrollLeft = (e: React.FormEvent<EventTarget>) => {
     if (e.currentTarget !== e.target) {
       return;
     }
-    const target = e.target;
+    const target = e.target as HTMLDivElement;
     const { scroll = {} } = this.props;
     const headTable = this.headRef.current;
     const bodyTable = this.bodyRef.current;

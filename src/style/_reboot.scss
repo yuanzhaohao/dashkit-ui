@@ -225,7 +225,7 @@ th {
   border-top: 1px solid #edf2f9;
   border-bottom: 1px solid #edf2f9;
   background-color: #f9fbfd;
-  font-size: 12px;
+  font-size: $font-size-sm;
 }
 
 td {
@@ -233,14 +233,6 @@ td {
   vertical-align: top;
   font-size: 15px;
   border-bottom: 1px solid #edf2f9;
-}
-
-caption {
-  padding-top: $table-cell-padding;
-  padding-bottom: $table-cell-padding;
-  color: $table-caption-color;
-  text-align: left;
-  caption-side: bottom;
 }
 
 // Forms

@@ -1,8 +1,8 @@
 import './header.scss';
 
 import * as React from 'react';
-import { Layout } from 'dashkit-ui';
 import GithubSvg from '../../assets/github.svg';
+import { Layout } from 'dashkit-ui';
 
 const { Header } = Layout;
 

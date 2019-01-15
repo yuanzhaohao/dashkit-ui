@@ -14,7 +14,7 @@ export type PaginationProps = {
   pageSize?: number;
   range?: number;
   className?: string;
-  disabled: boolean;
+  disabled?: boolean;
   onChange?: (value: number) => void;
 };
 

@@ -15,12 +15,13 @@
     "removeComments": true,
     "baseUrl": ".",
     "paths": {
-      "dashkit-ui": ["./src/"]
+      "dashkit-ui": ["src/"]
     }
   },
   "include": [
-    "./custom.d.ts",
-    "./src/**/*"
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "custom.d.ts"
   ],
   "exclude": [
     "node_modules"

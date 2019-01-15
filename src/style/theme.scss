@@ -127,19 +127,18 @@ $icon-base-url:               '/static' !default;
 $table-cell-padding:          12px !default;
 $table-cell-padding-sm:       5px !default;
 
-$table-bg:                    transparent !default;
-$table-accent-bg:             rgba($black, .05) !default;
-$table-hover-bg:              rgba($black, .075) !default;
+$table-bg:                    $white !default;
+$table-hover-bg:              rgba($black, .02) !default;
 $table-active-bg:             $table-hover-bg !default;
 
 $table-border-width:          $border-width !default;
 $table-border-color:          $gray-300 !default;
 
-$table-head-bg:               $gray-200 !default;
+$table-head-bg:               $gray-100 !default;
 $table-head-color:            $gray-700 !default;
 
 $table-dark-bg:               $gray-900 !default;
-$table-dark-accent-bg:        rgba($white, .05) !default;
+$table-dark-accent-bg:        rgba($white, .02) !default;
 $table-dark-hover-bg:         rgba($white, .075) !default;
 $table-dark-border-color:     lighten($gray-900, 7.5%) !default;
 $table-dark-color:            $body-bg !default;
