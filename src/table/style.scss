@@ -1,0 +1,146 @@
+
+$table-prefix: 'dk-table';
+
+.#{$table-prefix} {
+  position: relative;
+  width: 100%;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    vertical-align: middle;
+    background-color: #fff;
+  }
+
+  tr {
+    padding: 0;
+  }
+
+  th {
+    padding: 12px;
+    text-align: inherit;
+    font-weight: 600;
+    letter-spacing: .08em;
+    color: #909399;
+    border-top: 1px solid #edf2f9;
+    border-bottom: 1px solid #edf2f9;
+    background-color: #f9fbfd;
+    font-size: 12px;
+  }
+
+
+  td {
+    padding: 12px;
+    font-size: 14px;
+    border-bottom: 1px solid #edf2f9;
+  }
+
+  th,
+  td {
+    word-break: break-word;
+  }
+
+
+  &-scroll {
+    overflow: auto;
+    overflow-x: hidden;
+
+    table {
+      width: auto;
+      min-width: 100%;
+    }
+  }
+
+  &-title {
+    padding: 12px;
+    border-width: 1px 1px 0 1px;
+    border-style: solid;
+    border-color: #edf2f9;
+    font-weight: 600;
+    font-size: 12px;
+    color: #909399;
+  }
+
+  &-header {
+    overflow: scroll;
+    padding-bottom: 20px;
+    margin-bottom: -20px;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &-body {
+    position: relative;
+    background: #fff;
+    z-index: 9;
+
+    tr {
+      &:hover td {
+        background-color: rgba(0, 0, 0, 0.02);
+      }
+    }
+  }
+
+  &-no-data {
+    width: 100%;
+    padding: 12px;
+    text-align: center;
+    color: rgba(0, 0, 0, .45);
+  }
+
+
+  &-fixed-left,
+  &-fixed-right {
+    position: absolute;
+    top: 0;
+    width: 6px;
+    height: 100%;
+    overflow: hidden;
+    transition: box-shadow .3s ease;
+    border-radius: 0;
+    z-index: 10;
+  }
+
+  &-fixed-left {
+    left: 0;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, .15) 0, rgba(62, 152, 240, 0) 100%);
+  }
+
+  &-fixed-right {
+    right: 0;
+    background-image: linear-gradient(to left, rgba(0, 0, 0, .15) 0, rgba(62, 152, 240, 0) 100%);
+  }
+
+  &-position-both {
+
+    .#{$table-prefix}-fixed-left,
+    .#{$table-prefix}-fixed-right {
+      background-image: none;
+    }
+  }
+
+  &-position-middle {
+    position: relative;
+  }
+
+  &-position-left {
+    .#{$table-prefix}-fixed-left {
+      background-image: none;
+    }
+  }
+
+  &-position-right {
+    .#{$table-prefix}-fixed-right {
+      background-image: none;
+    }
+  }
+
+
+  &-page {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 0;
+  }
+}
