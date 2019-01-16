@@ -1,13 +1,15 @@
 import * as React from 'react';
 import createReactContext from 'create-react-context';
-import { CheckboxProps } from './checkbox';
 
+type ContextProps = {
+  onRawChange: (checked?: boolean, label?: string) => void;
+};
 
-const CheckboxContext = createReactContext<CheckboxProps | null>(null);
+const CheckboxContext = createReactContext<ContextProps>(null);
 export const CheckboxProvider = CheckboxContext.Provider;
 export const CheckboxConsumer = CheckboxContext.Consumer;
 export const createConsumer = (Component: any) => (props: any) => (
   <CheckboxConsumer>
-    {(context: any) => <Component {...props} rootContext={context} />}
+    {(value: any) => <Component {...props} {...value} />}
   </CheckboxConsumer>
 );

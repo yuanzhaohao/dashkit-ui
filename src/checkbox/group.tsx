@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 import { isEqual } from 'lodash';
-import { CheckboxProps } from './checkbox';
-// import { CheckboxProvider, createConsumer } from './context';
+import { CheckboxProps } from './types';
+import { CheckboxProvider, createConsumer } from './context';
 
 export type CheckboxGroupProps = {
   prefixCls?: string;
@@ -64,9 +64,9 @@ class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGrou
         child,
         Object.assign({}, props, {
           key: index,
-          checked: checked,
-          rootContext: this.getContext(),
-          onChange: this.handleChange.bind(this, checked, props.label),
+          checked,
+          // rootContext: this.getContext(),
+          // onChange: this.handleChange.bind(this, checked, props.label),
         }),
       );
     });
@@ -74,7 +74,12 @@ class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGrou
     return (
 
       <div className={groupClassName} style={style}>
-        {realChildren}
+        <CheckboxProvider
+          value={{
+            onRawChange: this.handleRawChange,
+            // checked: options.indexOf,
+          }}
+        >{children}</CheckboxProvider>
       </div>
     );
   }
@@ -100,13 +105,15 @@ class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGrou
     return this.state.options;
   }
 
-  handleChange = (checked: boolean, label: string) => {
+  handleRawChange = (checked: boolean, label: string) => {
     const options = this.getOptions();
     const { onChange } = this.props;
     const newOptions = !checked
       ? Array.from(new Set([...options, label]))
       : options.filter(option => option !== label);
 
+    console.log(checked, label);
+    console.log('call handleRawChange', newOptions);
     this.setState({
       options: newOptions,
     });

@@ -1,0 +1,14 @@
+@import '../style/functions';
+@import '../style/theme';
+@import '../style/mixins';
+
+$radio-prefix: 'dk-radio';
+
+.#{$radio-prefix} {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+  cursor: pointer;
+}
