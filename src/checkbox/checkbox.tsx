@@ -1,18 +1,17 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import * as PropTyps from 'prop-types';
-import { Consumer } from './context';
+// import { createConsumer } from './context';
 
 export type CheckboxProps = {
   prefixCls?: string;
   className?: string;
-  style?: React.CSSProperties;
   checked?: boolean;
   label?: string;
   disabled?: boolean;
   indeterminate?: boolean;
   defaultChecked?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  rootContext: any;
 };
 
 export interface CheckboxState {
@@ -20,14 +19,8 @@ export interface CheckboxState {
 }
 class Checkbox extends React.PureComponent<CheckboxProps, CheckboxState> {
   static Group: any;
-  static elementType = 'Checkbox';
-  static contextTypes = {
-    groupHook: PropTyps.object,
-  };
   static defaultProps = {
-    disabled: false,
     prefixCls: 'dk-checkbox',
-    indeterminate: false,
   };
 
   constructor(props: CheckboxProps) {
@@ -40,7 +33,7 @@ class Checkbox extends React.PureComponent<CheckboxProps, CheckboxState> {
   }
 
   render() {
-    const { children, className, style, prefixCls, label, disabled, indeterminate } = this.props;
+    const { children, className, prefixCls, label, disabled, indeterminate, rootContext, onChange, ...attributes } = this.props;
     const checked = this.getChecked();
     const checkboxClassName = classNames(
       prefixCls,
@@ -52,21 +45,17 @@ class Checkbox extends React.PureComponent<CheckboxProps, CheckboxState> {
       className,
     );
     return (
-      <Consumer>
-        {() => (
-          <label className={checkboxClassName} style={style}>
-            <input
-              className={`${prefixCls}-input`}
-              type="checkbox"
-              disabled={disabled}
-              onChange={this.handleChange}
-              checked={checked}
-            />
-            <i className={`${prefixCls}-indicator`} />
-            <span>{children || label}</span>
-          </label>
-        )}
-      </Consumer>
+      <label className={checkboxClassName} {...attributes}>
+        <input
+          className={`${prefixCls}-input`}
+          type="checkbox"
+          disabled={disabled}
+          onChange={this.handleChange}
+          checked={checked}
+        />
+        <i className={`${prefixCls}-indicator`} />
+        <span>{children || label}</span>
+      </label>
     );
   }
 
@@ -78,18 +67,17 @@ class Checkbox extends React.PureComponent<CheckboxProps, CheckboxState> {
   }
 
   handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { onChange } = this.props;
+    const { onChange, rootContext } = this.props;
     const { checked } = event.target;
-    const { groupHook } = this.context;
 
-    if (groupHook) {
-      const length = groupHook.getOptions().length + (checked ? 1 : -1);
-      const min = groupHook.getMin();
+    if (rootContext) {
+      const length = rootContext.getOptions().length + (checked ? 1 : -1);
+      const min = rootContext.getMin();
       if (min !== undefined && length < min) {
         return;
       }
 
-      const max = groupHook.getMax();
+      const max = rootContext.getMax();
       if (max !== undefined && length > max) {
         return;
       }

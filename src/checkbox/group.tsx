@@ -1,9 +1,8 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import * as PropTyps from 'prop-types';
 import { isEqual } from 'lodash';
 import { CheckboxProps } from './checkbox';
-import { Provider } from './context';
+// import { CheckboxProvider, createConsumer } from './context';
 
 export type CheckboxGroupProps = {
   prefixCls?: string;
@@ -25,11 +24,6 @@ class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGrou
     prefixCls: 'dk-checkbox',
     value: [],
   };
-
-  static childContextTypes = {
-    groupHook: PropTyps.object,
-  };
-
   static getDerivedStateFromProps(nextProps: CheckboxGroupProps, prevState: CheckboxGroupState) {
     if (!isEqual(nextProps.value, prevState.options)) {
       return {
@@ -46,22 +40,6 @@ class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGrou
     this.state = {
       options,
     };
-  }
-
-  getChildContext() {
-    return {
-      groupHook: {
-        getOptions: () => {
-          return this.state.options;
-        },
-        getMin: () => {
-          return this.props.min;
-        },
-        getMax: () => {
-          return this.props.max;
-        }
-      },
-    }
   }
 
   render() {
@@ -87,16 +65,32 @@ class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGrou
         Object.assign({}, props, {
           key: index,
           checked: checked,
+          rootContext: this.getContext(),
           onChange: this.handleChange.bind(this, checked, props.label),
         }),
       );
     });
 
     return (
+
       <div className={groupClassName} style={style}>
         {realChildren}
       </div>
     );
+  }
+
+  getContext() {
+    return {
+      getOptions: () => {
+        return this.state.options;
+      },
+      getMin: () => {
+        return this.props.min;
+      },
+      getMax: () => {
+        return this.props.max;
+      }
+    };
   }
 
   getOptions() {
@@ -113,7 +107,6 @@ class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGrou
       ? Array.from(new Set([...options, label]))
       : options.filter(option => option !== label);
 
-    console.log(checked, label)
     this.setState({
       options: newOptions,
     });

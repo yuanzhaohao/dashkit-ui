@@ -33,8 +33,6 @@
     "classnames": "^2.2.5",
     "create-react-context": "^0.2.3",
     "lodash": "^4.17.11",
-    "lodash-es": "^4.17.11",
-    "prop-types": "^15.6.2",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-transition-group": "^2.4.0"
@@ -42,7 +40,6 @@
   "devDependencies": {
     "@types/classnames": "^2.2.4",
     "@types/lodash": "^4.14.116",
-    "@types/prop-types": "^15.5.5",
     "@types/react": "^16.4.1",
     "@types/react-dom": "^16.0.6",
     "@types/react-router-dom": "^4.2.7",

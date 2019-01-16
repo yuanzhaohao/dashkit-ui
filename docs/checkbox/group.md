@@ -49,6 +49,7 @@ class App extends React.Component {
   onGroupChange = (value) => {
     const checkedCount = value.length;
     const citiesLength = cityOptions.length;
+    console.log(value);
 
     this.setState({
       checkedCities: value,
@@ -61,7 +62,6 @@ class App extends React.Component {
     const { checked } = e.target;
     const checkedCities = checked ? cityOptions : [];
 
-    console.log(checkedCities)
     this.setState({
       checkedCities,
       indeterminate: false,

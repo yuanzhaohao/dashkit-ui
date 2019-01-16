@@ -2,7 +2,7 @@ import './style.scss';
 
 import Pagination, { PaginationProps } from '../pagination';
 import * as classNames from 'classnames';
-import { debounce } from 'lodash-es';
+import { debounce } from 'lodash';
 import * as React from 'react';
 
 export type ColumnProps<T> = {
