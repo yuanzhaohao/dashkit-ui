@@ -1,8 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 import { isEqual } from 'lodash';
-import { CheckboxProps } from './types';
-import { CheckboxProvider, createConsumer } from './context';
+import { CheckboxProvider } from './context';
 
 export type CheckboxGroupProps = {
   prefixCls?: string;

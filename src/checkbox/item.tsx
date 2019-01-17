@@ -1,13 +1,24 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import { CheckboxProps } from './types';
 import { createConsumer } from './context';
 
-export type ItemProps = CheckboxProps & {
+export type InputProps = {
+  prefixCls?: string;
+  className?: string;
+  checked?: boolean;
+  value?: string;
+  indeterminate?: boolean;
+  disabled?: boolean;
+  defaultChecked?: boolean;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+export type ItemProps = InputProps & {
   onRawChange?: (checked?: boolean, label?: string) => void;
   options?: string[];
   min?: number;
   max?: number;
+  type: 'checkbox' | 'radio';
 };
 
 export type ItemState = {
@@ -37,6 +48,7 @@ class Item extends React.PureComponent<ItemProps, ItemState> {
       value,
       min,
       max,
+      options,
       ...attributes
     } = this.props;
     const checked = this.getChecked();
@@ -45,6 +57,7 @@ class Item extends React.PureComponent<ItemProps, ItemState> {
       {
         [`${prefixCls}-checked`]: checked,
         [`${prefixCls}-disabled`]: disabled,
+        [`${prefixCls}-group-item`]: options instanceof Array,
         [`${prefixCls}-indeterminate`]: indeterminate,
       },
       className,

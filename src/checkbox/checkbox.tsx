@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { CheckboxProps } from './types';
-import Item from './item';
+import Item, { InputProps } from './item';
 
-class Checkbox extends React.PureComponent<CheckboxProps> {
+class Checkbox extends React.PureComponent<InputProps> {
   static Group: any;
   static defaultProps = {
     prefixCls: 'dk-checkbox',

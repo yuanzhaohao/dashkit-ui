@@ -221,11 +221,20 @@ $calendar-transition:               transform 300ms $ease-fade, opacity 300ms $e
 
 // Checkbox
 //
-$checkbox-size:                     $font-size-base !default;
-$checkbox-margin-right:             24px !default;
+$checkbox-size:                     14px !default;
+$checkbox-margin-right:             16px !default;
+$checkbox-padding-x:                8px !default;
 $checkbox-active-color:             $primary !default;
 $checkbox-border-radius:            2px !default;
 $checkbox-indicator-transtion:      border-color .25s ease, background-color .25s ease !default;
+
+// Radio
+//
+$radio-size:                        16px !default;
+$radio-margin-right:                16px !default;
+$radio-padding-x:                   8px !default;
+$radio-active-color:                $primary !default;
+$radio-indicator-transtion:         border-color .25s ease, background-color .25s ease !default;
 
 // Switch
 //
