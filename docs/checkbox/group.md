@@ -1,11 +1,11 @@
 ---
 order: 3
 title:
-  zh-CN: 全选
-  en-US: Group
+  zh-CN: 多选框组
+  en-US: Checkbox Group
 subtitle:
-  zh-CN: 在实现全选效果时，你可能会用到 `indeterminate` 属性。
-  en-US: The `indeterminate` property can help you to achieve a 'check all' effect.
+  zh-CN: 适用于多个勾选框绑定到同一个数组的情景，通过是否勾选来表示这一组选项中选中的项。
+  en-US: It is used for multiple checkboxes which are bound in one group, and indicates whether one option is selected by checking if it is checked.
 ---
 
 ```js

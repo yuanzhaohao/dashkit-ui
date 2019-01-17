@@ -19,13 +19,14 @@ export type ItemProps = InputProps & {
   min?: number;
   max?: number;
   type: 'checkbox' | 'radio';
+  checked?: (value: any) => boolean;
 };
 
 export type ItemState = {
   checked: boolean;
 };
 
-class Item extends React.PureComponent<ItemProps, ItemState> {
+class Item extends React.Component<ItemProps, ItemState> {
   constructor(props: ItemProps) {
     super(props);
 
@@ -49,15 +50,16 @@ class Item extends React.PureComponent<ItemProps, ItemState> {
       min,
       max,
       options,
+      checked,
       ...attributes
     } = this.props;
-    const checked = this.getChecked();
+    const realChecked = this.getChecked();
     const checkboxClassName = classNames(
       prefixCls,
       {
-        [`${prefixCls}-checked`]: checked,
+        [`${prefixCls}-checked`]: realChecked,
         [`${prefixCls}-disabled`]: disabled,
-        [`${prefixCls}-group-item`]: options instanceof Array,
+        [`${prefixCls}-group-item`]: typeof onRawChange === 'function',
         [`${prefixCls}-indeterminate`]: indeterminate,
       },
       className,
@@ -69,7 +71,7 @@ class Item extends React.PureComponent<ItemProps, ItemState> {
           type={type}
           disabled={disabled}
           onChange={this.handleChange}
-          checked={checked}
+          checked={realChecked}
           value={value}
         />
         <i className={`${prefixCls}-indicator`} />
@@ -81,10 +83,10 @@ class Item extends React.PureComponent<ItemProps, ItemState> {
   }
 
   getChecked = () => {
-    const { checked, options, value } = this.props;
+    const { checked, value } = this.props;
 
-    if (options instanceof Array) {
-      return options.indexOf(value) !== -1;
+    if (typeof checked === 'function') {
+      return checked(value);
     }
     if (checked !== undefined) {
       return checked;

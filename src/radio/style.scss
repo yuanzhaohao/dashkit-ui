@@ -61,6 +61,16 @@ $radio-prefix: 'dk-radio';
     }
   }
 
+  &-group {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+
+    &-item {
+      margin-right: $radio-margin-right;
+    }
+  }
+
   &-checked &-indicator {
     border-color: $radio-active-color;
 

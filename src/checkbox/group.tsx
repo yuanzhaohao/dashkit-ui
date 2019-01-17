@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 import { isEqual } from 'lodash';
-import { CheckboxProvider } from './context';
+import { Provider as CheckboxProvider } from './context';
 
 export type CheckboxGroupProps = {
   prefixCls?: string;
@@ -23,6 +23,7 @@ class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGrou
     prefixCls: 'dk-checkbox',
     value: [],
   };
+
   static getDerivedStateFromProps(nextProps: CheckboxGroupProps, prevState: CheckboxGroupState) {
     if (!isEqual(nextProps.value, prevState.options)) {
       return {
@@ -56,44 +57,24 @@ class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGrou
         <CheckboxProvider
           value={{
             onRawChange: this.handleRawChange,
+            checked: this.handleChecked,
             options,
             min,
             max,
           }}
-        >{children}</CheckboxProvider>
+        >
+          {children}
+        </CheckboxProvider>
       </div>
     );
   }
 
-  checkMin = () => {
-    const { min } = this.props;
-    if (min !== undefined && length < min) {
-      return true;
-    }
-    return false;
-  }
-
-  checkMax = () => {
-    const { max } = this.props;
-    if (max !== undefined && length > max) {
-      return true;
-    }
-    return false;
-  }
-
-  getOptions = () => {
-    if ('value' in this.props && this.props.value instanceof Array) {
-      return this.props.value;
-    }
-    return this.state.options;
-  }
-
-  handleRawChange = (checked: boolean, label: string) => {
-    const options = this.getOptions();
+  handleRawChange = (checked: boolean, value) => {
+    const { options } = this.state;
     const { onChange } = this.props;
     const newOptions = !!checked
-      ? Array.from(new Set([...options, label]))
-      : options.filter(option => option !== label);
+      ? Array.from(new Set([...options, value]))
+      : options.filter(option => option !== value);
 
     this.setState({
       options: newOptions,
@@ -102,6 +83,12 @@ class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGrou
     if (typeof onChange === 'function') {
       onChange(newOptions);
     }
+  }
+
+  handleChecked = (value) => {
+    const { options } = this.state;
+
+    return options.indexOf(value) !== -1;
   }
 }
 
