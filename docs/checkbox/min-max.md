@@ -30,7 +30,7 @@ class App extends React.Component {
         min={1}
       >
         {cityOptions.map((city, index) =>
-          <Checkbox key={index} label={city} />
+          <Checkbox key={index} value={city}>{city}</Checkbox>
         )}
       </Checkbox.Group>
     );

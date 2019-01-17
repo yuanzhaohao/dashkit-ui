@@ -4,7 +4,10 @@ import { CheckboxProps } from './types';
 import { createConsumer } from './context';
 
 export type ItemProps = CheckboxProps & {
-  // options?: string[];
+  onRawChange?: (checked?: boolean, label?: string) => void;
+  options?: string[];
+  min?: number;
+  max?: number;
 };
 
 export type ItemState = {
@@ -22,7 +25,20 @@ class Item extends React.PureComponent<ItemProps, ItemState> {
   }
 
   render() {
-    const { children, className, prefixCls, type, label, disabled, indeterminate, onRawChange, onChange, ...attributes } = this.props;
+    const {
+      children,
+      className,
+      prefixCls,
+      type,
+      disabled,
+      indeterminate,
+      onChange,
+      onRawChange,
+      value,
+      min,
+      max,
+      ...attributes
+    } = this.props;
     const checked = this.getChecked();
     const checkboxClassName = classNames(
       prefixCls,
@@ -41,39 +57,42 @@ class Item extends React.PureComponent<ItemProps, ItemState> {
           disabled={disabled}
           onChange={this.handleChange}
           checked={checked}
+          value={value}
         />
         <i className={`${prefixCls}-indicator`} />
-        <span>{children || label}</span>
+        {!!children && (
+          <span>{children}</span>
+        )}
       </label>
     );
   }
 
   getChecked = () => {
-    if ('checked' in this.props) {
-      return this.props.checked;
+    const { checked, options, value } = this.props;
+
+    if (options instanceof Array) {
+      return options.indexOf(value) !== -1;
+    }
+    if (checked !== undefined) {
+      return checked;
     }
     return this.state.checked;
   }
 
   handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { onChange, onRawChange, children, label } = this.props;
+    const { onChange, type, onRawChange, options, value } = this.props;
     const { checked } = event.target;
 
-    // if (rootContext) {
-    //   const length = rootContext.getOptions().length + (checked ? 1 : -1);
-    //   const min = rootContext.getMin();
-    //   if (min !== undefined && length < min) {
-    //     return;
-    //   }
-
-    //   const max = rootContext.getMax();
-    //   if (max !== undefined && length > max) {
-    //     return;
-    //   }
-    // }
+    if (type === 'checkbox' && options instanceof Array) {
+      const { min, max } = this.props;
+      const length = options.length + (checked ? 1 : -1);
+      if ((min !== undefined && length < min) || (max !== undefined && length > max)) {
+        return;
+      }
+    }
 
     if (onRawChange) {
-      onRawChange(checked, label);
+      onRawChange(checked, value);
     }
 
     this.setState({

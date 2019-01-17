@@ -43,7 +43,7 @@ class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGrou
   }
 
   render() {
-    const { className, style, prefixCls, children } = this.props;
+    const { className, style, prefixCls, children, min, max } = this.props;
     const { options } = this.state;
     const groupClassName = classNames(
       {
@@ -52,53 +52,37 @@ class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGrou
       className,
     );
 
-    const realChildren = React.Children.map(children, (child: React.ReactElement<CheckboxProps>, index) => {
-      if (!child) {
-        return null;
-      }
-
-      const { props } = child;
-      const checked = options.indexOf(props.label) !== -1;
-
-      return React.cloneElement(
-        child,
-        Object.assign({}, props, {
-          key: index,
-          checked,
-          // rootContext: this.getContext(),
-          // onChange: this.handleChange.bind(this, checked, props.label),
-        }),
-      );
-    });
-
     return (
-
       <div className={groupClassName} style={style}>
         <CheckboxProvider
           value={{
             onRawChange: this.handleRawChange,
-            // checked: options.indexOf,
+            options,
+            min,
+            max,
           }}
         >{children}</CheckboxProvider>
       </div>
     );
   }
 
-  getContext() {
-    return {
-      getOptions: () => {
-        return this.state.options;
-      },
-      getMin: () => {
-        return this.props.min;
-      },
-      getMax: () => {
-        return this.props.max;
-      }
-    };
+  checkMin = () => {
+    const { min } = this.props;
+    if (min !== undefined && length < min) {
+      return true;
+    }
+    return false;
   }
 
-  getOptions() {
+  checkMax = () => {
+    const { max } = this.props;
+    if (max !== undefined && length > max) {
+      return true;
+    }
+    return false;
+  }
+
+  getOptions = () => {
     if ('value' in this.props && this.props.value instanceof Array) {
       return this.props.value;
     }
@@ -108,12 +92,10 @@ class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGrou
   handleRawChange = (checked: boolean, label: string) => {
     const options = this.getOptions();
     const { onChange } = this.props;
-    const newOptions = !checked
+    const newOptions = !!checked
       ? Array.from(new Set([...options, label]))
       : options.filter(option => option !== label);
 
-    console.log(checked, label);
-    console.log('call handleRawChange', newOptions);
     this.setState({
       options: newOptions,
     });

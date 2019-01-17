@@ -39,7 +39,7 @@ class App extends React.Component {
           onChange={this.onGroupChange}
         >
           {cityOptions.map((city, index) =>
-            <Checkbox key={index} label={city} />
+            <Checkbox key={index} value={city}>{city}</Checkbox>
           )}
         </Checkbox.Group>
       </div>
