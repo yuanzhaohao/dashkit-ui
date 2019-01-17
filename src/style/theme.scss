@@ -259,6 +259,7 @@ $pagination-padding-x:              4px !default;
 $pagination-padding-x-sm:           3px !default;
 $pagination-padding-x-lg:           5px !default;
 $pagination-margin-right:           8px !default;
+$pagination-item-color:             $gray-600 !default;
 $pagination-disabled-opacity:       .65 !default;
 $pagination-transition:             color .15s $ease-in-out, background-color .15s $ease-in-out, border-color .15s $ease-in-out, box-shadow .15s $ease-in-out !default;
 
@@ -314,7 +315,7 @@ $menu-vertical-item-height:             40px !default;
 $menu-vertical-item-padding-x:          18px !default;
 $menu-horizontal-item-height:           60px !default;
 $menu-horizontal-item-padding-x:        18px !default;
-$menu-item-color:                       #6e84a3 !default;
+$menu-item-color:                       $gray-600 !default;
 $menu-item-active-color:                $primary !default;
 $menu-item-active-bg:                   mix($white, $primary, 90%) !default;
 $menu-item-icon-margin-x:               10px !default;
@@ -323,7 +324,7 @@ $menu-disabled-opacity:                 .5 !default;
 
 $menu-dark-bg:                          #152e4d !default;
 $menu-dark-border-color:                $gray-900 !default;
-$menu-dark-item-color:                  #6e84a3 !default;
+$menu-dark-item-color:                  $gray-600 !default;
 $menu-dark-item-active-color:           $white !default;
 $menu-dark-item-active-bg:              mix($black, $primary, 75%) !default;
 $menu-shadow:                           0 2px 8px rgba($black, .25) !default;

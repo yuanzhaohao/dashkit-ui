@@ -17,6 +17,7 @@ $prefix-cls: 'dk-pagination';
     border: $border-width solid $border-color;
     border-radius: $border-radius;
     background-color: $white;
+    color: $pagination-item-color;
     cursor: pointer;
     justify-content: center;
     align-items: center;
