@@ -23,7 +23,6 @@ class SubMenu extends React.Component<MenuProps, MenuState> {
   static Item: any;
   static defaultProps = {
     prefixCls: 'dk-menu',
-    theme: 'light',
   };
   readonly titleRef: React.RefObject<HTMLDivElement>;
   hoverTimer: number;
@@ -43,7 +42,8 @@ class SubMenu extends React.Component<MenuProps, MenuState> {
   render() {
     const { children, index, prefixCls, className, icon, title, rootContext, ...attributes } = this.props;
     const opened = rootContext.existOpenedMenu(index);
-    const isHorizontal = rootContext.getProps().mode === 'horizontal';
+    const rootProps = rootContext.getProps();
+    const isHorizontal = rootProps.mode === 'horizontal';
     const active = isHorizontal ? this.state.active : opened;
 
     const iconNode = icon && typeof icon === 'string' && (
@@ -64,6 +64,7 @@ class SubMenu extends React.Component<MenuProps, MenuState> {
         <ul
           className={classNames({
             [`${prefixCls}-submenu-list`]: true,
+            [`${prefixCls}-dark-submenu-list`]: rootProps.theme === 'dark',
             [`${prefixCls}-horizontal-submenu-list`]: isHorizontal,
             [`${prefixCls}-submenu-list-opened`]: !isHorizontal && opened,
           })}

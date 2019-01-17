@@ -11,6 +11,7 @@ export type MenuProps = {
   prefixCls?: string;
   className?: string;
   style?: React.CSSProperties;
+  active?: string;
   defaultActive?: string;
   defaultOpeneds?: string[];
   mode: 'horizontal' | 'vertical',
@@ -34,19 +35,19 @@ class Menu extends React.PureComponent<MenuProps, MenuState> {
     theme: 'light',
   };
 
-
   static getDerivedStateFromProps(nextProps: MenuProps) {
-    const state: Partial<MenuState> = {};
-    if ('defaultActive' in nextProps) {
-      state.activeIndex = nextProps.defaultActive;
+    if ('active' in nextProps) {
+      return {
+        activeIndex: nextProps.active,
+      }
     }
-    return state;
+    return null;
   }
 
   constructor(props: MenuProps) {
     super(props);
     this.state = {
-      activeIndex: props.defaultActive,
+      activeIndex: props.active || props.defaultActive,
       openedMenus: props.defaultOpeneds || [],
     };
   }
