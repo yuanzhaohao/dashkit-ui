@@ -82,13 +82,14 @@ $radio-prefix: 'dk-radio';
 
   &-disabled {
     pointer-events: none;
+    opacity: $radio-disabled-opacity;
 
     .#{$radio-prefix}-indicator {
       border-color: $gray-500;
       background-color: $input-disabled-bg;
 
       &:after {
-        border-color: $gray-500;
+        background-color: $gray-500;
       }
     }
   }

@@ -89,6 +89,7 @@ $border-radius-lg:            5px !default;
 $border-radius-sm:            3px !default;
 $component-active-color:      $white !default;
 $component-active-bg:         $primary !default;
+$disabled-opacity:            .65 !default;
 
 // Fonts
 //
@@ -227,6 +228,7 @@ $checkbox-padding-x:                8px !default;
 $checkbox-active-color:             $primary !default;
 $checkbox-border-radius:            2px !default;
 $checkbox-indicator-transtion:      border-color .25s ease, background-color .25s ease !default;
+$checkbox-disabled-opacity:         .65 !default;
 
 // Radio
 //
@@ -235,6 +237,7 @@ $radio-margin-right:                16px !default;
 $radio-padding-x:                   8px !default;
 $radio-active-color:                $primary !default;
 $radio-indicator-transtion:         border-color .25s ease, background-color .25s ease !default;
+$radio-disabled-opacity:            .65 !default;
 
 // Switch
 //
