@@ -129,15 +129,15 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
 
   getPosition = (contentEl: HTMLDivElement) => {
     const { placement } = this.props;
-
     const el = findDOMNode(this);
+    let left = 0;
+    let top = 0;
+
+    if (!(el instanceof Element)) return { left, top };
     const rect = el.getBoundingClientRect();
     const contentRect = contentEl.getBoundingClientRect();
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
     const scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
-
-    let left = 0;
-    let top = 0;
 
     switch (placement) {
       case 'top-start':

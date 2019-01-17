@@ -16,7 +16,7 @@ export type CalendarProps = {
   prefixCls?: string;
   className?: string;
   disabled?: boolean;
-  value?: DateProps | DateProps[];
+  value?: any;//DateProps | DateProps[];
   format?: string;
   type: CalendarType;
   range?: boolean;
@@ -29,7 +29,7 @@ export type CalendarProps = {
 export type CalendarState = {
   current: Date | Date[];
   active?: boolean;
-  value?: DateProps | DateProps[];
+  value?: any;//DateProps | DateProps[];
   position: {
     top: number;
     left: number;

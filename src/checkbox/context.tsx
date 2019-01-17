@@ -3,6 +3,10 @@ import createReactContext from 'create-react-context';
 
 type ContextProps = {
   onRawChange?: (checked?: boolean, label?: string) => void;
+  checked?: boolean | ((value: any) => boolean);
+  options?: string[];
+  min?: number;
+  max?: number;
 };
 
 const context = createReactContext<ContextProps>(null);
