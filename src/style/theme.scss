@@ -116,6 +116,7 @@ $headings-font-family:        inherit !default;
 $headings-font-weight:        500 !default;
 $headings-line-height:        1.2 !default;
 $headings-color:              inherit !default;
+$text-color:                  $gray-600 !default;
 
 // Icon
 //
@@ -341,3 +342,14 @@ $tooltip-arrow-color:                   $tooltip-bg !default;
 $tooltip-distance:                      $tooltip-arrow-size - 1px + 4px !default;
 $tooltip-font-size:                     12px !default;
 $tooltip-max-width:                     250px !default;
+
+// Popover
+//
+$popover-bg:                            $white !default;
+$popover-min-width:                     177px !default;
+$popover-padding-x:                     12px !default;
+$popover-padding-y:                     16px !default;
+$popover-arrow-color:                   $popover-bg !default;
+$popover-arrow-size:                    6px !default;
+$popover-distance:                      $popover-arrow-size + 4px !default;
+$popover-box-shadow:                    0 2px 8px rgba(0, 0, 0, .15) !default;

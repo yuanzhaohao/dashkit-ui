@@ -4,7 +4,7 @@ import { createPortal, findDOMNode } from 'react-dom';
 import * as classNames from 'classnames';
 import { CSSTransition } from 'react-transition-group';
 
-export type TooltipTheme = 'dark' | 'light';
+// export type TooltipTheme = 'dark' | 'light';
 export type TooltipPlacement = 'top-start' | 'top' | 'top-end' | 'right-start' | 'right' | 'right-end' | 'bottom-start' | 'bottom' | 'bottom-end' | 'left-start' | 'left' | 'left-end';
 export type TooltipTrigger = 'hover' | 'click' | 'focus';
 export type TooltipProps = {
@@ -14,7 +14,7 @@ export type TooltipProps = {
   disabled?: boolean;
   trigger: TooltipTrigger;
   visible?: boolean;
-  theme: TooltipTheme;
+  // theme: TooltipTheme;
   content: string;
   placement: TooltipPlacement;
   children: React.ReactElement<any>;
@@ -33,8 +33,7 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
 
   static defaultProps = {
     prefixCls: 'dk-tooltip',
-    disabled: false,
-    theme: 'dark' as TooltipTheme,
+    // theme: 'dark' as TooltipTheme,
     placement: 'top' as TooltipPlacement,
     trigger: 'hover' as TooltipTrigger,
   };

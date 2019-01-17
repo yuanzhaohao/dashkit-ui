@@ -2,13 +2,13 @@
 @import '../style/theme';
 @import '../style/mixins';
 
-$tooltip-prefix: 'dk-tooltip';
+$popover-prefix: 'dk-popover';
 
-.#{$tooltip-prefix} {
-  position: absolute;
-  max-width: $tooltip-max-width;
-  z-index: 1060;
+.#{$popover-prefix} {
   @include reset-component();
+  min-width: $popover-min-width;
+  position: absolute;
+  z-index: 1060;
 
   &-enter {
     opacity: 0;
@@ -33,10 +33,10 @@ $tooltip-prefix: 'dk-tooltip';
   }
 
   &-inner {
-    padding: $tooltip-padding-x $tooltip-padding-y;
-    border-radius: $tooltip-border-radius;
-    background: $tooltip-bg;
-    color: $tooltip-color;
+    padding: $popover-padding-x $popover-padding-y;
+    border-radius: $border-radius;
+    background: $popover-bg;
+    box-shadow: $popover-box-shadow;
   }
 
   &-arrow {
@@ -50,38 +50,38 @@ $tooltip-prefix: 'dk-tooltip';
   &-top,
   &-top-start,
   &-top-end {
-    padding-bottom: $tooltip-distance;
+    padding-bottom: $popover-distance;
   }
 
   &-right,
   &-right-start,
   &-right-end {
-    padding-left: $tooltip-distance;
+    padding-left: $popover-distance;
   }
 
   &-bottom,
   &-bottom-start,
   &-bottom-end {
-    padding-top: $tooltip-distance;
+    padding-top: $popover-distance;
   }
 
   &-left,
   &-left-start,
   &-left-end {
-    padding-right: $tooltip-distance;
+    padding-right: $popover-distance;
   }
 
   &-top &-arrow,
   &-top-start &-arrow,
   &-top-end &-arrow {
-    bottom: $tooltip-distance - $tooltip-arrow-size;
-    border-width: $tooltip-arrow-size $tooltip-arrow-size 0;
-    border-top-color: $tooltip-arrow-color;
+    bottom: $popover-distance - $popover-arrow-size;
+    border-width: $popover-arrow-size $popover-arrow-size 0;
+    border-top-color: $popover-arrow-color;
   }
 
   &-top &-arrow {
     left: 50%;
-    margin-left: -$tooltip-arrow-size;
+    margin-left: -$popover-arrow-size;
   }
 
   &-top-start &-arrow {
@@ -95,14 +95,14 @@ $tooltip-prefix: 'dk-tooltip';
   &-right &-arrow,
   &-right-start &-arrow,
   &-right-end &-arrow {
-    left: $tooltip-distance - $tooltip-arrow-size;
-    border-width: $tooltip-arrow-size $tooltip-arrow-size $tooltip-arrow-size 0;
-    border-right-color: $tooltip-arrow-color;
+    left: $tooltip-distance - $popover-arrow-size;
+    border-width: $popover-arrow-size $popover-arrow-size $popover-arrow-size 0;
+    border-right-color: $popover-arrow-color;
   }
 
   &-right &-arrow {
     top: 50%;
-    margin-top: -$tooltip-arrow-size;
+    margin-top: -$popover-arrow-size;
   }
 
   &-right-start &-arrow {
@@ -116,14 +116,14 @@ $tooltip-prefix: 'dk-tooltip';
   &-left &-arrow,
   &-left-start &-arrow,
   &-left-end &-arrow {
-    right: $tooltip-distance - $tooltip-arrow-size;
-    border-width: $tooltip-arrow-size 0 $tooltip-arrow-size $tooltip-arrow-size;
-    border-left-color: $tooltip-arrow-color;
+    right: $tooltip-distance - $popover-arrow-size;
+    border-width: $popover-arrow-size 0 $popover-arrow-size $popover-arrow-size;
+    border-left-color: $popover-arrow-color;
   }
 
   &-left &-arrow {
     top: 50%;
-    margin-top: -$tooltip-arrow-size;
+    margin-top: -$popover-arrow-size;
   }
 
   &-left-start &-arrow {
@@ -137,14 +137,14 @@ $tooltip-prefix: 'dk-tooltip';
   &-bottom &-arrow,
   &-bottom-start &-arrow,
   &-bottom-end &-arrow {
-    top: $tooltip-distance - $tooltip-arrow-size;
-    border-width: 0 $tooltip-arrow-size $tooltip-arrow-size;
-    border-bottom-color: $tooltip-arrow-color;
+    top: $tooltip-distance - $popover-arrow-size;
+    border-width: 0 $popover-arrow-size $popover-arrow-size;
+    border-bottom-color: $popover-arrow-color;
   }
 
   &-bottom &-arrow {
     left: 50%;
-    margin-left: -$tooltip-arrow-size;
+    margin-left: -$popover-arrow-size;
   }
 
   &-bottom-start &-arrow {
