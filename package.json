@@ -18,7 +18,9 @@
     "publish:ts": "tsc -p tsconfig.json",
     "publish:babel": "babel publish/lib --out-dir publish/lib",
     "publish:dev": "webpack --config scripts/webpack.publish.config.js",
-    "publish:prod": "webpack --config scripts/webpack.publish.prod.config.js"
+    "publish:prod": "webpack --config scripts/webpack.publish.prod.config.js",
+    "lint": "eslint ./src",
+    "test": "jest ./src"
   },
   "repository": {
     "type": "git",
@@ -39,6 +41,7 @@
   },
   "devDependencies": {
     "@types/classnames": "^2.2.4",
+    "@types/jest": "^23.3.12",
     "@types/lodash": "^4.14.116",
     "@types/react": "^16.4.1",
     "@types/react-dom": "^16.0.6",
@@ -69,6 +72,7 @@
     "happypack": "^5.0.0",
     "html-webpack-plugin": "^2.30.1",
     "http-proxy-middleware": "^0.18.0",
+    "jest": "^23.6.0",
     "loader-utils": "^1.1.0",
     "markdown-website-loader": "0.0.4",
     "node-sass": "^4.10.0",
@@ -79,9 +83,11 @@
     "react-dev-utils": "^5.0.2",
     "react-router-dom": "^4.2.2",
     "react-svg-loader": "^2.1.0",
+    "react-test-renderer": "^16.7.0",
     "rimraf": "^2.6.2",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.21.0",
+    "ts-jest": "^23.10.5",
     "ts-loader": "^4.4.2",
     "typescript": "^3.0.1",
     "uglify-js": "^3.4.1",

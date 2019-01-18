@@ -1,5 +1,5 @@
 import * as React from 'react';
-import createReactContext from 'create-react-context';
+// import createReactContext from 'create-react-context';
 
 type ContextProps = {
   onRawChange?: (checked?: boolean, label?: string) => void;
@@ -9,7 +9,7 @@ type ContextProps = {
   max?: number;
 };
 
-const context = createReactContext<ContextProps>(null);
+const context = React.createContext<ContextProps>(null);
 export const Provider = context.Provider;
 export const Consumer = context.Consumer;
 export const createConsumer = (Component: any) => (props: any) => (
