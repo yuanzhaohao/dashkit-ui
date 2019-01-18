@@ -84,12 +84,16 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
     );
     const childProps = this.getChildProps();
 
+    // const childNode = (
+    //   children
+    //     ? children instanceof Array
+    //       ? <div className={`${prefixCls}-reference`} {...childProps}>{children}</div>
+    //       : React.cloneElement(children, childProps)
+    //     : null
+    // );
+
     const childNode = (
-      children
-        ? children instanceof Array
-          ? <div className={`${prefixCls}-reference`} {...childProps}>{children}</div>
-          : React.cloneElement(children, childProps)
-        : null
+      <div className={`${prefixCls}-reference`} {...childProps}>{children}</div>
     );
 
     return (
@@ -199,6 +203,7 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
   }
 
   handleClick = () => {
+    console.log('call button inner click')
     const { visible } = this.state;
 
     this.setState({

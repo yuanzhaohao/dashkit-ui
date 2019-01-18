@@ -24,7 +24,7 @@ class Demo extends React.Component {
     const { disabled } = this.state;
 
     return (
-      <Tooltip content="prompt text" disabled={ disabled }>
+      <Tooltip content="prompt text" disabled={disabled}>
         <Button onClick={this.handleClick}>
           click to {disabled ? 'active' : 'close'} tooltip function
         </Button>
