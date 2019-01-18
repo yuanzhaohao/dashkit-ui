@@ -411,39 +411,47 @@
   }
 }
 
-// Tooltip
+// Tooltip & Popover
 //
+.popover-box,
 .tooltip-box {
   width: 400px;
 }
 
+.popover-button,
 .tooltip-button {
   width: 100px;
   margin: 4px;
 }
 
+.popover-box-top,
 .tooltip-box-top {
   text-align: center;
 }
 
+.popover-box-left,
 .tooltip-box-left {
   float: left;
   width: 88px;
 
+  .popover-button,
   .tooltip-button {
     margin-left: 0;
   }
 }
 
+.popover-box-right,
 .tooltip-box-right {
   float: right;
   width: 88px;
 
+  .popover-button,
   .tooltip-button {
     margin-right: 0;
   }
 }
 
+.popover-box-bottom,
 .tooltip-box-bottom {
   clear: both;
   text-align: center;

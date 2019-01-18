@@ -74,8 +74,8 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
         classNames={`${prefixCls}`}
       >
         <div className={tooltopClassName} style={{ left, top }}
-          onMouseEnter={this.handleMouseEnter}
-          onMouseLeave={this.handleMouseLeave}
+          onMouseEnter={trigger === 'hover' ? this.handleMouseEnter : undefined}
+          onMouseLeave={trigger === 'hover' ? this.handleMouseLeave : undefined}
         >
           <div className={`${prefixCls}-arrow`}></div>
           <div className={`${prefixCls}-inner`}>{content}</div>
