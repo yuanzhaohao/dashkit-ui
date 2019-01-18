@@ -10,16 +10,17 @@ subtitle:
 
 ```js
 import { Popover, Button } from 'dashkit-ui';
+const title = <span>Title</span>;
 
 ReactDOM.render(
   <div>
-    <Popover content="hover event" trigger="hover">
+    <Popover content="hover event" title={title} trigger="hover">
       <Button type="primary">Hover me</Button>
     </Popover>
-    <Popover content="click event" trigger="click">
+    <Popover content="click event" title={title} trigger="click">
       <Button style={{marginLeft: 10}} type="primary">Click me</Button>
     </Popover>
-    <Popover content="focus event" trigger="focus">
+    <Popover content="focus event" title={title} trigger="focus">
       <Button style={{marginLeft: 10}} type="primary">Focus me</Button>
     </Popover>
   </div>,

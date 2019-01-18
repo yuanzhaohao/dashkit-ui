@@ -15,7 +15,7 @@ export type TooltipProps = {
   trigger: TooltipTrigger;
   visible?: boolean;
   // theme: TooltipTheme;
-  content: string;
+  content: React.ReactNode;
   placement: TooltipPlacement;
   children: React.ReactElement<any>;
 };

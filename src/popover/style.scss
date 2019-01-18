@@ -33,7 +33,6 @@ $popover-prefix: 'dk-popover';
   }
 
   &-inner {
-    padding: $popover-padding-x $popover-padding-y;
     border-radius: $border-radius;
     background: $popover-bg;
     box-shadow: $popover-box-shadow;
@@ -192,5 +191,19 @@ $popover-prefix: 'dk-popover';
 
   &-bottom-end &-arrow {
     right: 16px;
+  }
+
+  &-title {
+    min-width: $popover-min-width;
+    margin: 0;
+    padding: ($popover-padding-x - 7px) $popover-padding-y;
+    color: $gray-800;
+    min-height: 32px;
+    border-bottom: 1px solid $border-color;
+    font-weight: $headings-font-weight;
+  }
+
+  &-content {
+    padding: $popover-padding-x $popover-padding-y;
   }
 }

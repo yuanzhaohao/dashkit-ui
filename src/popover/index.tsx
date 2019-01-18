@@ -3,7 +3,12 @@ import './style.scss';
 import * as React from 'react';
 import Tooltip, { TooltipProps } from '../tooltip';
 
-class Popover extends React.PureComponent<TooltipProps> {
+export type PopoverProps = TooltipProps & {
+  title: React.ReactNode;
+  content: React.ReactNode;
+}
+
+class Popover extends React.PureComponent<PopoverProps> {
   static defaultProps = {
     prefixCls: 'dk-popover',
     placement: 'top',
@@ -11,8 +16,13 @@ class Popover extends React.PureComponent<TooltipProps> {
   };
 
   render() {
+    const { content, prefixCls, title, ...attibutes } = this.props;
+    const realContent = <>
+      <div className={`${prefixCls}-title`}>{title}</div>
+      <div className={`${prefixCls}-content`}>{content}</div>
+    </>;
     return (
-      <Tooltip {...this.props} />
+      <Tooltip {...attibutes} prefixCls={prefixCls} content={realContent} />
     );
   }
 }

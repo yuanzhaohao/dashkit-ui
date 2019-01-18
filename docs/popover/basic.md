@@ -10,9 +10,10 @@ subtitle:
 
 ```js
 import { Popover, Button } from 'dashkit-ui';
+const title = <span>Title</span>;
 
 ReactDOM.render(
-  <Popover content="prompt text">
+  <Popover content="prompt text" title={title}>
     <Button>click me</Button>
   </Popover>,
   mountNode
