@@ -30,7 +30,6 @@ class App extends React.Component {
   }
 
   handleClick = () => {
-    console.log('click handleClick')
     const { visible } = this.state;
     this.setState({
       visible: !visible

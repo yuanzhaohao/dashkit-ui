@@ -93,7 +93,7 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
     // );
 
     const childNode = (
-      <div className={`${prefixCls}-reference`} {...childProps}>{children}</div>
+      <span className={`${prefixCls}-reference`} {...childProps}>{children}</span>
     );
 
     return (
@@ -203,7 +203,6 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
   }
 
   handleClick = () => {
-    console.log('call button inner click')
     const { visible } = this.state;
 
     this.setState({
