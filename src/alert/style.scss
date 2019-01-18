@@ -5,6 +5,7 @@
 $alert-prefix-cls: 'dk-alert';
 
 .#{$alert-prefix-cls} {
+  @include reset-component();
   position: relative;
   padding: $alert-padding-y $alert-padding-x;
   margin-bottom: $alert-margin-bottom;
@@ -64,7 +65,7 @@ $alert-prefix-cls: 'dk-alert';
   }
 
   &-with-icon {
-    padding-left: $alert-padding-x + 22;
+    padding-left: $alert-padding-x + 22px;
   }
 
   &-icon-box {
@@ -77,7 +78,7 @@ $alert-prefix-cls: 'dk-alert';
   }
 
   &-icon {
-    font-size: 16px;
+    font-size: $font-size-lg;
     font-weight: bold;
   }
 

@@ -4,12 +4,11 @@
 $prefix-cls: 'dk-switch';
 
 .#{$prefix-cls} {
+  @include reset-component();
   position: relative;
   display: inline-block;
   min-width: 44px;
   height: $switch-height;
-  padding: 0;
-  margin: 0;
   line-height: $switch-height - 2px;
   vertical-align: middle;
   border-radius: 100px;

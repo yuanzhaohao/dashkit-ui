@@ -5,6 +5,7 @@
 $checkbox-prefix: 'dk-checkbox';
 
 .#{$checkbox-prefix} {
+  @include reset-component();
   position: relative;
   display: inline-block;
   margin: 0;

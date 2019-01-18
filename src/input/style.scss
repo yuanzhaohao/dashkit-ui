@@ -5,11 +5,11 @@
 $prefix-cls: 'dashkit-input';
 
 .#{$prefix-cls} {
+  @include reset-component();
   display: block;
   width: 100%;
   height: $input-height;
   padding: $input-padding-y $input-padding-x;
-  outline: 0;
   font-size: $font-size-base;
   color: $input-color;
   background-color: $input-bg;

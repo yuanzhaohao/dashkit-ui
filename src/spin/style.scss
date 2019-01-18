@@ -5,6 +5,7 @@
 $spin-prefix: 'dk-spin';
 
 .#{$spin-prefix} {
+  @include reset-component();
   display: none;
   position: absolute;
   transition: transform 0.3s cubic-bezier(.78, .14, .15, .86);

@@ -11,16 +11,24 @@ subtitle:
 ```js
 import { Popover, Button } from 'dashkit-ui';
 
+const text = <span>Title</span>;
+const content = (
+  <div>
+    <p>Content</p>
+    <p>Content</p>
+  </div>
+);
+
 ReactDOM.render(
   <div className="popover-box">
     <div className="popover-box-top">
-      <Popover content="Top Left popover prompt text" placement="top-start" trigger="focus">
+      <Popover content={content} placement="top-start" trigger="click">
         <Button className="popover-button">top-start</Button>
       </Popover>
-      <Popover content="Top Center popover prompt text" placement="top" trigger="focus">
+      <Popover content={content} placement="top" trigger="click">
         <Button className="popover-button">top</Button>
       </Popover>
-      <Popover content="Top Right popover prompt text" placement="top-end" trigger="focus">
+      <Popover content={content} placement="top-end" trigger="click">
         <Button className="popover-button">top-end</Button>
       </Popover>
     </div>

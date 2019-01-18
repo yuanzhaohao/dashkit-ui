@@ -5,10 +5,8 @@
 $menu-prefix: 'dk-menu';
 
 .#{$menu-prefix} {
+  @include reset-component();
   position: relative;
-  outline: none;
-  margin: 0;
-  padding: 0;
   list-style: none;
   background-color: $menu-bg;
   transition: background-color .3s, width .2s;

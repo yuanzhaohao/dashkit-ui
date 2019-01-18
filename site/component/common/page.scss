@@ -1,11 +1,15 @@
+@import '../../../src/style/theme.scss';
+
 .app-page {
   width: 100%;
   padding-top: 24px;
   padding-bottom: 24px;
 
+
   p {
-    color: #95aac9;
     margin-top: 6px;
+    margin-bottom: 16px;
+    color: $text-color;
   }
 }
 

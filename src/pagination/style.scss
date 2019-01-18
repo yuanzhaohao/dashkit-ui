@@ -5,8 +5,8 @@
 $prefix-cls: 'dk-pagination';
 
 .#{$prefix-cls} {
+  @include reset-component();
   display: flex;
-  margin: 0;
 
   &-item {
     display: flex;

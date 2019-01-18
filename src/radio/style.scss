@@ -5,10 +5,9 @@
 $radio-prefix: 'dk-radio';
 
 .#{$radio-prefix} {
+  @include reset-component();
   position: relative;
   display: inline-block;
-  margin: 0;
-  padding: 0;
   vertical-align: middle;
   cursor: pointer;
 

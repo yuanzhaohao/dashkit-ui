@@ -1,6 +1,8 @@
+@import '../../../src/style/theme.scss';
+
 .app-header {
   height: 72px;
-  border-bottom: 1px solid #e3ebf6;
+  border-bottom: 1px solid $border-color;
   display: flex;
   align-items: center;
   justify-content: flex-end;

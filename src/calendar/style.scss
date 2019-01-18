@@ -5,6 +5,7 @@
 $calendar-prefix: 'dk-calendar';
 
 .#{$calendar-prefix} {
+  @include reset-component();
   position: relative;
   display: inline-block;
   color: $gray-800;

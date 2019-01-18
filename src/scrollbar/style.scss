@@ -5,6 +5,7 @@
 $scrollbar-prefix: 'dk-scrollbar';
 
 .#{$scrollbar-prefix} {
+  @include reset-component();
   position: relative;
   width: 100%;
   height: 100%;

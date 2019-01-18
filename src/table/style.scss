@@ -5,6 +5,7 @@
 $table-prefix: 'dk-table';
 
 .#{$table-prefix} {
+  @include reset-component();
   position: relative;
   width: 100%;
 

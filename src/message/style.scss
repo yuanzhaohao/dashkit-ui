@@ -5,6 +5,7 @@
 $prefix-cls: 'dk-msg';
 
 .#{$prefix-cls} {
+  @include reset-component();
   position: fixed;
   z-index: 10600;
   max-width: 50%;

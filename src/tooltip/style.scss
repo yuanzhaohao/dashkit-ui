@@ -5,10 +5,10 @@
 $tooltip-prefix: 'dk-tooltip';
 
 .#{$tooltip-prefix} {
+  @include reset-component();
   position: absolute;
   max-width: $tooltip-max-width;
   z-index: 1060;
-  @include reset-component();
 
   &-enter {
     opacity: 0;

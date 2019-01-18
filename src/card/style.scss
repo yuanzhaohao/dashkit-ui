@@ -5,6 +5,7 @@
 $prefix: 'dashkit-card';
 
 .dashkit-card {
+  @include reset-component();
   position: relative;
   display: flex;
   flex-direction: column;
@@ -70,7 +71,7 @@ $prefix: 'dashkit-card';
 }
 
 //
-// Header 
+// Header
 //
 .dashkit-card-header-title {
   margin-bottom: 0;
