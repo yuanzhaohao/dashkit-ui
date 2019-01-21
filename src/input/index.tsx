@@ -30,10 +30,19 @@ function fixControlledValue<T>(value: T) {
 
 class Input extends React.Component<InputProps> {
   static defaultProps = {
-    prefixCls: 'dashkit-input',
+    prefixCls: 'dk-input',
     size: 'default' as InputSize,
     type: 'text',
   };
+
+  static getDerivedStateFromProps(nextProps: InputProps) {
+    if ('value' in nextProps) {
+      return {
+        value: nextProps.value,
+      }
+    }
+    return null;
+  }
 
   constructor(props: InputProps) {
     super(props);

@@ -2,7 +2,7 @@
 @import '../style/theme';
 @import '../style/mixins';
 
-$prefix-cls: 'dashkit-input';
+$prefix-cls: 'dk-input';
 
 .#{$prefix-cls} {
   @include reset-component();
@@ -10,7 +10,6 @@ $prefix-cls: 'dashkit-input';
   width: 100%;
   height: $input-height;
   padding: $input-padding-y $input-padding-x;
-  font-size: $font-size-base;
   color: $input-color;
   background-color: $input-bg;
   background-clip: padding-box;
@@ -26,6 +25,16 @@ $prefix-cls: 'dashkit-input';
 
   &:hover {
     border-color: $input-hover-border-color;
+  }
+
+  &-small {
+    height: $input-height-sm;
+    font-size: $font-size-sm;
+  }
+
+  &-large {
+    height: $input-height-lg;
+    font-size: $font-size-lg;
   }
 
   // Placeholder

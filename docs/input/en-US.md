@@ -4,7 +4,7 @@ Dashkit supports all of Bootstrap's default form styling in addition to a handfu
 
 <Demos />
 
-### API 
+### API
 #### Input
 Property    | Description    | Type      | Default   |
 |---------- |-------- |---------- |-------------  |-------- |
