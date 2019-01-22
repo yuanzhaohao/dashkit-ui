@@ -75,7 +75,7 @@ $calendar-prefix: 'dk-calendar';
     border-radius: $border-radius;
     transition: $calendar-transition;
     transform-origin: center top;
-    z-index: 999;
+    z-index: $zindex-calendar;
 
     &-time {
       padding: 0;

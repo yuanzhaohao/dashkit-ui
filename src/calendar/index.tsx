@@ -16,6 +16,7 @@ export type CalendarProps = {
   prefixCls?: string;
   className?: string;
   disabled?: boolean;
+  visible?: boolean;
   value?: any;//DateProps | DateProps[];
   format?: string;
   type: CalendarType;
@@ -28,7 +29,7 @@ export type CalendarProps = {
 
 export type CalendarState = {
   current: Date | Date[];
-  active?: boolean;
+  visible?: boolean;
   value?: any;//DateProps | DateProps[];
   position: {
     top: number;
@@ -47,6 +48,9 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
 
   static getDerivedStateFromProps(nextProps: CalendarProps) {
     const state: Partial<CalendarState> = {};
+    if ('visible' in nextProps) {
+      state.visible = !!nextProps.visible;
+    }
     if ('value' in nextProps && nextProps.value) {
       if (nextProps.value instanceof Array) {
         if (isDate(nextProps.value[0]) && isDate(nextProps.value[1])) {
@@ -65,7 +69,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
     this.contentElement = React.createRef();
     this.state = {
       current: this.getCurrent(),
-      active: false,
+      visible: false,
       value: undefined,
       position: {
         top: 0,
@@ -88,7 +92,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
     const placeholder = this.getPlaceholder();
     const calendarNode = (
       <CSSTransition
-        in={this.state.active}
+        in={this.state.visible}
         unmountOnExit
         timeout={300}
         classNames={`${prefixCls}-content`}
@@ -238,7 +242,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
 
   handleInputFocus = () => {
     this.setState({
-      active: true,
+      visible: true,
     });
   }
 
@@ -267,7 +271,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
       )
     ) {
       this.setState({
-        active: false,
+        visible: false,
       });
     }
   }
@@ -287,13 +291,13 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
       this.setState({
         current,
         value: date,
-        active: !isSelect,
+        visible: !isSelect,
       });
     } else if (isSelect) {
       this.setState({
         current,
         value: date,
-        active: false,
+        visible: false,
       });
       if (typeof onChange === 'function') {
         const format = this.getFormat();

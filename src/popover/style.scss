@@ -8,7 +8,7 @@ $popover-prefix: 'dk-popover';
   @include reset-component();
   min-width: $popover-min-width;
   position: absolute;
-  z-index: 1060;
+  z-index: $zindex-popover;
 
   &-enter {
     opacity: 0;

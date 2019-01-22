@@ -117,6 +117,16 @@ $headings-font-weight:        500 !default;
 $headings-line-height:        1.2 !default;
 $headings-color:              inherit !default;
 $text-color:                  $gray-600 !default;
+$heading-color:               $gray-800 !default;
+
+// z-index
+//
+$zindex-popover:              1060 !default;
+$zindex-tooltip:              1070 !default;
+$zindex-modal-background:     1040 !default;
+$zindex-modal:                1050 !default;
+$zindex-message:              1060 !default;
+$zindex-calendar:             1060 !default;
 
 // Icon
 //
@@ -356,3 +366,11 @@ $popover-arrow-size:                    6px !default;
 $popover-distance:                      $popover-arrow-size + 4px !default;
 $popover-border-color:                  #e3ebf6 !default;
 $popover-box-shadow:                    0 2px 8px rgba(0, 0, 0, .15) !default;
+
+// Modal
+//
+$modal-bg:                              $white !default;
+$modal-body-padding:                    24px !default;
+$modal-box-shadow:                      0 4px 12px rgba(0, 0, 0, .15) !default;
+$modal-transfrom-y:                     -150px !default;
+$modal-transition:                      transform 300ms $ease-fade, opacity 300ms $ease-fade !default;

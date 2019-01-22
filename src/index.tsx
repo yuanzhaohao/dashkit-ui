@@ -22,9 +22,10 @@ export { default as Table } from './table';
 export { default as Pagination } from './pagination';
 
 // Function
-// todo: Modal
+//
 export { default as Menu } from './menu';
 export { default as Spin } from './spin';
+export { default as Modal } from './modal';
 
 // Feedback
 //

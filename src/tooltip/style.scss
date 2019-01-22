@@ -8,7 +8,7 @@ $tooltip-prefix: 'dk-tooltip';
   @include reset-component();
   position: absolute;
   max-width: $tooltip-max-width;
-  z-index: 1060;
+  z-index: $zindex-tooltip;
 
   &-enter {
     opacity: 0;
