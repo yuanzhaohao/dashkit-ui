@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { createPortal } from 'react-dom';
 import * as classNames from 'classnames';
-import { CSSTransition } from 'react-transition-group';
+import Panel from './panel';
 
 export type ModalProps = {
   prefixCls?: string;
@@ -40,41 +39,23 @@ class Modal extends React.Component<ModalProps, ModalState> {
   }
 
   render() {
-    const { prefixCls, title, children, disabled } = this.props;
-    const titleNode = !!title && (
-      <div className={`${prefixCls}-title`}>{title}</div>
-    );
-
-    const calendarNode = (
-      <CSSTransition
-        in={this.state.visible}
-        unmountOnExit
-        timeout={300}
-        classNames={`${prefixCls}`}
-      >
-
-          <div
-            className={classNames(`${prefixCls}`, {
-            })}
-          >
-            {titleNode}
-            <div className={`${prefixCls}-body`}>
-              {children}
-            </div>
-          </div>
-      </CSSTransition>
-    );
-
+    const { prefixCls, visible, ...attibutes } = this.props;
     const node = (
       <div className={`${prefixCls}-wrapper`}>
         <div className={`${prefixCls}-mask`} />
-        {calendarNode}
+        <Panel
+          {...attibutes}
+          prefixCls={prefixCls}
+          visible={visible}
+        />
       </div>
     );
-    if (!disabled) {
-      return (
-        createPortal(calendarNode, document.body)
-      );
+    console.log(visible)
+    if (visible) {
+      return node;
+      // return (
+      //   createPortal(node, document.body)
+      // );
     }
     return null;
   }
