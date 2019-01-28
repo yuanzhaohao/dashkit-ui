@@ -38,7 +38,6 @@ class Modal extends React.Component<ModalProps, ModalState> {
     super(props);
     this.state = {
       visible: false,
-      panelVisible: false,
     };
   }
 
@@ -47,7 +46,7 @@ class Modal extends React.Component<ModalProps, ModalState> {
       return null;
     }
 
-    const { prefixCls, visible, title, children, ...attibutes } = this.props;
+    const { prefixCls, visible, ...attibutes } = this.props;
 
     const node = (
       <div className={`${prefixCls}`}>
@@ -63,12 +62,12 @@ class Modal extends React.Component<ModalProps, ModalState> {
   }
 
   closeModal = () => {
-    const { onCancel } = this.props;
+    const { onClose } = this.props;
     this.setState({
       visible: false
     });
-    if (typeof onCancel === 'function') {
-      onCancel();
+    if (typeof onClose === 'function') {
+      onClose();
     }
   }
 }

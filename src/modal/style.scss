@@ -54,26 +54,45 @@ $prefix-cls: 'dk-modal';
   }
 
   &-title {
-    margin: 0;
-    padding: 16px 24px;
+    color: $heading-color;
     font-size: $font-size-lg;
     font-weight: 500;
-    color: $heading-color;
+  }
+
+  &-header {
+    padding: $modal-padding-y $modal-padding-x;
+    border-bottom: 1px solid $border-color;
   }
 
   &-body {
-    padding: $modal-body-padding;
+    padding: $modal-padding-x;
+  }
+
+  &-footer {
+    padding: $modal-padding-y $modal-padding-x;
+    border-top: 1px solid $border-color;
+    text-align: right;
+
+    &-confirm {
+      margin-inline-start: 10px;
+    }
   }
 
   &-close {
-    display: block;
+    display: flex;
     position: absolute;
-    top: 13px;
-    right: 16px;
-    z-index: 100;
-    font-size: 16px;
+    top: 0;
+    right: 0;
+    width: 55px;
+    height: 55px;
     cursor: pointer;
     transition: color 200ms ease;
+    justify-content: center;
+    align-items: center;
+
+    &-icon {
+      font-size: 16px;
+    }
 
     &:hover {
       color: $gray-900;

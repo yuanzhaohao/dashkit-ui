@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import * as classNames from 'classnames';
 import { CSSTransition } from 'react-transition-group';
 import Icon from '../icon';
+import Button from '../button';
 
 export type ModalProps = {
   prefixCls?: string;
@@ -47,12 +48,18 @@ class Modal extends React.Component<ModalProps, ModalState> {
         <div
           className={`${prefixCls}-panel`}
         >
-          {!!title && (
-            <div className={`${prefixCls}-title`}>{title}</div>
-          )}
-          <Icon className={`${prefixCls}-close`} type="x" />
+          <div className={classNames(`${prefixCls}-header`, {
+            [`${prefixCls}-header`]: !!title,
+          })}>{title}</div>
+          <div className={`${prefixCls}-close`} onClick={this.props.onClose}>
+            <Icon className={`${prefixCls}-close-icon`} type="x" />
+          </div>
           <div className={`${prefixCls}-body`}>
             {children}
+          </div>
+          <div className={`${prefixCls}-footer`}>
+            <Button type="default" onClick={this.props.onCancel}>Cancel</Button>
+            <Button type="primary" className={`${prefixCls}-footer-confirm`} onClick={this.props.onConfirm}>OK</Button>
           </div>
         </div>
       </CSSTransition>

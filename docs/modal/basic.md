@@ -23,7 +23,9 @@ class App extends React.Component {
         <Modal
           visible={this.state.visible}
           title="Modal Title"
-          onCancel={this.handleCancel}
+          onClose={this.handleClose}
+          onCancel={this.handleClose}
+          onConfirm={this.handleClose}
         >
           <p>Contents...</p>
           <p>Contents...</p>
@@ -39,7 +41,7 @@ class App extends React.Component {
     });
   }
 
-  handleCancel = () => {
+  handleClose = () => {
     this.setState({
       visible: false,
     });
