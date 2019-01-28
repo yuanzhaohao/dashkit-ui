@@ -45,7 +45,7 @@ class Year extends React.PureComponent<YearProps> {
               className={classNames({
                 [`${prefixCls}-ym-item`]: true,
                 [`${prefixCls}-ym-item-other`]: i === 0 || i === years.length - 1,
-                [`${prefixCls}-ym-item-active`]: value &&  isSameYear(year, value),
+                [`${prefixCls}-ym-item-active`]: value &&  isSameYear(year.toString(), value),
               })}
               onClick={this.handleYearClick.bind(this, year)}
             >
@@ -58,7 +58,7 @@ class Year extends React.PureComponent<YearProps> {
   }
 
   handleYearClick = (year: number) => {
-    const { current, onChange, disabled, type } = this.props;
+    const { current, onChange, disabled, type, value } = this.props;
 
     if (disabled) {
       return;

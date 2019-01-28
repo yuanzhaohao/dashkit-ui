@@ -75,9 +75,9 @@ export function toDate(dirtyDate?: DateProps) {
 
   if (dirtyDate instanceof Date) {
     return new Date(dirtyDate.getTime());
-  } else if (typeof dirtyDate === 'number') {
+  } else if (typeof dirtyDate === 'number' || Object.prototype.toString.call(dirtyDate) === '[object Number]') {
     return new Date(dirtyDate);
-  } else if (typeof dirtyDate === 'string') {
+  } else if (typeof dirtyDate === 'string' || Object.prototype.toString.call(dirtyDate) === '[object String]') {
     return new Date(dirtyDate);
   }
 
