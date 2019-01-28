@@ -2,6 +2,7 @@ import * as React from 'react';
 import { createPortal } from 'react-dom';
 import * as classNames from 'classnames';
 import { CSSTransition } from 'react-transition-group';
+import Icon from '../icon';
 
 export type ModalProps = {
   prefixCls?: string;
@@ -20,18 +21,6 @@ export type ModalState = {
 };
 
 class Modal extends React.Component<ModalProps, ModalState> {
-  static defaultProps = {
-    prefixCls: 'dk-modal',
-  };
-
-  // static getDerivedStateFromProps(nextProps: ModalProps) {
-  //   const state: Partial<ModalProps> = {};
-  //   if ('visible' in nextProps) {
-  //     state.visible = !!nextProps.visible;
-  //   }
-  //   return state;
-  // }
-
   constructor(props: ModalProps) {
     super(props);
     this.state = {
@@ -47,22 +36,21 @@ class Modal extends React.Component<ModalProps, ModalState> {
 
   render() {
     const { prefixCls, title, children } = this.props;
-    const titleNode = !!title && (
-      <div className={`${prefixCls}-title`}>{title}</div>
-    );
 
     return (
       <CSSTransition
         in={this.state.visible}
         unmountOnExit
         timeout={300}
-        classNames={`${prefixCls}`}
+        classNames={`${prefixCls}-panel`}
       >
         <div
-          className={classNames(`${prefixCls}`, {
-          })}
+          className={`${prefixCls}-panel`}
         >
-          {titleNode}
+          {!!title && (
+            <div className={`${prefixCls}-title`}>{title}</div>
+          )}
+          <Icon className={`${prefixCls}-close`} type="x" />
           <div className={`${prefixCls}-body`}>
             {children}
           </div>

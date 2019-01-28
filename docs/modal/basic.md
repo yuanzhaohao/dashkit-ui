@@ -23,7 +23,12 @@ class App extends React.Component {
         <Modal
           visible={this.state.visible}
           title="Modal Title"
-        />
+          onCancel={this.handleCancel}
+        >
+          <p>Contents...</p>
+          <p>Contents...</p>
+          <p>Contents...</p>
+        </Modal>
       </div>
     );
   }
@@ -31,6 +36,12 @@ class App extends React.Component {
   handleClick = () => {
     this.setState({
       visible: true,
+    });
+  }
+
+  handleCancel = () => {
+    this.setState({
+      visible: false,
     });
   }
 };

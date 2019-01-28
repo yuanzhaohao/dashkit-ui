@@ -6,21 +6,41 @@ $prefix-cls: 'dk-modal';
 
 .#{$prefix-cls} {
   @include reset-component();
-  position: relative;
-  max-width: 90%;
-  width: 520px;
-  margin: 250px auto 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   z-index: $zindex-modal;
-  background-color: $modal-bg;
-  box-shadow: $modal-box-shadow;
-  transition: $modal-transition;
 
-  &-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+  &-panel {
+    position: relative;
+    max-width: 90%;
+    width: 520px;
+    margin: 250px auto 0;
     z-index: $zindex-modal;
+    background-color: $modal-bg;
+    box-shadow: $modal-box-shadow;
+    transition: $modal-transition;
+
+    &-enter {
+      opacity: 0;
+      transform: translate3d(0, $modal-transfrom-y, 0);
+    }
+
+    &-enter-active {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    &-exit {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    &-exit-active {
+      opacity: 0;
+      transform: translate3d(0, $modal-transfrom-y, 0);
+    }
   }
 
   &-mask {
@@ -30,27 +50,7 @@ $prefix-cls: 'dk-modal';
     width: 100%;
     height: 100%;
     z-index: $zindex-modal;
-    background-color: rgba(0, 0, 0, 0.65);
-  }
-
-  &-enter {
-    opacity: 0;
-    transform: translate3d(0, 0, 0);
-  }
-
-  &-enter-active {
-    opacity: 1;
-    transform: translate3d(0, $modal-transfrom-y, 0);
-  }
-
-  &-exit {
-    opacity: 1;
-    transform: translate3d(0, $modal-transfrom-y, 0);
-  }
-
-  &-exit-active {
-    opacity: 0;
-    transform: translate3d(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.35);
   }
 
   &-title {
@@ -63,5 +63,20 @@ $prefix-cls: 'dk-modal';
 
   &-body {
     padding: $modal-body-padding;
+  }
+
+  &-close {
+    display: block;
+    position: absolute;
+    top: 13px;
+    right: 16px;
+    z-index: 100;
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 200ms ease;
+
+    &:hover {
+      color: $gray-900;
+    }
   }
 }

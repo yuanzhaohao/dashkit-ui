@@ -1,6 +1,9 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
+import { createPortal } from 'react-dom';
+import { CSSTransition } from 'react-transition-group';
 import Panel from './panel';
+import Icon from '../icon';
 
 export type ModalProps = {
   prefixCls?: string;
@@ -35,14 +38,20 @@ class Modal extends React.Component<ModalProps, ModalState> {
     super(props);
     this.state = {
       visible: false,
+      panelVisible: false,
     };
   }
 
   render() {
-    const { prefixCls, visible, ...attibutes } = this.props;
+    if (!this.state.visible) {
+      return null;
+    }
+
+    const { prefixCls, visible, title, children, ...attibutes } = this.props;
+
     const node = (
-      <div className={`${prefixCls}-wrapper`}>
-        <div className={`${prefixCls}-mask`} />
+      <div className={`${prefixCls}`}>
+        <div className={`${prefixCls}-mask`} onClick={this.closeModal} />
         <Panel
           {...attibutes}
           prefixCls={prefixCls}
@@ -50,14 +59,17 @@ class Modal extends React.Component<ModalProps, ModalState> {
         />
       </div>
     );
-    console.log(visible)
-    if (visible) {
-      return node;
-      // return (
-      //   createPortal(node, document.body)
-      // );
+    return createPortal(node, document.body);
+  }
+
+  closeModal = () => {
+    const { onCancel } = this.props;
+    this.setState({
+      visible: false
+    });
+    if (typeof onCancel === 'function') {
+      onCancel();
     }
-    return null;
   }
 }
 
