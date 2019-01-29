@@ -75,7 +75,7 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
         timeout={216}
         unmountOnExit
         classNames={`${prefixCls}`}
-        onExited={this.onAnimationEnd}
+        onExited={this.handleExited}
       >
         <div className={alertClassName} style={style}>
           {isShowIcon
@@ -98,7 +98,7 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
     );
   }
 
-  onAnimationEnd = () => {
+  handleExited = () => {
     const { onClose } = this.props;
     if (typeof onClose === 'function') {
       onClose();

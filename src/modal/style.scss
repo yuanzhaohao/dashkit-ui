@@ -5,7 +5,6 @@
 $prefix-cls: 'dk-modal';
 
 .#{$prefix-cls} {
-  @include reset-component();
   position: fixed;
   top: 0;
   left: 0;
@@ -13,6 +12,7 @@ $prefix-cls: 'dk-modal';
   z-index: $zindex-modal;
 
   &-panel {
+    @include reset-component();
     position: relative;
     max-width: 90%;
     width: 520px;
@@ -51,6 +51,23 @@ $prefix-cls: 'dk-modal';
     height: 100%;
     z-index: $zindex-modal;
     background-color: rgba(0, 0, 0, 0.35);
+    transition: $modal-mask-transition;
+
+    &-enter {
+      opacity: 0;
+    }
+
+    &-enter-active {
+      opacity: 1;
+    }
+
+    &-exit {
+      opacity: 1;
+    }
+
+    &-exit-active {
+      opacity: 0;
+    }
   }
 
   &-title {
