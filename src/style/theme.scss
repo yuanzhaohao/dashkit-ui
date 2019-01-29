@@ -376,3 +376,10 @@ $modal-box-shadow:                      0 4px 12px rgba(0, 0, 0, .15) !default;
 $modal-transfrom-y:                     -150px !default;
 $modal-transition:                      transform 300ms $ease-fade, opacity 300ms $ease-fade !default;
 $modal-mask-transition:                 opacity 300ms $ease-fade !default;
+$modal-type-colors: (
+  "info":       $info,
+  "success":    $success,
+  "warning":    $warning,
+  "error":      $danger,
+  "confirm":    $warning
+) !default;

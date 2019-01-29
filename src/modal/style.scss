@@ -70,19 +70,55 @@ $prefix-cls: 'dk-modal';
     }
   }
 
-  &-title {
+  &-header {
+    padding: $modal-padding-y $modal-padding-x;
+    border-bottom: 1px solid $border-color;
     color: $heading-color;
     font-size: $font-size-lg;
     font-weight: 500;
   }
 
-  &-header {
-    padding: $modal-padding-y $modal-padding-x;
-    border-bottom: 1px solid $border-color;
-  }
-
   &-body {
     padding: $modal-padding-x;
+
+    &-container {
+      position: relative;
+      padding-left: 38px;
+    }
+
+    &-title {
+      color: $heading-color;
+      font-size: $font-size-lg;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    &-content {
+      margin-top: 8px;
+    }
+
+    &-btn {
+      margin-top: $modal-padding-y;
+      text-align: right;
+
+      &-cancel {
+        margin-right: 10px;
+      }
+    }
+
+    &-icon {
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-size: 22px;
+      font-weight: 700;
+
+      @each $type, $color in $modal-type-colors {
+        &-#{$type} {
+          color: theme-color-level($color, 2);
+        }
+      }
+    }
   }
 
   &-footer {
