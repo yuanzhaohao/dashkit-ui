@@ -17,7 +17,7 @@ export function create(type: ModalType) {
     const div = document.createElement('div');
     document.body.appendChild(div);
 
-    let props = {
+    let props: Props = {
       prefixCls: 'dk-modal',
       width: 420,
       ...options,
@@ -37,7 +37,7 @@ export function create(type: ModalType) {
       }
     }
 
-    function update(newProps: Props) {
+    function update(newProps: Props = {}) {
       props = {
         ...props,
         ...newProps,
@@ -94,6 +94,7 @@ export function create(type: ModalType) {
 
     return {
       destroy,
+      update,
     };
   }
 }
