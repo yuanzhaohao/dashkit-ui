@@ -9,12 +9,13 @@ export { default as Button } from './button';
 export { default as Scrollbar } from './scrollbar';
 
 // Form
-// todo: Select, Form
+// todo: Select
 export { default as Radio } from './radio';
 export { default as Checkbox } from './checkbox';
 export { default as Switch } from './switch';
 export { default as Input } from './input';
 export { default as Calendar } from './calendar';
+export { default as Form } from './form';
 
 // Data
 //
