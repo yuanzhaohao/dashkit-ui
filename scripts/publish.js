@@ -23,7 +23,7 @@ const publishEsPath = path.join(publishPath, './es')
 
 const distConfig = {
   output: {
-    filename: 'dashkit.min.js',
+    filename: 'dashkit.production.js',
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
@@ -40,7 +40,7 @@ const distConfig = {
 }
 const devConfig = {
   output: {
-    filename: 'dashkit.js',
+    filename: 'dashkit.development.js',
   }
 }
 
@@ -55,9 +55,10 @@ rm(publishPath, function(err) {
       callback(err, stats);
       fs.copySync(srcPath, publishSrcPath)
 
-      copyScssFiles()
-      createPackageFile()
-      transpileTsFiles()
+      copyFiles('scss');
+      copyFiles('svg');
+      createPackageFile();
+      transpileTsFiles();
     })
   })
 })
@@ -115,8 +116,8 @@ function transpileTsFiles() {
   })
 }
 
-function copyScssFiles() {
-  const files = glob.sync(path.join(publishSrcPath, './**/*.scss'))
+function copyFiles(type) {
+  const files = glob.sync(path.join(publishSrcPath, `./**/*.${type}`))
   files.forEach((filePath) => {
     const newFilePath = publishEsPath + filePath.replace(publishSrcPath, '')
     fs.copySync(filePath, newFilePath)

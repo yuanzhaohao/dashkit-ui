@@ -1,8 +1,14 @@
 {
   "name": "dashkit-ui",
-  "version": "0.0.6",
   "description": "A ui library.",
-  "main": "./es/index.js",
+  "version": "0.0.7",
+  "main": "es/index.js",
+  "module": "es/index.js",
+  "files": [
+    "dist",
+    "lib",
+    "es"
+  ],
   "author": "yuanzhaohao",
   "keywords": [
     "ui",
@@ -14,11 +20,10 @@
     "start": "npm run dev",
     "dev": "node scripts/dev.js",
     "docs": "node scripts/docs.js",
-    "publish": "node scripts/publish.js && npm run publish:ts && npm run publish:babel",
-    "publish:ts": "tsc -p tsconfig.json",
-    "publish:babel": "babel publish/lib --out-dir publish/lib",
-    "publish:dev": "webpack --config scripts/webpack.publish.config.js",
-    "publish:prod": "webpack --config scripts/webpack.publish.prod.config.js",
+    "pub": "node scripts/publish.js && npm run pub:tsEs && npm run pub:tsLib && npm run pub:babel",
+    "pub:tsEs": "tsc -p tsconfig.json",
+    "pub:tsLib": "tsc -p tsconfig.json --declarationDir publish/lib",
+    "pub:babel": "babel publish/lib --out-dir publish/lib",
     "lint": "eslint ./src",
     "test": "jest ./src"
   },
