@@ -202,7 +202,7 @@ $input-disabled-bg:                 $gray-200 !default;
 
 $input-border-color:                $border-color !default;
 $input-box-shadow:                  inset 0 1px 1px rgba($primary, .075) !default;
-$input-transition:                  border-color .15s $ease-in-out, box-shadow .15s $ease-in-out !default;
+$input-transition:                  border-color .25s $ease-in-out, box-shadow .25s $ease-in-out !default;
 $input-placeholder-color:           #b1c2d9 !default;
 
 $input-focus-bg:                    $input-bg !default;
@@ -219,9 +219,15 @@ $calendar-other-color:              $input-placeholder-color !default;
 $calendar-border-color:             $input-border-color !default;
 $calendar-active-bg:                $component-active-bg !default;
 $calendar-active-border-color:      $calendar-active-bg !default;
+
+$calendar-focus-bg:                 $input-focus-bg !default;
+$calendar-focus-border-color:       $input-focus-border-color !default;
+$calendar-focus-box-shadow:         $input-focus-box-shadow !default;
+$calendar-hover-border-color:       $input-focus-border-color !default;
+
 $calendar-icon-size:                14px !default;
 $calendar-item-size:                36px !default;
-$calendar-hover-bg:               #edf2f9 !default;
+$calendar-item-hover-bg:          #edf2f9 !default;
 $calendar-time-active-bg:         #edf2f9 !default;
 $calendar-time-item-width:          66px !default;
 $calendar-time-item-height:         32px !default;

@@ -9,32 +9,10 @@ $calendar-prefix: 'dk-calendar';
   position: relative;
   display: inline-block;
 
-  &-inner {
-    min-width: $calendar-width;
-    padding: $input-padding-y $input-padding-x;
-    padding-right: 30px;
-    border: 1px solid $input-border-color;
-    border-radius: $border-radius;
-    transition: $input-transition;
-
-    &:hover {
-      border-color: $input-hover-border-color;
-    }
-
-    > span {
-      padding: 0 $input-padding-x / 2;
-    }
-  }
-
-  &-input {
-    border: none;
+  input {
     outline: 0;
     font-size: $font-size-base;
-    color: $input-color;
-
-    &-range {
-      text-align: center;
-    }
+    color: $calendar-color;
 
     &::placeholder {
       color: $input-placeholder-color;
@@ -42,12 +20,40 @@ $calendar-prefix: 'dk-calendar';
     }
   }
 
-  &-range-input {
-    min-width: 350px;
-    direction: flex;
+  &-range,
+  &-input {
+    min-width: $calendar-width;
+    padding: $input-padding-y $input-padding-x;
+    padding-right: 30px;
+    border: 1px solid $calendar-border-color;
+    border-radius: $border-radius;
+    transition: $calendar-transition;
 
-    &-text {
-      flex: 1;
+    &:focus {
+      background-color: $calendar-focus-bg;
+      border-color: $calendar-focus-border-color;
+      box-shadow: $calendar-focus-box-shadow;
+    }
+
+    &:hover {
+      border-color: $calendar-hover-border-color;
+    }
+  }
+
+  &-range {
+    > span {
+      padding: 0 $input-padding-x / 2;
+    }
+
+    > input {
+      text-align: center;
+      border: none;
+    }
+
+    &-active {
+      background-color: $calendar-focus-bg;
+      border-color: $calendar-focus-border-color;
+      box-shadow: $calendar-focus-box-shadow;
     }
   }
 
@@ -62,48 +68,6 @@ $calendar-prefix: 'dk-calendar';
     color: $calendar-icon-color;
     user-select: none;
     z-index: 1;
-  }
-
-  &-content {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    margin-top: 5px;
-    padding: $calendar-container-padding;
-    box-shadow: $calendar-shadow;
-    background-color: $white;
-    border-radius: $border-radius;
-    transition: $calendar-transition;
-    transform-origin: center top;
-    z-index: $zindex-calendar;
-
-    &-time {
-      padding: 0;
-    }
-
-    span {
-      user-select: none;
-    }
-
-    &-enter {
-      opacity: 0;
-      transform: scaleY(0);
-    }
-
-    &-enter-active {
-      opacity: 1;
-      transform: scaleY(1);
-    }
-
-    &-exit {
-      opacity: 1;
-      transform: scaleY(1);
-    }
-
-    &-exit-active {
-      opacity: 0;
-      transform: scaleY(0);
-    }
   }
 
   &-select {
@@ -195,7 +159,7 @@ $calendar-prefix: 'dk-calendar';
         color: $calendar-color;
 
         &:hover {
-          background: $calendar-hover-bg;
+          background: $calendar-item-hover-bg;
           border-color: $calendar-border-color;
         }
       }
@@ -227,7 +191,7 @@ $calendar-prefix: 'dk-calendar';
     }
 
     &-item-hover {
-      background: $calendar-hover-bg;
+      background: $calendar-item-hover-bg;
       cursor: pointer;
 
       > span,
@@ -238,7 +202,7 @@ $calendar-prefix: 'dk-calendar';
     }
 
     &-item-hover-active {
-      background: $calendar-hover-bg;
+      background: $calendar-item-hover-bg;
 
       &.#{$calendar-prefix}-day-item-hover-start,
       &.#{$calendar-prefix}-day-item-hover-end {
@@ -257,7 +221,7 @@ $calendar-prefix: 'dk-calendar';
       background: #f5f5f5;
       opacity: 0.35;
 
-      >span {
+      > span {
         color: $calendar-other-color;
         // opacity: 0.35;
 
@@ -271,8 +235,8 @@ $calendar-prefix: 'dk-calendar';
       &.#{$calendar-prefix}-day-item-hover-end {
         border-radius: 0;
 
-        >span,
-        >span:hover {
+        > span,
+        > span:hover {
           color: $calendar-other-color;
           background: #f5f5f5;
           border-radius: 0;
@@ -422,13 +386,55 @@ $calendar-prefix: 'dk-calendar';
       }
     }
   }
+}
 
-  &-range {
-    display: flex;
-    flex-direction: row;
+.#{$calendar-prefix}-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 5px;
+  padding: $calendar-container-padding;
+  box-shadow: $calendar-shadow;
+  background-color: $white;
+  border-radius: $border-radius;
+  transition: $calendar-transition;
+  transform-origin: center top;
+  z-index: $zindex-calendar;
 
-    > div:first-child {
-      margin-right: 18px;
-    }
+  &-time {
+    padding: 0;
+  }
+
+  span {
+    user-select: none;
+  }
+
+  &-enter {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+
+  &-enter-active {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+
+  &-exit {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+
+  &-exit-active {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+}
+
+.#{$calendar-prefix}-panel-range {
+  display: flex;
+  flex-direction: row;
+
+  > div:first-child {
+    margin-right: 18px;
   }
 }

@@ -7,7 +7,7 @@ export type FormProps = {
   className?: string;
 };
 
-class Form extends React.PureComponent<FormProps> {
+class Form extends React.Component<FormProps> {
   render() {
     const { className, children, ...attributes } = this.props;
     const formClassName = classNames(

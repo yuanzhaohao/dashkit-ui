@@ -20,7 +20,7 @@ $prefix-cls: 'dk-input';
   &:focus {
     background-color: $input-focus-bg;
     border-color: $input-focus-border-color;
-    box-shadow: $input-box-shadow, $input-focus-box-shadow;
+    box-shadow: $input-focus-box-shadow;
   }
 
   &:hover {

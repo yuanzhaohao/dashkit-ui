@@ -38,7 +38,7 @@ export type CalendarState = {
 };
 
 class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
-  readonly dateElement: React.RefObject<HTMLDivElement>;
+  readonly calendarElement: React.RefObject<HTMLDivElement>;
   readonly contentElement: React.RefObject<HTMLDivElement>;
 
   static defaultProps = {
@@ -65,7 +65,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
 
   constructor(props: CalendarProps) {
     super(props);
-    this.dateElement = React.createRef();
+    this.calendarElement = React.createRef();
     this.contentElement = React.createRef();
     this.state = {
       current: this.getCurrent(),
@@ -80,30 +80,29 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
 
   render() {
     const { className, prefixCls, type, range, disabled } = this.props;
-    const dateClassName = classNames({
-      [`${prefixCls}`]: true,
-    }, className);
-    const inputClassName = classNames({
-      [`${prefixCls}-input`]: true,
-      [`${prefixCls}-input-range`]: range,
-    });
     const { value, position } = this.state;
     const format = this.getFormat();
     const placeholder = this.getPlaceholder();
+    const calendarClassName = classNames({
+      [`${prefixCls}`]: true,
+    }, className);
+    const panelClassName = classNames({
+      [`${prefixCls}-panel`]: true,
+      [`${prefixCls}-panel-time`]: type === 'time',
+      [`${prefixCls}-panel-range`]: !!range,
+    });
     const calendarNode = (
       <CSSTransition
         in={this.state.visible}
         unmountOnExit
         timeout={300}
-        classNames={`${prefixCls}-content`}
+        classNames={`${prefixCls}-panel`}
         onEntered={this.bindDocumentClick}
         onExited={this.clearDocumentClick}
         onEnter={this.handleEnter}
       >
         <div
-          className={classNames(`${prefixCls}-content`, {
-            [`${prefixCls}-content-time`]: type === 'time'
-          })}
+          className={panelClassName}
           style={position}
           ref={this.contentElement}
         >
@@ -113,35 +112,45 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
     );
 
     return (
-      <span className={dateClassName} ref={this.dateElement}>
-        <div className={`${prefixCls}-inner`}>
-          {range
-            ? <>
-              <input
-                className={inputClassName}
-                placeholder={placeholder[0]}
-                onFocus={this.handleInputFocus}
-                value={value instanceof Array && value.length ? formatDate(value[0], format) : undefined}
-              />
-              <span>~</span>
-              <input
-                className={inputClassName}
-                placeholder={placeholder[1]}
-                onFocus={this.handleInputFocus}
-                value={value instanceof Array && value.length ? formatDate(value[1], format) : undefined}
-              />
-            </>
-            : (
-              <input
-                className={inputClassName}
-                placeholder={placeholder}
-                onFocus={this.handleInputFocus}
-                value={value && !(value instanceof Array) ? formatDate(value, format) : undefined}
-              />
-            )
-          }
-        </div>
-        <Icon type={type === 'time' ? 'clock' : 'calendar'} className={`${prefixCls}-icon`} />
+      <span className={calendarClassName} ref={this.calendarElement}>
+        {range ? (
+          <div className={`${prefixCls}-range`}>
+            <input
+              placeholder={placeholder[0]}
+              onFocus={this.handleInputFocus}
+              value={
+                value instanceof Array && value.length
+                  ? formatDate(value[0], format)
+                  : undefined
+              }
+            />
+            <span>~</span>
+            <input
+              placeholder={placeholder[1]}
+              onFocus={this.handleInputFocus}
+              value={
+                value instanceof Array && value.length
+                  ? formatDate(value[1], format)
+                  : undefined
+              }
+            />
+          </div>
+        ) : (
+          <input
+            className={`${prefixCls}-input`}
+            placeholder={placeholder}
+            onFocus={this.handleInputFocus}
+            value={
+              value && !(value instanceof Array)
+                ? formatDate(value, format)
+                : undefined
+            }
+          />
+        )}
+        <Icon
+          type={type === "time" ? "clock" : "calendar"}
+          className={`${prefixCls}-icon`}
+        />
         {!disabled && createPortal(calendarNode, document.body)}
       </span>
     );
@@ -167,7 +176,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
   }
 
   getPosition = () => {
-    const el = this.dateElement.current;
+    const el = this.calendarElement.current;
     const rect = el.getBoundingClientRect();
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
     const scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
@@ -259,19 +268,19 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
   }
 
   handleDocumentClick = (event: any) => {
-    const dateEl = this.dateElement.current;
+    const calendarEl = this.calendarElement.current;
     const contentEl = this.contentElement.current;
     const targetEl = event.target;
     if (
       !(
-        targetEl === dateEl ||
-        (dateEl && dateEl.contains(targetEl)) ||
+        targetEl === calendarEl ||
+        (calendarEl && calendarEl.contains(targetEl)) ||
         targetEl === contentEl ||
         (contentEl && contentEl.contains(targetEl))
       )
     ) {
       this.setState({
-        visible: false,
+        visible: false
       });
     }
   }

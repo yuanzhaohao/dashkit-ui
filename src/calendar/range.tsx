@@ -36,7 +36,7 @@ class Range extends React.PureComponent<RangeProps, RangeState> {
     const hideIcon = (newType === 'day' || newType === 'datetime') && isSameMonth(addMonths(current[0], 1), current[1]);
 
     return (
-      <div className={`${prefixCls}-range`}>
+      <>
         <Picker
           {...attributes}
           prefixCls={prefixCls}
@@ -57,7 +57,7 @@ class Range extends React.PureComponent<RangeProps, RangeState> {
           onChange={this.handleChange.bind(this, 1)}
           onDayHover={this.handleDayHover}
         />
-      </div>
+      </>
     );
   }
 

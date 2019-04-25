@@ -40,8 +40,8 @@
     "classnames": "^2.2.5",
     "create-react-context": "^0.2.3",
     "lodash": "^4.17.11",
-    "react": "^16.1.1",
-    "react-dom": "^16.1.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-transition-group": "^2.4.0"
   },
   "devDependencies": {
