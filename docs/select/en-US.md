@@ -1,4 +1,4 @@
-# Form
+# Select
 
 Select component to select value from options.
 

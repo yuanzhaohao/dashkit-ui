@@ -39,7 +39,7 @@ export type CalendarState = {
 
 class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
   readonly calendarElement: React.RefObject<HTMLDivElement>;
-  readonly contentElement: React.RefObject<HTMLDivElement>;
+  readonly panelElement: React.RefObject<HTMLDivElement>;
 
   static defaultProps = {
     prefixCls: 'dk-calendar',
@@ -66,7 +66,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
   constructor(props: CalendarProps) {
     super(props);
     this.calendarElement = React.createRef();
-    this.contentElement = React.createRef();
+    this.panelElement = React.createRef();
     this.state = {
       current: this.getCurrent(),
       visible: false,
@@ -80,7 +80,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
 
   render() {
     const { className, prefixCls, type, range, disabled } = this.props;
-    const { value, position } = this.state;
+    const { value, position, visible } = this.state;
     const format = this.getFormat();
     const placeholder = this.getPlaceholder();
     const calendarClassName = classNames({
@@ -93,7 +93,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
     });
     const calendarNode = (
       <CSSTransition
-        in={this.state.visible}
+        in={visible}
         unmountOnExit
         timeout={300}
         classNames={`${prefixCls}-panel`}
@@ -104,7 +104,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
         <div
           className={panelClassName}
           style={position}
-          ref={this.contentElement}
+          ref={this.panelElement}
         >
           {this.renderContent()}
         </div>
@@ -148,7 +148,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
           />
         )}
         <Icon
-          type={type === "time" ? "clock" : "calendar"}
+          type={type === 'time' ? 'clock' : 'calendar'}
           className={`${prefixCls}-icon`}
         />
         {!disabled && createPortal(calendarNode, document.body)}
@@ -269,7 +269,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
 
   handleDocumentClick = (event: any) => {
     const calendarEl = this.calendarElement.current;
-    const contentEl = this.contentElement.current;
+    const contentEl = this.panelElement.current;
     const targetEl = event.target;
     if (
       !(

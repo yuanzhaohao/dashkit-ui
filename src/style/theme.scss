@@ -127,6 +127,7 @@ $zindex-modal-background:     1040 !default;
 $zindex-modal:                1050 !default;
 $zindex-message:              1060 !default;
 $zindex-calendar:             1060 !default;
+$zindex-select:               1060 !default;
 
 // Icon
 //
@@ -224,6 +225,7 @@ $calendar-focus-bg:                 $input-focus-bg !default;
 $calendar-focus-border-color:       $input-focus-border-color !default;
 $calendar-focus-box-shadow:         $input-focus-box-shadow !default;
 $calendar-hover-border-color:       $input-focus-border-color !default;
+$calendar-transition:               $input-transition;
 
 $calendar-icon-size:                14px !default;
 $calendar-item-size:                36px !default;
@@ -235,9 +237,30 @@ $calendar-time-shadow:              0 0 1px 1px rgba(0, 0, 0, .02), 0 -2px 12px 
 $calendar-ym-item-height:           32px !default;
 $calendar-picker-width:             $calendar-item-size * 7 !default;
 $calendar-icon-color:               $input-placeholder-color !default;
-$calendar-container-padding:        12px !default;
-$calendar-shadow:                   0 2px 8px rgba($black, .25) !default;
-$calendar-transition:               transform 300ms $ease-fade, opacity 300ms $ease-fade !default;
+
+$calendar-panel-shadow:             0 2px 8px rgba($black, .25) !default;
+$calendar-panel-padding:            12px !default;
+$calendar-panel-transition:         transform 300ms $ease-fade, opacity 300ms $ease-fade !default;
+
+// Select
+//
+$select-width:                      220px !default;
+$select-icon-size:                  16px !default;
+$select-icon-color:                 $input-placeholder-color !default;
+
+$select-color:                      $input-color !default;
+$select-border-color:               $input-border-color !default;
+$select-focus-bg:                   $input-focus-bg !default;
+$select-focus-border-color:         $input-focus-border-color !default;
+$select-focus-box-shadow:           $input-focus-box-shadow !default;
+$select-hover-border-color:         $input-focus-border-color !default;
+$select-transition:                 $input-transition;
+$select-panel-shadow:               $calendar-panel-shadow !default;
+$select-panel-transition:           $calendar-panel-transition !default;
+
+$select-option-hover-bg:            $calendar-item-hover-bg !default;
+$select-option-active-bg:           $calendar-time-active-bg !default;
+$select-option-height:              $calendar-time-item-height !default;
 
 // Checkbox
 //

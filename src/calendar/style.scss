@@ -278,8 +278,6 @@ $calendar-prefix: 'dk-calendar';
       height: $calendar-time-item-height * 6;
     }
 
-
-
     &-scroll {
       width: $calendar-time-item-width;
       height: 100%;
@@ -393,11 +391,11 @@ $calendar-prefix: 'dk-calendar';
   top: 100%;
   left: 0;
   margin-top: 5px;
-  padding: $calendar-container-padding;
-  box-shadow: $calendar-shadow;
+  padding: $calendar-panel-padding;
+  box-shadow: $calendar-panel-shadow;
   background-color: $white;
   border-radius: $border-radius;
-  transition: $calendar-transition;
+  transition: $calendar-panel-transition;
   transform-origin: center top;
   z-index: $zindex-calendar;
 

@@ -41,7 +41,6 @@ class RadioGroup extends React.PureComponent<RadioGroupProps, RadioGroupState> {
 
   render() {
     const { className, style, prefixCls, children } = this.props;
-    const { value } = this.state;
     const groupClassName = classNames(
       {
         [`${prefixCls}-group`]: true,

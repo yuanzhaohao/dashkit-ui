@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Item, { InputProps } from '../checkbox/item';
 
-class Checkbox extends React.PureComponent<InputProps> {
+class Radio extends React.PureComponent<InputProps> {
   static Group: any;
   static defaultProps = {
     prefixCls: 'dk-radio',
@@ -15,4 +15,4 @@ class Checkbox extends React.PureComponent<InputProps> {
   }
 }
 
-export default Checkbox;
+export default Radio;

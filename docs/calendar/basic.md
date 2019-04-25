@@ -4,8 +4,8 @@ title:
   zh-CN: 基本
   en-US: Basic
 subtitle:
-  zh-CN: 基本用法，可以用`defaultChecked`来定义checkbox默认的值。
-  en-US: Use `defaultChecked` to define Checkbox's value.
+  zh-CN: 基本用法，你可以选择多种日历选择弃。
+  en-US: Use `type` to use different Calenders.
 ---
 
 ```js
