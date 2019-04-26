@@ -8,6 +8,7 @@ $select-prefix: 'dk-select';
   @include reset-component();
   position: relative;
   display: inline-block;
+  color: $select-color;
 
   input {
     outline: 0;
@@ -52,6 +53,42 @@ $select-prefix: 'dk-select';
     z-index: 1;
   }
 
+  &-panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: $select-width;
+    max-height: $select-panel-height;
+    margin-top: 5px;
+    box-shadow: $select-panel-shadow;
+    background-color: $white;
+    border-radius: $border-radius;
+    transition: $select-panel-transition;
+    transform-origin: center top;
+    box-sizing: border-box;
+    z-index: $zindex-select;
+
+    &-enter {
+      opacity: 0;
+      transform: scaleY(0);
+    }
+
+    &-enter-active {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+
+    &-exit {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+
+    &-exit-active {
+      opacity: 0;
+      transform: scaleY(0);
+    }
+  }
+
   &-option {
     height: $select-option-height;
     padding: $input-padding-y $input-padding-x;
@@ -60,6 +97,9 @@ $select-prefix: 'dk-select';
     cursor: pointer;
     background: $white;
     box-sizing: border-box;
+    color: $select-color;
+    line-height: 20px;
+    transition: $select-option-transition;
 
     &:hover {
       background: $select-option-hover-bg;
@@ -67,41 +107,12 @@ $select-prefix: 'dk-select';
 
     &-active {
       background: $select-option-active-bg;
+      font-weight: bold;
+      transition: none;
+
+      &:hover {
+        background: $select-option-active-bg;
+      }
     }
-  }
-}
-
-.#{$select-prefix}-panel {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: $select-width;
-  margin-top: 5px;
-  box-shadow: $select-panel-shadow;
-  background-color: $white;
-  border-radius: $border-radius;
-  transition: $select-panel-transition;
-  transform-origin: center top;
-  box-sizing: border-box;
-  z-index: $zindex-select;
-
-  &-enter {
-    opacity: 0;
-    transform: scaleY(0);
-  }
-
-  &-enter-active {
-    opacity: 1;
-    transform: scaleY(1);
-  }
-
-  &-exit {
-    opacity: 1;
-    transform: scaleY(1);
-  }
-
-  &-exit-active {
-    opacity: 0;
-    transform: scaleY(0);
   }
 }

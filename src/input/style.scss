@@ -37,24 +37,14 @@ $prefix-cls: 'dk-input';
     font-size: $font-size-lg;
   }
 
-  // Placeholder
   &::placeholder {
     color: $input-placeholder-color;
     opacity: 1;
   }
   &:disabled,
   &[readonly] {
-    background-color: $input-disabled-bg;
-    opacity: 1;
-    cursor: not-allowed;
-
-    &:hover {
-      border-color: $input-border-color;
-    }
-
-    &:focus {
-      border-color: $input-border-color;
-      box-shadow: none;
-    }
+    background: $input-disabled-bg;
+    opacity: $switch-disabled-opacity;
+    pointer-events: none;
   }
 }

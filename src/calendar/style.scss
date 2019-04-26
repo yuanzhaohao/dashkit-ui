@@ -157,6 +157,7 @@ $calendar-prefix: 'dk-calendar';
         border-radius: 50%;
         cursor: pointer;
         color: $calendar-color;
+        transition: $calendar-hover-transition;
 
         &:hover {
           background: $calendar-item-hover-bg;
@@ -305,6 +306,7 @@ $calendar-prefix: 'dk-calendar';
       display: block;
       text-align: center;
       line-height: $calendar-time-item-height;
+      transition: $calendar-hover-transition;
       cursor: pointer;
 
       &:hover {
@@ -314,6 +316,7 @@ $calendar-prefix: 'dk-calendar';
       &-active {
         background: $calendar-time-active-bg;
         font-weight: 700;
+        transition: none;
 
         &:hover {
           background: $calendar-time-active-bg;

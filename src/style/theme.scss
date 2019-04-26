@@ -225,12 +225,13 @@ $calendar-focus-bg:                 $input-focus-bg !default;
 $calendar-focus-border-color:       $input-focus-border-color !default;
 $calendar-focus-box-shadow:         $input-focus-box-shadow !default;
 $calendar-hover-border-color:       $input-focus-border-color !default;
+$calendar-hover-transition:         background 300ms ease !default;
 $calendar-transition:               $input-transition;
 
 $calendar-icon-size:                14px !default;
 $calendar-item-size:                36px !default;
-$calendar-item-hover-bg:          #edf2f9 !default;
-$calendar-time-active-bg:         #edf2f9 !default;
+$calendar-item-hover-bg:            $light !default;
+$calendar-time-active-bg:           #edf2f9 !default;
 $calendar-time-item-width:          66px !default;
 $calendar-time-item-height:         32px !default;
 $calendar-time-shadow:              0 0 1px 1px rgba(0, 0, 0, .02), 0 -2px 12px rgba(0, 0, 0, .175) !default;
@@ -255,12 +256,15 @@ $select-focus-border-color:         $input-focus-border-color !default;
 $select-focus-box-shadow:           $input-focus-box-shadow !default;
 $select-hover-border-color:         $input-focus-border-color !default;
 $select-transition:                 $input-transition;
+$select-panel-height:               256px !default;
 $select-panel-shadow:               $calendar-panel-shadow !default;
 $select-panel-transition:           $calendar-panel-transition !default;
 
 $select-option-hover-bg:            $calendar-item-hover-bg !default;
 $select-option-active-bg:           $calendar-time-active-bg !default;
 $select-option-height:              $calendar-time-item-height !default;
+$select-option-transition:          background 300ms ease !default;
+$select-disabled-opacity:           1 !default;
 
 // Checkbox
 //

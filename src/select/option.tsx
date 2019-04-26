@@ -1,28 +1,36 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 import { createConsumer } from './context';
+import { SelectOptionProps } from './types';
 
-export type SelectOptionProps = {
-  prefixCls?: string;
-  value?: string | number;
-  onClick?: (value: string | number) => void
-};
-
-class Option extends React.Component<SelectOptionProps> {
+class Option extends React.PureComponent<SelectOptionProps> {
   render() {
-    const { prefixCls, value, ...attributes } = this.props;
+    const { prefixCls, value, onRawChange, disabled, options, ...attributes } = this.props;
     const optionClassName = classNames({
       [`${prefixCls}-option`]: true,
+      [`${prefixCls}-option-disabled`]: disabled,
+      [`${prefixCls}-option-active`]:
+        options instanceof Array && options.indexOf(value) !== -1
+          ? true
+          : options === value
+            ? true
+            : false
     });
     return (
-      <div className={optionClassName} {...attributes} onClick={this.handleOptionClick} />
+      <div
+        className={optionClassName}
+        onClick={this.handleOptionClick}
+        {...attributes}
+      />
     );
   }
 
-  handleOptionClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    const { value } = this.props;
+  handleOptionClick = () => {
+    const { value, onRawChange } = this.props;
 
-    console.log(value);
+    if (typeof onRawChange === 'function') {
+      onRawChange(value);
+    }
   }
 }
 

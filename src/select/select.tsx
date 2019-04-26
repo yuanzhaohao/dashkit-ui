@@ -2,28 +2,11 @@ import * as React from 'react';
 import { createPortal } from 'react-dom';
 import { CSSTransition } from 'react-transition-group';
 import * as classNames from 'classnames';
+import { SelectProps, SelectState, SelectSize } from './types';
 import { Provider as SelectProvider } from './context';
 import Icon from '../icon';
 
-export type SelectSize = 'small' | 'default' | 'large';
-export type SelectProps = {
-  className?: string;
-  prefixCls?: string;
-  size: SelectSize;
-  disabled?: boolean;
-  value?: string | number | string[] | number[];
-  multiple?: boolean;
-};
-export type SelectState = {
-  visible: boolean;
-  options: string | number | string[] | number[];
-  position: {
-    top: number;
-    left: number;
-  }
-};
-
-class Select extends React.Component<SelectProps, SelectState> {
+class Select extends React.PureComponent<SelectProps, SelectState> {
   static Option: any;
   readonly selectElement: React.RefObject<HTMLDivElement>;
   readonly panelElement: React.RefObject<HTMLDivElement>;
@@ -38,6 +21,7 @@ class Select extends React.Component<SelectProps, SelectState> {
     this.panelElement = React.createRef();
     this.state = {
       visible: false,
+      options: props.multiple ? [] : undefined,
       position: {
         top: 0,
         left: 0,
@@ -53,9 +37,11 @@ class Select extends React.Component<SelectProps, SelectState> {
       children,
       disabled,
       value,
+      multiple,
+      onChange,
       ...attributes
     } = this.props;
-    const { position, visible } = this.state;
+    const { position, options, visible } = this.state;
     const selectClassName = classNames(
       prefixCls,
       {
@@ -82,7 +68,9 @@ class Select extends React.Component<SelectProps, SelectState> {
           <SelectProvider
             value={{
               prefixCls,
-              selectedValue: value,
+              multiple,
+              options,
+              onRawChange: this.handleRawChange,
             }}
           >
             {children}
@@ -90,13 +78,19 @@ class Select extends React.Component<SelectProps, SelectState> {
         </div>
       </CSSTransition>
     );
+    console.log(options);
     return (
       <div {...attributes} className={selectClassName} ref={this.selectElement}>
-        <input
-          className={`${prefixCls}-input`}
-          placeholder="Select"
-          onFocus={this.handleInputFocus}
-        />
+        {options instanceof Array
+          ? <></>
+          : <input
+            className={`${prefixCls}-input`}
+            placeholder="Select"
+            value={options}
+            onFocus={this.handleInputFocus}
+          />
+        }
+
         <Icon type="chevron-down" className={`${prefixCls}-icon`} />
         {!disabled && createPortal(selectNode, document.body)}
       </div>
@@ -158,6 +152,23 @@ class Select extends React.Component<SelectProps, SelectState> {
     this.setState({
       visible: true,
     });
+  }
+
+  handleRawChange = (value) => {
+    const { options } = this.state;
+    const { onChange } = this.props;
+    const newOptions = options instanceof Array
+      ? Array.from(new Set([...options, value]))
+      : value;
+
+    this.setState({
+      options: newOptions,
+      visible: false,
+    });
+
+    if (typeof onChange === 'function') {
+      onChange(newOptions);
+    }
   }
 }
 

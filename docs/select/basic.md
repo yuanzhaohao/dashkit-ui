@@ -18,9 +18,9 @@ function onChange(value) {
 }
 
 ReactDOM.render(
-  <Select>
+  <Select onChange={onChange}>
     {data.map(fruit =>
-      <Option value={fruit}>{fruit}</Option>
+      <Option key={fruit} value={fruit}>{fruit}</Option>
     )}
   </Select>,
   mountNode
