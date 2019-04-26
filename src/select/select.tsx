@@ -21,7 +21,7 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
     this.panelElement = React.createRef();
     this.state = {
       visible: false,
-      options: props.multiple ? [] : undefined,
+      options: props.multiple ? [] : '',
       position: {
         top: 0,
         left: 0,
@@ -45,6 +45,7 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
     const selectClassName = classNames(
       prefixCls,
       {
+        [`${prefixCls}-disabled`]: disabled,
         [`${prefixCls}-large`]: size === 'large',
         [`${prefixCls}-small`]: size === 'small',
       },
@@ -78,7 +79,6 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
         </div>
       </CSSTransition>
     );
-    console.log(options);
     return (
       <div {...attributes} className={selectClassName} ref={this.selectElement}>
         {options instanceof Array
@@ -86,7 +86,8 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
           : <input
             className={`${prefixCls}-input`}
             placeholder="Select"
-            value={options}
+            value={options || ''}
+            onChange={this.handleInputChange}
             onFocus={this.handleInputFocus}
           />
         }
@@ -152,6 +153,10 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
     this.setState({
       visible: true,
     });
+  }
+
+  handleInputChange = (value) => {
+    console.log(value);
   }
 
   handleRawChange = (value) => {

@@ -70,7 +70,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
     this.state = {
       current: this.getCurrent(),
       visible: false,
-      value: undefined,
+      value: props.range ? [] : '',
       position: {
         top: 0,
         left: 0,
@@ -79,12 +79,21 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
   }
 
   render() {
-    const { className, prefixCls, type, range, disabled } = this.props;
+    const {
+      className,
+      prefixCls,
+      type,
+      range,
+      disabled,
+      onChange,
+      ...attributes
+    } = this.props;
     const { value, position, visible } = this.state;
     const format = this.getFormat();
     const placeholder = this.getPlaceholder();
     const calendarClassName = classNames({
       [`${prefixCls}`]: true,
+      [`${prefixCls}-disabled`]: disabled,
     }, className);
     const panelClassName = classNames({
       [`${prefixCls}-panel`]: true,
@@ -112,7 +121,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
     );
 
     return (
-      <span className={calendarClassName} ref={this.calendarElement}>
+      <span {...attributes} className={calendarClassName} ref={this.calendarElement}>
         {range ? (
           <div className={`${prefixCls}-range`}>
             <input
@@ -121,7 +130,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
               value={
                 value instanceof Array && value.length
                   ? formatDate(value[0], format)
-                  : undefined
+                  : ''
               }
             />
             <span>~</span>
@@ -131,7 +140,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
               value={
                 value instanceof Array && value.length
                   ? formatDate(value[1], format)
-                  : undefined
+                  : ''
               }
             />
           </div>
@@ -143,7 +152,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
             value={
               value && !(value instanceof Array)
                 ? formatDate(value, format)
-                : undefined
+                : ''
             }
           />
         )}

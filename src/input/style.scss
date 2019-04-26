@@ -44,7 +44,8 @@ $prefix-cls: 'dk-input';
   &:disabled,
   &[readonly] {
     background: $input-disabled-bg;
-    opacity: $switch-disabled-opacity;
+    opacity: $input-disabled-opacity;
+    border-color: $input-disabled-border-color;
     pointer-events: none;
   }
 }

@@ -439,3 +439,15 @@ $calendar-prefix: 'dk-calendar';
     margin-right: 18px;
   }
 }
+
+.#{$calendar-prefix}-disabled {
+  background: $calendar-disabled-bg;
+  opacity: $calendar-disabled-opacity;
+  pointer-events: none;
+
+  .#{$calendar-prefix}-range,
+  input {
+    border-color: $calendar-disabled-border-color;
+    background: $calendar-disabled-bg;
+  }
+}

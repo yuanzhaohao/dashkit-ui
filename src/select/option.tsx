@@ -26,9 +26,9 @@ class Option extends React.PureComponent<SelectOptionProps> {
   }
 
   handleOptionClick = () => {
-    const { value, onRawChange } = this.props;
+    const { value, disabled, onRawChange } = this.props;
 
-    if (typeof onRawChange === 'function') {
+    if (!disabled && typeof onRawChange === 'function') {
       onRawChange(value);
     }
   }

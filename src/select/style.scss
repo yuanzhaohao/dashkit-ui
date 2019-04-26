@@ -114,5 +114,24 @@ $select-prefix: 'dk-select';
         background: $select-option-active-bg;
       }
     }
+
+    &-disabled {
+      color: lighten($select-color, 20%);
+      cursor: not-allowed;
+
+      &:hover {
+        background: $white;
+      }
+    }
+  }
+
+  &-disabled {
+    pointer-events: none;
+
+    input {
+      background: $select-disabled-bg;
+      opacity: $select-disabled-opacity;
+      border-color: $select-disabled-border-color;
+    }
   }
 }
