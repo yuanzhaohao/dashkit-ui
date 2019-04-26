@@ -14,6 +14,7 @@ export type SelectProps = {
 export type SelectState = {
   visible: boolean;
   options: ValueType;
+  inputValue: string;
   position: {
     top: number;
     left: number;

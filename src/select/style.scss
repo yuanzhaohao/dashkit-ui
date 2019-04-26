@@ -118,6 +118,7 @@ $select-prefix: 'dk-select';
     &-disabled {
       color: lighten($select-color, 20%);
       cursor: not-allowed;
+      transition: none;
 
       &:hover {
         background: $white;

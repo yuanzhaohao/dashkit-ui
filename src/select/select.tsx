@@ -22,6 +22,7 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
     this.state = {
       visible: false,
       options: props.multiple ? [] : '',
+      inputValue: '',
       position: {
         top: 0,
         left: 0,
@@ -41,7 +42,7 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
       onChange,
       ...attributes
     } = this.props;
-    const { position, options, visible } = this.state;
+    const { position, options, inputValue, visible } = this.state;
     const selectClassName = classNames(
       prefixCls,
       {
@@ -85,8 +86,8 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
           ? <></>
           : <input
             className={`${prefixCls}-input`}
-            placeholder="Select"
-            value={options || ''}
+            placeholder={options.toString() || 'Select'}
+            value={inputValue}
             onChange={this.handleInputChange}
             onFocus={this.handleInputFocus}
           />
@@ -122,8 +123,10 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
         (contentEl && contentEl.contains(targetEl))
       )
     ) {
+      const { options } = this.state;
       this.setState({
-        visible: false
+        visible: false,
+        inputValue: options instanceof Array ? '' : options.toString(),
       });
     }
   }
@@ -152,11 +155,15 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
   handleInputFocus = () => {
     this.setState({
       visible: true,
+      inputValue: '',
     });
   }
 
-  handleInputChange = (value) => {
-    console.log(value);
+  handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    this.setState({
+      inputValue: value,
+    });
   }
 
   handleRawChange = (value) => {
@@ -165,9 +172,11 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
     const newOptions = options instanceof Array
       ? Array.from(new Set([...options, value]))
       : value;
+    const newInputValue = newOptions instanceof Array ? '' : value;
 
     this.setState({
       options: newOptions,
+      inputValue: newInputValue,
       visible: false,
     });
 
