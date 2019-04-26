@@ -67,6 +67,7 @@ $select-prefix: 'dk-select';
     transform-origin: center top;
     box-sizing: border-box;
     z-index: $zindex-select;
+    overflow: scroll;
 
     &-enter {
       opacity: 0;
