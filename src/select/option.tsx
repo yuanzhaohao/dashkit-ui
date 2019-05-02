@@ -10,6 +10,7 @@ class Option extends React.PureComponent<SelectOptionProps> {
       [`${prefixCls}-option`]: true,
       [`${prefixCls}-option-disabled`]: disabled,
       [`${prefixCls}-option-active`]:
+        // @ts-ignore
         options instanceof Array && options.indexOf(value) !== -1
           ? true
           : options === value

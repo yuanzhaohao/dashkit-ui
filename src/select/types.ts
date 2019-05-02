@@ -7,6 +7,7 @@ export type SelectProps = {
   size: SelectSize;
   disabled?: boolean;
   value?: ValueType;
+  inputValue?: string;
   multiple?: boolean;
   onChange?: (options: string[]) => void;
 };

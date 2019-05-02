@@ -72,6 +72,7 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
               prefixCls,
               multiple,
               options,
+              inputValue,
               onRawChange: this.handleRawChange,
             }}
           >

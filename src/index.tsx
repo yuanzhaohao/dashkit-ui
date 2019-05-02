@@ -2,11 +2,15 @@ import './style/index.scss';
 
 // Basic
 //
-export { default as Grid } from './grid';
-export { default as Layout } from './layout';
 export { default as Icon } from './icon';
 export { default as Button } from './button';
 export { default as Scrollbar } from './scrollbar';
+
+// Layout
+//
+export { default as Grid } from './grid';
+export { default as Layout } from './layout';
+export { default as Card } from './card';
 
 // Form
 //

@@ -13,7 +13,10 @@ const Index = asyncComponent(() => import('./index'));
 
 const pageMap = {
   Basic: [
-    'Layout', 'Grid', 'Button', 'Icon',
+    'Button', 'Icon',
+  ],
+  Layout: [
+    'Layout', 'Grid', 'Card',
   ],
   Form: [
     'Radio', 'Checkbox', 'Switch', 'Input', 'Select', 'Calendar', 'Form',
