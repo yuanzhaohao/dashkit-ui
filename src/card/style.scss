@@ -1,10 +1,10 @@
 @import '../style/functions';
-@import '../style/variables';
+@import '../style/theme';
 @import '../style/mixins';
 
-$prefix: 'dashkit-card';
+$prefix-cls: 'dk-card';
 
-.dashkit-card {
+.#{$prefix-cls} {
   @include reset-component();
   position: relative;
   display: flex;
@@ -14,217 +14,24 @@ $prefix: 'dashkit-card';
   background-color: $card-bg;
   background-clip: border-box;
   border: $card-border-width solid $card-border-color;
-  @include border-radius($card-border-radius);
-  >hr {
-    margin-right: 0;
-    margin-left: 0;
+  border-radius: $card-border-radius;
+
+  &-header {
+    padding: $card-padding-y $card-padding-x;
+    margin-bottom: 0;
+    border-bottom: $card-border-width solid $card-border-color;
+    background: $card-header-bg;
+    border-radius: $card-border-radius $card-border-radius 0 0;
   }
-}
 
-.dashkit-card-body {
-  flex: 1 1 auto;
-  padding: $card-spacer-x;
-}
-
-.dashkit-card-title {
-  margin-bottom: $card-spacer-y;
-}
-
-.dashkit-card-subtitle {
-  margin-top: -($card-spacer-y / 2);
-  margin-bottom: 0;
-}
-
-.dashkit-card-text:last-child {
-  margin-bottom: 0;
-}
-
-.dashkit-card-link {
-  @include hover {
-    text-decoration: none;
+  &-body {
+    flex: 1 1 auto;
+    padding: $card-padding-y $card-padding-x;
   }
-  +.card-link {
-    margin-left: $card-spacer-x;
-  }
-}
 
-//
-// Optional textual caps
-//
-.card-header {
-  padding: $card-spacer-y $card-spacer-x;
-  margin-bottom: 0; // Removes the default margin-bottom of <hN>
-  background-color: $card-cap-bg;
-  border-bottom: $card-border-width solid $card-border-color;
-  &:first-child {
-    @include border-radius($card-inner-border-radius $card-inner-border-radius 0 0);
-  }
-}
-
-.card-footer {
-  padding: $card-spacer-y $card-spacer-x;
-  background-color: $card-cap-bg;
-  border-top: $card-border-width solid $card-border-color;
-  &:last-child {
-    @include border-radius(0 0 $card-inner-border-radius $card-inner-border-radius);
-  }
-}
-
-//
-// Header
-//
-.dashkit-card-header-title {
-  margin-bottom: 0;
-
-  > * {
-    flex: 1 1;
-  }
-}
-
-.dashkit-card-header-tabs {
-  margin-right: -($card-spacer-x / 2);
-  margin-bottom: -$card-spacer-y;
-  margin-left: -($card-spacer-x / 2);
-  border-bottom: 0;
-}
-
-.dashkit-card-header-pills {
-  margin-right: -($card-spacer-x / 2);
-  margin-left: -($card-spacer-x / 2);
-}
-
-// Card image
-.dashkit-card-img-overlay {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: $card-img-overlay-padding;
-}
-
-.dashkit-card-img {
-  width: 100%; // Required because we use flexbox and this inherently applies align-self: stretch
-  @include border-radius($card-inner-border-radius);
-}
-
-// Card image caps
-.dashkit-card-img-top {
-  width: 100%; // Required because we use flexbox and this inherently applies align-self: stretch
-  @include border-top-radius($card-inner-border-radius);
-}
-
-.dashkit-card-img-bottom {
-  width: 100%; // Required because we use flexbox and this inherently applies align-self: stretch
-  @include border-bottom-radius($card-inner-border-radius);
-}
-
-// Card deck
-.dashkit-card-deck {
-  display: flex;
-  flex-direction: column;
-  .card {
-    margin-bottom: $card-deck-margin;
-  }
-  @include media-breakpoint-up(sm) {
-    flex-flow: row wrap;
-    margin-right: -$card-deck-margin;
-    margin-left: -$card-deck-margin;
-    .card {
-      display: flex; // Flexbugs #4: https://github.com/philipwalton/flexbugs#flexbug-4
-      flex: 1 0 0%;
-      flex-direction: column;
-      margin-right: $card-deck-margin;
-      margin-bottom: 0; // Override the default
-      margin-left: $card-deck-margin;
-    }
-  }
-}
-
-//
-// Card groups
-//
-.dashkit-card-group {
-  display: flex;
-  flex-direction: column; // The child selector allows nested `.card` within `.card-group`
-  // to display properly.
-  >.card {
-    margin-bottom: $card-group-margin;
-  }
-  @include media-breakpoint-up(sm) {
-    flex-flow: row wrap; // The child selector allows nested `.card` within `.card-group`
-    // to display properly.
-    >.card {
-      // Flexbugs #4: https://github.com/philipwalton/flexbugs#flexbug-4
-      flex: 1 0 0%;
-      margin-bottom: 0;
-      +.card {
-        margin-left: 0;
-        border-left: 0;
-      } // Handle rounded corners
-      @if $enable-rounded {
-        &:first-child {
-          @include border-right-radius(0);
-          .card-img-top,
-          .card-header {
-            border-top-right-radius: 0;
-          }
-          .card-img-bottom,
-          .card-footer {
-            border-bottom-right-radius: 0;
-          }
-        }
-        &:last-child {
-          @include border-left-radius(0);
-          .card-img-top,
-          .card-header {
-            border-top-left-radius: 0;
-          }
-          .card-img-bottom,
-          .card-footer {
-            border-bottom-left-radius: 0;
-          }
-        }
-        &:only-child {
-          @include border-radius($card-border-radius);
-          .card-img-top,
-          .card-header {
-            @include border-top-radius($card-border-radius);
-          }
-          .card-img-bottom,
-          .card-footer {
-            @include border-bottom-radius($card-border-radius);
-          }
-        }
-        &:not(:first-child):not(:last-child):not(:only-child) {
-          @include border-radius(0);
-          .card-img-top,
-          .card-img-bottom,
-          .card-header,
-          .card-footer {
-            @include border-radius(0);
-          }
-        }
-      }
-    }
-  }
-}
-
-//
-// Columns
-//
-.dashkit-card-columns {
-  .card {
-    margin-bottom: $card-columns-margin;
-  }
-  @include media-breakpoint-up(sm) {
-    column-count: $card-columns-count;
-    column-gap: $card-columns-gap;
-    orphans: 1;
-    widows: 1;
-    .card {
-      display: inline-block; // Don't let them vertically span multiple columns
-      width: 100%; // Don't let their width change
-    }
+  &-footer {
+    padding: $card-padding-y $card-padding-x;
+    border-top: $card-border-width solid $card-border-color;
+    border-radius: $card-border-radius $card-border-radius 0 0;
   }
 }

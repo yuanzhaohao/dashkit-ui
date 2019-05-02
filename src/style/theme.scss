@@ -189,6 +189,16 @@ $btn-transition:                    color .15s $ease-in-out, background-color .1
 //
 $scrollbar-thumb-size:              6px !default;
 
+// Card
+//
+$card-bg:                           $white !default;
+$card-border-width:                 $border-width !default;
+$card-border-color:                 $border-color !default;
+$card-border-radius:                $border-radius !default;
+$card-header-bg:                    $white !default;
+$card-padding-y:                    16px !default;
+$card-padding-x:                    24px !default;
+
 // Input
 //
 $input-height:                      34px !default;

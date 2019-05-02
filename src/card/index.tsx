@@ -23,12 +23,12 @@ class Card extends React.PureComponent<CardProps> {
   render() {
     const { className, children, title, ...attributes } = this.props;
     const cardClassName = classNames(
-      'dashkit-card',
+      'dk-card',
       className,
     );
     return (
       <div {...attributes} className={cardClassName}>
-        {title ? <h3 className="dashkit-card-title">{title}</h3> : null}
+        {title ? <h3 className="dk-card-title">{title}</h3> : null}
         {children}
       </div>
     );
@@ -39,12 +39,12 @@ class CardHeader extends React.PureComponent<CardProps> {
   render() {
     const { className, children, title, ...attributes } = this.props;
     const cardClassName = classNames(
-      'dashkit-card-header',
+      'dk-card-header',
       className,
     );
     return (
       <div {...attributes} className={cardClassName}>
-        {title ? <h4 className="dashkit-card-title">{title}</h4> : null}
+        {title ? <h4 className="dk-card-title">{title}</h4> : null}
         {children}
       </div>
     );
@@ -63,8 +63,8 @@ function generator(classname: string) {
   }
 }
 
-const Footer = generator('dashkit-card-footer');
-const Body = generator('dashkit-card-body');
+const Footer = generator('dk-card-footer');
+const Body = generator('dk-card-body');
 
 Card.Header = CardHeader;
 Card.Footer = Footer;
