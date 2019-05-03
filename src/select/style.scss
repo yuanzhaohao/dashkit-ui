@@ -136,4 +136,22 @@ $select-prefix: 'dk-select';
       border-color: $select-disabled-border-color;
     }
   }
+
+  &-group {
+
+    &-title {
+      display: flex;
+      align-items: center;
+      height: $select-option-group-height;
+      opacity: 0.7;
+      color: $select-color;
+      padding-left: $input-padding-x;
+    }
+
+    &-list {
+      .#{$select-prefix}-option {
+        padding-left: $input-padding-x + 8px;
+      }
+    }
+  }
 }

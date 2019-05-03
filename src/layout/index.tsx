@@ -18,10 +18,10 @@ export type BasicProps = {
 };
 
 class Layout extends React.Component<LayoutProps, LayoutState> {
-  static Header: any;
-  static Footer: any;
-  static Content: any;
-  static Sidebar: any;
+  static Header: typeof Header;
+  static Footer: typeof Footer;
+  static Content: typeof Content;
+  static Sidebar: typeof Sidebar;
   static defaultProps = {
     prefixCls: 'dk-layout',
     hasSidebar: false,

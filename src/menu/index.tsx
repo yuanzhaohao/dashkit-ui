@@ -26,9 +26,9 @@ export type MenuState = {
 };
 
 class Menu extends React.PureComponent<MenuProps, MenuState> {
-  static Item: any;
-  static ItemGroup: any;
-  static SubMenu: any;
+  static Item: typeof MenuItem;
+  static ItemGroup: typeof ItemGroup;
+  static SubMenu: typeof SubMenu;
   static defaultProps = {
     prefixCls: 'dk-menu',
     mode: 'vertical',

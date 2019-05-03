@@ -13,7 +13,7 @@
     "strictFunctionTypes": false,
     "sourceMap": false,
     "removeComments": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
       "dashkit-ui": ["src/"]
     }

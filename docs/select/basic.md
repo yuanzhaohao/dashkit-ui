@@ -5,7 +5,7 @@ title:
   en-US: Basic
 subtitle:
   zh-CN: 基本用法。
-  en-US: Select component to select value from options..
+  en-US: Select component to select value from options.
 ---
 
 ```js

@@ -2,12 +2,15 @@ import * as React from 'react';
 import { createPortal } from 'react-dom';
 import { CSSTransition } from 'react-transition-group';
 import * as classNames from 'classnames';
-import { SelectProps, SelectState, SelectSize } from './types';
-import { Provider as SelectProvider } from './context';
+import { SelectProps, SelectState, SelectSize, SelectOptionProps, SelectOptionGroupProps } from './types';
+import { Provider } from './context';
+import Option from './option';
+import OptionGroup from './option-group';
 import Icon from '../icon';
 
 class Select extends React.PureComponent<SelectProps, SelectState> {
-  static Option: any;
+  static Option: typeof Option;
+  static OptionGroup: typeof OptionGroup;
   readonly selectElement: React.RefObject<HTMLDivElement>;
   readonly panelElement: React.RefObject<HTMLDivElement>;
   static defaultProps = {
@@ -52,6 +55,7 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
       },
       className,
     );
+
     const selectNode = (
       <CSSTransition
         in={visible}
@@ -67,7 +71,7 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
           style={position}
           ref={this.panelElement}
         >
-          <SelectProvider
+          <Provider
             value={{
               prefixCls,
               multiple,
@@ -77,7 +81,7 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
             }}
           >
             {children}
-          </SelectProvider>
+          </Provider>
         </div>
       </CSSTransition>
     );
@@ -98,6 +102,38 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
         {!disabled && createPortal(selectNode, document.body)}
       </div>
     );
+  }
+
+  renderFilterOptionsFromChildren = () => {
+    const { children } = this.props;
+
+    console.log(children)
+    const newChildren = React.Children.map(children, (child: React.ReactElement<any>) => {
+      if (!child) {
+        return;
+      }
+      const { type }= child as any;
+
+      console.log(child.type)
+
+      // warning(
+      //   type.isSelectOption || type.isSelectOptionGroup,
+      //   'the children of `Select` should be `Select.Option` or `Select.OptGroup`, ' +
+      //     `instead of \`${type.name || type.displayName}\`.`,
+      // );
+
+      // if (type.isSelectOption) {
+      //   return <Option {...newOptionProps} {...child.props} />
+      // }
+
+      // if (type.isSelectOptionGroup) {
+      //   const label = child.props.label || child.props.key;
+      //   return <OptionGroup {...newOptionGroupProps} {...child.props} label={label} />
+      // }
+
+      return child;
+    })
+    return newChildren;
   }
 
   bindDocumentClick = () => {

@@ -3,9 +3,19 @@ import * as classNames from 'classnames';
 import { createConsumer } from './context';
 import { SelectOptionProps } from './types';
 
-class Option extends React.PureComponent<SelectOptionProps> {
+class Option extends React.PureComponent<Partial<SelectOptionProps>> {
   render() {
-    const { prefixCls, value, onRawChange, disabled, options, ...attributes } = this.props;
+    const {
+      prefixCls,
+      value,
+      className,
+      inputValue,
+      onRawChange,
+      disabled,
+      options,
+      filterOption,
+      ...attributes
+    } = this.props;
     const optionClassName = classNames({
       [`${prefixCls}-option`]: true,
       [`${prefixCls}-option-disabled`]: disabled,
@@ -16,14 +26,19 @@ class Option extends React.PureComponent<SelectOptionProps> {
           : options === value
             ? true
             : false
-    });
-    return (
-      <div
-        className={optionClassName}
-        onClick={this.handleOptionClick}
-        {...attributes}
-      />
-    );
+    }, className);
+    const isShow = typeof filterOption === 'function' ? filterOption(inputValue, options) : true;
+
+    if (isShow) {
+      return (
+        <div
+          className={optionClassName}
+          onClick={this.handleOptionClick}
+          {...attributes}
+        />
+      );
+    }
+    return null;
   }
 
   handleOptionClick = () => {
