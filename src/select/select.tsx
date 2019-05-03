@@ -74,7 +74,6 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
           <Provider
             value={{
               prefixCls,
-              multiple,
               options,
               inputValue,
               onRawChange: this.handleRawChange,
@@ -85,7 +84,6 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
         </div>
       </CSSTransition>
     );
-    console.log(visible);
     return (
       <div {...attributes} className={selectClassName} ref={this.selectElement}>
         {options instanceof Array
@@ -108,38 +106,6 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
         {!disabled && createPortal(selectNode, document.body)}
       </div>
     );
-  }
-
-  renderFilterOptionsFromChildren = () => {
-    const { children } = this.props;
-
-    console.log(children)
-    const newChildren = React.Children.map(children, (child: React.ReactElement<any>) => {
-      if (!child) {
-        return;
-      }
-      const { type }= child as any;
-
-      console.log(child.type)
-
-      // warning(
-      //   type.isSelectOption || type.isSelectOptionGroup,
-      //   'the children of `Select` should be `Select.Option` or `Select.OptGroup`, ' +
-      //     `instead of \`${type.name || type.displayName}\`.`,
-      // );
-
-      // if (type.isSelectOption) {
-      //   return <Option {...newOptionProps} {...child.props} />
-      // }
-
-      // if (type.isSelectOptionGroup) {
-      //   const label = child.props.label || child.props.key;
-      //   return <OptionGroup {...newOptionGroupProps} {...child.props} label={label} />
-      // }
-
-      return child;
-    })
-    return newChildren;
   }
 
   bindDocumentClick = () => {
