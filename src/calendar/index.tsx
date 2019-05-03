@@ -1,11 +1,11 @@
 import './style.scss';
 
 import * as React from 'react';
-import { createPortal, findDOMNode } from 'react-dom';
+import { createPortal } from 'react-dom';
 import * as classNames from 'classnames';
 import { CSSTransition } from 'react-transition-group';
 import { CalendarType, DateProps } from './types';
-// import Input from '../input';
+import { isArray } from 'lodash-es';
 import Icon from '../icon';
 import Picker from './picker';
 import Range from './range';
@@ -34,7 +34,8 @@ export type CalendarState = {
   position: {
     top: number;
     left: number;
-  }
+  },
+  inputValue: string | string[];
 };
 
 class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
@@ -52,12 +53,14 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
       state.visible = !!nextProps.visible;
     }
     if ('value' in nextProps && nextProps.value) {
-      if (nextProps.value instanceof Array) {
+      if (isArray(nextProps.value)) {
         if (isDate(nextProps.value[0]) && isDate(nextProps.value[1])) {
           state.value = nextProps.value;
+          state.inputValue = nextProps.value;
         }
       } else if (isDate(nextProps.value)) {
         state.value = nextProps.value;
+        state.inputValue = nextProps.value;
       }
     }
     return state;
@@ -75,6 +78,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
         top: 0,
         left: 0,
       },
+      inputValue: props.range ? [] : '',
     };
   }
 
@@ -88,8 +92,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
       onChange,
       ...attributes
     } = this.props;
-    const { value, position, visible } = this.state;
-    const format = this.getFormat();
+    const { value, position, inputValue, visible } = this.state;
     const placeholder = this.getPlaceholder();
     const calendarClassName = classNames({
       [`${prefixCls}`]: true,
@@ -122,26 +125,20 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
 
     return (
       <span {...attributes} className={calendarClassName} ref={this.calendarElement}>
-        {range ? (
+        {isArray(inputValue) ? (
           <div className={`${prefixCls}-range`}>
             <input
               placeholder={placeholder[0]}
               onFocus={this.handleInputFocus}
-              value={
-                value instanceof Array && value.length
-                  ? formatDate(value[0], format)
-                  : ''
-              }
+              value={inputValue[0]}
+              onChange={this.handleInputChange.bind(this, 0)}
             />
             <span>~</span>
             <input
               placeholder={placeholder[1]}
               onFocus={this.handleInputFocus}
-              value={
-                value instanceof Array && value.length
-                  ? formatDate(value[1], format)
-                  : ''
-              }
+              value={inputValue[1]}
+              onChange={this.handleInputChange.bind(this, 1)}
             />
           </div>
         ) : (
@@ -149,11 +146,8 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
             className={`${prefixCls}-input`}
             placeholder={placeholder}
             onFocus={this.handleInputFocus}
-            value={
-              value && !(value instanceof Array)
-                ? formatDate(value, format)
-                : ''
-            }
+            value={inputValue}
+            onChange={this.handleInputChange}
           />
         )}
         <Icon
@@ -264,6 +258,22 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
     });
   }
 
+  handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, index?: number) => {
+    const { value } = event.target;
+    const { inputValue } = this.state;
+    if (inputValue instanceof Array && index !== undefined) {
+      inputValue[index] = value;
+      const newInputValue = [...inputValue];
+      this.setState({
+        inputValue: newInputValue,
+      });
+    } else {
+      this.setState({
+        inputValue: value,
+      });
+    }
+  }
+
   bindDocumentClick = () => {
     document.addEventListener('click', this.handleDocumentClick);
   }
@@ -289,15 +299,16 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
       )
     ) {
       this.setState({
-        visible: false
+        visible: false,
       });
     }
   }
 
   handleChange = (date: Date | Date[], isSelect?: boolean) => {
     const { onChange, type } = this.props;
-
+    const format = this.getFormat();
     let current = date;
+
     if (date instanceof Array) {
       current = [...date];
       if (isSameMonth(current[0], current[1])) {
@@ -309,17 +320,19 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
       this.setState({
         current,
         value: date,
+        inputValue: isArray(date) ? date.map(v => formatDate(v, format)) : formatDate(date, format),
         visible: !isSelect,
       });
     } else if (isSelect) {
       this.setState({
         current,
         value: date,
+        inputValue: isArray(date) ? date.map(v => formatDate(v, format)) : formatDate(date, format),
         visible: false,
       });
       if (typeof onChange === 'function') {
         const format = this.getFormat();
-        const dateStr = date instanceof Array
+        const dateStr = isArray(date)
           ? date.map((d) => {
             return formatDate(d, format);
           })
