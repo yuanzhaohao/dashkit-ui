@@ -27,7 +27,8 @@ class Option extends React.PureComponent<Partial<SelectOptionProps>> {
             ? true
             : false
     }, className);
-    const isShow = typeof filterOption === 'function' ? filterOption(inputValue, options) : true;
+
+    const isShow = typeof filterOption === 'function' ? filterOption(inputValue, value) : true;
 
     if (isShow) {
       return (
