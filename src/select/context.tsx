@@ -1,14 +1,11 @@
 import * as React from 'react';
+import { SelectOptionProps } from './types';
 
-type ContextProps = {
-  prefixCls?: string;
-};
-
-const context = React.createContext<ContextProps>(null);
+const context = React.createContext<Partial<SelectOptionProps>>(null);
 export const Provider = context.Provider;
 export const Consumer = context.Consumer;
 export const createConsumer = (Component: any) => (props: any) => (
   <Consumer>
-    {(value: ContextProps) => <Component {...props} {...value} />}
+    {(value: Partial<SelectOptionProps>) => <Component {...props} {...value} />}
   </Consumer>
 );
