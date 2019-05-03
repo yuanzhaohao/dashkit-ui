@@ -85,6 +85,7 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
         </div>
       </CSSTransition>
     );
+    console.log(visible);
     return (
       <div {...attributes} className={selectClassName} ref={this.selectElement}>
         {options instanceof Array
@@ -98,7 +99,12 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
           />
         }
 
-        <Icon type="chevron-down" className={`${prefixCls}-icon`} />
+        <Icon
+          type="chevron-down"
+          className={classNames(`${prefixCls}-icon`, {
+            [`${prefixCls}-icon-visible`]: visible,
+          })}
+        />
         {!disabled && createPortal(selectNode, document.body)}
       </div>
     );
