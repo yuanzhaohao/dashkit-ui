@@ -7,6 +7,7 @@ export type SpinSize = 'small' | 'default' | 'large';
 export type SpinProps = {
   spinning?: boolean;
   className?: string;
+  wrapperClassName?: string;
   size?: SpinSize;
   delay?: number;
   text?: string;
@@ -90,7 +91,7 @@ class Spin extends React.Component<SpinProps, SpinState> {
   }
 
   render() {
-    const { children, className, size, text, prefixCls } = this.props;
+    const { children, className, wrapperClassName, size, text, prefixCls } = this.props;
     const { spinning } = this.state;
     const isNestedPattern = !!children;
     const spinClassName = classNames([
@@ -123,7 +124,7 @@ class Spin extends React.Component<SpinProps, SpinState> {
         className,
       );
       return (
-        <div className={`${prefixCls}-box`}>
+        <div className={classNames(`${prefixCls}-box`, wrapperClassName)}>
           <div className={containerClassName}>{children}</div>
           {spinning ? (
             <div className={`${prefixCls}-loading`}>{spinElement}</div>

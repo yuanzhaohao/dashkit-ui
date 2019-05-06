@@ -2,7 +2,7 @@ import * as React from 'react';
 import { createPortal } from 'react-dom';
 import { CSSTransition } from 'react-transition-group';
 import * as classNames from 'classnames';
-import { SelectProps, SelectState, SelectSize, SelectOptionProps, SelectOptionGroupProps } from './types';
+import { SelectProps, SelectState, SelectSize } from './types';
 import { Provider } from './context';
 import Option from './option';
 import OptionGroup from './option-group';
@@ -18,6 +18,16 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
     size: 'default' as SelectSize,
   };
 
+  static getDerivedStateFromProps(nextProps: SelectProps) {
+    if ('value' in nextProps) {
+      return {
+        value: nextProps.value,
+        inputValue: nextProps.value,
+      }
+    }
+    return null;
+  }
+
   constructor(props: SelectProps) {
     super(props);
     this.selectElement = React.createRef();
@@ -30,6 +40,7 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
         top: 0,
         left: 0,
       },
+      width: 0,
     };
   }
 
@@ -43,9 +54,10 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
       value,
       multiple,
       onChange,
+      placeholder = 'Select',
       ...attributes
     } = this.props;
-    const { position, options, inputValue, visible } = this.state;
+    const { position, width, options, inputValue, visible } = this.state;
     const selectClassName = classNames(
       prefixCls,
       {
@@ -55,6 +67,10 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
       },
       className,
     );
+    const panelStyle = {
+      ...position,
+      width,
+    }
 
     const selectNode = (
       <CSSTransition
@@ -68,7 +84,7 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
       >
         <div
           className={`${prefixCls}-panel`}
-          style={position}
+          style={panelStyle}
           ref={this.panelElement}
         >
           <Provider
@@ -84,13 +100,14 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
         </div>
       </CSSTransition>
     );
+
     return (
       <div {...attributes} className={selectClassName} ref={this.selectElement}>
         {options instanceof Array
           ? <></>
           : <input
             className={`${prefixCls}-input`}
-            placeholder={options.toString() || 'Select'}
+            placeholder={options.toString() || placeholder}
             value={inputValue}
             onChange={this.handleInputChange}
             onFocus={this.handleInputFocus}
@@ -156,8 +173,10 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
 
   handleEnter = () => {
     const position = this.getPosition();
+    const width = this.selectElement.current.clientWidth;
     this.setState({
       position,
+      width,
     });
   }
 

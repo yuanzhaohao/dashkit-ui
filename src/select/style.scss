@@ -7,6 +7,7 @@ $select-prefix: 'dk-select';
 .#{$select-prefix} {
   @include reset-component();
   position: relative;
+  width: $select-width;
   display: inline-block;
   color: $select-color;
 
@@ -22,7 +23,7 @@ $select-prefix: 'dk-select';
   }
 
   &-input {
-    min-width: $select-width;
+    width: 100%;
     padding: $input-padding-y $input-padding-x;
     padding-right: 30px;
     border: 1px solid $select-border-color;
@@ -63,7 +64,7 @@ $select-prefix: 'dk-select';
     position: absolute;
     top: 100%;
     left: 0;
-    width: $select-width;
+    // width: $select-width;
     max-height: $select-panel-height;
     margin-top: 5px;
     box-shadow: $select-panel-shadow;

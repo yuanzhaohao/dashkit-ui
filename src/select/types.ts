@@ -10,6 +10,7 @@ export type SelectProps = {
   value?: ValueType;
   inputValue?: string;
   multiple?: boolean;
+  placeholder?: string;
   onChange?: (options: string[]) => void;
 };
 
@@ -39,5 +40,5 @@ export type SelectOptionGroupProps = {
   prefixCls: string;
   label: string;
   key: string | number;
-  children: ChildNode;
+  children: React.ReactChildren | null;
 }
