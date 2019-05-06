@@ -21,7 +21,8 @@ export type SelectState = {
   position: {
     top: number;
     left: number;
-  }
+  },
+  width: number;
 };
 
 export type SelectOptionProps = {

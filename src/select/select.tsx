@@ -36,11 +36,11 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
       visible: false,
       options: props.multiple ? [] : '',
       inputValue: '',
+      width: 0,
       position: {
         top: 0,
         left: 0,
       },
-      width: 0,
     };
   }
 
@@ -173,7 +173,7 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
 
   handleEnter = () => {
     const position = this.getPosition();
-    const width = this.selectElement.current.clientWidth;
+    const width = this.selectElement.current.clientWidth || 0;
     this.setState({
       position,
       width,
