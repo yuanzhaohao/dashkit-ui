@@ -44,7 +44,6 @@ const devConfig = {
   }
 }
 
-
 rm(publishPath, function(err) {
   if (err) throw err
 
@@ -54,6 +53,7 @@ rm(publishPath, function(err) {
     webpack(merge(webpackConfig, devConfig), function(err, stats) {
       callback(err, stats);
       fs.copySync(srcPath, publishSrcPath)
+      fs.copySync(utils.resolve('./readme.md'), path.join(publishPath, './readme.md'))
 
       copyFiles('scss');
       copyFiles('svg');

@@ -7,3 +7,36 @@
 ## Dashkit UI
 
 > A ui library.
+
+## Docs
+
+[View docs here](http://yuanzhaohao.github.io/dashkit-ui/#/)
+
+## Requirements
+
+```
+React >= 16.0.0
+```
+
+## Installation
+
+```
+yarn add dashkit-ui
+// or
+npm install dashkit-ui
+```
+
+## CDN
+
+```
+<link rel="stylesheet" href="https://unpkg.com/dashkit-ui/dist/dashkit.css" />
+<script crossorigin src="https://unpkg.com/dashkit-ui/dist/dashkit.min.js"></script>
+```
+
+## Usage
+
+```
+import { Button } from 'dashkit-ui'
+
+<Button />
+```
