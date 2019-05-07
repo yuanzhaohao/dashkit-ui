@@ -32,6 +32,9 @@
     "url": "git+https://github.com/yuanzhaohao/dashkit-ui.git"
   },
   "homepage": "http://yuanzhaohao.github.io/dashkit-ui/#/",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "peerDependencies": {
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0"
