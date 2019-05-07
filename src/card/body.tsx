@@ -31,7 +31,6 @@ class Body extends React.PureComponent<BodyProps> {
         onEntered={this.handleEntered}
         onExit={this.handleExit}
         onExiting={this.handleExiting}
-        onExited={this.handleExited}
         classNames={`${prefixCls}-body-collapse`}
       >
         <div className={collapseClassName}>{bodyNode}</div>
@@ -42,7 +41,7 @@ class Body extends React.PureComponent<BodyProps> {
 
   handleEnter = (el) => {
     const { prefixCls } = this.props;
-    removeClass(el, `${prefixCls}-submenu-list-opened`);
+    removeClass(el, `${prefixCls}-body-collapse-visible`);
     if (el.scrollHeight !== 0) {
       el.style.height = el.scrollHeight + 'px';
     }
@@ -60,12 +59,6 @@ class Body extends React.PureComponent<BodyProps> {
     if (el.scrollHeight !== 0) {
       el.style.height = '0';
     }
-  }
-
-  handleExited = () => {
-    // const { key } = this.props;
-
-    // console.log(key);
   }
 }
 

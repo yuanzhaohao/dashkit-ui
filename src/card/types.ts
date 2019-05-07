@@ -5,7 +5,9 @@ export type BasicProps = {
 
 export type CardProps = BasicProps & {
   collapse?: boolean;
-  key?: string | number;
+  index?: string | number;
+  visible?: boolean;
+  onCollapse?: (index: string | number) => void;
 };
 
 export type CardState = {
@@ -33,9 +35,10 @@ export type AccordionProps = BasicProps & {
 };
 
 export type CollapseProps = BasicProps & {
-  defaultActiveKey?: string[];
+  defaultActiveIndexs?: (string | number)[];
+  activeIndexs?: (string | number)[];
 };
 
 export type CollapseState = {
-  activeKey: string[];
+  activeIndexs: (string | number)[];
 };

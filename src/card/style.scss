@@ -23,6 +23,10 @@ $card-prefix: 'dk-card';
 
     &-collapse {
       cursor: pointer;
+
+      &-visible {
+        background: $light;
+      }
     }
   }
 

@@ -25,16 +25,16 @@ const Demo = () => (
       <Card.Body>A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.</Card.Body>
     </Card>
 
-    <Card.Collapse style={collapseStyle}>
-      <Card key="1">
+    <Card.Collapse style={collapseStyle} defaultActiveIndexs={['1']}>
+      <Card index="1">
         <Card.Header>This is header 1</Card.Header>
         <Card.Body>A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.</Card.Body>
       </Card>
-      <Card key="2">
+      <Card index="2">
         <Card.Header>This is header 1</Card.Header>
         <Card.Body>A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.</Card.Body>
       </Card>
-      <Card key="3">
+      <Card index="3">
         <Card.Header>This is header 3</Card.Header>
         <Card.Body>A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.</Card.Body>
       </Card>

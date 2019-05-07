@@ -16,12 +16,22 @@ class Card extends React.PureComponent<CardProps, CardState> {
   static Collapse: typeof Collapse;
   static defaultProps = {
     prefixCls: 'dk-card',
+    visible: true,
   };
+
+  static getDerivedStateFromProps(nextProps: CardProps) {
+    if ('visible' in nextProps) {
+      return {
+        visible: nextProps.visible,
+      }
+    }
+    return null;
+  }
 
   constructor(props: CardProps) {
     super(props);
     this.state = {
-      visible: true,
+      visible: !!props.visible,
     };
   }
 
@@ -31,6 +41,8 @@ class Card extends React.PureComponent<CardProps, CardState> {
       prefixCls,
       children,
       collapse,
+      visible: visibleProp,
+      onCollapse,
       ...attributes
     } = this.props;
     const { visible } = this.state;
@@ -38,6 +50,7 @@ class Card extends React.PureComponent<CardProps, CardState> {
       prefixCls,
       className,
     );
+    console.log(visible);
     return (
       <div {...attributes} className={cardClassName}>
         <Provider
@@ -51,8 +64,14 @@ class Card extends React.PureComponent<CardProps, CardState> {
     );
   }
 
-  handleHeaderClick = (key?: string | number) => {
+  handleHeaderClick = () => {
     const { visible } = this.state;
+    const { index, onCollapse } = this.props;
+    console.log('call handleHeaderClick', index, visible);
+    if (typeof onCollapse === 'function') {
+      onCollapse(index);
+      return;
+    }
     this.setState({
       visible: !visible,
     });
