@@ -3,7 +3,8 @@ import './style.scss';
 import * as classNames from 'classnames';
 import * as React from 'react';
 import Accordion from './accordion';
-import { CardProps, BasicProps, HeaderProps } from './types';
+import Header from './header';
+import { CardProps, BasicProps } from './types';
 
 class Card extends React.PureComponent<CardProps> {
   static Header: typeof Header;
@@ -29,39 +30,14 @@ class Card extends React.PureComponent<CardProps> {
   }
 }
 
-class Header extends React.PureComponent<HeaderProps> {
-  static defaultProps = {
-    prefixCls: 'dk-card',
-  };
-
-  render() {
-    const { className, prefixCls, children, title, ...attributes } = this.props;
-    const cardClassName = classNames(
-      `${prefixCls}-header`,
-      className,
-    );
-    return (
-      <div {...attributes} className={cardClassName}>
-        {title ? <h4 className={`${prefixCls}-title`}>{title}</h4> : null}
-        {children}
-      </div>
-    );
-  }
-}
-
 function generator(cls: string) {
-  return class Basic extends React.Component<BasicProps> {
-    static defaultProps = {
-      prefixCls: 'dk-card',
-    };
-    render() {
-      const { className, prefixCls, children, ...attributes } = this.props;
-      const basicClassName = classNames(`${prefixCls}-${cls}`, className);
-      return (
-        <div {...attributes} className={basicClassName}>{children}</div>
-      );
-    }
-  }
+  return (props: BasicProps) => {
+    const { className, prefixCls = 'dk-card', ...attributes } = props;
+    const basicClassName = classNames(`${prefixCls}-${cls}`, className);
+    return (
+      <div {...attributes} className={basicClassName} />
+    );
+  };
 }
 
 const Footer = generator('footer');
