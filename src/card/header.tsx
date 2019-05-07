@@ -15,7 +15,6 @@ class Header extends React.PureComponent<HeaderProps> {
       children,
       title,
       handleHeaderClick,
-      key,
       collapse,
       visible,
       ...attributes
@@ -25,18 +24,18 @@ class Header extends React.PureComponent<HeaderProps> {
       [`${prefixCls}-header-collapse`]: collapse,
     }, className);
     return (
-      <div {...attributes} className={cardClassName} onClick={this.handleClick.bind(this, key)}>
+      <div {...attributes} className={cardClassName} onClick={this.handleClick}>
         {title ? <h4 className={`${prefixCls}-title`}>{title}</h4> : null}
         {children}
       </div>
     );
   }
 
-  handleClick = (key?: string | number) => {
+  handleClick = () => {
     const { handleHeaderClick, onClick, collapse } = this.props;
 
     if (collapse && typeof handleHeaderClick === 'function') {
-      handleHeaderClick(key);
+      handleHeaderClick();
     }
 
     if (typeof onClick === 'function') {

@@ -49,8 +49,6 @@ class Collapse extends React.PureComponent<CollapseProps, CollapseState> {
     ? Array.from(new Set([...activeIndexs, index]))
     : activeIndexs.filter(i => i !== index);
 
-    console.log(newActiveIndexs);
-    console.log('call handleCollapse', index);
     this.setState({
       activeIndexs: newActiveIndexs,
     });
