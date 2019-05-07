@@ -2,9 +2,9 @@
 @import '../style/theme';
 @import '../style/mixins';
 
-$prefix-cls: 'dk-card';
+$card-prefix: 'dk-card';
 
-.#{$prefix-cls} {
+.#{$card-prefix} {
   @include reset-component();
   position: relative;
   display: flex;
@@ -19,14 +19,35 @@ $prefix-cls: 'dk-card';
   &-header {
     padding: $card-padding-y $card-padding-x;
     margin-bottom: 0;
-    border-bottom: $card-border-width solid $card-border-color;
     background: $card-header-bg;
-    border-radius: $card-border-radius $card-border-radius 0 0;
+
+    &-collapse {
+      cursor: pointer;
+    }
   }
 
   &-body {
     flex: 1 1 auto;
     padding: $card-padding-y $card-padding-x;
+    border-top: $card-border-width solid $card-border-color;
+
+    &-collapse {
+      overflow: hidden;
+      height: 0;
+      transition: height 0.35s ease;
+
+      &-visible,
+      &-exit,
+      &-enter-done {
+        height: auto;
+        display: block;
+      }
+
+      &-exit-done {
+        height: 0;
+        display: none;
+      }
+    }
   }
 
   &-footer {
@@ -35,7 +56,34 @@ $prefix-cls: 'dk-card';
     border-radius: $card-border-radius $card-border-radius 0 0;
   }
 
+  > div:first-child {
+    border-radius: $card-border-radius $card-border-radius 0 0;
+  }
+  > div:last-child {
+    border-radius: 0 0 $card-border-radius $card-border-radius;
+  }
+
   &-accordion {
     overflow: hidden;
+  }
+}
+
+.#{$card-prefix}-collapse {
+  @include reset-component();
+
+  .#{$card-prefix} {
+    border-radius: 0;
+
+    &:nth-of-type(n+1) {
+      margin-top: -1px;
+    }
+
+    &:first-child {
+      border-radius: $card-border-radius $card-border-radius 0 0;
+    }
+
+    &:last-child {
+      border-radius: 0 0 $card-border-radius $card-border-radius;
+    }
   }
 }

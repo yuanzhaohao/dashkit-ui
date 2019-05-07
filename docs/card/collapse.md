@@ -10,13 +10,40 @@ subtitle:
 
 ```js
 import { Card } from 'dashkit-ui';
+const cardStyle = {
+  width: 240,
+};
+
+const collapseStyle = {
+  marginTop: 20,
+};
+
+const Demo = () => (
+  <div>
+    <Card style={cardStyle} collapse={true}>
+      <Card.Header>Header</Card.Header>
+      <Card.Body>A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.</Card.Body>
+    </Card>
+
+    <Card.Collapse style={collapseStyle}>
+      <Card key="1">
+        <Card.Header>This is header 1</Card.Header>
+        <Card.Body>A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.</Card.Body>
+      </Card>
+      <Card key="2">
+        <Card.Header>This is header 1</Card.Header>
+        <Card.Body>A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.</Card.Body>
+      </Card>
+      <Card key="3">
+        <Card.Header>This is header 3</Card.Header>
+        <Card.Body>A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.</Card.Body>
+      </Card>
+    </Card.Collapse>
+  </div>
+);
 
 ReactDOM.render(
-  <Card>
-    <Card.Header style={gray}>Header</Card.Header>
-    <Card.Body>Body</Card.Body>
-    <Card.Footer style={gray}>Footer</Card.Footer>
-  </Card>,
+  <Demo />,
   mountNode
 );
 ```

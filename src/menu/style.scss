@@ -80,10 +80,12 @@ $menu-prefix: 'dk-menu';
     &-exit,
     &-enter-done {
       height: auto;
+      display: block;
     }
 
     &-exit-done {
       height: 0;
+      display: none;
     }
   }
 
