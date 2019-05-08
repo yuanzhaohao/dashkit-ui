@@ -10,11 +10,13 @@ subtitle:
 
 ```js
 import { Input } from 'dashkit-ui';
-
+const inputStyle = {
+  marginRight: 10,
+};
 ReactDOM.render(
   <div>
-    <Input defaultValue="Hello." />
-    <Input disabled defaultValue="Hello." style={{ marginTop: 10 }} />
+    <Input defaultValue="Hello." style={inputStyle} />
+    <Input disabled defaultValue="Hello." />
   </div>,
   mountNode
 );

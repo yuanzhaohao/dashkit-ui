@@ -1,5 +1,5 @@
 ---
-order: 3
+order: 4
 title:
   zh-CN: 受控组件
   en-US: Controlled Component

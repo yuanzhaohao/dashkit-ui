@@ -11,6 +11,8 @@ export type SelectProps = {
   inputValue?: string;
   multiple?: boolean;
   placeholder?: string;
+  prefix?: string;
+  prefixClassName?: string;
   onChange?: (options: string[]) => void;
 };
 

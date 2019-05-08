@@ -6,52 +6,9 @@ $select-prefix: 'dk-select';
 
 .#{$select-prefix} {
   @include reset-component();
-  position: relative;
-  width: $select-width;
   display: inline-block;
-  color: $select-color;
-
-  input {
-    outline: 0;
-    font-size: $font-size-base;
-    color: $select-color;
-
-    &::placeholder {
-      color: $input-placeholder-color;
-      opacity: 1;
-    }
-  }
-
-  &-input {
-    width: 100%;
-    padding: $input-padding-y $input-padding-x;
-    padding-right: 30px;
-    border: 1px solid $select-border-color;
-    border-radius: $border-radius;
-    transition: $select-transition;
-
-    &:focus {
-      background-color: $select-focus-bg;
-      border-color: $select-focus-border-color;
-      box-shadow: $select-focus-box-shadow;
-    }
-
-    &:hover {
-      border-color: $select-hover-border-color;
-    }
-  }
 
   &-icon {
-    position: absolute;
-    width: $select-icon-size;
-    height: $select-icon-size;
-    right: 12px;
-    top: 50%;
-    margin-top: -$select-icon-size / 2;
-    font-size: $select-icon-size;
-    color: $select-icon-color;
-    user-select: none;
-    z-index: 1;
     transform: rotate(0deg);
     transition: transform 200ms linear;
 
@@ -64,7 +21,6 @@ $select-prefix: 'dk-select';
     position: absolute;
     top: 100%;
     left: 0;
-    // width: $select-width;
     max-height: $select-panel-height;
     margin-top: 5px;
     box-shadow: $select-panel-shadow;

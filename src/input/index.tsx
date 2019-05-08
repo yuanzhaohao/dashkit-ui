@@ -1,5 +1,6 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
+import Icon from '../icon';
 import './style.scss';
 
 export type InputSize = 'small' | 'default' | 'large';
@@ -15,6 +16,10 @@ export type InputProps = {
   placeholder?: string;
   type?: string;
   digits?: number;
+  prefix?: string;
+  prefixClassName?: string;
+  suffix?: string;
+  suffixClassName?: string;
   onChange?: (value: string) => void;
   onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onFocus?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -59,6 +64,10 @@ class Input extends React.Component<InputProps> {
       size,
       type,
       prefixCls,
+      prefix,
+      suffix,
+      prefixClassName,
+      suffixClassName,
       ...attributes
     } = this.props;
     const value = this.props.value;
@@ -67,6 +76,8 @@ class Input extends React.Component<InputProps> {
       {
         [`${prefixCls}-large`]: size === 'large',
         [`${prefixCls}-small`]: size === 'small',
+        [`${prefixCls}-prefix`]: prefix,
+        [`${prefixCls}-suffix`]: suffix,
       },
       className,
     );
@@ -75,7 +86,8 @@ class Input extends React.Component<InputProps> {
       attributes.value = fixControlledValue(value);
       delete attributes.defaultValue;
     }
-    return (
+
+    const inputNode = (
       <input
         {...attributes}
         className={inputClassName}
@@ -86,6 +98,21 @@ class Input extends React.Component<InputProps> {
         onBlur={this.handleBlur}
         onFocus={this.handleFocus}
       />
+    );
+    return (
+      prefix || suffix
+        ? <div className={`${prefixCls}-wrapper`}>
+          {prefix
+            ? <Icon type={prefix} className={classNames(`${prefixCls}-prefix-icon`, prefixClassName)} />
+            : null
+          }
+          {inputNode}
+          {suffix
+            ? <Icon type={suffix} className={classNames(`${prefixCls}-suffix-icon`, suffixClassName)} />
+            : null
+          }
+        </div>
+        : inputNode
     );
   }
 

@@ -10,12 +10,16 @@ subtitle:
 
 ```js
 import { Input } from 'dashkit-ui';
+const inputStyle = {
+  marginRight: 10,
+  marginBottom: 10,
+};
 
 ReactDOM.render(
   <div className="input-list">
-    <Input placeholder="large size" size="large" />
-    <Input placeholder="default size" size="default" />
-    <Input placeholder="small size" size="small" />
+    <Input placeholder="large size" size="large" style={inputStyle} />
+    <Input placeholder="default size" size="default" style={inputStyle} />
+    <Input placeholder="small size" size="small" style={inputStyle} />
   </div>,
   mountNode
 );

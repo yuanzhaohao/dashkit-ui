@@ -7,6 +7,7 @@ import { Provider } from './context';
 import Option from './option';
 import OptionGroup from './option-group';
 import Icon from '../icon';
+import Input from '../input';
 
 class Select extends React.PureComponent<SelectProps, SelectState> {
   static Option: typeof Option;
@@ -53,6 +54,8 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
       value,
       multiple,
       onChange,
+      prefix,
+      prefixClassName,
       placeholder = 'Select',
       ...attributes
     } = this.props;
@@ -66,6 +69,9 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
       },
       className,
     );
+    const iconClassName = classNames(`${prefixCls}-icon`, {
+      [`${prefixCls}-icon-visible`]: visible,
+    });
     const panelStyle = {
       ...position,
       width,
@@ -104,21 +110,18 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
       <div {...attributes} className={selectClassName} ref={this.selectElement}>
         {options instanceof Array
           ? <></>
-          : <input
+          : <Input
             className={`${prefixCls}-input`}
             placeholder={options.toString() || placeholder}
             value={inputValue}
             onChange={this.handleInputChange}
             onFocus={this.handleInputFocus}
+            prefix={prefix}
+            prefixClassName={prefixClassName}
+            suffix="chevron-down"
+            suffixClassName={iconClassName}
           />
         }
-
-        <Icon
-          type="chevron-down"
-          className={classNames(`${prefixCls}-icon`, {
-            [`${prefixCls}-icon-visible`]: visible,
-          })}
-        />
         {!disabled && createPortal(selectNode, document.body)}
       </div>
     );
@@ -186,8 +189,7 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
     });
   }
 
-  handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
+  handleInputChange = (value: string) => {
     this.setState({
       inputValue: value,
     });

@@ -201,19 +201,22 @@ $card-padding-x:                    24px !default;
 
 // Input
 //
+$input-width:                       220px !default;
 $input-height:                      34px !default;
 $input-height-sm:                   24px !default;
 $input-height-lg:                   40px !default;
 $input-padding-y:                   6px !default;
 $input-padding-x:                   12px !default;
+$input-icon-size:                   16px !default;
 
 $input-color:                       $gray-600 !default;
 $input-bg:                          $white !default;
+$input-placeholder-color:           #b1c2d9 !default;
+$input-icon-color:                  $input-placeholder-color !default;
 
 $input-border-color:                $border-color !default;
 $input-box-shadow:                  inset 0 1px 1px rgba($primary, .075) !default;
 $input-transition:                  border-color .25s $ease-in-out, box-shadow .25s $ease-in-out !default;
-$input-placeholder-color:           #b1c2d9 !default;
 
 $input-focus-bg:                    $input-bg !default;
 $input-focus-border-color:          $primary !default;
@@ -285,6 +288,7 @@ $select-option-group-height:        32px !default;
 $select-disabled-bg:                $input-disabled-bg !default;
 $select-disabled-opacity:           $input-disabled-opacity !default;
 $select-disabled-border-color:      $input-disabled-border-color !default;
+
 
 // Checkbox
 //

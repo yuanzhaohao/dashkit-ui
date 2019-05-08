@@ -6,8 +6,8 @@ $prefix-cls: 'dk-input';
 
 .#{$prefix-cls} {
   @include reset-component();
-  display: block;
-  width: 100%;
+  display: inline-block;
+  width: $input-width;
   height: $input-height;
   padding: $input-padding-y $input-padding-x;
   color: $input-color;
@@ -47,5 +47,44 @@ $prefix-cls: 'dk-input';
     opacity: $input-disabled-opacity;
     border-color: $input-disabled-border-color;
     pointer-events: none;
+  }
+
+  &-wrapper {
+    @include reset-component();
+    display: inline-block;
+    position: relative;
+    width: $input-width;
+    color: $input-color;
+
+    > .#{$prefix-cls} {
+      width: 100%;
+    }
+  }
+
+  &-prefix {
+    padding-left: 30px;
+  }
+  &-suffix {
+    padding-right: 30px;
+  }
+
+  &-prefix-icon,
+  &-suffix-icon {
+    position: absolute;
+    width: $input-icon-size;
+    height: $input-icon-size;
+    top: 50%;
+    margin-top: -$input-icon-size / 2;
+    font-size: $input-icon-size;
+    color: $input-icon-color;
+    user-select: none;
+    z-index: 1;
+  }
+
+  &-prefix-icon {
+    left: 10px;
+  }
+  &-suffix-icon {
+    right: 10px;
   }
 }
