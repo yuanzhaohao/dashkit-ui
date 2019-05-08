@@ -207,7 +207,7 @@ $input-height-sm:                   24px !default;
 $input-height-lg:                   40px !default;
 $input-padding-y:                   6px !default;
 $input-padding-x:                   12px !default;
-$input-icon-size:                   16px !default;
+$input-icon-size:                   14px !default;
 
 $input-color:                       $gray-600 !default;
 $input-bg:                          $white !default;
@@ -269,12 +269,7 @@ $select-icon-size:                  16px !default;
 $select-icon-color:                 $input-placeholder-color !default;
 
 $select-color:                      $input-color !default;
-$select-border-color:               $input-border-color !default;
-$select-focus-bg:                   $input-focus-bg !default;
-$select-focus-border-color:         $input-focus-border-color !default;
-$select-focus-box-shadow:           $input-focus-box-shadow !default;
-$select-hover-border-color:         $input-focus-border-color !default;
-$select-transition:                 $input-transition;
+
 $select-panel-height:               256px !default;
 $select-panel-shadow:               $calendar-panel-shadow !default;
 $select-panel-transition:           $calendar-panel-transition !default;

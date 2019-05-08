@@ -20,6 +20,8 @@ export type InputProps = {
   prefixClassName?: string;
   suffix?: string;
   suffixClassName?: string;
+  wrapperClassName?: string;
+  wrapperRef?: any;
   onChange?: (value: string) => void;
   onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onFocus?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -68,6 +70,8 @@ class Input extends React.Component<InputProps> {
       suffix,
       prefixClassName,
       suffixClassName,
+      wrapperClassName,
+      wrapperRef,
       ...attributes
     } = this.props;
     const value = this.props.value;
@@ -101,7 +105,7 @@ class Input extends React.Component<InputProps> {
     );
     return (
       prefix || suffix
-        ? <div className={`${prefixCls}-wrapper`}>
+        ? <div ref={wrapperRef} className={classNames(`${prefixCls}-wrapper`, wrapperClassName)}>
           {prefix
             ? <Icon type={prefix} className={classNames(`${prefixCls}-prefix-icon`, prefixClassName)} />
             : null

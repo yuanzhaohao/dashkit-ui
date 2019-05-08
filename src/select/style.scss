@@ -90,16 +90,6 @@ $select-prefix: 'dk-select';
     }
   }
 
-  &-disabled {
-    pointer-events: none;
-
-    input {
-      background: $select-disabled-bg;
-      opacity: $select-disabled-opacity;
-      border-color: $select-disabled-border-color;
-    }
-  }
-
   &-group {
 
     &-title {

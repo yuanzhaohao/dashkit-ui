@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { createPortal } from 'react-dom';
+import { createPortal, findDOMNode } from 'react-dom';
 import { CSSTransition } from 'react-transition-group';
 import * as classNames from 'classnames';
 import { SelectProps, SelectState, SelectSize } from './types';
@@ -12,7 +12,7 @@ import Input from '../input';
 class Select extends React.PureComponent<SelectProps, SelectState> {
   static Option: typeof Option;
   static OptionGroup: typeof OptionGroup;
-  readonly selectElement: React.RefObject<HTMLDivElement>;
+  readonly selectElement: any;//React.RefObject<HTMLDivElement>;
   readonly panelElement: React.RefObject<HTMLDivElement>;
   static defaultProps = {
     prefixCls: 'dk-select',
@@ -60,15 +60,6 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
       ...attributes
     } = this.props;
     const { position, width, options, inputValue, visible } = this.state;
-    const selectClassName = classNames(
-      prefixCls,
-      {
-        [`${prefixCls}-disabled`]: disabled,
-        [`${prefixCls}-large`]: size === 'large',
-        [`${prefixCls}-small`]: size === 'small',
-      },
-      className,
-    );
     const iconClassName = classNames(`${prefixCls}-icon`, {
       [`${prefixCls}-icon-visible`]: visible,
     });
@@ -106,24 +97,28 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
       </CSSTransition>
     );
 
+
+    if (options instanceof Array) {
+      return null;
+    }
     return (
-      <div {...attributes} className={selectClassName} ref={this.selectElement}>
-        {options instanceof Array
-          ? <></>
-          : <Input
-            className={`${prefixCls}-input`}
-            placeholder={options.toString() || placeholder}
-            value={inputValue}
-            onChange={this.handleInputChange}
-            onFocus={this.handleInputFocus}
-            prefix={prefix}
-            prefixClassName={prefixClassName}
-            suffix="chevron-down"
-            suffixClassName={iconClassName}
-          />
-        }
+      <>
+        <Input
+          {...attributes}
+          wrapperRef={this.selectElement}
+          placeholder={options.toString() || placeholder}
+          value={inputValue}
+          disabled={disabled}
+          onChange={this.handleInputChange}
+          onFocus={this.handleInputFocus}
+          prefix={prefix}
+          prefixClassName={prefixClassName}
+          suffix="chevron-down"
+          wrapperClassName={className}
+          suffixClassName={iconClassName}
+        />
         {!disabled && createPortal(selectNode, document.body)}
-      </div>
+      </>
     );
   }
 
@@ -140,13 +135,13 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
   }
 
   handleDocumentClick = (event: any) => {
-    const calendarEl = this.selectElement.current;
+    const el = findDOMNode(this.selectElement.current) as Element;
     const contentEl = this.panelElement.current;
     const targetEl = event.target;
     if (
       !(
-        targetEl === calendarEl ||
-        (calendarEl && calendarEl.contains(targetEl)) ||
+        targetEl === el ||
+        (el && el.contains(targetEl)) ||
         targetEl === contentEl ||
         (contentEl && contentEl.contains(targetEl))
       )
@@ -160,7 +155,7 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
   }
 
   getPosition = () => {
-    const el = this.selectElement.current;
+    const el = findDOMNode(this.selectElement.current) as Element;
     const rect = el.getBoundingClientRect();
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
     const scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
@@ -175,7 +170,8 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
 
   handleEnter = () => {
     const position = this.getPosition();
-    const width = this.selectElement.current.clientWidth || 0;
+    const el = findDOMNode(this.selectElement.current) as Element;
+    const width = el.clientWidth || 0;
     this.setState({
       position,
       width,
