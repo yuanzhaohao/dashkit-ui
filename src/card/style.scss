@@ -20,10 +20,12 @@ $card-prefix: 'dk-card';
     padding: $card-padding-y $card-padding-x;
     margin-bottom: 0;
     background: $card-header-bg;
+    transition: all 0.35s ease;
 
     &-collapse {
       cursor: pointer;
 
+      &:hover,
       &-visible {
         background: $light;
       }
