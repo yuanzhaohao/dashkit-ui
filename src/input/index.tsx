@@ -90,7 +90,6 @@ class Input extends React.Component<InputProps> {
       attributes.value = fixControlledValue(value);
       delete attributes.defaultValue;
     }
-
     const inputNode = (
       <input
         {...attributes}
@@ -103,6 +102,7 @@ class Input extends React.Component<InputProps> {
         onFocus={this.handleFocus}
       />
     );
+
     return (
       prefix || suffix
         ? <div ref={wrapperRef} className={classNames(`${prefixCls}-wrapper`, wrapperClassName)}>

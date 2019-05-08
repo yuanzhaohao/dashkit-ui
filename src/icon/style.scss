@@ -4,11 +4,11 @@
 
 @font-face {
   font-family: 'feather';
-  src: url('#{$icon-base-url}/fonts/feather.eot');
-  src: url('#{$icon-base-url}/fonts/feather.eot#iefix') format('embedded-opentype'),
-    url('#{$icon-base-url}/fonts/feather.woff') format('woff'),
-    url('#{$icon-base-url}/fonts/feather.ttf') format('truetype'),
-    url('#{$icon-base-url}/fonts/feather.svg#feather') format('svg');
+  src: url('#{$icon-base-url}/feather.eot');
+  src: url('#{$icon-base-url}/feather.eot#iefix') format('embedded-opentype'),
+    url('#{$icon-base-url}/feather.woff') format('woff'),
+    url('#{$icon-base-url}/feather.ttf') format('truetype'),
+    url('#{$icon-base-url}/feather.svg#feather') format('svg');
 }
 
 .#{$icon-prefix-cls} {

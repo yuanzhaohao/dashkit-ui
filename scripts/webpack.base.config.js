@@ -42,7 +42,7 @@ const createHappypackPlugin = () => {
     createHappypack('sass', [{
       loader: 'sass-loader',
       options: {
-        data: "$icon-base-url: '//yuanzhaohao.github.io/dashkit-ui/static';"
+        data: "$icon-base-url: '//yuanzhaohao.github.io/dashkit-fonts';"
       }
     }]),
     createHappypack('css', ['css-loader']),
