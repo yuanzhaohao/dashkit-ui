@@ -41,5 +41,5 @@ export type SelectOptionGroupProps = {
   prefixCls: string;
   label: string;
   key: string | number;
-  children: React.ReactChildren | null;
+  children: any;
 }

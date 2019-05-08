@@ -22,7 +22,6 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
     if ('value' in nextProps) {
       return {
         value: nextProps.value,
-        inputValue: nextProps.value,
       }
     }
     return null;

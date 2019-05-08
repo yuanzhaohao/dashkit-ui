@@ -55,9 +55,6 @@ $card-prefix: 'dk-card';
       height: 0;
       transition: height 0.35s ease;
 
-      &-enter {
-        height: 0;
-      }
       &-visible,
       &-exit,
       &-enter-done {
@@ -65,6 +62,10 @@ $card-prefix: 'dk-card';
       }
 
       &-exit-done {
+        height: 0;
+      }
+
+      &-enter {
         height: 0;
       }
     }
