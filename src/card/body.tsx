@@ -23,7 +23,6 @@ class Body extends React.PureComponent<BodyProps> {
       [`${prefixCls}-body-collapse-visible`]: visible,
     })
     const bodyNode = <div {...attributes} className={basicClassName} />;
-    console.log('call body render');
     return (collapse
       ? <CSSTransition
         in={visible}

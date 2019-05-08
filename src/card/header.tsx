@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 import { HeaderProps } from './types';
 import { createConsumer } from './context';
+import Icon from '../icon';
 
 class Header extends React.PureComponent<HeaderProps> {
   static defaultProps = {
@@ -22,10 +23,19 @@ class Header extends React.PureComponent<HeaderProps> {
     const cardClassName = classNames({
       [`${prefixCls}-header`]: true,
       [`${prefixCls}-header-collapse`]: collapse,
+      [`${prefixCls}-header-collapse-visible`]: visible,
     }, className);
     return (
       <div {...attributes} className={cardClassName} onClick={this.handleClick}>
-        {title ? <h4 className={`${prefixCls}-title`}>{title}</h4> : null}
+        {collapse
+          ? <Icon
+              type="chevron-right"
+              className={classNames(`${prefixCls}-header-icon`, {
+                [`${prefixCls}-header-icon-visible`]: visible,
+              })}
+            />
+          : null
+        }
         {children}
       </div>
     );
