@@ -2,81 +2,81 @@
 
 process.env.NODE_ENV = 'development';
 
-const fs = require('fs')
-const path = require('path')
-const express = require('express')
-const webpack = require('webpack')
-const portfinder = require('portfinder')
-const openBrowser = require('react-dev-utils/openBrowser')
-const proxyMiddleware = require('http-proxy-middleware')
-const utils = require('./utils')
-const config = require('./config')
-const webpackConfig = require('./webpack.dev.config')
+const fs = require('fs');
+const path = require('path');
+const express = require('express');
+const webpack = require('webpack');
+const portfinder = require('portfinder');
+const openBrowser = require('react-dev-utils/openBrowser');
+const proxyMiddleware = require('http-proxy-middleware');
+const utils = require('./utils');
+const config = require('./config');
+const webpackConfig = require('./webpack.dev.config');
 
-const HOST = config.host || 'localhost'
-const PORT = config.port || '8787'
-const URI = `http://${HOST}:${PORT}/`
+const HOST = config.host || 'localhost';
+const PORT = config.port || '8787';
+const URI = `http://${HOST}:${PORT}/`;
 
-const app = express()
-const compiler = webpack(webpackConfig)
+const app = express();
+const compiler = webpack(webpackConfig);
 const devMiddleware = require('webpack-dev-middleware')(compiler, {
   quiet: true,
-})
+});
 
-app.use('/static', express.static(
-  path.join(utils.resolve(config.sitePath), './static')
-))
-app.use(require('connect-history-api-fallback')())
-app.use(devMiddleware)
+app.use('/static', express.static(path.join(utils.resolve(config.sitePath), './static')));
+app.use(require('connect-history-api-fallback')());
+app.use(devMiddleware);
 
 // proxy api requests
 if (config.proxyTable && Object.keys(config.proxyTable).length > 0) {
   Object.keys(config.proxyTable).forEach(function(context) {
-    let options = config.proxyTable[context]
+    let options = config.proxyTable[context];
     if (typeof options === 'string') {
       options = {
-        target: options
+        target: options,
       };
     }
-    app.use(proxyMiddleware(options.filter || context, options))
-  })
+    app.use(proxyMiddleware(options.filter || context, options));
+  });
 }
 
 // mock data
-let mockPath = utils.resolve('./mock')
+let mockPath = utils.resolve('./mock');
 if (config.mockData && fs.existsSync(mockPath)) {
-  const mockRouter = express.Router()
+  const mockRouter = express.Router();
 
-  app.use(proxyMiddleware('/mock-api', {
-    target: URI,
-    pathRewrite: {
-      '^/mock-api' : '/mock-api'
-    }
-  }))
+  app.use(
+    proxyMiddleware('/mock-api', {
+      target: URI,
+      pathRewrite: {
+        '^/mock-api': '/mock-api',
+      },
+    }),
+  );
 
   mockRouter.all('/:method', (req, res) => {
-    let method = req.params.method.replace(/\.json$/, '')
-    let jsonPath = path.join(mockPath, method + '.json')
-    delete require.cache[require.resolve(jsonPath)]
-    let data = require(jsonPath)
-    res.json(data)
+    let method = req.params.method.replace(/\.json$/, '');
+    let jsonPath = path.join(mockPath, method + '.json');
+    delete require.cache[require.resolve(jsonPath)];
+    let data = require(jsonPath);
+    res.json(data);
   });
-  app.use('/mock-api', mockRouter)
+  app.use('/mock-api', mockRouter);
 }
 
-utils.log('starting dev server...')
+utils.log('starting dev server...');
 devMiddleware.waitUntilValid(function() {
-  const uri = `${URI}index.html`
+  const uri = `${URI}index.html`;
 
-  utils.success(`Listening at ${uri}\n`)
+  utils.success(`Listening at ${uri}\n`);
   openBrowser(uri);
-})
+});
 
-portfinder.basePort = PORT
+portfinder.basePort = PORT;
 portfinder.getPort((err, port) => {
   if (err) {
-    throw err
+    throw err;
   } else {
-    const server = app.listen(port)
+    const server = app.listen(port);
   }
-})
+});

@@ -10,6 +10,7 @@
       "static-before-instance",
       "variables-before-functions"
     ],
+    "jsx-boolean-value": false,
     "jsx-no-lambda": false,
     "ordered-imports": false,
     "object-literal-sort-keys": false,
@@ -29,7 +30,8 @@
         "singleline": "never",
         "esSpecCompliant": true
       }
-    ]
+    ],
+    "semicolon": [true, "always", "ignore-bound-class-methods"]
   },
   "rulesDirectory": [],
   "linterOptions": {

@@ -12,7 +12,7 @@ import Input from '../input';
 class Select extends React.PureComponent<SelectProps, SelectState> {
   static Option: typeof Option;
   static OptionGroup: typeof OptionGroup;
-  readonly selectElement: any;//React.RefObject<HTMLDivElement>;
+  readonly selectElement: any; //React.RefObject<HTMLDivElement>;
   readonly panelElement: React.RefObject<HTMLDivElement>;
   static defaultProps = {
     prefixCls: 'dk-select',
@@ -23,7 +23,7 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
     if ('value' in nextProps) {
       return {
         value: nextProps.value,
-      }
+      };
     }
     return null;
   }
@@ -66,7 +66,7 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
     const panelStyle = {
       ...position,
       width,
-    }
+    };
 
     const selectNode = (
       <CSSTransition
@@ -78,11 +78,7 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
         onExited={this.clearDocumentClick}
         onEnter={this.handleEnter}
       >
-        <div
-          className={`${prefixCls}-panel`}
-          style={panelStyle}
-          ref={this.panelElement}
-        >
+        <div className={`${prefixCls}-panel`} style={panelStyle} ref={this.panelElement}>
           <Provider
             value={{
               prefixCls,
@@ -96,7 +92,6 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
         </div>
       </CSSTransition>
     );
-
 
     if (options instanceof Array) {
       return null;
@@ -124,15 +119,15 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
 
   bindDocumentClick = () => {
     document.addEventListener('click', this.handleDocumentClick);
-  }
+  };
 
   clearDocumentClick = () => {
     document.removeEventListener('click', this.handleDocumentClick);
-  }
+  };
 
   handleExited = () => {
     this.clearDocumentClick();
-  }
+  };
 
   handleDocumentClick = (event: any) => {
     const el = findDOMNode(this.selectElement.current) as Element;
@@ -152,7 +147,7 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
         inputValue: options instanceof Array ? '' : options.toString(),
       });
     }
-  }
+  };
 
   getPosition = () => {
     const el = findDOMNode(this.selectElement.current) as Element;
@@ -166,7 +161,7 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
       left,
       top,
     };
-  }
+  };
 
   handleEnter = () => {
     const position = this.getPosition();
@@ -176,27 +171,25 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
       position,
       width,
     });
-  }
+  };
 
   handleInputFocus = () => {
     this.setState({
       visible: true,
       inputValue: '',
     });
-  }
+  };
 
   handleInputChange = (value: string) => {
     this.setState({
       inputValue: value,
     });
-  }
+  };
 
   handleRawChange = (value) => {
     const { options } = this.state;
     const { onChange } = this.props;
-    const newOptions = options instanceof Array
-      ? Array.from(new Set([...options, value]))
-      : value;
+    const newOptions = options instanceof Array ? Array.from(new Set([...options, value])) : value;
     const newInputValue = newOptions instanceof Array ? '' : value;
 
     this.setState({
@@ -208,7 +201,7 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
     if (typeof onChange === 'function') {
       onChange(newOptions);
     }
-  }
+  };
 }
 
 export default Select;

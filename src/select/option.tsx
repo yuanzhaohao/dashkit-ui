@@ -16,28 +16,25 @@ class Option extends React.PureComponent<Partial<SelectOptionProps>> {
       filterOption,
       ...attributes
     } = this.props;
-    const optionClassName = classNames({
-      [`${prefixCls}-option`]: true,
-      [`${prefixCls}-option-disabled`]: disabled,
-      [`${prefixCls}-option-active`]:
-        // @ts-ignore
-        options instanceof Array && options.indexOf(value) !== -1
-          ? true
-          : options === value
+    const optionClassName = classNames(
+      {
+        [`${prefixCls}-option`]: true,
+        [`${prefixCls}-option-disabled`]: disabled,
+        [`${prefixCls}-option-active`]:
+          // @ts-ignore
+          options instanceof Array && options.indexOf(value) !== -1
             ? true
-            : false
-    }, className);
+            : options === value
+            ? true
+            : false,
+      },
+      className,
+    );
 
     const isShow = typeof filterOption === 'function' ? filterOption(inputValue, value) : true;
 
     if (isShow) {
-      return (
-        <div
-          className={optionClassName}
-          onClick={this.handleOptionClick}
-          {...attributes}
-        />
-      );
+      return <div className={optionClassName} onClick={this.handleOptionClick} {...attributes} />;
     }
     return null;
   }
@@ -48,7 +45,7 @@ class Option extends React.PureComponent<Partial<SelectOptionProps>> {
     if (!disabled && typeof onRawChange === 'function') {
       onRawChange(value);
     }
-  }
+  };
 }
 
 export default createConsumer(Option);

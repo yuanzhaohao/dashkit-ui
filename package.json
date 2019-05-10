@@ -24,7 +24,8 @@
     "pub:tsEs": "tsc -p tsconfig.json",
     "pub:tsLib": "tsc -p tsconfig.json --declarationDir publish/lib",
     "pub:babel": "babel publish/lib --out-dir publish/lib",
-    "format": "prettier --parser typescript './src/**/*.{ts,tsx}' --write",
+    "format": "prettier --parser typescript './src/select/*.{ts,tsx}' --write",
+    "format:scripts": "prettier './scripts/*.js' --write",
     "lint": "tslint --project tsconfig.json './src/**/*.{ts,tsx}' && tsc --noEmit --pretty",
     "lint:fix": "tslint --project tsconfig.json --fix './src/**/*.{ts,tsx}' && tsc --noEmit --pretty",
     "test": "jest ./src"

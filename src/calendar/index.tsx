@@ -9,15 +9,22 @@ import { isArray } from 'lodash-es';
 import Icon from '../icon';
 import Picker from './picker';
 import Range from './range';
-import { allPlaceholders, allFormats, isDate, addMonths, parseDate, formatDate, isSameMonth } from './utils';
-
+import {
+  allPlaceholders,
+  allFormats,
+  isDate,
+  addMonths,
+  parseDate,
+  formatDate,
+  isSameMonth,
+} from './utils';
 
 export type CalendarProps = {
   prefixCls?: string;
   className?: string;
   disabled?: boolean;
   visible?: boolean;
-  value?: any;//DateProps | DateProps[];
+  value?: any; // DateProps | DateProps[];
   format?: string;
   type: CalendarType;
   range?: boolean;
@@ -30,24 +37,24 @@ export type CalendarProps = {
 export type CalendarState = {
   current: Date | Date[];
   visible?: boolean;
-  value?: any;//DateProps | DateProps[];
+  value?: any; // DateProps | DateProps[];
   position: {
     top: number;
     left: number;
-  },
+  };
   inputValue: string | string[];
 };
 
 class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
-  readonly calendarElement: React.RefObject<HTMLDivElement>;
-  readonly panelElement: React.RefObject<HTMLDivElement>;
-
-  static defaultProps = {
+  public static defaultProps = {
     prefixCls: 'dk-calendar',
     type: 'day',
   };
 
-  static getDerivedStateFromProps(nextProps: CalendarProps) {
+  private readonly calendarElement: React.RefObject<HTMLDivElement>;
+  private readonly panelElement: React.RefObject<HTMLDivElement>;
+
+  public static getDerivedStateFromProps(nextProps: CalendarProps) {
     const state: Partial<CalendarState> = {};
     if ('visible' in nextProps) {
       state.visible = !!nextProps.visible;
@@ -82,22 +89,17 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
     };
   }
 
-  render() {
-    const {
-      className,
-      prefixCls,
-      type,
-      range,
-      disabled,
-      onChange,
-      ...attributes
-    } = this.props;
+  public render() {
+    const { className, prefixCls, type, range, disabled, onChange, ...attributes } = this.props;
     const { value, position, inputValue, visible } = this.state;
     const placeholder = this.getPlaceholder();
-    const calendarClassName = classNames({
-      [`${prefixCls}`]: true,
-      [`${prefixCls}-disabled`]: disabled,
-    }, className);
+    const calendarClassName = classNames(
+      {
+        [`${prefixCls}`]: true,
+        [`${prefixCls}-disabled`]: disabled,
+      },
+      className,
+    );
     const panelClassName = classNames({
       [`${prefixCls}-panel`]: true,
       [`${prefixCls}-panel-time`]: type === 'time',
@@ -113,11 +115,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
         onExited={this.clearDocumentClick}
         onEnter={this.handleEnter}
       >
-        <div
-          className={panelClassName}
-          style={position}
-          ref={this.panelElement}
-        >
+        <div className={panelClassName} style={position} ref={this.panelElement}>
           {this.renderContent()}
         </div>
       </CSSTransition>
@@ -150,16 +148,13 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
             onChange={this.handleInputChange}
           />
         )}
-        <Icon
-          type={type === 'time' ? 'clock' : 'calendar'}
-          className={`${prefixCls}-icon`}
-        />
+        <Icon type={type === 'time' ? 'clock' : 'calendar'} className={`${prefixCls}-icon`} />
         {!disabled && createPortal(calendarNode, document.body)}
       </span>
     );
   }
 
-  renderContent = () => {
+  private renderContent = () => {
     const { range, type = 'day', ...attributes } = this.props;
     const { current, value } = this.state;
     const format = this.getFormat();
@@ -172,13 +167,14 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
       onChange: this.handleChange,
     };
 
-    return (current instanceof Date
-      ? <Picker {...childProps} current={current} />
-      : <Range {...childProps} current={current} />
+    return current instanceof Date ? (
+      <Picker {...childProps} current={current} />
+    ) : (
+      <Range {...childProps} current={current} />
     );
-  }
+  };
 
-  getPosition = () => {
+  private getPosition = () => {
     const el = this.calendarElement.current;
     const rect = el.getBoundingClientRect();
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
@@ -190,16 +186,16 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
       left,
       top,
     };
-  }
+  };
 
-  handleEnter = () => {
+  private handleEnter = () => {
     const position = this.getPosition();
     this.setState({
       position,
     });
-  }
+  };
 
-  getPlaceholder = () => {
+  private getPlaceholder = () => {
     const { placeholder, type = 'day', range } = this.props;
     if (placeholder !== undefined) {
       return placeholder;
@@ -208,22 +204,24 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
       return allPlaceholders.range[type];
     }
     return allPlaceholders[type];
-  }
+  };
 
-  getFormat = () => {
+  private getFormat = () => {
     const { format, type = 'day' } = this.props;
-    if (format) return format;
+    if (format) {
+      return format;
+    }
     return allFormats[type];
-  }
+  };
 
-  getDateFromValue(val?: DateProps | DateProps[]) {
+  private getDateFromValue(val?: DateProps | DateProps[]) {
     if (val && typeof val === 'string') {
       return parseDate(val, this.getFormat());
     }
     return new Date();
   }
 
-  getCurrent = () => {
+  private getCurrent = () => {
     const { value, range, type } = this.props;
 
     if (range) {
@@ -250,15 +248,15 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
       return current;
     }
     return this.getDateFromValue(value);
-  }
+  };
 
-  handleInputFocus = () => {
+  private handleInputFocus = () => {
     this.setState({
       visible: true,
     });
-  }
+  };
 
-  handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, index?: number) => {
+  private handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, index?: number) => {
     const { value } = event.target;
     const { inputValue } = this.state;
     if (inputValue instanceof Array && index !== undefined) {
@@ -272,21 +270,17 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
         inputValue: value,
       });
     }
-  }
+  };
 
-  bindDocumentClick = () => {
+  private bindDocumentClick = () => {
     document.addEventListener('click', this.handleDocumentClick);
-  }
+  };
 
-  clearDocumentClick = () => {
+  private clearDocumentClick = () => {
     document.removeEventListener('click', this.handleDocumentClick);
-  }
+  };
 
-  handleExited = () => {
-    this.clearDocumentClick();
-  }
-
-  handleDocumentClick = (event: any) => {
+  private handleDocumentClick = (event: any) => {
     const calendarEl = this.calendarElement.current;
     const contentEl = this.panelElement.current;
     const targetEl = event.target;
@@ -302,9 +296,9 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
         visible: false,
       });
     }
-  }
+  };
 
-  handleChange = (date: Date | Date[], isSelect?: boolean) => {
+  private handleChange = (date: Date | Date[], isSelect?: boolean) => {
     const { onChange, type } = this.props;
     const format = this.getFormat();
     let current = date;
@@ -320,22 +314,26 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
       this.setState({
         current,
         value: date,
-        inputValue: isArray(date) ? date.map(v => formatDate(v, format)) : formatDate(date, format),
+        inputValue: isArray(date)
+          ? date.map((v) => formatDate(v, format))
+          : formatDate(date, format),
         visible: !isSelect,
       });
     } else if (isSelect) {
       this.setState({
         current,
         value: date,
-        inputValue: isArray(date) ? date.map(v => formatDate(v, format)) : formatDate(date, format),
+        inputValue: isArray(date)
+          ? date.map((v) => formatDate(v, format))
+          : formatDate(date, format),
         visible: false,
       });
       if (typeof onChange === 'function') {
         const format = this.getFormat();
         const dateStr = isArray(date)
           ? date.map((d) => {
-            return formatDate(d, format);
-          })
+              return formatDate(d, format);
+            })
           : formatDate(date, format);
         onChange(date, dateStr);
       }
@@ -346,8 +344,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
         });
       }, 0);
     }
-  }
+  };
 }
 
 export default Calendar;
-

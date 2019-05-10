@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-const path = require('path')
+const path = require('path');
 
 module.exports = {
   srcPath: './src',
@@ -10,21 +10,13 @@ module.exports = {
   proxyTable: {},
   mockData: false,
   optimizeCommon: {
-    'vendor-lib': [
-      'prop-types',
-      'classnames',
-      'react-transition-group'
-    ],
-    'vendor-react': [
-      'react',
-      'react-dom',
-      'react-router-dom'
-    ]
+    'vendor-lib': ['prop-types', 'classnames', 'react-transition-group'],
+    'vendor-react': ['react', 'react-dom', 'react-router-dom'],
   },
   host: 'localhost',
   port: 8999,
   autoOpen: true,
   useEslint: false,
   extractStyle: false,
-  mockData: true
-}
+  mockData: true,
+};
