@@ -1,0 +1,38 @@
+{
+  "defaultSeverity": "error",
+  "extends": ["tslint:recommended", "tslint-react"],
+  "jsRules": {},
+  "rules": {
+    "quotemark": [true, "single", "jsx-double"],
+    "member-ordering": [
+      true,
+      "public-before-private",
+      "static-before-instance",
+      "variables-before-functions"
+    ],
+    "jsx-no-lambda": false,
+    "ordered-imports": false,
+    "object-literal-sort-keys": false,
+    "interface-over-type-literal": false,
+    "deprecation": true,
+    "interface-name": false,
+    "jsx-no-multiline-js": false,
+    "prefer-for-of": true,
+    "jsx-curly-spacing": false,
+    "no-implicit-dependencies": [true, "dev"],
+    "object-literal-key-quotes": false,
+    "no-shadowed-variable": false,
+    "trailing-comma": [
+      true,
+      {
+        "multiline": "always",
+        "singleline": "never",
+        "esSpecCompliant": true
+      }
+    ]
+  },
+  "rulesDirectory": [],
+  "linterOptions": {
+    "exclude": ["./typing-workarounds/*.d.ts", "./node_modules/**/*"]
+  }
+}
