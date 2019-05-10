@@ -13,27 +13,41 @@ export type MenuItemProps = {
 };
 
 class MenuItem extends React.Component<MenuItemProps> {
-  static defaultProps = {
+  public static defaultProps = {
     prefixCls: 'dk-menu',
     disabled: false,
   };
 
-  render() {
-    const { children, prefixCls, className, index, disabled, rootContext, icon, ...attributes } = this.props;
+  public render() {
+    const {
+      children,
+      prefixCls,
+      className,
+      index,
+      disabled,
+      rootContext,
+      icon,
+      ...attributes
+    } = this.props;
     const rootState = rootContext.getState();
     const isHorizontal = rootContext.getProps().mode === 'horizontal';
-    const itemClassName = classNames({
-      [`${prefixCls}-item`]: true,
-      [`${prefixCls}-horizontal-item`]: isHorizontal,
-      [`${prefixCls}-item-active`]: rootState.activeIndex === index,
-      [`${prefixCls}-item-disabled`]: disabled,
-    }, className);
-    const iconNode = icon && typeof icon === 'string'
-      ? <Icon type={icon} className={`${prefixCls}-icon`} />
-      : null;
+    const itemClassName = classNames(
+      {
+        [`${prefixCls}-item`]: true,
+        [`${prefixCls}-horizontal-item`]: isHorizontal,
+        [`${prefixCls}-item-active`]: rootState.activeIndex === index,
+        [`${prefixCls}-item-disabled`]: disabled,
+      },
+      className,
+    );
+    const iconNode =
+      icon && typeof icon === 'string' ? (
+        <Icon type={icon} className={`${prefixCls}-icon`} />
+      ) : null;
 
     return (
-      <li className={itemClassName}
+      <li
+        className={itemClassName}
         onClick={disabled ? undefined : this.handleClick}
         {...attributes}
       >
@@ -43,12 +57,12 @@ class MenuItem extends React.Component<MenuItemProps> {
     );
   }
 
-  handleClick = (e: React.MouseEvent) => {
+  public handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     const { rootContext, index } = this.props;
     rootContext.selectItem(index);
-  }
+  };
 }
 
 export default createConsumer(MenuItem);

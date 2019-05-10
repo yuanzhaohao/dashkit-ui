@@ -15,19 +15,19 @@ export type CardState = {
 };
 
 export type ContextProps = BasicProps & {
-  collapse?: boolean,
+  collapse?: boolean;
   handleHeaderClick?: (key?: string | number) => void;
   onClick: () => void;
   visible?: boolean;
 };
 
-export type HeaderProps = BasicProps & ContextProps & {
-  title?: string;
-  key?: string | number;
-};
+export type HeaderProps = BasicProps &
+  ContextProps & {
+    title?: string;
+    key?: string | number;
+  };
 
-export type BodyProps = BasicProps & ContextProps & {
-};
+export type BodyProps = BasicProps & ContextProps & {};
 
 export type AccordionProps = BasicProps & {
   className?: string;
@@ -35,10 +35,10 @@ export type AccordionProps = BasicProps & {
 };
 
 export type CollapseProps = BasicProps & {
-  defaultActiveIndexs?: (string | number)[];
-  activeIndexs?: (string | number)[];
+  defaultActiveIndexs?: Array<string | number>;
+  activeIndexs?: Array<string | number>;
 };
 
 export type CollapseState = {
-  activeIndexs: (string | number)[];
+  activeIndexs: Array<string | number>;
 };

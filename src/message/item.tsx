@@ -3,7 +3,7 @@ import Alert from '../alert';
 import { MessageItemProps, MessageItemState } from './types';
 
 class MessageItem extends React.PureComponent<MessageItemProps, MessageItemState> {
-  closeTimer: number;
+  public closeTimer: number;
 
   constructor(props: MessageItemProps) {
     super(props);
@@ -14,59 +14,59 @@ class MessageItem extends React.PureComponent<MessageItemProps, MessageItemState
     };
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.startCloseTimer();
   }
 
-  componentDidUpdate(prevProps: MessageItemProps) {
+  public componentDidUpdate(prevProps: MessageItemProps) {
     if (this.props.duration !== prevProps.duration) {
       this.restartCloseTimer();
     }
   }
 
-  componentWillUnmount() {
+  public componentWillUnmount() {
     this.clearCloseTimer();
   }
 
-  close = () => {
+  public close = () => {
     this.clearCloseTimer();
     this.setState({
       dismiss: true,
     });
     setTimeout(() => {
       if (typeof this.props.onClose === 'function') {
-        this.props.onClose()
+        this.props.onClose();
       }
     }, 0);
-  }
+  };
 
-  startCloseTimer = () => {
+  public startCloseTimer = () => {
     if (this.props.duration) {
       this.closeTimer = window.setTimeout(() => {
         this.close();
       }, this.props.duration * 1000);
     }
-  }
+  };
 
-  clearCloseTimer = () => {
+  public clearCloseTimer = () => {
     if (this.closeTimer) {
       clearTimeout(this.closeTimer);
       this.closeTimer = 0;
     }
-  }
+  };
 
-  restartCloseTimer() {
+  public restartCloseTimer() {
     this.clearCloseTimer();
     this.startCloseTimer();
   }
 
-  destory = () => {
+  public destory = () => {
     this.setState({
       closed: true,
     });
-  }
+  };
 
-  render() {
+  public render() {
     const { prefixCls, type, content } = this.props;
     const { dismiss, closed } = this.state;
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 import { PickerChildProps } from './types';
-import { addYears, toDate, isSameYear } from './utils';
+import { addYears, isSameYear } from './utils';
 import { rangeNumber } from '../utils/number';
 import Icon from '../icon';
 
@@ -12,7 +12,7 @@ class Year extends React.PureComponent<YearProps> {
     super(props);
   }
 
-  render() {
+  public render() {
     const { prefixCls, current, value, hideLeftIcon, hideRightIcon } = this.props;
     const startYear = Math.floor(current.getFullYear() / 10) * 10;
     const years = rangeNumber(11, -1).map(i => startYear + i);
@@ -28,7 +28,9 @@ class Year extends React.PureComponent<YearProps> {
               disabled={hideLeftIcon}
             />
             <div className={`${prefixCls}-select`}>
-              <span>{years[1]} ~ {years[years.length - 2]}</span>
+              <span>
+                {years[1]} ~ {years[years.length - 2]}
+              </span>
             </div>
             <Icon
               className={`${prefixCls}-config-icon`}
@@ -39,25 +41,25 @@ class Year extends React.PureComponent<YearProps> {
           </div>
         </div>
         <div className={`${prefixCls}-list`}>
-          {years.map((year, i) =>
+          {years.map((year, i) => (
             <div
               key={year}
               className={classNames({
                 [`${prefixCls}-ym-item`]: true,
                 [`${prefixCls}-ym-item-other`]: i === 0 || i === years.length - 1,
-                [`${prefixCls}-ym-item-active`]: value &&  isSameYear(year.toString(), value),
+                [`${prefixCls}-ym-item-active`]: value && isSameYear(year.toString(), value),
               })}
               onClick={this.handleYearClick.bind(this, year)}
             >
               <span>{year}</span>
             </div>
-          )}
+          ))}
         </div>
       </div>
     );
   }
 
-  handleYearClick = (year: number) => {
+  public handleYearClick = (year: number) => {
     const { current, onChange, disabled, type, value } = this.props;
 
     if (disabled) {
@@ -70,23 +72,23 @@ class Year extends React.PureComponent<YearProps> {
     if (!isYear) {
       this.props.onModeChange('month');
     }
-  }
+  };
 
-  handleYear = (year: number) => {
+  public handleYear = (year: number) => {
     const { current, onChange, disabled } = this.props;
     if (disabled) {
       return;
     }
     onChange(addYears(current, year));
-  }
+  };
 
-  handlePrevRange = () => {
+  public handlePrevRange = () => {
     this.handleYear(-10);
-  }
+  };
 
-  handleNextRange = () => {
+  public handleNextRange = () => {
     this.handleYear(10);
-  }
+  };
 }
 
 export default Year;

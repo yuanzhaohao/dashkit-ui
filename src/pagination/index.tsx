@@ -24,7 +24,7 @@ export type PaginationState = {
 };
 
 class Pagination extends React.Component<PaginationProps, PaginationState> {
-  static defaultProps = {
+  public static defaultProps = {
     prefixCls: 'dk-pagination',
     defaultCurrent: 1,
     pageSize: 20,
@@ -33,7 +33,7 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
     size: 'default' as PaginationSize,
   };
 
-  static getDerivedStateFromProps(nextProps: PaginationProps) {
+  public static getDerivedStateFromProps(nextProps: PaginationProps) {
     const state: Partial<PaginationState> = {};
     if ('current' in nextProps && nextProps.current) {
       state.current = nextProps.current;
@@ -42,15 +42,14 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
   }
 
   constructor(props: PaginationProps) {
-    super(props)
+    super(props);
     this.state = {
       current: props.current || props.defaultCurrent,
       pageSize: props.pageSize,
-    }
+    };
   }
 
-
-  render() {
+  public render() {
     const { className, prefixCls, size, disabled } = this.props;
     const { current } = this.state;
     const paginationClassName = classNames(
@@ -61,23 +60,16 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
       },
       className,
     );
-    const itemClassName = classNames(
-      `${prefixCls}-item`,
-      {
-        [`${prefixCls}-disabled`]: !!disabled,
-      }
-    );
+    const itemClassName = classNames(`${prefixCls}-item`, {
+      [`${prefixCls}-disabled`]: !!disabled,
+    });
     const { pages, max } = this.getPages();
     const items: React.ReactNodeArray = [];
 
     items.push(
       <button
         key="previous"
-        onClick={
-          current > 1 && !disabled
-            ? this.handleChange.bind(this, current - 1)
-            : null
-        }
+        onClick={current > 1 && !disabled ? this.handleChange.bind(this, current - 1) : null}
         className={classNames(itemClassName, [`${prefixCls}-prev`], {
           [`${prefixCls}-disabled`]: current === 1,
         })}
@@ -86,13 +78,10 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
       </button>,
     );
 
-    pages.forEach((page) => {
+    pages.forEach(page => {
       if (page === '<..' || page === '..>') {
         items.push(
-          <div
-            key={page}
-            className={classNames(itemClassName, `${prefixCls}-miss`)}
-          >
+          <div key={page} className={classNames(itemClassName, `${prefixCls}-miss`)}>
             <i />
             <i />
             <i />
@@ -102,15 +91,13 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
         items.push(
           <button
             key={page}
-            onClick={
-              current !== page && !disabled
-               ? this.handleChange.bind(this, page)
-               : null
-            }
+            onClick={current !== page && !disabled ? this.handleChange.bind(this, page) : null}
             className={classNames(itemClassName, {
               [`${prefixCls}-active`]: current === page,
             })}
-          >{page}</button>,
+          >
+            {page}
+          </button>,
         );
       }
     });
@@ -118,11 +105,7 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
     items.push(
       <button
         key="next"
-        onClick={
-          current < max && !disabled
-            ? this.handleChange.bind(this, current + 1)
-            : null
-        }
+        onClick={current < max && !disabled ? this.handleChange.bind(this, current + 1) : null}
         className={classNames(itemClassName, [`${prefixCls}-next`], {
           [`${prefixCls}-disabled`]: current === max,
         })}
@@ -132,6 +115,13 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
     );
 
     return <div className={paginationClassName}>{items}</div>;
+  }
+
+  public handleChange(current) {
+    this.setState({ current });
+    if (this.props.onChange) {
+      this.props.onChange(current);
+    }
   }
 
   private getPages = () => {
@@ -179,14 +169,7 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
     }
 
     return { pages, max };
-  }
-
-  handleChange(current) {
-    this.setState({ current });
-    if (this.props.onChange) {
-      this.props.onChange(current);
-    }
-  }
+  };
 }
 
 export default Pagination;

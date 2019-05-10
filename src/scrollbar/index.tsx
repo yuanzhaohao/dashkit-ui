@@ -15,7 +15,7 @@ type ValueProps = {
 };
 type ScrollbarEvent = MouseEvent & {
   target: HTMLDivElement;
-}
+};
 type UpdateCallbackProps = (value: ValueProps) => void;
 export type ScrollbarProps = {
   prefixCls?: string;
@@ -33,32 +33,31 @@ export type ScrollbarProps = {
 };
 
 class Scrollbar extends React.PureComponent<ScrollbarProps> {
-  scrolling: boolean;
-  dragging: boolean;
-  prevPageY?: number;
-  prevPageX?: number;
-  viewScrollLeft?: number;
-  viewScrollTop?: number;
-  lastViewScrollLeft?: number;
-  lastViewScrollTop?: number;
-  hideTracksTimeout: number;
-  detectScrollingInterval: number;
-  trackMouseOver?: boolean;
-  requestFrame?: number;
-
-  readonly containerRef: React.RefObject<HTMLDivElement>;
-  readonly trackHorizontalRef: React.RefObject<HTMLDivElement>;
-  readonly thumbHorizontalRef: React.RefObject<HTMLDivElement>;
-  readonly trackVerticalRef: React.RefObject<HTMLDivElement>;
-  readonly thumbVerticalRef: React.RefObject<HTMLDivElement>;
-  readonly viewRef: React.RefObject<HTMLDivElement>;
-
-  static defaultProps = {
+  public static defaultProps = {
     prefixCls: 'dk-scrollbar',
     thumbMinSize: 30,
     autoHide: true,
     autoHideTimeout: 1000,
   };
+  public scrolling: boolean;
+  public dragging: boolean;
+  public prevPageY?: number;
+  public prevPageX?: number;
+  public viewScrollLeft?: number;
+  public viewScrollTop?: number;
+  public lastViewScrollLeft?: number;
+  public lastViewScrollTop?: number;
+  public hideTracksTimeout: number;
+  public detectScrollingInterval: number;
+  public trackMouseOver?: boolean;
+  public requestFrame?: any;
+
+  public readonly containerRef: React.RefObject<HTMLDivElement>;
+  public readonly trackHorizontalRef: React.RefObject<HTMLDivElement>;
+  public readonly thumbHorizontalRef: React.RefObject<HTMLDivElement>;
+  public readonly trackVerticalRef: React.RefObject<HTMLDivElement>;
+  public readonly thumbVerticalRef: React.RefObject<HTMLDivElement>;
+  public readonly viewRef: React.RefObject<HTMLDivElement>;
 
   constructor(props: ScrollbarProps) {
     super(props);
@@ -76,12 +75,12 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
     this.thumbVerticalRef = React.createRef();
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.addListeners();
     this.update();
   }
 
-  componentDidUpdate(prevProps: ScrollbarProps) {
+  public componentDidUpdate(prevProps: ScrollbarProps) {
     if (prevProps.autoHide !== this.props.autoHide) {
       this.removeListeners();
       this.addListeners();
@@ -89,7 +88,7 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
     // this.update();
   }
 
-  componentWillUnmount() {
+  public componentWillUnmount() {
     this.removeListeners();
     if (this.requestFrame) {
       caf(this.requestFrame);
@@ -98,190 +97,217 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
     clearInterval(this.detectScrollingInterval);
   }
 
-  render() {
+  public render() {
     const { prefixCls, children, style, className, autoHide } = this.props;
-    const containerClassName = classNames({
-      [`${prefixCls}`]: true,
-    }, className);
+    const containerClassName = classNames(
+      {
+        [`${prefixCls}`]: true,
+      },
+      className,
+    );
     const scrollbarWidth = getScrollbarWidth();
     const viewStyle = {
       marginLeft: `-${scrollbarWidth}px`,
       marginRight: `-${scrollbarWidth}px`,
-    }
+    };
 
     return (
       <div className={containerClassName} ref={this.containerRef} style={style}>
-        <div className={`${prefixCls}-view`} ref={this.viewRef} style={viewStyle}>{children}</div>
+        <div className={`${prefixCls}-view`} ref={this.viewRef} style={viewStyle}>
+          {children}
+        </div>
         <div
           className={classNames({
             [`${prefixCls}-track-horizontal`]: true,
-            [`${prefixCls}-hide-track`]: autoHide
+            [`${prefixCls}-hide-track`]: autoHide,
           })}
           ref={this.trackHorizontalRef}
         >
-          <div className={`${prefixCls}-thumb-horizontal`} ref={this.thumbHorizontalRef}></div>
+          <div className={`${prefixCls}-thumb-horizontal`} ref={this.thumbHorizontalRef} />
         </div>
         <div
           className={classNames({
             [`${prefixCls}-track-vertical`]: true,
-            [`${prefixCls}-hide-track`]: autoHide
+            [`${prefixCls}-hide-track`]: autoHide,
           })}
           ref={this.trackVerticalRef}
         >
-          <div className={`${prefixCls}-thumb-vertical`} ref={this.thumbVerticalRef}></div>
+          <div className={`${prefixCls}-thumb-vertical`} ref={this.thumbVerticalRef} />
         </div>
       </div>
     );
   }
 
-  getScrollLeft = () => {
+  public getScrollLeft = () => {
     const el = this.viewRef.current;
     if (!el) {
       return 0;
     }
     return el.scrollLeft;
-  }
+  };
 
-  getScrollTop = () => {
+  public getScrollTop = () => {
     const el = this.viewRef.current;
     if (!el) {
       return 0;
     }
     return el.scrollTop;
-  }
+  };
 
-  getScrollWidth = () => {
+  public getScrollWidth = () => {
     const el = this.viewRef.current;
     if (!el) {
       return 0;
     }
     return el.scrollWidth;
-  }
+  };
 
-  getScrollHeight = () => {
+  public getScrollHeight = () => {
     const el = this.viewRef.current;
     if (!el) {
       return 0;
     }
     return el.scrollHeight;
-  }
+  };
 
-  getClientWidth = () => {
+  public getClientWidth = () => {
     const el = this.viewRef.current;
     if (!el) {
       return 0;
     }
     return el.clientWidth;
-  }
+  };
 
-  getClientHeight = () => {
+  public getClientHeight = () => {
     const el = this.viewRef.current;
     if (!el) {
       return 0;
     }
     return el.clientHeight;
-  }
+  };
 
-  getValues = () => {
+  public getValues = () => {
     const {
       scrollLeft = 0,
       scrollTop = 0,
       scrollWidth = 0,
       scrollHeight = 0,
       clientWidth = 0,
-      clientHeight = 0
+      clientHeight = 0,
     } = this.viewRef.current || {};
 
     return {
-      left: (scrollLeft / (scrollWidth - clientWidth)) || 0,
-      top: (scrollTop / (scrollHeight - clientHeight)) || 0,
+      left: scrollLeft / (scrollWidth - clientWidth) || 0,
+      top: scrollTop / (scrollHeight - clientHeight) || 0,
       scrollLeft,
       scrollTop,
       scrollWidth,
       scrollHeight,
       clientWidth,
-      clientHeight
+      clientHeight,
     };
-  }
+  };
 
-  getThumbHorizontalWidth = () => {
+  public getThumbHorizontalWidth = () => {
     const { thumbSize, thumbMinSize } = this.props;
     const { scrollWidth, clientWidth } = this.viewRef.current as HTMLDivElement;
     const trackHorizontalDiv = this.trackHorizontalRef.current as HTMLDivElement;
     const trackWidth = getInnerWidth(trackHorizontalDiv);
-    const width = Math.ceil(clientWidth / scrollWidth * trackWidth);
-    if (trackWidth === width) return 0;
-    if (thumbSize) return thumbSize;
+    const width = Math.ceil((clientWidth / scrollWidth) * trackWidth);
+    if (trackWidth === width) {
+      return 0;
+    }
+    if (thumbSize) {
+      return thumbSize;
+    }
     return Math.max(width, thumbMinSize);
-  }
+  };
 
-  getThumbVerticalHeight = () => {
+  public getThumbVerticalHeight = () => {
     const { thumbSize, thumbMinSize } = this.props;
     const { scrollHeight, clientHeight } = this.viewRef.current as HTMLDivElement;
     const trackVerticalDiv = this.trackVerticalRef.current as HTMLDivElement;
     const trackHeight = getInnerHeight(trackVerticalDiv);
-    const height = Math.ceil(clientHeight / scrollHeight * trackHeight);
-    if (trackHeight === height) return 0;
-    if (thumbSize) return thumbSize;
+    const height = Math.ceil((clientHeight / scrollHeight) * trackHeight);
+    if (trackHeight === height) {
+      return 0;
+    }
+    if (thumbSize) {
+      return thumbSize;
+    }
     return Math.max(height, thumbMinSize);
-  }
+  };
 
-  getScrollLeftForOffset = (offset: number) => {
+  public getScrollLeftForOffset = (offset: number) => {
     const { scrollWidth, clientWidth } = this.viewRef.current as HTMLDivElement;
     const trackHorizontalDiv = this.trackHorizontalRef.current as HTMLDivElement;
     const trackWidth = getInnerWidth(trackHorizontalDiv);
     const thumbWidth = this.getThumbHorizontalWidth();
-    return offset / (trackWidth - thumbWidth) * (scrollWidth - clientWidth);
-  }
+    return (offset / (trackWidth - thumbWidth)) * (scrollWidth - clientWidth);
+  };
 
-  getScrollTopForOffset = (offset: number) => {
+  public getScrollTopForOffset = (offset: number) => {
     const { scrollHeight, clientHeight } = this.viewRef.current as HTMLDivElement;
     const trackVerticalDiv = this.trackVerticalRef.current as HTMLDivElement;
     const trackHeight = getInnerHeight(trackVerticalDiv);
     const thumbHeight = this.getThumbVerticalHeight();
-    return offset / (trackHeight - thumbHeight) * (scrollHeight - clientHeight);
-  }
+    return (offset / (trackHeight - thumbHeight)) * (scrollHeight - clientHeight);
+  };
 
-  scrollLeft = (left = 0, duration = 0) => {
-    if (!this.viewRef.current) return;
+  public scrollLeft = (left = 0, duration = 0) => {
+    if (!this.viewRef.current) {
+      return;
+    }
     if (duration === 0) {
       this.viewRef.current.scrollLeft = left;
     } else {
       scrollAnimateLeft(this.viewRef.current, left, duration);
     }
-  }
+  };
 
-  scrollTop = (top = 0, duration = 0) => {
-    if (!this.viewRef.current) return;
+  public scrollTop = (top = 0, duration = 0) => {
+    if (!this.viewRef.current) {
+      return;
+    }
     if (duration === 0) {
       this.viewRef.current.scrollTop = top;
     } else {
       scrollAnimateTop(this.viewRef.current, top, duration);
     }
-  }
+  };
 
-  scrollToLeft = () => {
-    if (!this.viewRef.current) return;
+  public scrollToLeft = () => {
+    if (!this.viewRef.current) {
+      return;
+    }
     this.viewRef.current.scrollLeft = 0;
-  }
+  };
 
-  scrollToTop = () => {
-    if (!this.viewRef.current) return;
+  public scrollToTop = () => {
+    if (!this.viewRef.current) {
+      return;
+    }
     this.viewRef.current.scrollTop = 0;
-  }
+  };
 
-  scrollToRight = () => {
-    if (!this.viewRef.current) return;
+  public scrollToRight = () => {
+    if (!this.viewRef.current) {
+      return;
+    }
     this.viewRef.current.scrollLeft = this.viewRef.current.scrollWidth;
-  }
+  };
 
-  scrollToBottom = () => {
-    if (!this.viewRef.current) return;
+  public scrollToBottom = () => {
+    if (!this.viewRef.current) {
+      return;
+    }
     this.viewRef.current.scrollTop = this.viewRef.current.scrollHeight;
-  }
+  };
 
-  addListeners = () => {
-    if (typeof document === 'undefined' || !this.viewRef.current) return;
+  public addListeners = () => {
+    if (typeof document === 'undefined' || !this.viewRef.current) {
+      return;
+    }
     this.viewRef.current.addEventListener('scroll', this.handleScroll);
 
     if (!this.props.autoHide) {
@@ -297,10 +323,12 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
     thumbHorizontalDiv.addEventListener('mousedown', this.handleHorizontalThumbMouseDown);
     thumbVerticalDiv.addEventListener('mousedown', this.handleVerticalThumbMouseDown);
     window.addEventListener('resize', this.handleWindowResize);
-  }
+  };
 
-  removeListeners = () => {
-    if (typeof document === 'undefined' || !this.viewRef.current) return;
+  public removeListeners = () => {
+    if (typeof document === 'undefined' || !this.viewRef.current) {
+      return;
+    }
     this.viewRef.current.removeEventListener('scroll', this.handleScroll);
 
     if (!this.props.autoHide) {
@@ -318,9 +346,9 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
     thumbVerticalDiv.removeEventListener('mousedown', this.handleVerticalThumbMouseDown);
     window.removeEventListener('resize', this.handleWindowResize);
     this.teardownDragging();
-  }
+  };
 
-  handleScroll = (event: MouseEvent) => {
+  public handleScroll = (event: MouseEvent) => {
     const { onScroll, onScrollFrame } = this.props;
     if (typeof onScroll === 'function') {
       onScroll(event);
@@ -334,41 +362,45 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
       }
     });
     this.detectScrolling();
-  }
+  };
 
-  handleScrollStart = () => {
+  public handleScrollStart = () => {
     const { onScrollStart } = this.props;
     if (typeof onScrollStart === 'function') {
       onScrollStart();
     }
     this.handleScrollStartAutoHide();
-  }
+  };
 
-  handleScrollStartAutoHide = () => {
+  public handleScrollStartAutoHide = () => {
     const { autoHide } = this.props;
-    if (!autoHide) return;
+    if (!autoHide) {
+      return;
+    }
     this.showTracks();
-  }
+  };
 
-  handleScrollStop = () => {
+  public handleScrollStop = () => {
     const { onScrollStop } = this.props;
     if (typeof onScrollStop === 'function') {
       onScrollStop();
     }
     this.handleScrollStopAutoHide();
-  }
+  };
 
-  handleScrollStopAutoHide = () => {
+  public handleScrollStopAutoHide = () => {
     const { autoHide } = this.props;
-    if (!autoHide) return;
+    if (!autoHide) {
+      return;
+    }
     this.hideTracks();
-  }
+  };
 
-  handleWindowResize = () => {
+  public handleWindowResize = () => {
     this.update();
-  }
+  };
 
-  handleHorizontalTrackMouseDown = (event: ScrollbarEvent) => {
+  public handleHorizontalTrackMouseDown = (event: ScrollbarEvent) => {
     event.preventDefault();
     const { target, clientX } = event;
     const { left: targetLeft } = target.getBoundingClientRect();
@@ -376,9 +408,9 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
     const offset = Math.abs(targetLeft - clientX) - thumbWidth / 2;
     const viewDiv = this.viewRef.current as HTMLDivElement;
     viewDiv.scrollLeft = this.getScrollLeftForOffset(offset);
-  }
+  };
 
-  handleVerticalTrackMouseDown = (event: ScrollbarEvent) => {
+  public handleVerticalTrackMouseDown = (event: ScrollbarEvent) => {
     event.preventDefault();
     const { target, clientY } = event;
     const { top: targetTop } = target.getBoundingClientRect();
@@ -386,49 +418,49 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
     const offset = Math.abs(targetTop - clientY) - thumbHeight / 2;
     const viewDiv = this.viewRef.current as HTMLDivElement;
     viewDiv.scrollTop = this.getScrollTopForOffset(offset);
-  }
+  };
 
-  handleHorizontalThumbMouseDown = (event: ScrollbarEvent) => {
+  public handleHorizontalThumbMouseDown = (event: ScrollbarEvent) => {
     event.preventDefault();
     this.handleDragStart(event);
     const { target, clientX } = event;
     const { offsetWidth } = target;
     const { left } = target.getBoundingClientRect();
     this.prevPageX = offsetWidth - (clientX - left);
-  }
+  };
 
-  handleVerticalThumbMouseDown = (event: ScrollbarEvent) => {
+  public handleVerticalThumbMouseDown = (event: ScrollbarEvent) => {
     event.preventDefault();
     this.handleDragStart(event);
     const { target, clientY } = event;
     const { offsetHeight } = target;
     const { top } = target.getBoundingClientRect();
     this.prevPageY = offsetHeight - (clientY - top);
-  }
+  };
 
-  setupDragging = () => {
+  public setupDragging = () => {
     const doc: any = document;
     doc.body.style.userSelect = 'none';
     doc.addEventListener('mousemove', this.handleDrag);
     doc.addEventListener('mouseup', this.handleDragEnd);
     doc.onselectstart = () => false;
-  }
+  };
 
-  teardownDragging = () => {
+  public teardownDragging = () => {
     const doc: any = document;
     doc.body.style.userSelect = '';
     doc.removeEventListener('mousemove', this.handleDrag);
     doc.removeEventListener('mouseup', this.handleDragEnd);
     doc.onselectstart = undefined;
-  }
+  };
 
-  handleDragStart = (event: MouseEvent) => {
+  public handleDragStart = (event: MouseEvent) => {
     this.dragging = true;
     event.stopImmediatePropagation();
     this.setupDragging();
-  }
+  };
 
-  handleDrag = (event: MouseEvent) => {
+  public handleDrag = (event: MouseEvent) => {
     if (this.prevPageX) {
       const { clientX } = event;
       const trackHorizontalDiv = this.trackHorizontalRef.current as HTMLDivElement;
@@ -450,55 +482,67 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
       viewDiv.scrollTop = this.getScrollTopForOffset(offset);
     }
     return false;
-  }
+  };
 
-  handleDragEnd = () => {
+  public handleDragEnd = () => {
     this.dragging = false;
     this.prevPageX = this.prevPageY = 0;
     this.teardownDragging();
     this.handleDragEndAutoHide();
-  }
+  };
 
-  handleDragEndAutoHide = () => {
+  public handleDragEndAutoHide = () => {
     const { autoHide } = this.props;
-    if (!autoHide) return;
+    if (!autoHide) {
+      return;
+    }
     this.hideTracks();
-  }
+  };
 
-  handleTrackMouseEnter = () => {
+  public handleTrackMouseEnter = () => {
     this.trackMouseOver = true;
     this.handleTrackMouseEnterAutoHide();
-  }
+  };
 
-  handleTrackMouseEnterAutoHide = () => {
+  public handleTrackMouseEnterAutoHide = () => {
     const { autoHide } = this.props;
-    if (!autoHide) return;
+    if (!autoHide) {
+      return;
+    }
     this.showTracks();
-  }
+  };
 
-  handleTrackMouseLeave = () => {
+  public handleTrackMouseLeave = () => {
     this.trackMouseOver = false;
     this.handleTrackMouseLeaveAutoHide();
-  }
+  };
 
-  handleTrackMouseLeaveAutoHide = () => {
+  public handleTrackMouseLeaveAutoHide = () => {
     const { autoHide } = this.props;
-    if (!autoHide) return;
+    if (!autoHide) {
+      return;
+    }
     this.hideTracks();
-  }
+  };
 
-  showTracks = () => {
+  public showTracks = () => {
     clearTimeout(this.hideTracksTimeout);
     const trackHorizontalDiv = this.trackHorizontalRef.current as HTMLDivElement;
     const trackVerticalDiv = this.trackVerticalRef.current as HTMLDivElement;
     trackHorizontalDiv.style.opacity = '1';
     trackVerticalDiv.style.opacity = '1';
-  }
+  };
 
-  hideTracks = () => {
-    if (this.dragging) return;
-    if (this.scrolling) return;
-    if (this.trackMouseOver) return;
+  public hideTracks = () => {
+    if (this.dragging) {
+      return;
+    }
+    if (this.scrolling) {
+      return;
+    }
+    if (this.trackMouseOver) {
+      return;
+    }
     const { autoHideTimeout } = this.props;
     clearTimeout(this.hideTracksTimeout);
     this.hideTracksTimeout = window.setTimeout(() => {
@@ -507,15 +551,19 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
       trackHorizontalDiv.style.opacity = '0';
       trackVerticalDiv.style.opacity = '0';
     }, autoHideTimeout);
-  }
+  };
 
-  detectScrolling = () => {
-    if (this.scrolling) return;
+  public detectScrolling = () => {
+    if (this.scrolling) {
+      return;
+    }
     this.scrolling = true;
     this.handleScrollStart();
     this.detectScrollingInterval = window.setInterval(() => {
-      if (this.lastViewScrollLeft === this.viewScrollLeft
-        && this.lastViewScrollTop === this.viewScrollTop) {
+      if (
+        this.lastViewScrollLeft === this.viewScrollLeft &&
+        this.lastViewScrollTop === this.viewScrollTop
+      ) {
         clearInterval(this.detectScrollingInterval);
         this.scrolling = false;
         this.handleScrollStop();
@@ -523,9 +571,9 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
       this.lastViewScrollLeft = this.viewScrollLeft;
       this.lastViewScrollTop = this.viewScrollTop;
     }, 100);
-  }
+  };
 
-  raf = (callback: VoidFunction) => {
+  public raf = (callback: VoidFunction) => {
     if (this.requestFrame) {
       caf(this.requestFrame);
     }
@@ -533,13 +581,13 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
       this.requestFrame = undefined;
       callback();
     });
-  }
+  };
 
-  update = (callback?: UpdateCallbackProps) => {
-    this.raf(() => this._update(callback));
-  }
+  public update = (callback?: UpdateCallbackProps) => {
+    this.raf(() => this.updateCallback(callback));
+  };
 
-  _update = (callback?: UpdateCallbackProps) => {
+  public updateCallback = (callback?: UpdateCallbackProps) => {
     const { onUpdate } = this.props;
     const values = this.getValues();
     const { scrollLeft, clientWidth, scrollWidth } = values;
@@ -548,13 +596,15 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
       const trackHorizontalDiv = this.trackHorizontalRef.current as HTMLDivElement;
       const trackHorizontalWidth = getInnerWidth(trackHorizontalDiv);
       const thumbHorizontalWidth = this.getThumbHorizontalWidth();
-      const thumbHorizontalX = scrollLeft / (scrollWidth - clientWidth) * (trackHorizontalWidth - thumbHorizontalWidth);
+      const thumbHorizontalX =
+        (scrollLeft / (scrollWidth - clientWidth)) * (trackHorizontalWidth - thumbHorizontalWidth);
 
       const { scrollTop, clientHeight, scrollHeight } = values;
       const trackVerticalDiv = this.trackVerticalRef.current as HTMLDivElement;
       const trackVerticalHeight = getInnerHeight(trackVerticalDiv);
       const thumbVerticalHeight = this.getThumbVerticalHeight();
-      const thumbVerticalY = scrollTop / (scrollHeight - clientHeight) * (trackVerticalHeight - thumbVerticalHeight);
+      const thumbVerticalY =
+        (scrollTop / (scrollHeight - clientHeight)) * (trackVerticalHeight - thumbVerticalHeight);
 
       const thumbHorizontalDiv = this.thumbHorizontalRef.current as HTMLDivElement;
       const thumbVerticalDiv = this.thumbVerticalRef.current as HTMLDivElement;
@@ -564,7 +614,6 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
 
       thumbVerticalDiv.style.height = `${thumbVerticalHeight}px`;
       thumbVerticalDiv.style.transform = `translateY(${thumbVerticalY}px)`;
-
     }
 
     if (typeof onUpdate === 'function') {
@@ -573,7 +622,7 @@ class Scrollbar extends React.PureComponent<ScrollbarProps> {
     if (typeof callback === 'function') {
       callback(values);
     }
-  }
+  };
 }
 
 const scrollAnimateTop = (element: Element, to: number, duration: number) => {
@@ -582,11 +631,13 @@ const scrollAnimateTop = (element: Element, to: number, duration: number) => {
     return;
   }
   const difference = to - element.scrollTop;
-  const perTick = difference / duration * 10;
+  const perTick = (difference / duration) * 10;
 
   raf(() => {
     element.scrollTop = element.scrollTop + perTick;
-    if (element.scrollTop === to) return;
+    if (element.scrollTop === to) {
+      return;
+    }
     scrollAnimateTop(element, to, duration - 10);
   });
 };
@@ -597,11 +648,13 @@ const scrollAnimateLeft = (element: Element, to: number, duration: number) => {
     return;
   }
   const difference = to - element.scrollLeft;
-  const perTick = difference / duration * 10;
+  const perTick = (difference / duration) * 10;
 
   raf(() => {
     element.scrollLeft = element.scrollLeft + perTick;
-    if (element.scrollLeft === to) return;
+    if (element.scrollLeft === to) {
+      return;
+    }
     scrollAnimateLeft(element, to, duration - 10);
   });
 };

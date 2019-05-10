@@ -22,7 +22,7 @@ export interface SwitchState {
   checked?: boolean;
 }
 class Switch extends React.Component<SwitchProps, SwitchState> {
-  static defaultProps = {
+  public static defaultProps = {
     disabled: false,
     prefixCls: 'dk-switch',
     size: 'default' as SwitchSize,
@@ -36,7 +36,7 @@ class Switch extends React.Component<SwitchProps, SwitchState> {
     };
   }
 
-  render() {
+  public render() {
     const {
       className,
       style,
@@ -58,11 +58,7 @@ class Switch extends React.Component<SwitchProps, SwitchState> {
       className,
     );
     return (
-      <button
-        className={switchClassName}
-        onClick={this.handleChange}
-        style={style}
-      >
+      <button className={switchClassName} onClick={this.handleChange} style={style}>
         <span className={`${prefixCls}-inner`}>
           {checked ? checkedChildren : unCheckedChildren}
         </span>
@@ -70,11 +66,11 @@ class Switch extends React.Component<SwitchProps, SwitchState> {
     );
   }
 
-  getChecked = () => {
+  public getChecked = () => {
     return 'checked' in this.props ? this.props.checked : this.state.checked;
-  }
+  };
 
-  handleChange = () => {
+  public handleChange = () => {
     const { onChange } = this.props;
     const checked = !this.getChecked();
     this.setState({
@@ -83,6 +79,6 @@ class Switch extends React.Component<SwitchProps, SwitchState> {
     if (typeof onChange === 'function') {
       onChange(checked);
     }
-  }
+  };
 }
 export default Switch;

@@ -18,28 +18,28 @@ export type BasicProps = {
 };
 
 class Layout extends React.Component<LayoutProps, LayoutState> {
-  static Header: typeof Header;
-  static Footer: typeof Footer;
-  static Content: typeof Content;
-  static Sidebar: typeof Sidebar;
-  static defaultProps = {
+  public static Header: typeof Header;
+  public static Footer: typeof Footer;
+  public static Content: typeof Content;
+  public static Sidebar: typeof Sidebar;
+  public static defaultProps = {
     prefixCls: 'dk-layout',
     hasSidebar: false,
   };
 
-  state = {
+  public state = {
     sidebars: [],
   };
 
-  render() {
+  public render() {
     const { prefixCls, className, children, hasSidebar, ...attibutes } = this.props;
     const layoutClassName = classNames(
       {
         [`${prefixCls}`]: true,
-        [`${prefixCls}-has-sidebar`]: hasSidebar || this.state.sidebars.length > 0
+        [`${prefixCls}-has-sidebar`]: hasSidebar || this.state.sidebars.length > 0,
       },
       className,
-    )
+    );
     return (
       <div className={layoutClassName} {...attibutes}>
         <LayoutProvider value={this.getLayoutContext()}>{children}</LayoutProvider>
@@ -47,7 +47,7 @@ class Layout extends React.Component<LayoutProps, LayoutState> {
     );
   }
 
-  getLayoutContext() {
+  public getLayoutContext() {
     return {
       addSidebar: (id: string) => {
         this.setState({
@@ -58,24 +58,26 @@ class Layout extends React.Component<LayoutProps, LayoutState> {
         this.setState({
           sidebars: this.state.sidebars.filter(currentId => currentId !== id),
         });
-      }
+      },
     };
   }
 }
 
 function generator(cls: string) {
   return class Basic extends React.Component<BasicProps> {
-    static defaultProps = {
+    public static defaultProps = {
       prefixCls: 'dk-layout',
     };
-    render() {
+    public render() {
       const { prefixCls, className, children, ...attibutes } = this.props;
       const basicClassName = classNames(`${prefixCls}-${cls}`, className);
       return (
-        <div className={basicClassName} {...attibutes}>{children}</div>
+        <div className={basicClassName} {...attibutes}>
+          {children}
+        </div>
       );
     }
-  }
+  };
 }
 
 const Header = generator('header');

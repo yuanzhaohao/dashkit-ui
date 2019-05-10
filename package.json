@@ -24,10 +24,10 @@
     "pub:tsEs": "tsc -p tsconfig.json",
     "pub:tsLib": "tsc -p tsconfig.json --declarationDir publish/lib",
     "pub:babel": "babel publish/lib --out-dir publish/lib",
-    "format": "prettier --parser typescript './src/select/*.{ts,tsx}' --write",
+    "format": "prettier --parser typescript './{src,site}/**/*.{ts,tsx}' --write",
     "format:scripts": "prettier './scripts/*.js' --write",
-    "lint": "tslint --project tsconfig.json './src/**/*.{ts,tsx}' && tsc --noEmit --pretty",
-    "lint:fix": "tslint --project tsconfig.json --fix './src/**/*.{ts,tsx}' && tsc --noEmit --pretty",
+    "lint": "tslint tsconfig.json './{src,site}/**/*.{ts,tsx}'",
+    "lint:fix": "tslint --project tsconfig.json './{src,site}/**/*.{ts,tsx}' --fix",
     "test": "jest ./src"
   },
   "lint-staged": {
@@ -40,6 +40,11 @@
       "tslint --project tsconfig.json --fix",
       "git add"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "repository": {
     "type": "git",

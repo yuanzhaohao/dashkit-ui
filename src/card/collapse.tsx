@@ -10,7 +10,7 @@ class Collapse extends React.PureComponent<CollapseProps, CollapseState> {
       activeIndexs: props.activeIndexs || props.defaultActiveIndexs || [],
     };
   }
-  render() {
+  public render() {
     const {
       className,
       children,
@@ -18,10 +18,7 @@ class Collapse extends React.PureComponent<CollapseProps, CollapseState> {
       activeIndexs: activeIndexsProp,
       ...attributes
     } = this.props;
-    const collapseClassName = classNames(
-      'dk-card-collapse',
-      className,
-    );
+    const collapseClassName = classNames('dk-card-collapse', className);
     const { activeIndexs } = this.state;
     const newChildren = React.Children.map(children, (child: React.ReactElement<CardProps>) => {
       if (!child) {
@@ -34,7 +31,7 @@ class Collapse extends React.PureComponent<CollapseProps, CollapseState> {
         visible: activeIndexs.indexOf(index) !== -1,
         onCollapse: this.handleCollapse.bind(this, index),
       };
-      return <Card {...newProps} />
+      return <Card {...newProps} />;
     });
     return (
       <div {...attributes} className={collapseClassName}>
@@ -43,16 +40,17 @@ class Collapse extends React.PureComponent<CollapseProps, CollapseState> {
     );
   }
 
-  handleCollapse = (index: string | number) => {
+  public handleCollapse = (index: string | number) => {
     const { activeIndexs } = this.state;
-    const newActiveIndexs = activeIndexs.indexOf(index) === -1
-    ? Array.from(new Set([...activeIndexs, index]))
-    : activeIndexs.filter(i => i !== index);
+    const newActiveIndexs =
+      activeIndexs.indexOf(index) === -1
+        ? Array.from(new Set([...activeIndexs, index]))
+        : activeIndexs.filter(i => i !== index);
 
     this.setState({
       activeIndexs: newActiveIndexs,
     });
-  }
+  };
 }
 
 export default Collapse;

@@ -3,12 +3,9 @@ import * as React from 'react';
 import { AccordionProps } from './types';
 
 class Accordion extends React.PureComponent<AccordionProps> {
-  render() {
+  public render() {
     const { className, children, ...attributes } = this.props;
-    const accordionClassName = classNames(
-      'dk-card',
-      className,
-    );
+    const accordionClassName = classNames('dk-card', className);
     return (
       <div {...attributes} className={accordionClassName}>
         {children}

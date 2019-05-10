@@ -1,7 +1,17 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 import { PickerChildProps } from './types';
-import { monthValues, weekdayValues, addDays, addMonths, compareAsc, getDaysOfMonth, isSameDay, isSameWeek, formatDate } from './utils';
+import {
+  monthValues,
+  weekdayValues,
+  addDays,
+  addMonths,
+  compareAsc,
+  getDaysOfMonth,
+  isSameDay,
+  isSameWeek,
+  formatDate,
+} from './utils';
 import Icon from '../icon';
 import Time from './time';
 
@@ -13,11 +23,11 @@ export type DayState = {
 };
 
 class Day extends React.PureComponent<DayProps, DayState> {
-  cachedDate: Date | null;
-  cachedDays: any;
-  static defaultProps = {
+  public static defaultProps = {
     type: 'day',
   };
+  private cachedDate: Date | null;
+  private cachedDays: any;
   constructor(props: DayProps) {
     super(props);
     this.cachedDate = null;
@@ -27,7 +37,7 @@ class Day extends React.PureComponent<DayProps, DayState> {
     };
   }
 
-  render() {
+  public render() {
     const { prefixCls, current, type, hideLeftIcon, hideRightIcon } = this.props;
     const days = this.getDays();
 
@@ -48,7 +58,9 @@ class Day extends React.PureComponent<DayProps, DayState> {
               disabled={hideLeftIcon}
             />
             <div className={`${prefixCls}-select`}>
-              <span onClick={() => this.props.onModeChange('month')}>{monthValues.long[current.getMonth()]}</span>
+              <span onClick={() => this.props.onModeChange('month')}>
+                {monthValues.long[current.getMonth()]}
+              </span>
               <span onClick={() => this.props.onModeChange('year')}>{current.getFullYear()}</span>
             </div>
             <Icon
@@ -66,23 +78,21 @@ class Day extends React.PureComponent<DayProps, DayState> {
           </div>
 
           <div className={`${prefixCls}-week`}>
-            {weekdayValues.short.map((w) => <span key={w}>{w}</span>)}
+            {weekdayValues.short.map(w => (
+              <span key={w}>{w}</span>
+            ))}
           </div>
         </div>
-        <div className={`${prefixCls}-list`}>
-          {days.map((date: Date) => this.renderDay(date) )}
-        </div>
+        <div className={`${prefixCls}-list`}>{days.map((date: Date) => this.renderDay(date))}</div>
         {type === 'datetime' ? this.renderDatetime() : null}
       </div>
     );
   }
 
-  renderDay = (date: Date) => {
+  public renderDay = (date: Date) => {
     const { current, value, type, prefixCls, rangeDate, min, max } = this.props;
     const hoverProps: any = {};
-    const isDisabled =
-      (!!min && compareAsc(date, min) < 0) ||
-      (!!max && compareAsc(date, max) > 0);
+    const isDisabled = (!!min && compareAsc(date, min) < 0) || (!!max && compareAsc(date, max) > 0);
     let itemClassName = classNames({
       [`${prefixCls}-day-item`]: true,
       [`${prefixCls}-day-item-disabled`]: isDisabled,
@@ -101,8 +111,10 @@ class Day extends React.PureComponent<DayProps, DayState> {
     } else if (rangeDate && current.getMonth() === date.getMonth()) {
       hoverProps.onMouseEnter = this.handleDayHover.bind(this, date);
       itemClassName = classNames(itemClassName, {
-        [`${prefixCls}-day-item-hover`]: compareAsc(rangeDate[0], date) <= 0 && compareAsc(rangeDate[1], date) >= 0,
-        [`${prefixCls}-day-item-hover-active`]: isSameDay(rangeDate[0], date) || isSameDay(rangeDate[1], date),
+        [`${prefixCls}-day-item-hover`]:
+          compareAsc(rangeDate[0], date) <= 0 && compareAsc(rangeDate[1], date) >= 0,
+        [`${prefixCls}-day-item-hover-active`]:
+          isSameDay(rangeDate[0], date) || isSameDay(rangeDate[1], date),
         [`${prefixCls}-day-item-hover-start`]: isSameDay(rangeDate[0], date),
         [`${prefixCls}-day-item-hover-end`]: isSameDay(rangeDate[1], date),
       });
@@ -124,9 +136,9 @@ class Day extends React.PureComponent<DayProps, DayState> {
         <span>{date.getDate()}</span>
       </div>
     );
-  }
+  };
 
-  renderDatetime = () => {
+  private renderDatetime = () => {
     const { format, current, prefixCls, ...attributes } = this.props;
     const match = format.match(/[H|h].*/);
     const newFormat = match ? match[0] : format;
@@ -144,10 +156,10 @@ class Day extends React.PureComponent<DayProps, DayState> {
         <span>{formatDate(current, newFormat)}</span>
       </div>
     );
-  }
+  };
 
-  getDays = () => {
-    const { current } = this.props
+  private getDays = () => {
+    const { current } = this.props;
     if (this.cachedDate && this.cachedDate.getTime() === current.getTime() && this.cachedDays) {
       return this.cachedDays;
     }
@@ -155,21 +167,21 @@ class Day extends React.PureComponent<DayProps, DayState> {
     this.cachedDate = current;
 
     return this.cachedDays;
-  }
+  };
 
-  handleDayHover = (date: Date) => {
+  private handleDayHover = (date: Date) => {
     const { onDayHover } = this.props;
     if (typeof onDayHover === 'function') {
       onDayHover(date);
     }
-  }
+  };
 
-  handleTimerChange = (date: Date) => {
+  private handleTimerChange = (date: Date) => {
     const { onChange } = this.props;
     onChange(date);
-  }
+  };
 
-  handleDayClick = (date: Date) => {
+  private handleDayClick = (date: Date) => {
     const { current, onChange, disabled, type } = this.props;
 
     if (disabled) {
@@ -192,43 +204,43 @@ class Day extends React.PureComponent<DayProps, DayState> {
       );
       onChange(newDate, true);
     }
-  }
+  };
 
-  handleMouth = (month: number) => {
+  private handleMouth = (month: number) => {
     const { current, onChange, disabled } = this.props;
     if (disabled) {
       return;
     }
     onChange(addMonths(current, month));
-  }
+  };
 
-  handlePrevYear = () => {
+  private handlePrevYear = () => {
     this.handleMouth(-12);
-  }
+  };
 
-  handleNextYear = () => {
+  private handleNextYear = () => {
     this.handleMouth(12);
-  }
+  };
 
-  handlePrevMonth = () => {
+  private handlePrevMonth = () => {
     this.handleMouth(-1);
-  }
+  };
 
-  handleNextMonth = () => {
+  private handleNextMonth = () => {
     this.handleMouth(1);
-  }
+  };
 
-  handleHoverWeek = (date: Date) => {
+  private handleHoverWeek = (date: Date) => {
     this.setState({
       hoverDate: date,
     });
-  }
+  };
 
-  handleHoverWeekLeave = () => {
+  private handleHoverWeekLeave = () => {
     this.setState({
       hoverDate: null,
     });
-  }
+  };
 }
 
 export default Day;

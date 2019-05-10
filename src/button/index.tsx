@@ -19,16 +19,16 @@ export type ButtonProps = {
 } & React.HTMLProps<HTMLButtonElement>;
 export type ButtonState = {
   spinning?: boolean;
-}
+};
 
 class Button extends React.PureComponent<ButtonProps, ButtonState> {
-  static defaultProps = {
+  private static defaultProps = {
     prefixCls: 'dk-btn',
     size: 'default' as ButtonSize,
     type: 'default' as ButtonType,
   };
 
-  render() {
+  public render() {
     const {
       children,
       prefixCls,
@@ -56,18 +56,18 @@ class Button extends React.PureComponent<ButtonProps, ButtonState> {
     );
     const iconType = loading ? 'loading' : icon;
     const iconNode = iconType && (
-      <Icon type={iconType} className={classNames(`${prefixCls}-icon`, {
-        [`${prefixCls}-icon-with-child`]: !!children
-      })} />
+      <Icon
+        type={iconType}
+        className={classNames(`${prefixCls}-icon`, {
+          [`${prefixCls}-icon-with-child`]: !!children,
+        })}
+      />
     );
 
     return (
-      <button
-        {...attibutes}
-        className={buttonClassName}
-        disabled={disabled}
-      >
-        {iconNode}{children}
+      <button {...attibutes} className={buttonClassName} disabled={disabled}>
+        {iconNode}
+        {children}
       </button>
     );
   }

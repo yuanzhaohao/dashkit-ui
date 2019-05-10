@@ -4,7 +4,7 @@ import { createConsumer } from './context';
 import { SelectOptionProps } from './types';
 
 class Option extends React.PureComponent<Partial<SelectOptionProps>> {
-  render() {
+  public render() {
     const {
       prefixCls,
       value,
@@ -39,7 +39,7 @@ class Option extends React.PureComponent<Partial<SelectOptionProps>> {
     return null;
   }
 
-  handleOptionClick = () => {
+  public handleOptionClick = () => {
     const { value, disabled, onRawChange } = this.props;
 
     if (!disabled && typeof onRawChange === 'function') {

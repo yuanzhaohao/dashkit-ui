@@ -10,18 +10,12 @@ export function formatTime(timestamp: number, format: string) {
     'S+': time.getMilliseconds(),
   };
   if (/(y+)/i.test(format)) {
-    format = format.replace(
-      RegExp.$1,
-      (time.getFullYear() + '').substr(4 - RegExp.$1.length),
-    );
+    format = format.replace(RegExp.$1, (time.getFullYear() + '').substr(4 - RegExp.$1.length));
   }
   for (const k in date) {
     if (new RegExp('(' + k + ')').test(format)) {
       const d = String(date[k]);
-      format = format.replace(
-        RegExp.$1,
-        RegExp.$1.length === 1 ? d : ('00' + d).substr(d.length),
-      );
+      format = format.replace(RegExp.$1, RegExp.$1.length === 1 ? d : ('00' + d).substr(d.length));
     }
   }
   return format;
@@ -37,12 +31,7 @@ const now =
     return new Date().getTime();
   };
 
-function later(
-  fn: any,
-  ms: number,
-  context: ObjectConstructor,
-  data: IArguments,
-) {
+function later(fn: any, ms: number, context: ObjectConstructor, data: IArguments) {
   const r = setTimeout(function a() {
     fn.apply(context, data);
   }, ms);
@@ -90,11 +79,10 @@ export function throttle(fn: any, ms: number, context: any) {
   };
 }
 
-
 export function obj2url(obj: any) {
   if (obj && obj instanceof Object) {
     const ary: any[] = [];
-    Object.keys(obj).forEach((key) => {
+    Object.keys(obj).forEach(key => {
       if (obj[key]) {
         ary.push(`${key}=${obj[key]}`);
       }

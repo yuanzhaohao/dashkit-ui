@@ -9,21 +9,21 @@ import { CardProps, CardState } from './types';
 import { Provider } from './context';
 
 class Card extends React.PureComponent<CardProps, CardState> {
-  static Header: typeof Header;
-  static Footer: typeof Footer;
-  static Body: typeof Body;
-  static Accordion: typeof Accordion;
-  static Collapse: typeof Collapse;
-  static defaultProps = {
+  public static Header: typeof Header;
+  public static Footer: typeof Footer;
+  public static Body: typeof Body;
+  public static Accordion: typeof Accordion;
+  public static Collapse: typeof Collapse;
+  public static defaultProps = {
     prefixCls: 'dk-card',
     // visible: true,
   };
 
-  static getDerivedStateFromProps(nextProps: CardProps) {
+  public static getDerivedStateFromProps(nextProps: CardProps) {
     if ('visible' in nextProps) {
       return {
         visible: nextProps.visible,
-      }
+      };
     }
     return null;
   }
@@ -35,7 +35,7 @@ class Card extends React.PureComponent<CardProps, CardState> {
     };
   }
 
-  render() {
+  public render() {
     const {
       className,
       prefixCls,
@@ -46,24 +46,23 @@ class Card extends React.PureComponent<CardProps, CardState> {
       ...attributes
     } = this.props;
     const { visible } = this.state;
-    const cardClassName = classNames(
-      prefixCls,
-      className,
-    );
+    const cardClassName = classNames(prefixCls, className);
     return (
       <div {...attributes} className={cardClassName}>
         <Provider
           value={{
             visible,
             collapse,
-            handleHeaderClick: this.handleHeaderClick
+            handleHeaderClick: this.handleHeaderClick,
           }}
-        >{children}</Provider>
+        >
+          {children}
+        </Provider>
       </div>
     );
   }
 
-  handleHeaderClick = () => {
+  public handleHeaderClick = () => {
     const { visible } = this.state;
     const { index, onCollapse } = this.props;
     if (typeof onCollapse === 'function') {
@@ -73,7 +72,7 @@ class Card extends React.PureComponent<CardProps, CardState> {
     this.setState({
       visible: !visible,
     });
-  }
+  };
 }
 
 export default Card;

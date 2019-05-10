@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as classNames from 'classnames';
@@ -62,7 +61,7 @@ export function create(type: ModalType) {
         if (typeof props.onCancel === 'function') {
           props.onCancel();
         }
-      }
+      };
       const iconType: { [key: string]: string } = {
         success: 'check-circle',
         error: 'x-circle',
@@ -74,9 +73,12 @@ export function create(type: ModalType) {
         <div className={`${prefixCls}-body-container`}>
           <span className={`${prefixCls}-body-title`}>{title}</span>
           <div className={`${prefixCls}-body-content`}>{content}</div>
-          <Icon className={classNames(`${prefixCls}-body-icon`, {
-            [`${prefixCls}-body-icon-${type}`]: true,
-          })} type={iconType[type]} />
+          <Icon
+            className={classNames(`${prefixCls}-body-icon`, {
+              [`${prefixCls}-body-icon-${type}`]: true,
+            })}
+            type={iconType[type]}
+          />
         </div>
       );
       return (
@@ -84,9 +86,13 @@ export function create(type: ModalType) {
           {contentNode}
           <div className={`${prefixCls}-body-btn`}>
             {type === 'confirm' && (
-              <Button onClick={handleCancelClick} className={`${prefixCls}-body-btn-cancel`}>Cancel</Button>
+              <Button onClick={handleCancelClick} className={`${prefixCls}-body-btn-cancel`}>
+                Cancel
+              </Button>
             )}
-            <Button type="primary" onClick={handleConfirmClick}>OK</Button>
+            <Button type="primary" onClick={handleConfirmClick}>
+              OK
+            </Button>
           </div>
         </Panel>
       );
@@ -96,5 +102,5 @@ export function create(type: ModalType) {
       destroy,
       update,
     };
-  }
+  };
 }

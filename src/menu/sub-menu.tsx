@@ -20,13 +20,13 @@ export type MenuState = {
 };
 
 class SubMenu extends React.Component<MenuProps, MenuState> {
-  static Item: any;
-  static defaultProps = {
+  public static Item: any;
+  public static defaultProps = {
     prefixCls: 'dk-menu',
   };
-  readonly titleRef: React.RefObject<HTMLDivElement>;
-  hoverTimer: number;
-  position: { left: number; top: number };
+  public readonly titleRef: React.RefObject<HTMLDivElement>;
+  public hoverTimer: number;
+  public position: { left: number; top: number };
 
   constructor(props: MenuProps) {
     super(props);
@@ -39,8 +39,17 @@ class SubMenu extends React.Component<MenuProps, MenuState> {
     };
   }
 
-  render() {
-    const { children, index, prefixCls, className, icon, title, rootContext, ...attributes } = this.props;
+  public render() {
+    const {
+      children,
+      index,
+      prefixCls,
+      className,
+      icon,
+      title,
+      rootContext,
+      ...attributes
+    } = this.props;
     const opened = rootContext.existOpenedMenu(index);
     const rootProps = rootContext.getProps();
     const isHorizontal = rootProps.mode === 'horizontal';
@@ -91,33 +100,38 @@ class SubMenu extends React.Component<MenuProps, MenuState> {
       >
         {iconNode}
         {title}
-        <Icon type="chevron-down" className={classNames({
-          [`${prefixCls}-arrow`]: true,
-          [`${prefixCls}-arrow-active`]: active,
-        })} />
+        <Icon
+          type="chevron-down"
+          className={classNames({
+            [`${prefixCls}-arrow`]: true,
+            [`${prefixCls}-arrow-active`]: active,
+          })}
+        />
       </div>
     );
 
     return (
       <div
-        className={classNames({
-          [`${prefixCls}-submenu`]: true,
-        }, className)}
+        className={classNames(
+          {
+            [`${prefixCls}-submenu`]: true,
+          },
+          className,
+        )}
         {...attributes}
       >
         {titleNode}
         {!isHorizontal
           ? childNode
-          // : createPortal(childNode, document.body)
-          : opened
-            ? createPortal(childNode, document.body)
-            : null
-        }
+          : // : createPortal(childNode, document.body)
+          opened
+          ? createPortal(childNode, document.body)
+          : null}
       </div>
     );
   }
 
-  handleClick = () => {
+  public handleClick = () => {
     const { index, rootContext } = this.props;
 
     if (!rootContext.existOpenedMenu(index)) {
@@ -125,9 +139,9 @@ class SubMenu extends React.Component<MenuProps, MenuState> {
     } else {
       rootContext.removeOpenedMenu(index);
     }
-  }
+  };
 
-  handleMouseEnter = () => {
+  public handleMouseEnter = () => {
     const { index, rootContext } = this.props;
 
     window.clearTimeout(this.hoverTimer);
@@ -142,45 +156,45 @@ class SubMenu extends React.Component<MenuProps, MenuState> {
         }, 0);
       }
     }, 300);
-  }
+  };
 
-  handleMouseLeave = () => {
+  public handleMouseLeave = () => {
     window.clearTimeout(this.hoverTimer);
     this.hoverTimer = window.setTimeout(() => {
       this.setState({
         active: false,
       });
     }, 300);
-  }
+  };
 
-  handleEnter = (el) => {
+  public handleEnter = el => {
     const { prefixCls } = this.props;
     removeClass(el, `${prefixCls}-submenu-list-opened`);
     if (el.scrollHeight !== 0) {
       el.style.height = el.scrollHeight + 'px';
     }
-  }
+  };
 
-  handleEntered = (el) => {
+  public handleEntered = el => {
     el.style.height = '';
-  }
+  };
 
-  handleExit = (el) => {
+  public handleExit = el => {
     el.style.height = el.scrollHeight + 'px';
-  }
+  };
 
-  handleExiting = (el) => {
+  public handleExiting = el => {
     if (el.scrollHeight !== 0) {
       el.style.height = '0';
     }
-  }
+  };
 
-  handleExited = () => {
+  public handleExited = () => {
     const { index, rootContext } = this.props;
     rootContext.removeOpenedMenu(index);
-  }
+  };
 
-  getPosition = () => {
+  public getPosition = () => {
     const titleDiv = this.titleRef.current;
     let left = 0;
     let top = 0;
@@ -197,7 +211,7 @@ class SubMenu extends React.Component<MenuProps, MenuState> {
       left,
       top,
     };
-  }
+  };
 }
 
 export default createConsumer(SubMenu);

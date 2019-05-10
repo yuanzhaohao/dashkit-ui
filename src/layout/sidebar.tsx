@@ -17,32 +17,31 @@ const generateId = (() => {
 })();
 
 class Sidebar extends React.Component<SidebarProps> {
-  uniqueId: string;
+  public uniqueId: string;
   constructor(props: SidebarProps) {
     super(props);
     this.uniqueId = generateId('dashkit-sidebar-');
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     if (this.props.addSidebar) {
       this.props.addSidebar(this.uniqueId);
     }
   }
 
-  componentWillUnmount() {
+  public componentWillUnmount() {
     if (this.props.removeSidebar) {
       this.props.removeSidebar(this.uniqueId);
     }
   }
 
-  render() {
+  public render() {
     const { className, children, addSidebar, removeSidebar, ...attributes } = this.props;
-    const layoutClassName = classNames(
-      'dk-layout-sidebar',
-      className,
-    )
+    const layoutClassName = classNames('dk-layout-sidebar', className);
     return (
-      <div {...attributes} className={layoutClassName}>{children}</div>
+      <div {...attributes} className={layoutClassName}>
+        {children}
+      </div>
     );
   }
 }

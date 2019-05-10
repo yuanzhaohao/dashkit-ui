@@ -18,7 +18,7 @@ export type MessageItemProps = {
 
 export type MessageState = {
   messages: MessageItemProps[];
-}
+};
 
 export type MessageItemState = {
   dismiss: boolean;

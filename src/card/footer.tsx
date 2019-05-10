@@ -5,9 +5,7 @@ import { BasicProps } from './types';
 const Footer = (props: BasicProps) => {
   const { className, prefixCls = 'dk-card', ...attributes } = props;
   const basicClassName = classNames(`${prefixCls}-footer`, className);
-  return (
-    <div {...attributes} className={basicClassName} />
-  );
+  return <div {...attributes} className={basicClassName} />;
 };
 
 export default Footer;

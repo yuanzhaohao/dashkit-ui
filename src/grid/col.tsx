@@ -24,11 +24,11 @@ function isInteger(value?: number | boolean) {
 }
 
 class Col extends React.PureComponent<ColProps> {
-  static defaultProps = {
+  public static defaultProps = {
     prefixCls: 'dk-grid',
   };
 
-  render() {
+  public render() {
     const { props } = this;
     const { children, prefixCls, className, first, last, ...attributes } = this.props;
 
@@ -49,19 +49,24 @@ class Col extends React.PureComponent<ColProps> {
       .map((key: ColKeyType) => {
         delete attributes[key];
         if (isInteger(props[key])) {
-          return (classMap[key] + '-' + props[key]);
+          return classMap[key] + '-' + props[key];
         }
-        return classMap[key]
+        return classMap[key];
       });
 
-    const rowClassName = classNames(colKeysClassNames, {
-      [`${prefixCls}-first-${first}`]: first !== undefined,
-      [`${prefixCls}-last-${last}`]: last !== undefined,
-    }, className);
-
+    const rowClassName = classNames(
+      colKeysClassNames,
+      {
+        [`${prefixCls}-first-${first}`]: first !== undefined,
+        [`${prefixCls}-last-${last}`]: last !== undefined,
+      },
+      className,
+    );
 
     return (
-      <div className={rowClassName} {...attributes}>{children}</div>
+      <div className={rowClassName} {...attributes}>
+        {children}
+      </div>
     );
   }
 }

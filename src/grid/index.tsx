@@ -11,27 +11,32 @@ export type GridProps = {
 };
 
 class Grid extends React.PureComponent<GridProps> {
-  static Row: any;
-  static Col: any;
-  static defaultProps = {
+  public static Row: any;
+  public static Col: any;
+  public static defaultProps = {
     prefixCls: 'dk-grid',
     fluid: false,
   };
 
-  render() {
+  public render() {
     const { children, prefixCls, fluid, className, ...attributes } = this.props;
-    const gridClassName = classNames(prefixCls, {
-      [`${prefixCls}-fluid`]: fluid,
-    }, className);
+    const gridClassName = classNames(
+      prefixCls,
+      {
+        [`${prefixCls}-fluid`]: fluid,
+      },
+      className,
+    );
 
     return (
-      <div className={gridClassName} {...attributes}>{children}</div>
+      <div className={gridClassName} {...attributes}>
+        {children}
+      </div>
     );
   }
 }
 
 Grid.Row = Row;
 Grid.Col = Col;
-
 
 export default Grid;

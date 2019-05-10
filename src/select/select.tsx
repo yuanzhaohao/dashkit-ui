@@ -10,16 +10,16 @@ import Icon from '../icon';
 import Input from '../input';
 
 class Select extends React.PureComponent<SelectProps, SelectState> {
-  static Option: typeof Option;
-  static OptionGroup: typeof OptionGroup;
-  readonly selectElement: any; //React.RefObject<HTMLDivElement>;
-  readonly panelElement: React.RefObject<HTMLDivElement>;
-  static defaultProps = {
+  public static Option: typeof Option;
+  public static OptionGroup: typeof OptionGroup;
+  public static defaultProps = {
     prefixCls: 'dk-select',
     size: 'default' as SelectSize,
   };
+  public readonly selectElement: any; // React.RefObject<HTMLDivElement>;
+  public readonly panelElement: React.RefObject<HTMLDivElement>;
 
-  static getDerivedStateFromProps(nextProps: SelectProps) {
+  public static getDerivedStateFromProps(nextProps: SelectProps) {
     if ('value' in nextProps) {
       return {
         value: nextProps.value,
@@ -44,7 +44,7 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
     };
   }
 
-  render() {
+  public render() {
     const {
       className,
       prefixCls,
@@ -117,19 +117,19 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
     );
   }
 
-  bindDocumentClick = () => {
+  public bindDocumentClick = () => {
     document.addEventListener('click', this.handleDocumentClick);
   };
 
-  clearDocumentClick = () => {
+  public clearDocumentClick = () => {
     document.removeEventListener('click', this.handleDocumentClick);
   };
 
-  handleExited = () => {
+  public handleExited = () => {
     this.clearDocumentClick();
   };
 
-  handleDocumentClick = (event: any) => {
+  public handleDocumentClick = (event: any) => {
     const el = findDOMNode(this.selectElement.current) as Element;
     const contentEl = this.panelElement.current;
     const targetEl = event.target;
@@ -149,7 +149,7 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
     }
   };
 
-  getPosition = () => {
+  public getPosition = () => {
     const el = findDOMNode(this.selectElement.current) as Element;
     const rect = el.getBoundingClientRect();
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
@@ -163,7 +163,7 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
     };
   };
 
-  handleEnter = () => {
+  public handleEnter = () => {
     const position = this.getPosition();
     const el = findDOMNode(this.selectElement.current) as Element;
     const width = el.clientWidth || 0;
@@ -173,20 +173,20 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
     });
   };
 
-  handleInputFocus = () => {
+  public handleInputFocus = () => {
     this.setState({
       visible: true,
       inputValue: '',
     });
   };
 
-  handleInputChange = (value: string) => {
+  public handleInputChange = (value: string) => {
     this.setState({
       inputValue: value,
     });
   };
 
-  handleRawChange = (value) => {
+  public handleRawChange = value => {
     const { options } = this.state;
     const { onChange } = this.props;
     const newOptions = options instanceof Array ? Array.from(new Set([...options, value])) : value;

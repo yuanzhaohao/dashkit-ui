@@ -8,12 +8,9 @@ export type FormProps = {
 };
 
 class Form extends React.Component<FormProps> {
-  render() {
+  public render() {
     const { className, children, ...attributes } = this.props;
-    const formClassName = classNames(
-      'dashkit-card',
-      className,
-    );
+    const formClassName = classNames('dashkit-card', className);
     return (
       <div {...attributes} className={formClassName}>
         {children}

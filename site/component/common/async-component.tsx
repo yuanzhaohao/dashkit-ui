@@ -6,7 +6,7 @@ export default function asyncComponent(importComponent: any) {
     constructor(props: any) {
       super(props);
       this.state = {
-        result: null
+        result: null,
       };
     }
 
@@ -20,15 +20,15 @@ export default function asyncComponent(importComponent: any) {
 
     public render() {
       const { result } = this.state;
-      return (
-        result && result.default
-          ? <result.default />
-          : <div className="page-loading">
-            <Spin text="Loading..." spinning={true} />
-          </div>
+      return result && result.default ? (
+        <result.default />
+      ) : (
+        <div className="page-loading">
+          <Spin text="Loading..." spinning={true} />
+        </div>
       );
     }
   }
 
-  return AsyncComponent
+  return AsyncComponent;
 }

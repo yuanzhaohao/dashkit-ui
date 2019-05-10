@@ -17,13 +17,13 @@ export interface SpinState {
   spinning?: boolean;
 }
 class Spin extends React.Component<SpinProps, SpinState> {
-  static defaultProps = {
+  public static defaultProps = {
     prefixCls: 'dk-spin',
     spinning: true,
     size: 'default' as SpinSize,
   };
-  delayTimeout: number;
-  debounceTimeout: number;
+  public delayTimeout: number;
+  public debounceTimeout: number;
 
   constructor(props: SpinProps) {
     super(props);
@@ -36,7 +36,7 @@ class Spin extends React.Component<SpinProps, SpinState> {
     };
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     const { spinning, delay } = this.props;
     if (spinning && delay) {
       this.setState({
@@ -50,7 +50,7 @@ class Spin extends React.Component<SpinProps, SpinState> {
     }
   }
 
-  componentWillReceiveProps(nextProps: SpinProps) {
+  public componentWillReceiveProps(nextProps: SpinProps) {
     const currentSpinning = this.props.spinning;
     const spinning = nextProps.spinning;
     const { delay } = this.props;
@@ -81,7 +81,7 @@ class Spin extends React.Component<SpinProps, SpinState> {
     }
   }
 
-  componentWillUnmount() {
+  public componentWillUnmount() {
     if (this.debounceTimeout) {
       clearTimeout(this.debounceTimeout);
     }
@@ -90,7 +90,7 @@ class Spin extends React.Component<SpinProps, SpinState> {
     }
   }
 
-  render() {
+  public render() {
     const { children, className, wrapperClassName, size, text, prefixCls } = this.props;
     const { spinning } = this.state;
     const isNestedPattern = !!children;
@@ -117,7 +117,7 @@ class Spin extends React.Component<SpinProps, SpinState> {
 
     if (isNestedPattern) {
       const containerClassName = classNames(
-      `${prefixCls}-container`,
+        `${prefixCls}-container`,
         {
           [`${prefixCls}-blur`]: spinning,
         },
@@ -126,9 +126,7 @@ class Spin extends React.Component<SpinProps, SpinState> {
       return (
         <div className={classNames(`${prefixCls}-box`, wrapperClassName)}>
           <div className={containerClassName}>{children}</div>
-          {spinning ? (
-            <div className={`${prefixCls}-loading`}>{spinElement}</div>
-          ) : null}
+          {spinning ? <div className={`${prefixCls}-loading`}>{spinElement}</div> : null}
         </div>
       );
     }

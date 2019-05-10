@@ -19,10 +19,12 @@
     "interface-name": false,
     "jsx-no-multiline-js": false,
     "prefer-for-of": true,
+    "only-arrow-functions": false,
     "jsx-curly-spacing": false,
     "no-implicit-dependencies": [true, "dev"],
     "object-literal-key-quotes": false,
     "no-shadowed-variable": false,
+    "arrow-parens": [true, "ban-single-arg-parens"],
     "trailing-comma": [
       true,
       {
@@ -31,7 +33,9 @@
         "esSpecCompliant": true
       }
     ],
-    "semicolon": [true, "always", "ignore-bound-class-methods"]
+    "semicolon": [true, "always", "ignore-bound-class-methods"],
+    "max-classes-per-file": false,
+    "jsx-wrap-multiline": false
   },
   "rulesDirectory": [],
   "linterOptions": {

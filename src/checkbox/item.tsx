@@ -36,7 +36,7 @@ class Item extends React.Component<ItemProps, ItemState> {
     };
   }
 
-  render() {
+  public render() {
     const {
       children,
       className,
@@ -75,14 +75,12 @@ class Item extends React.Component<ItemProps, ItemState> {
           value={value}
         />
         <i className={`${prefixCls}-indicator`} />
-        {!!children && (
-          <span>{children}</span>
-        )}
+        {!!children && <span>{children}</span>}
       </label>
     );
   }
 
-  getChecked = () => {
+  public getChecked = () => {
     const { checked, value } = this.props;
 
     if (typeof checked === 'function') {
@@ -92,9 +90,9 @@ class Item extends React.Component<ItemProps, ItemState> {
       return checked;
     }
     return this.state.checked;
-  }
+  };
 
-  handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  public handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { onChange, type, onRawChange, options, value } = this.props;
     const { checked } = event.target;
 
@@ -117,7 +115,7 @@ class Item extends React.Component<ItemProps, ItemState> {
     if (typeof onChange === 'function') {
       onChange(event);
     }
-  }
+  };
 }
 
 export default createConsumer(Item);

@@ -11,11 +11,10 @@ export type TimeState = {
 };
 
 class Time extends React.PureComponent<TimeProps, TimeState> {
-  static getDerivedStateFromProps(nextProps: TimeProps, prevState: TimeState) {
+  public static getDerivedStateFromProps(nextProps: TimeProps, prevState: TimeState) {
     if (nextProps.current.getTime() !== prevState.current.getTime()) {
       return {
-        current:
-          nextProps.type === 'time' ? prevState.current : nextProps.current,
+        current: nextProps.type === 'time' ? prevState.current : nextProps.current,
       };
     }
     return null;
@@ -28,57 +27,64 @@ class Time extends React.PureComponent<TimeProps, TimeState> {
     };
   }
 
-  render() {
+  public render() {
     const { type, format, className, prefixCls } = this.props;
     const { current } = this.state;
     const date = toDate(current);
     const hours =
-      format.indexOf('h') >= 0 && date.getHours() >= 12
-        ? date.getHours() - 12
-        : date.getHours();
+      format.indexOf('h') >= 0 && date.getHours() >= 12 ? date.getHours() - 12 : date.getHours();
 
     return (
       <div className={classNames(`${prefixCls}-time`, className)}>
         <div className={`${prefixCls}-time-container`}>
-        {
-          format.indexOf('H') >= 0 &&
-          <TimeScroll prefixCls={prefixCls} value={date.getHours()} total={24} onChange={this.handleChange.bind(this, 'hour')} />
-        }
-        {
-          format.indexOf('h') >= 0 &&
-          <TimeScroll prefixCls={prefixCls} value={hours} total={12} onChange={this.handleChange.bind(this, 'hour')} />
-        }
-        {
-          format.indexOf('m') >= 0 &&
-          <TimeScroll prefixCls={prefixCls} total={60} value={date.getMinutes()} onChange={this.handleChange.bind(this, 'minute')} />
-        }
-        {
-          format.indexOf('s') >= 0 &&
-          <TimeScroll prefixCls={prefixCls} total={60} value={date.getSeconds()} onChange={this.handleChange.bind(this, 'second')} />
-        }
+          {format.indexOf('H') >= 0 && (
+            <TimeScroll
+              prefixCls={prefixCls}
+              value={date.getHours()}
+              total={24}
+              onChange={this.handleChange.bind(this, 'hour')}
+            />
+          )}
+          {format.indexOf('h') >= 0 && (
+            <TimeScroll
+              prefixCls={prefixCls}
+              value={hours}
+              total={12}
+              onChange={this.handleChange.bind(this, 'hour')}
+            />
+          )}
+          {format.indexOf('m') >= 0 && (
+            <TimeScroll
+              prefixCls={prefixCls}
+              total={60}
+              value={date.getMinutes()}
+              onChange={this.handleChange.bind(this, 'minute')}
+            />
+          )}
+          {format.indexOf('s') >= 0 && (
+            <TimeScroll
+              prefixCls={prefixCls}
+              total={60}
+              value={date.getSeconds()}
+              onChange={this.handleChange.bind(this, 'second')}
+            />
+          )}
         </div>
-        {type !== 'datetime'
-          ? <div className={`${prefixCls}-time-footer`}>
-            <div
-              className={`${prefixCls}-time-cancel`}
-              onClick={this.handleCancel}
-            >
+        {type !== 'datetime' ? (
+          <div className={`${prefixCls}-time-footer`}>
+            <div className={`${prefixCls}-time-cancel`} onClick={this.handleCancel}>
               Cancel
             </div>
-            <div
-              className={`${prefixCls}-time-confirm`}
-              onClick={this.handleConfirm}
-            >
+            <div className={`${prefixCls}-time-confirm`} onClick={this.handleConfirm}>
               OK
             </div>
           </div>
-          : null
-        }
+        ) : null}
       </div>
     );
   }
 
-  handleChange = (mode: string, val: number) => {
+  public handleChange = (mode: string, val: number) => {
     const { format, type, onChange } = this.props;
     const { current } = this.state;
     const date = toDate(current);
@@ -89,13 +95,13 @@ class Time extends React.PureComponent<TimeProps, TimeState> {
         } else {
           date.setHours(val);
         }
-        break
+        break;
       case 'minute':
-        date.setMinutes(val)
-        break
+        date.setMinutes(val);
+        break;
       case 'second':
         date.setSeconds(val);
-        break
+        break;
       case 'ampm':
         const hours = date.getHours();
         if (val === 1 && hours < 12) {
@@ -103,7 +109,7 @@ class Time extends React.PureComponent<TimeProps, TimeState> {
         } else if (val === 0 && hours >= 12) {
           date.setHours(hours - 12);
         }
-        break
+        break;
       default:
     }
     this.setState({
@@ -112,22 +118,22 @@ class Time extends React.PureComponent<TimeProps, TimeState> {
     if (type === 'datetime') {
       onChange(date);
     }
-  }
+  };
 
-  handleConfirm = () => {
+  public handleConfirm = () => {
     const { onChange } = this.props;
     const { current } = this.state;
     const date = toDate(current);
     onChange(date, true);
-  }
+  };
 
-  handleCancel = () => {
+  public handleCancel = () => {
     const { current, onChange } = this.props;
     this.setState({
       current,
     });
     onChange(current, true);
-  }
+  };
 }
 
 export default Time;

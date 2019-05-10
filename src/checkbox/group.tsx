@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import { isEqual } from 'lodash';
+import { isEqual } from 'lodash-es';
 import { Provider as CheckboxProvider } from './context';
 
 export type CheckboxGroupProps = {
@@ -19,16 +19,19 @@ export type CheckboxGroupState = {
 };
 
 class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGroupState> {
-  static defaultProps = {
+  public static defaultProps = {
     prefixCls: 'dk-checkbox',
     value: [],
   };
 
-  static getDerivedStateFromProps(nextProps: CheckboxGroupProps, prevState: CheckboxGroupState) {
+  public static getDerivedStateFromProps(
+    nextProps: CheckboxGroupProps,
+    prevState: CheckboxGroupState,
+  ) {
     if (!isEqual(nextProps.value, prevState.options)) {
       return {
-        options: nextProps.value
-      }
+        options: nextProps.value,
+      };
     }
     return null;
   }
@@ -42,7 +45,7 @@ class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGrou
     };
   }
 
-  render() {
+  public render() {
     const { className, style, prefixCls, children, min, max } = this.props;
     const { options } = this.state;
     const groupClassName = classNames(
@@ -69,7 +72,7 @@ class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGrou
     );
   }
 
-  handleRawChange = (checked: boolean, value) => {
+  public handleRawChange = (checked: boolean, value) => {
     const { options } = this.state;
     const { onChange } = this.props;
     const newOptions = !!checked
@@ -83,13 +86,13 @@ class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGrou
     if (typeof onChange === 'function') {
       onChange(newOptions);
     }
-  }
+  };
 
-  handleChecked = (value) => {
+  public handleChecked = value => {
     const { options } = this.state;
 
     return options.indexOf(value) !== -1;
-  }
+  };
 }
 
 export default CheckboxGroup;

@@ -6,7 +6,7 @@ export type PortalProps = {
 };
 
 class Portal extends React.PureComponent<PortalProps> {
-  render() {
+  public render() {
     const { visible, children } = this.props;
     return visible ? createPortal(children, document.body) : null;
   }

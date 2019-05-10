@@ -36,17 +36,17 @@ function fixControlledValue<T>(value: T) {
 }
 
 class Input extends React.Component<InputProps> {
-  static defaultProps = {
+  public static defaultProps = {
     prefixCls: 'dk-input',
     size: 'default' as InputSize,
     type: 'text',
   };
 
-  static getDerivedStateFromProps(nextProps: InputProps) {
+  public static getDerivedStateFromProps(nextProps: InputProps) {
     if ('value' in nextProps) {
       return {
         value: nextProps.value,
-      }
+      };
     }
     return null;
   }
@@ -58,7 +58,7 @@ class Input extends React.Component<InputProps> {
     };
   }
 
-  render() {
+  public render() {
     const {
       children,
       className,
@@ -103,24 +103,22 @@ class Input extends React.Component<InputProps> {
       />
     );
 
-    return (
-      prefix || suffix
-        ? <div ref={wrapperRef} className={classNames(`${prefixCls}-wrapper`, wrapperClassName)}>
-          {prefix
-            ? <Icon type={prefix} className={classNames(`${prefixCls}-prefix-icon`, prefixClassName)} />
-            : null
-          }
-          {inputNode}
-          {suffix
-            ? <Icon type={suffix} className={classNames(`${prefixCls}-suffix-icon`, suffixClassName)} />
-            : null
-          }
-        </div>
-        : inputNode
+    return prefix || suffix ? (
+      <div ref={wrapperRef} className={classNames(`${prefixCls}-wrapper`, wrapperClassName)}>
+        {prefix ? (
+          <Icon type={prefix} className={classNames(`${prefixCls}-prefix-icon`, prefixClassName)} />
+        ) : null}
+        {inputNode}
+        {suffix ? (
+          <Icon type={suffix} className={classNames(`${prefixCls}-suffix-icon`, suffixClassName)} />
+        ) : null}
+      </div>
+    ) : (
+      inputNode
     );
   }
 
-  handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  public handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { onChange } = this.props;
     const { value } = event.target;
 
@@ -131,9 +129,9 @@ class Input extends React.Component<InputProps> {
     if (onChange) {
       onChange(value);
     }
-  }
+  };
 
-  handleBlur = (event: React.ChangeEvent<HTMLInputElement>) => {
+  public handleBlur = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     const { onBlur } = this.props;
     if (onBlur) {
@@ -142,23 +140,23 @@ class Input extends React.Component<InputProps> {
     if (this.invalidNumber(value)) {
       return;
     }
-  }
+  };
 
-  handleFocus = (event: React.ChangeEvent<HTMLInputElement>) => {
+  public handleFocus = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { onFocus } = this.props;
     if (onFocus) {
       onFocus(event);
     }
-  }
+  };
 
-  handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  public handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const { onKeyUp } = this.props;
     if (onKeyUp) {
       onKeyUp(event);
     }
-  }
+  };
 
-  invalidNumber = (value: string) => {
+  public invalidNumber = (value: string) => {
     const { digits, type } = this.props;
     if (type !== 'number') {
       return false;
@@ -172,7 +170,7 @@ class Input extends React.Component<InputProps> {
     }
     reg += '$';
     return !new RegExp(reg).test(value);
-  }
+  };
 }
 
 export default Input;

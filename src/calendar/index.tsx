@@ -227,7 +227,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
     if (range) {
       let current = [new Date(), new Date()];
       if (value instanceof Array) {
-        current = value.map((v) => {
+        current = value.map(v => {
           return this.getDateFromValue(v);
         });
         if (current.length === 1) {
@@ -314,24 +314,20 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
       this.setState({
         current,
         value: date,
-        inputValue: isArray(date)
-          ? date.map((v) => formatDate(v, format))
-          : formatDate(date, format),
+        inputValue: isArray(date) ? date.map(v => formatDate(v, format)) : formatDate(date, format),
         visible: !isSelect,
       });
     } else if (isSelect) {
       this.setState({
         current,
         value: date,
-        inputValue: isArray(date)
-          ? date.map((v) => formatDate(v, format))
-          : formatDate(date, format),
+        inputValue: isArray(date) ? date.map(v => formatDate(v, format)) : formatDate(date, format),
         visible: false,
       });
       if (typeof onChange === 'function') {
         const format = this.getFormat();
         const dateStr = isArray(date)
-          ? date.map((d) => {
+          ? date.map(d => {
               return formatDate(d, format);
             })
           : formatDate(date, format);

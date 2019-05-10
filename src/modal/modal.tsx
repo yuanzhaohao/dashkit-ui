@@ -4,17 +4,15 @@ import { ModalProps } from './types';
 import Panel from './panel';
 
 class Modal extends React.Component<ModalProps> {
-  static success: any;
-  static info: any;
-  static warning: any;
-  static warn: any;
-  static error: any;
-  static confirm: any;
+  public static success: any;
+  public static info: any;
+  public static warning: any;
+  public static warn: any;
+  public static error: any;
+  public static confirm: any;
 
-  render() {
-    const node = (
-      <Panel {...this.props} />
-    );
+  public render() {
+    const node = <Panel {...this.props} />;
     return createPortal(node, document.body);
   }
 }

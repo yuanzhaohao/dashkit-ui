@@ -1,25 +1,33 @@
-const trim = function (string: string) {
-  return (string || '').replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '');
+const trim = function(str: string = '') {
+  return str.replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '');
 };
 
 export function hasClass(el: HTMLElement, cls: string) {
-  if (!el || !cls) return false;
-  if (cls.indexOf(' ') !== -1) throw new Error('className should not contain space.');
+  if (!el || !cls) {
+    return false;
+  }
+  if (cls.indexOf(' ') !== -1) {
+    throw new Error('className should not contain space.');
+  }
   if (el.classList) {
     return el.classList.contains(cls);
   } else {
     return (' ' + el.className + ' ').indexOf(' ' + cls + ' ') > -1;
   }
-};
+}
 
 export function addClass(el: HTMLElement, cls: string) {
-  if (!el) return;
+  if (!el) {
+    return;
+  }
   let curClass = el.className;
   const classes = (cls || '').split(' ');
 
-  for (var i = 0, j = classes.length; i < j; i++) {
-    var clsName = classes[i];
-    if (!clsName) continue;
+  for (let i = 0, j = classes.length; i < j; i++) {
+    const clsName = classes[i];
+    if (!clsName) {
+      continue;
+    }
 
     if (el.classList) {
       el.classList.add(clsName);
@@ -30,16 +38,20 @@ export function addClass(el: HTMLElement, cls: string) {
   if (!el.classList) {
     el.className = curClass;
   }
-};
+}
 
 export function removeClass(el: HTMLElement, cls: string) {
-  if (!el || !cls) return;
-  let classes = cls.split(' ');
+  if (!el || !cls) {
+    return;
+  }
+  const classes = cls.split(' ');
   let curClass = ' ' + el.className + ' ';
 
   for (let i = 0, j = classes.length; i < j; i++) {
     const clsName = classes[i];
-    if (!clsName) continue;
+    if (!clsName) {
+      continue;
+    }
 
     if (el.classList) {
       el.classList.remove(clsName);
@@ -50,4 +62,4 @@ export function removeClass(el: HTMLElement, cls: string) {
   if (!el.classList) {
     el.className = trim(curClass);
   }
-};
+}

@@ -2,7 +2,7 @@ import './style.scss';
 
 import Pagination, { PaginationProps } from '../pagination';
 import * as classNames from 'classnames';
-import { debounce } from 'lodash';
+import { debounce } from 'lodash-es';
 import * as React from 'react';
 
 export type ColumnProps<T> = {
@@ -24,9 +24,11 @@ export type TableProps<T extends object> = {
     x?: number;
     y?: number;
   };
-  pagination?: false | PaginationProps & {
-    position?: 'top' | 'bottom';
-  };
+  pagination?:
+    | false
+    | PaginationProps & {
+        position?: 'top' | 'bottom';
+      };
   title?: string;
   bodyClassName?: string;
 };
@@ -35,17 +37,20 @@ export type TableState = {
   position?: 'left' | 'right' | 'both' | 'middle';
 };
 
-class TableList<T extends {[key: string]: any;}> extends React.Component<TableProps<T>, TableState> {
-  static defaultProps = {
+class TableList<T extends { [key: string]: any }> extends React.Component<
+  TableProps<T>,
+  TableState
+> {
+  public static defaultProps = {
     prefixCls: 'dk-table',
   };
 
-  lastScrollLeft: number;
-  lastScrollTop: number;
-  debouncedWindowResize: any;
-  resizeEvent: any;
-  readonly bodyRef: React.RefObject<HTMLDivElement>;
-  readonly headRef: React.RefObject<HTMLDivElement>;
+  public lastScrollLeft: number;
+  public lastScrollTop: number;
+  public debouncedWindowResize: any;
+  public resizeEvent: any;
+  public readonly bodyRef: React.RefObject<HTMLDivElement>;
+  public readonly headRef: React.RefObject<HTMLDivElement>;
 
   constructor(props: TableProps<T>) {
     super(props);
@@ -59,14 +64,11 @@ class TableList<T extends {[key: string]: any;}> extends React.Component<TablePr
     this.debouncedWindowResize = debounce(this.handleWindowResize, 150);
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.handleWindowResize();
-    this.resizeEvent = window.addEventListener(
-      'resize',
-      this.debouncedWindowResize,
-    );
+    this.resizeEvent = window.addEventListener('resize', this.debouncedWindowResize);
   }
-  componentWillUnmount() {
+  public componentWillUnmount() {
     if (this.resizeEvent) {
       this.resizeEvent.remove();
     }
@@ -75,7 +77,7 @@ class TableList<T extends {[key: string]: any;}> extends React.Component<TablePr
     }
   }
 
-  componentDidUpdate(prevProps: TableProps<T>) {
+  public componentDidUpdate(prevProps: TableProps<T>) {
     if (
       this.props.fixed &&
       prevProps.dataSource !== this.props.dataSource &&
@@ -86,7 +88,7 @@ class TableList<T extends {[key: string]: any;}> extends React.Component<TablePr
     }
   }
 
-  render() {
+  public render() {
     const {
       prefixCls,
       columns,
@@ -120,8 +122,8 @@ class TableList<T extends {[key: string]: any;}> extends React.Component<TablePr
                 {column.render
                   ? column.render(itemData, index, itemData[column.dataIndex])
                   : column.dataIndex && itemData[column.dataIndex] !== undefined
-                    ? String(itemData[column.dataIndex])
-                    : null}
+                  ? String(itemData[column.dataIndex])
+                  : null}
               </td>
             ))}
           </tr>
@@ -205,13 +207,10 @@ class TableList<T extends {[key: string]: any;}> extends React.Component<TablePr
                 {bodyCell}
               </table>
             ) : (
-                <div
-                  style={tableStyle}
-                  className={`${prefixCls}-no-data`}
-                >
-                  No data
+              <div style={tableStyle} className={`${prefixCls}-no-data`}>
+                No data
               </div>
-              )}
+            )}
           </div>
           {fixed && (
             <>
@@ -225,7 +224,7 @@ class TableList<T extends {[key: string]: any;}> extends React.Component<TablePr
     );
   }
 
-  handleBodyScrollLeft = (e: React.FormEvent<EventTarget>) => {
+  public handleBodyScrollLeft = (e: React.FormEvent<EventTarget>) => {
     if (e.currentTarget !== e.target) {
       return;
     }
@@ -242,9 +241,9 @@ class TableList<T extends {[key: string]: any;}> extends React.Component<TablePr
       this.setScrollPositionClassName();
     }
     this.lastScrollLeft = target.scrollLeft;
-  }
+  };
 
-  setScrollPositionClassName() {
+  public setScrollPositionClassName() {
     const bodyTable = this.bodyRef.current;
 
     if (bodyTable) {
@@ -253,7 +252,7 @@ class TableList<T extends {[key: string]: any;}> extends React.Component<TablePr
       const scrollToRight =
         bodyTable.scrollLeft + 1 >=
         bodyTable.children[0].getBoundingClientRect().width -
-        bodyTable.getBoundingClientRect().width;
+          bodyTable.getBoundingClientRect().width;
       if (scrollToLeft && scrollToRight) {
         this.setState({
           position: 'both',
@@ -274,9 +273,9 @@ class TableList<T extends {[key: string]: any;}> extends React.Component<TablePr
     }
   }
 
-  handleWindowResize = () => {
+  public handleWindowResize = () => {
     this.setScrollPositionClassName();
-  }
+  };
 }
 
 export default TableList;

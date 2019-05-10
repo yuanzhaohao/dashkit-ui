@@ -1,5 +1,5 @@
 export default {
-  'arrows': [
+  arrows: [
     'arrow-down-left',
     'arrow-down-right',
     'arrow-down',
@@ -17,7 +17,7 @@ export default {
     'chevrons-right',
     'chevrons-up',
   ],
-  'communication': [
+  communication: [
     'mail',
     'message-circle',
     'message-square',
@@ -30,7 +30,7 @@ export default {
     'phone',
     'voicemail',
   ],
-  'core': [
+  core: [
     'activity',
     'airplay',
     'alert-circle',
@@ -170,25 +170,8 @@ export default {
     'zoom-in',
     'zoom-out',
   ],
-  'location': [
-    'compass',
-    'crosshair',
-    'globe',
-    'map-pin',
-    'map',
-    'navigation-2',
-    'navigation',
-  ],
-  'logos': [
-    'chrome',
-    'codepen',
-    'facebook',
-    'github',
-    'instagram',
-    'pocket',
-    'slack',
-    'twitter',
-  ],
+  location: ['compass', 'crosshair', 'globe', 'map-pin', 'map', 'navigation-2', 'navigation'],
+  logos: ['chrome', 'codepen', 'facebook', 'github', 'instagram', 'pocket', 'slack', 'twitter'],
   'media-controls': [
     'fast-forward',
     'pause-circle',
@@ -206,16 +189,8 @@ export default {
     'volume-x',
     'volume',
   ],
-  'photo-and-video': [
-    'aperture',
-    'camera-off',
-    'camera',
-    'film',
-    'image',
-    'video-off',
-    'video',
-  ],
-  'weather': [
+  'photo-and-video': ['aperture', 'camera-off', 'camera', 'film', 'image', 'video-off', 'video'],
+  weather: [
     'cloud-drizzle',
     'cloud-lightning',
     'cloud-rain',

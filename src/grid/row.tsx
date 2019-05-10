@@ -8,39 +8,55 @@ export type RowProps = {
   style?: React.CSSProperties;
   reverse?: boolean;
   start?: ViewportType;
-  center?: ViewportType,
-  end?: ViewportType,
-  top?: ViewportType,
-  middle?: ViewportType,
-  bottom?: ViewportType,
-  around?: ViewportType,
-  between?: ViewportType,
+  center?: ViewportType;
+  end?: ViewportType;
+  top?: ViewportType;
+  middle?: ViewportType;
+  bottom?: ViewportType;
+  around?: ViewportType;
+  between?: ViewportType;
 };
 
-const rowKeys: RowKeyType[] = ['start', 'center', 'end', 'top', 'middle', 'bottom', 'around', 'between'];
+const rowKeys: RowKeyType[] = [
+  'start',
+  'center',
+  'end',
+  'top',
+  'middle',
+  'bottom',
+  'around',
+  'between',
+];
 
 class Row extends React.PureComponent<RowProps> {
-  static defaultProps = {
+  public static defaultProps = {
     prefixCls: 'dk-grid',
     reverse: false,
   };
 
-  render() {
+  public render() {
     const { children, prefixCls, className, reverse, ...attributes } = this.props;
     const rowKeysClassNames = this.getRowClassNames();
-    const rowClassName = classNames(`${prefixCls}-row`, rowKeysClassNames, {
-      [`${prefixCls}-row-reverse`]: reverse,
-    }, className);
+    const rowClassName = classNames(
+      `${prefixCls}-row`,
+      rowKeysClassNames,
+      {
+        [`${prefixCls}-row-reverse`]: reverse,
+      },
+      className,
+    );
 
     rowKeys.forEach(key => {
       delete attributes[key];
     });
     return (
-      <div className={rowClassName} {...attributes}>{children}</div>
+      <div className={rowClassName} {...attributes}>
+        {children}
+      </div>
     );
   }
 
-  getRowClassNames = () => {
+  public getRowClassNames = () => {
     const { prefixCls } = this.props;
 
     return rowKeys.map((key: RowKeyType) => {
@@ -48,11 +64,11 @@ class Row extends React.PureComponent<RowProps> {
       if (!!value) {
         return {
           [`${prefixCls}-${key}-${value}`]: true,
-        }
+        };
       }
       return null;
     });
-  }
+  };
 }
 
 export default Row;

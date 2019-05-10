@@ -20,8 +20,8 @@ export type RangeState = {
 };
 
 class Range extends React.PureComponent<RangeProps, RangeState> {
-  firstSelectDate?: Date;
-  isSelectDate?: boolean;
+  public firstSelectDate?: Date;
+  public isSelectDate?: boolean;
   constructor(props: RangeProps) {
     super(props);
     this.state = {
@@ -29,11 +29,13 @@ class Range extends React.PureComponent<RangeProps, RangeState> {
     };
   }
 
-  render() {
+  public render() {
     const { current, type, value, prefixCls, ...attributes } = this.props;
     const { rangeDate } = this.state;
     const newType = type === 'week' ? 'day' : type;
-    const hideIcon = (newType === 'day' || newType === 'datetime') && isSameMonth(addMonths(current[0], 1), current[1]);
+    const hideIcon =
+      (newType === 'day' || newType === 'datetime') &&
+      isSameMonth(addMonths(current[0], 1), current[1]);
 
     return (
       <>
@@ -61,7 +63,7 @@ class Range extends React.PureComponent<RangeProps, RangeState> {
     );
   }
 
-  handleDayHover = (date: Date) => {
+  public handleDayHover = (date: Date) => {
     const { rangeDate } = this.state;
     const { isSelectDate, firstSelectDate } = this;
     if (isSelectDate && firstSelectDate) {
@@ -76,9 +78,9 @@ class Range extends React.PureComponent<RangeProps, RangeState> {
         rangeDate: newRangeDate,
       });
     }
-  }
+  };
 
-  handleChange = (index: number, date: Date, isSelectDay?: boolean) => {
+  public handleChange = (index: number, date: Date, isSelectDay?: boolean) => {
     const { rangeDate } = this.state;
     if (!isSelectDay) {
       const { current } = this.props;
@@ -116,7 +118,7 @@ class Range extends React.PureComponent<RangeProps, RangeState> {
       this.firstSelectDate = undefined;
       this.props.onChange(newRangeDate, true);
     }
-  }
+  };
 }
 
 export default Range;

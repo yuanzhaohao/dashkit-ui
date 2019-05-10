@@ -12,29 +12,17 @@ const { Content, Footer } = Layout;
 const Index = asyncComponent(() => import('./index'));
 
 const pageMap = {
-  Basic: [
-    'Button', 'Icon',
-  ],
-  Layout: [
-    'Layout', 'Grid', 'Card',
-  ],
-  Form: [
-    'Radio', 'Checkbox', 'Switch', 'Input', 'Select', 'Calendar', 'Form',
-  ],
-  Data: [
-    'Table', 'Pagination',
-  ],
-  Function: [
-    'Menu', 'Modal', 'Spin',
-  ],
-  Feedback: [
-    'Tooltip', 'Popover', 'Alert', 'Message',
-  ]
+  Basic: ['Button', 'Icon'],
+  Layout: ['Layout', 'Grid', 'Card'],
+  Form: ['Radio', 'Checkbox', 'Switch', 'Input', 'Select', 'Calendar', 'Form'],
+  Data: ['Table', 'Pagination'],
+  Function: ['Menu', 'Modal', 'Spin'],
+  Feedback: ['Tooltip', 'Popover', 'Alert', 'Message'],
 };
 
 let pages = [];
-Object.keys(pageMap).forEach((key) => {
-  pages = pages.concat(pageMap[key])
+Object.keys(pageMap).forEach(key => {
+  pages = pages.concat(pageMap[key]);
 });
 
 export default () => (
@@ -47,9 +35,9 @@ export default () => (
           <Switch>
             <Route exact path="/" component={Index} />
             <Route exact path="/index" component={Index} />
-            {pages.map((page) =>
+            {pages.map(page => (
               <Route key={page} exact path={`/components/${page}`} component={Page} />
-            )}
+            ))}
             <Redirect to="/" />
           </Switch>
         </Content>
@@ -57,4 +45,4 @@ export default () => (
       </Layout>
     </Layout>
   </HashRouter>
-)
+);

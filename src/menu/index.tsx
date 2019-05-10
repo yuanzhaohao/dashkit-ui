@@ -14,7 +14,7 @@ export type MenuProps = {
   active?: string;
   defaultActive?: string;
   defaultOpeneds?: string[];
-  mode: 'horizontal' | 'vertical',
+  mode: 'horizontal' | 'vertical';
   theme: 'dark' | 'light';
   onSelect?: (index: string) => void;
   onOpen?: (index: string) => void;
@@ -26,20 +26,20 @@ export type MenuState = {
 };
 
 class Menu extends React.PureComponent<MenuProps, MenuState> {
-  static Item: typeof MenuItem;
-  static ItemGroup: typeof ItemGroup;
-  static SubMenu: typeof SubMenu;
-  static defaultProps = {
+  public static Item: typeof MenuItem;
+  public static ItemGroup: typeof ItemGroup;
+  public static SubMenu: typeof SubMenu;
+  public static defaultProps = {
     prefixCls: 'dk-menu',
     mode: 'vertical',
     theme: 'light',
   };
 
-  static getDerivedStateFromProps(nextProps: MenuProps) {
+  public static getDerivedStateFromProps(nextProps: MenuProps) {
     if ('active' in nextProps) {
       return {
         activeIndex: nextProps.active,
-      }
+      };
     }
     return null;
   }
@@ -52,14 +52,17 @@ class Menu extends React.PureComponent<MenuProps, MenuState> {
     };
   }
 
-  render() {
+  public render() {
     const { children, prefixCls, className, style, theme, mode } = this.props;
-    const menuClassName = classNames({
-      [`${prefixCls}`]: true,
-      [`${prefixCls}-vertical`]: mode === 'vertical',
-      [`${prefixCls}-horizontal`]: mode === 'horizontal',
-      [`${prefixCls}-dark`]: theme === 'dark',
-    }, className);
+    const menuClassName = classNames(
+      {
+        [`${prefixCls}`]: true,
+        [`${prefixCls}-vertical`]: mode === 'vertical',
+        [`${prefixCls}-horizontal`]: mode === 'horizontal',
+        [`${prefixCls}-dark`]: theme === 'dark',
+      },
+      className,
+    );
 
     return (
       <ul className={menuClassName} style={style}>
@@ -68,7 +71,7 @@ class Menu extends React.PureComponent<MenuProps, MenuState> {
     );
   }
 
-  getMenuContext() {
+  public getMenuContext() {
     return {
       getState: () => {
         return this.state;
@@ -109,7 +112,7 @@ class Menu extends React.PureComponent<MenuProps, MenuState> {
 
       existOpenedMenu: (index: string) => {
         return this.state.openedMenus.indexOf(index) !== -1;
-      }
+      },
     };
   }
 }

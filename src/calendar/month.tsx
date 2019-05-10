@@ -11,7 +11,7 @@ class Month extends React.PureComponent<MonthProps> {
     super(props);
   }
 
-  render() {
+  public render() {
     const { prefixCls, current, hideLeftIcon, hideRightIcon } = this.props;
 
     return (
@@ -36,15 +36,13 @@ class Month extends React.PureComponent<MonthProps> {
           </div>
         </div>
         <div className={`${prefixCls}-list`}>
-          {monthValues.short.map((m, i) =>
-            this.renderMonth(m, i)
-          )}
+          {monthValues.short.map((m, i) => this.renderMonth(m, i))}
         </div>
       </div>
     );
   }
 
-  renderMonth = (m: string, key: number) => {
+  public renderMonth = (m: string, key: number) => {
     const { prefixCls, current, value } = this.props;
     const date = new Date(current.getTime());
     date.setMonth(key);
@@ -55,17 +53,13 @@ class Month extends React.PureComponent<MonthProps> {
     });
 
     return (
-      <div
-        key={key}
-        className={itemClassName}
-        onClick={this.handleMonthClick.bind(this, key)}
-      >
+      <div key={key} className={itemClassName} onClick={this.handleMonthClick.bind(this, key)}>
         <span>{m}</span>
       </div>
     );
-  }
+  };
 
-  handleMonthClick = (i: number) => {
+  public handleMonthClick = (i: number) => {
     const { current, onChange, type, disabled } = this.props;
 
     if (disabled) {
@@ -79,23 +73,23 @@ class Month extends React.PureComponent<MonthProps> {
     if (!isMonth) {
       this.props.onModeChange('day');
     }
-  }
+  };
 
-  handleYear = (year: number) => {
+  public handleYear = (year: number) => {
     const { current, onChange, disabled } = this.props;
     if (disabled) {
       return;
     }
     onChange(addYears(current, year));
-  }
+  };
 
-  handlePrevYear = () => {
+  public handlePrevYear = () => {
     this.handleYear(-1);
-  }
+  };
 
-  handleNextYear = () => {
+  public handleNextYear = () => {
     this.handleYear(1);
-  }
+  };
 }
 
 export default Month;

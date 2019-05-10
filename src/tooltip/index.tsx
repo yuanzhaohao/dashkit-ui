@@ -5,7 +5,19 @@ import * as classNames from 'classnames';
 import { CSSTransition } from 'react-transition-group';
 
 // export type TooltipTheme = 'dark' | 'light';
-export type TooltipPlacement = 'top-start' | 'top' | 'top-end' | 'right-start' | 'right' | 'right-end' | 'bottom-start' | 'bottom' | 'bottom-end' | 'left-start' | 'left' | 'left-end';
+export type TooltipPlacement =
+  | 'top-start'
+  | 'top'
+  | 'top-end'
+  | 'right-start'
+  | 'right'
+  | 'right-end'
+  | 'bottom-start'
+  | 'bottom'
+  | 'bottom-end'
+  | 'left-start'
+  | 'left'
+  | 'left-end';
 export type TooltipTrigger = 'hover' | 'click' | 'focus';
 export type TooltipProps = {
   prefixCls?: string;
@@ -27,18 +39,18 @@ export type TooltipState = {
 };
 
 class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
-  hoverTimer: number;
-  readonly childRef: React.RefObject<HTMLDivElement>;
-  readonly contentRef: React.RefObject<HTMLDivElement>;
 
-  static defaultProps = {
+  public static defaultProps = {
     prefixCls: 'dk-tooltip',
     // theme: 'dark' as TooltipTheme,
     placement: 'top' as TooltipPlacement,
     trigger: 'hover' as TooltipTrigger,
   };
+  public hoverTimer: number;
+  public readonly childRef: React.RefObject<HTMLDivElement>;
+  public readonly contentRef: React.RefObject<HTMLDivElement>;
 
-  static getDerivedStateFromProps(nextProps: TooltipProps) {
+  public static getDerivedStateFromProps(nextProps: TooltipProps) {
     if ('visible' in nextProps) {
       return { visible: nextProps.visible };
     }
@@ -58,7 +70,7 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
     };
   }
 
-  render() {
+  public render() {
     const { children, prefixCls, disabled, content, placement, trigger } = this.props;
     const tooltopClassName = classNames({
       [prefixCls]: true,
@@ -73,11 +85,13 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
         onEnter={this.handleEnter}
         classNames={`${prefixCls}`}
       >
-        <div className={tooltopClassName} style={{ left, top }}
+        <div
+          className={tooltopClassName}
+          style={{ left, top }}
           onMouseEnter={trigger === 'hover' ? this.handleMouseEnter : undefined}
           onMouseLeave={trigger === 'hover' ? this.handleMouseLeave : undefined}
         >
-          <div className={`${prefixCls}-arrow`}></div>
+          <div className={`${prefixCls}-arrow`} />
           <div className={`${prefixCls}-inner`}>{content}</div>
         </div>
       </CSSTransition>
@@ -93,50 +107,50 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
     // );
 
     const childNode = (
-      <span className={`${prefixCls}-reference`} {...childProps}>{children}</span>
+      <span className={`${prefixCls}-reference`} {...childProps}>
+        {children}
+      </span>
     );
 
     return (
       <>
         {childNode}
-        {!disabled && (
-          createPortal(tooltipNode, document.body)
-        )}
+        {!disabled && createPortal(tooltipNode, document.body)}
       </>
     );
   }
 
-  getChildProps = () => {
+  public getChildProps = () => {
     const { trigger } = this.props;
 
-    switch(trigger) {
+    switch (trigger) {
       case 'click': {
         return {
           onClick: this.handleClick,
-        }
+        };
       }
       case 'focus': {
         return {
           onFocus: this.handleFocus,
           onBlur: this.handleBlur,
-        }
+        };
       }
       default: {
         return {
           onMouseEnter: this.handleMouseEnter,
           onMouseLeave: this.handleMouseLeave,
-        }
+        };
       }
     }
-  }
+  };
 
-  getPosition = (contentEl: HTMLDivElement) => {
+  public getPosition = (contentEl: HTMLDivElement) => {
     const { placement } = this.props;
     const el = findDOMNode(this);
     let left = 0;
     let top = 0;
 
-    if (!(el instanceof Element)) return { left, top };
+    if (!(el instanceof Element)) { return { left, top }; }
     const rect = el.getBoundingClientRect();
     const contentRect = contentEl.getBoundingClientRect();
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
@@ -195,50 +209,50 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
     }
 
     return { left, top };
-  }
+  };
 
-  handleEnter = (el) => {
+  public handleEnter = el => {
     const position = this.getPosition(el);
     this.setState(position);
-  }
+  };
 
-  handleClick = () => {
+  public handleClick = () => {
     const { visible } = this.state;
 
     this.setState({
-      visible: !visible
+      visible: !visible,
     });
-  }
+  };
 
-  handleFocus = () => {
+  public handleFocus = () => {
     this.setState({
       visible: true,
     });
-  }
+  };
 
-  handleBlur = () => {
+  public handleBlur = () => {
     this.setState({
       visible: false,
     });
-  }
+  };
 
-  handleMouseEnter = () => {
+  public handleMouseEnter = () => {
     window.clearTimeout(this.hoverTimer);
     this.hoverTimer = window.setTimeout(() => {
       this.setState({
         visible: true,
       });
     }, 100);
-  }
+  };
 
-  handleMouseLeave = () => {
+  public handleMouseLeave = () => {
     window.clearTimeout(this.hoverTimer);
     this.hoverTimer = window.setTimeout(() => {
       this.setState({
         visible: false,
       });
     }, 50);
-  }
+  };
 }
 
 export default Tooltip;

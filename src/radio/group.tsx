@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import { isEqual } from 'lodash';
+import { isEqual } from 'lodash-es';
 import { Provider as RadioProvider } from '../checkbox/context';
 
 export type RadioGroupProps = {
@@ -17,15 +17,15 @@ export type RadioGroupState = {
 };
 
 class RadioGroup extends React.PureComponent<RadioGroupProps, RadioGroupState> {
-  static defaultProps = {
+  public static defaultProps = {
     prefixCls: 'dk-radio',
   };
 
-  static getDerivedStateFromProps(nextProps: RadioGroupProps, prevState: RadioGroupState) {
+  public static getDerivedStateFromProps(nextProps: RadioGroupProps, prevState: RadioGroupState) {
     if (!isEqual(nextProps.value, prevState.value)) {
       return {
-        value: nextProps.value
-      }
+        value: nextProps.value,
+      };
     }
     return null;
   }
@@ -39,7 +39,7 @@ class RadioGroup extends React.PureComponent<RadioGroupProps, RadioGroupState> {
     };
   }
 
-  render() {
+  public render() {
     const { className, style, prefixCls, children } = this.props;
     const groupClassName = classNames(
       {
@@ -53,7 +53,7 @@ class RadioGroup extends React.PureComponent<RadioGroupProps, RadioGroupState> {
         <RadioProvider
           value={{
             onRawChange: this.handleRawChange,
-            checked: this.handleChecked
+            checked: this.handleChecked,
           }}
         >
           {children}
@@ -62,7 +62,7 @@ class RadioGroup extends React.PureComponent<RadioGroupProps, RadioGroupState> {
     );
   }
 
-  handleRawChange = (checked, value) => {
+  public handleRawChange = (checked, value) => {
     const { onChange } = this.props;
 
     this.setState({
@@ -72,11 +72,11 @@ class RadioGroup extends React.PureComponent<RadioGroupProps, RadioGroupState> {
     if (typeof onChange === 'function') {
       onChange(value);
     }
-  }
+  };
 
-  handleChecked = (value) => {
+  public handleChecked = value => {
     return value === this.state.value;
-  }
+  };
 }
 
 export default RadioGroup;

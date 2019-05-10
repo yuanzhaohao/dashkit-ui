@@ -10,24 +10,24 @@ const { Row, Col } = Grid;
 interface PageProps extends RouteComponentProps<PageProps> {
   dataSource: any;
   locale?: string;
-};
+}
 
 type PageState = {
   dataSource?: {
     markdown: string;
     demos: Object[];
   } | null;
-}
+};
 
 class Page extends React.PureComponent<PageProps, PageState> {
   constructor(props: PageProps) {
     super(props);
     this.state = {
-      dataSource: null
-    }
+      dataSource: null,
+    };
   }
 
-  async componentDidMount() {
+  public async componentDidMount() {
     const page = this.props.location.pathname.replace('/components/', '');
     const locale = window.localStorage.getItem('DASHKIT_UI_LOCALE') || 'en-US';
     const dataSource = await import(`../../../docs/${page.toLocaleLowerCase()}/${locale}.md`);
@@ -43,37 +43,35 @@ class Page extends React.PureComponent<PageProps, PageState> {
         .map(key => dataSource.demos[key])
         .sort((a, b) => a.meta.order - b.meta.order);
       const children = demoData.map((d, key) => {
-        return (
-          <Example
-            key={key}
-            locale={locale}
-            dataSource={d}
-          />
-        )
+        return <Example key={key} locale={locale} dataSource={d} />;
       });
       ReactDOM.render(children, demoElement);
     }
   }
 
-  render() {
+  public render() {
     const { dataSource } = this.state;
 
     return (
       <Grid className="app-page" fluid>
         <Row center="xs">
           <Col xs={12} md={10} lg={8}>
-            {dataSource && dataSource.markdown
-              ? <div className="app-page-info" dangerouslySetInnerHTML={{
-                __html: dataSource.markdown
-              }} />
-              : <div className="page-loading">
+            {dataSource && dataSource.markdown ? (
+              <div
+                className="app-page-info"
+                dangerouslySetInnerHTML={{
+                  __html: dataSource.markdown,
+                }}
+              />
+            ) : (
+              <div className="page-loading">
                 <Spin text="Loading..." spinning={true} />
               </div>
-            }
+            )}
           </Col>
         </Row>
       </Grid>
-    )
+    );
   }
 }
 

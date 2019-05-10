@@ -13,19 +13,22 @@ export type IconProps = {
 };
 
 class Icon extends React.PureComponent<IconProps> {
-  static defaultProps = {
+  public static defaultProps = {
     prefixCls: 'dk-icon',
   };
 
-  static types = types;
+  public static types = types;
 
-  render() {
+  public render() {
     const { className, type, disabled, prefixCls, ...attributes } = this.props;
-    const iconClassName = classNames({
-      [`${prefixCls}`]: true,
-      [`${prefixCls}-${type}`]: true,
-      [`${prefixCls}-disabled`]: disabled,
-    }, className);
+    const iconClassName = classNames(
+      {
+        [`${prefixCls}`]: true,
+        [`${prefixCls}-${type}`]: true,
+        [`${prefixCls}-disabled`]: disabled,
+      },
+      className,
+    );
     return <i className={iconClassName} {...attributes} />;
   }
 }

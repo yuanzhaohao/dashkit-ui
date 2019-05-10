@@ -11,10 +11,10 @@ interface SidebarProps extends RouteComponentProps<any> {
   pageMap: {
     [key: string]: string[];
   };
-};
+}
 
 class AppSidebar extends React.PureComponent<SidebarProps> {
-  render() {
+  public render() {
     const { pageMap, location } = this.props;
     const { pathname } = location;
     const pathnameAry = pathname.slice(1).split('/');
@@ -31,28 +31,32 @@ class AppSidebar extends React.PureComponent<SidebarProps> {
           defaultOpeneds={['Components']}
           onSelect={this.onMenuSelect}
         >
-          <Item icon="home" index="Dashboard">Dashboard</Item>
+          <Item icon="home" index="Dashboard">
+            Dashboard
+          </Item>
           <SubMenu icon="book-open" title="Components" index="Components">
-            {Object.keys(pageMap).map((group) =>
+            {Object.keys(pageMap).map(group => (
               <ItemGroup title={group} key={group}>
-                {pageMap[group].map((page) =>
-                  <Item key={page} index={page}>{page}</Item>
-                )}
+                {pageMap[group].map(page => (
+                  <Item key={page} index={page}>
+                    {page}
+                  </Item>
+                ))}
               </ItemGroup>
-            )}
+            ))}
           </SubMenu>
         </Menu>
-        <div className="sidebar-switch"></div>
+        <div className="sidebar-switch" />
       </Sidebar>
-    )
+    );
   }
 
-  onMenuSelect = (index: string) => {
+  public onMenuSelect = (index: string) => {
     const { pageMap, location, history } = this.props;
     let pages = [];
 
-    Object.keys(pageMap).forEach((key) => {
-      pages = pages.concat(pageMap[key])
+    Object.keys(pageMap).forEach(key => {
+      pages = pages.concat(pageMap[key]);
     });
 
     const page = pages.indexOf(index) === -1 ? '/' : `/components/${index}`;
@@ -60,7 +64,7 @@ class AppSidebar extends React.PureComponent<SidebarProps> {
     if (location.pathname !== page) {
       history.push(page);
     }
-  }
+  };
 }
 
 export default withRouter(AppSidebar);

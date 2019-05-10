@@ -45,7 +45,7 @@ function getComponent() {
         onDestory={destroy}
       />,
       div,
-    )
+    );
   }
   return component;
 }
@@ -54,7 +54,7 @@ function create(type: MessageType) {
   return async (content: React.ReactNode, duration?: number, onClose?: VoidFunction) => {
     const messager = getComponent();
     if (duration === undefined) {
-      duration =  defaultDuration;
+      duration = defaultDuration;
     }
     messager.addMessage({
       id: getUid(),
@@ -62,8 +62,8 @@ function create(type: MessageType) {
       duration,
       type,
       onClose,
-    })
-  }
+    });
+  };
 }
 
 export default {
@@ -72,4 +72,4 @@ export default {
   info: create('info'),
   warning: create('warning'),
   error: create('error'),
-}
+};

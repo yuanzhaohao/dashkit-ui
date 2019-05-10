@@ -44,7 +44,7 @@ class Picker extends React.PureComponent<PickerProps, PickerState> {
     };
   }
 
-  render() {
+  public render() {
     const { mode } = this.state;
     let PickerChild;
     switch (mode) {
@@ -65,19 +65,16 @@ class Picker extends React.PureComponent<PickerProps, PickerState> {
         break;
       }
     }
-    return (
-      <PickerChild {...this.props} onModeChange={this.handleModeChange} />
-    );
+    return <PickerChild {...this.props} onModeChange={this.handleModeChange} />;
   }
 
-  handleModeChange = (mode: CalendarMode) => {
+  public handleModeChange = (mode: CalendarMode) => {
     setTimeout(() => {
       this.setState({
         mode,
       });
     }, 10);
-  }
+  };
 }
 
 export default Picker;
-

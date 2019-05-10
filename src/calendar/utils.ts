@@ -4,11 +4,25 @@ const token = /d{1,4}|M{1,4}|yy(?:yy)?|S{1,3}|Do|ZZ|WW|Wo|([HhMsDm])\1?|[aA]|"[^
 const twoDigits = /\d\d?/;
 const threeDigits = /\d{3}/;
 const fourDigits = /\d{4}/;
+// tslint:disable-next-line
 const word = /[0-9]*['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+|[\u0600-\u06FF\/]+(\s*?[\u0600-\u06FF]+){1,2}/i;
 const literal = /\[([^]*?)\]/gm;
 const amPm = ['am', 'pm'];
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
 export const weekdayValues = {
   short: shorten(weekdays, 3),
   long: weekdays,
@@ -68,16 +82,20 @@ export function pad(val: number, len = 2) {
 
 export function toDate(dirtyDate?: DateProps) {
   if (arguments.length < 1) {
-    throw new TypeError(
-      '1 argument required, but only ' + arguments.length + ' present',
-    );
+    throw new TypeError('1 argument required, but only ' + arguments.length + ' present');
   }
 
   if (dirtyDate instanceof Date) {
     return new Date(dirtyDate.getTime());
-  } else if (typeof dirtyDate === 'number' || Object.prototype.toString.call(dirtyDate) === '[object Number]') {
+  } else if (
+    typeof dirtyDate === 'number' ||
+    Object.prototype.toString.call(dirtyDate) === '[object Number]'
+  ) {
     return new Date(dirtyDate);
-  } else if (typeof dirtyDate === 'string' || Object.prototype.toString.call(dirtyDate) === '[object String]') {
+  } else if (
+    typeof dirtyDate === 'string' ||
+    Object.prototype.toString.call(dirtyDate) === '[object String]'
+  ) {
     return new Date(dirtyDate);
   }
 
@@ -165,9 +183,7 @@ export function isDate(dirtyDate?: DateProps) {
 
 export function isSameDay(dirtyDateLeft: DateProps, dirtyDateRight: DateProps) {
   if (arguments.length < 2) {
-    throw new TypeError(
-      '2 arguments required, but only ' + arguments.length + ' present',
-    );
+    throw new TypeError('2 arguments required, but only ' + arguments.length + ' present');
   }
 
   const dateLeftStartOfDay = startOfDay(dirtyDateLeft);
@@ -178,9 +194,7 @@ export function isSameDay(dirtyDateLeft: DateProps, dirtyDateRight: DateProps) {
 
 export function isSameWeek(dirtyDateLeft: DateProps, dirtyDateRight: DateProps) {
   if (arguments.length < 2) {
-    throw new TypeError(
-      '2 arguments required, but only ' + arguments.length + ' present',
-    );
+    throw new TypeError('2 arguments required, but only ' + arguments.length + ' present');
   }
 
   const dateLeftStartOfWeek = startOfWeek(dirtyDateLeft);
@@ -191,9 +205,7 @@ export function isSameWeek(dirtyDateLeft: DateProps, dirtyDateRight: DateProps) 
 
 export function isSameMonth(dirtyDateLeft: DateProps, dirtyDateRight: DateProps) {
   if (arguments.length < 2) {
-    throw new TypeError(
-      '2 arguments required, but only ' + arguments.length + ' present',
-    );
+    throw new TypeError('2 arguments required, but only ' + arguments.length + ' present');
   }
 
   const dateLeft = toDate(dirtyDateLeft);
@@ -206,9 +218,7 @@ export function isSameMonth(dirtyDateLeft: DateProps, dirtyDateRight: DateProps)
 
 export function isSameYear(dirtyDateLeft: DateProps, dirtyDateRight: DateProps) {
   if (arguments.length < 2) {
-    throw new TypeError(
-      '2 arguments required, but only ' + arguments.length + ' present',
-    );
+    throw new TypeError('2 arguments required, but only ' + arguments.length + ' present');
   }
 
   const dateLeft = toDate(dirtyDateLeft);
@@ -218,9 +228,7 @@ export function isSameYear(dirtyDateLeft: DateProps, dirtyDateRight: DateProps) 
 
 export function compareAsc(dirtyDateLeft: DateProps, dirtyDateRight: DateProps) {
   if (arguments.length < 2) {
-    throw new TypeError(
-      '2 arguments required, but only ' + arguments.length + ' present',
-    );
+    throw new TypeError('2 arguments required, but only ' + arguments.length + ' present');
   }
 
   const dateLeft = toDate(dirtyDateLeft);
@@ -254,12 +262,7 @@ export function getWeekNumberOfYear(dirtyDate: DateProps) {
   const week1 = new Date(date.getFullYear(), 0, 4);
   return (
     1 +
-    Math.round(
-      ((date.getTime() - week1.getTime()) / 86400000 -
-        3 +
-        ((week1.getDay() + 6) % 7)) /
-      7,
-    )
+    Math.round(((date.getTime() - week1.getTime()) / 86400000 - 3 + ((week1.getDay() + 6) % 7)) / 7)
   );
 }
 
@@ -298,136 +301,172 @@ export function getDaysOfMonth(dirtyDate: DateProps) {
 }
 
 const formatFlags: any = {
-  D: function(date: Date) {
+  D(date: Date) {
     return date.getDay();
   },
-  DD: function(date: Date) {
+  DD(date: Date) {
     return pad(date.getDay());
   },
-  Do: function(date: Date) {
+  Do(date: Date) {
     return getDaySuffix(date.getDate());
   },
-  d: function(date: Date) {
+  d(date: Date) {
     return date.getDate();
   },
-  dd: function(date: Date) {
+  dd(date: Date) {
     return pad(date.getDate());
   },
-  M: function(date: Date) {
+  M(date: Date) {
     return date.getMonth() + 1;
   },
-  MM: function(date: Date) {
+  MM(date: Date) {
     return pad(date.getMonth() + 1);
   },
-  yy: function(date: Date) {
+  yy(date: Date) {
     return String(date.getFullYear()).substr(2);
   },
-  yyyy: function(date: Date) {
+  yyyy(date: Date) {
     return date.getFullYear();
   },
-  h: function(date: Date) {
+  h(date: Date) {
     return date.getHours() % 12 || 12;
   },
-  hh: function(date: Date) {
+  hh(date: Date) {
     return pad(date.getHours() % 12 || 12);
   },
-  H: function(date: Date) {
+  H(date: Date) {
     return date.getHours();
   },
-  HH: function(date: Date) {
+  HH(date: Date) {
     return pad(date.getHours());
   },
-  m: function(date: Date) {
+  m(date: Date) {
     return date.getMinutes();
   },
-  mm: function(date: Date) {
+  mm(date: Date) {
     return pad(date.getMinutes());
   },
-  s: function(date: Date) {
+  s(date: Date) {
     return date.getSeconds();
   },
-  ss: function(date: Date) {
+  ss(date: Date) {
     return pad(date.getSeconds());
   },
-  S: function(date: Date) {
+  S(date: Date) {
     return Math.round(date.getMilliseconds() / 100);
   },
-  SS: function(date: Date) {
+  SS(date: Date) {
     return pad(Math.round(date.getMilliseconds() / 10), 2);
   },
-  SSS: function(date: Date) {
+  SSS(date: Date) {
     return pad(date.getMilliseconds(), 3);
   },
-  a: function(date: Date) {
+  a(date: Date) {
     return date.getHours() < 12 ? amPm[0] : amPm[1];
   },
-  A: function(date: Date) {
+  A(date: Date) {
     return date.getHours() < 12 ? amPm[0].toUpperCase() : amPm[1].toUpperCase();
   },
-  WW: function(date: Date) {
+  WW(date: Date) {
     return pad(getWeekNumberOfYear(date));
   },
-  Wo: function(date: Date) {
+  Wo(date: Date) {
     return getDaySuffix(getWeekNumberOfYear(date));
   },
-  ZZ: function(date: Date) {
+  ZZ(date: Date) {
     const o = date.getTimezoneOffset();
-    return (o > 0 ? '-' : '+') + pad(Math.floor(Math.abs(o) / 60) * 100 + Math.abs(o) % 60, 4);
-  }
+    return (o > 0 ? '-' : '+') + pad(Math.floor(Math.abs(o) / 60) * 100 + (Math.abs(o) % 60), 4);
+  },
 };
 
-type ParseDataType = { [key: string]: any }
+type ParseDataType = { [key: string]: any };
 const parseFlags: any = {
-  d: [twoDigits, function(d: ParseDataType, v: number) {
-    d.day = v;
-  }],
-  M: [twoDigits, function(d: ParseDataType, v: number) {
-    d.month = v - 1;
-  }],
-  h: [twoDigits, function(d: ParseDataType, v: number) {
-    d.hour = v;
-  }],
-  m: [twoDigits, function(d: ParseDataType, v: number) {
-    d.minute = v;
-  }],
-  s: [twoDigits, function(d: ParseDataType, v: number) {
-    d.second = v;
-  }],
-  yy: [twoDigits, function(d: ParseDataType, v: number) {
-    const da = new Date()
-    const cent = +('' + da.getFullYear()).substr(0, 2);
-    d.year = '' + (v > 68 ? cent - 1 : cent) + v;
-  }],
-  yyyy: [fourDigits, function(d: ParseDataType, v: number) {
-    d.year = v;
-  }],
-  S: [/\d/, function(d: ParseDataType, v: number) {
-    d.millisecond = v * 100;
-  }],
-  SS: [/\d{2}/, function(d: ParseDataType, v: number) {
-    d.millisecond = v * 10;
-  }],
-  SSS: [threeDigits, function(d: ParseDataType, v: number) {
-    d.millisecond = v;
-  }],
+  d: [
+    twoDigits,
+    function(d: ParseDataType, v: number) {
+      d.day = v;
+    },
+  ],
+  M: [
+    twoDigits,
+    function(d: ParseDataType, v: number) {
+      d.month = v - 1;
+    },
+  ],
+  h: [
+    twoDigits,
+    function(d: ParseDataType, v: number) {
+      d.hour = v;
+    },
+  ],
+  m: [
+    twoDigits,
+    function(d: ParseDataType, v: number) {
+      d.minute = v;
+    },
+  ],
+  s: [
+    twoDigits,
+    function(d: ParseDataType, v: number) {
+      d.second = v;
+    },
+  ],
+  yy: [
+    twoDigits,
+    function(d: ParseDataType, v: number) {
+      const da = new Date();
+      const cent = +('' + da.getFullYear()).substr(0, 2);
+      d.year = '' + (v > 68 ? cent - 1 : cent) + v;
+    },
+  ],
+  yyyy: [
+    fourDigits,
+    function(d: ParseDataType, v: number) {
+      d.year = v;
+    },
+  ],
+  S: [
+    /\d/,
+    function(d: ParseDataType, v: number) {
+      d.millisecond = v * 100;
+    },
+  ],
+  SS: [
+    /\d{2}/,
+    function(d: ParseDataType, v: number) {
+      d.millisecond = v * 10;
+    },
+  ],
+  SSS: [
+    threeDigits,
+    function(d: ParseDataType, v: number) {
+      d.millisecond = v;
+    },
+  ],
   D: [twoDigits],
   ddd: [word],
-  a: [word, function(d: ParseDataType, v: string) {
-    const val = v.toLowerCase();
-    if (val === amPm[0]) {
-      d.isPm = false;
-    } else if (val === amPm[1]) {
-      d.isPm = true;
-    }
-  }],
-  ZZ: [/[\+\-]\d\d:?\d\d/, function(d: ParseDataType, v: number) {
-    const parts: any = (v + '').match(/([\+\-]|\d\d)/gi);
+  a: [
+    word,
+    function(d: ParseDataType, v: string) {
+      const val = v.toLowerCase();
+      if (val === amPm[0]) {
+        d.isPm = false;
+      } else if (val === amPm[1]) {
+        d.isPm = true;
+      }
+    },
+  ],
+  ZZ: [
+    /[\+\-]\d\d:?\d\d/,
+    function(d: ParseDataType, v: number) {
+      const parts: any = (v + '').match(/([\+\-]|\d\d)/gi);
 
-    if (parts && parts[1]) {
-      const minutes = +(parts[1] * 60) + parseInt(parts[2], 10);
-      d.timezoneOffset = parts[0] === '+' ? minutes : -minutes;
-    }
-  }]
+      if (parts && parts[1]) {
+        const minutes = +(parts[1] * 60) + parseInt(parts[2], 10);
+        d.timezoneOffset = parts[0] === '+' ? minutes : -minutes;
+      }
+    },
+  ],
 };
 parseFlags.DD = parseFlags.D;
 parseFlags.Do = parseFlags.dd = parseFlags.d;
@@ -439,9 +478,7 @@ parseFlags.A = parseFlags.a;
 
 export function formatDate(dirtyDate: DateProps, fmt: string) {
   if (arguments.length < 2) {
-    throw new TypeError(
-      '2 argument required, but only ' + arguments.length + ' present',
-    );
+    throw new TypeError('2 argument required, but only ' + arguments.length + ' present');
   }
   const date = toDate(dirtyDate);
   const literals: any = [];
@@ -451,20 +488,16 @@ export function formatDate(dirtyDate: DateProps, fmt: string) {
     return '??';
   });
   fmt = fmt.replace(token, function($0) {
-    return $0 in formatFlags
-      ? formatFlags[$0](date)
-      : $0.slice(1, $0.length - 1);
+    return $0 in formatFlags ? formatFlags[$0](date) : $0.slice(1, $0.length - 1);
   });
   return fmt.replace(/\?\?/g, function() {
     return literals.shift();
   });
-};
+}
 
 export function parseDate(dirtyDateString: string, dirtyFormatString: string) {
   if (arguments.length < 2) {
-    throw new TypeError(
-      '2 argument required, but only ' + arguments.length + ' present',
-    );
+    throw new TypeError('2 argument required, but only ' + arguments.length + ' present');
   }
 
   dirtyDateString = String(dirtyDateString);
@@ -477,6 +510,7 @@ export function parseDate(dirtyDateString: string, dirtyFormatString: string) {
     if (parseFlags[$0]) {
       const info = parseFlags[$0];
       const index = dirtyDateString.search(info[0]);
+      // tslint:disable-next-line
       if (!~index) {
         isValid = false;
       } else {
@@ -515,8 +549,8 @@ export function parseDate(dirtyDateString: string, dirtyFormatString: string) {
         dateInfo.hour || 0,
         dateInfo.minute || 0,
         dateInfo.second || 0,
-        dateInfo.millisecond || 0
-      )
+        dateInfo.millisecond || 0,
+      ),
     );
   } else {
     date = new Date(

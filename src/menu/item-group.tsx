@@ -10,23 +10,23 @@ export type MenuItemGroupProps = {
 };
 
 class MenuItemGroup extends React.Component<MenuItemGroupProps> {
-  static defaultProps = {
+  public static defaultProps = {
     prefixCls: 'dk-menu',
     disabled: false,
   };
 
-  render() {
+  public render() {
     const { children, prefixCls, className, title, rootContext, ...attributes } = this.props;
-    const groupClassName = classNames({
-      [`${prefixCls}-item-group`]: true,
-    }, className);
+    const groupClassName = classNames(
+      {
+        [`${prefixCls}-item-group`]: true,
+      },
+      className,
+    );
 
     return (
       <>
-        <li
-          className={groupClassName}
-          {...attributes}
-        >
+        <li className={groupClassName} {...attributes}>
           {title}
         </li>
         {children}

@@ -6,7 +6,7 @@ import { BodyProps } from './types';
 import { createConsumer } from './context';
 
 class Body extends React.PureComponent<BodyProps> {
-  render() {
+  public render() {
     const {
       className,
       collapse,
@@ -15,16 +15,19 @@ class Body extends React.PureComponent<BodyProps> {
       visible,
       ...attributes
     } = this.props;
-    const basicClassName = classNames({
-      [`${prefixCls}-body`]: true,
-    }, className);
+    const basicClassName = classNames(
+      {
+        [`${prefixCls}-body`]: true,
+      },
+      className,
+    );
     const collapseClassName = classNames({
       [`${prefixCls}-body-collapse`]: true,
       [`${prefixCls}-body-collapse-visible`]: visible,
-    })
+    });
     const bodyNode = <div {...attributes} className={basicClassName} />;
-    return (collapse
-      ? <CSSTransition
+    return collapse ? (
+      <CSSTransition
         in={visible}
         timeout={350}
         onEnter={this.handleEnter}
@@ -35,11 +38,12 @@ class Body extends React.PureComponent<BodyProps> {
       >
         <div className={collapseClassName}>{bodyNode}</div>
       </CSSTransition>
-      : bodyNode
+    ) : (
+      bodyNode
     );
   }
 
-  handleEnter = (el) => {
+  public handleEnter = el => {
     // const { prefixCls, visible } = this.props;
     // if (visible) {
     //   removeClass(el, `${prefixCls}-body-collapse-visible`);
@@ -47,21 +51,21 @@ class Body extends React.PureComponent<BodyProps> {
     if (el.scrollHeight !== 0) {
       el.style.height = el.scrollHeight + 'px';
     }
-  }
+  };
 
-  handleEntered = (el) => {
+  public handleEntered = el => {
     el.style.height = '';
-  }
+  };
 
-  handleExit = (el) => {
+  public handleExit = el => {
     el.style.height = el.scrollHeight + 'px';
-  }
+  };
 
-  handleExiting = (el) => {
+  public handleExiting = el => {
     if (el.scrollHeight !== 0) {
       el.style.height = '0';
     }
-  }
+  };
 }
 
 export default createConsumer(Body);

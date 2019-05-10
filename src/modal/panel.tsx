@@ -8,13 +8,13 @@ import Button from '../button';
 const ESC_KEY = 27;
 
 class ModalPanel extends React.Component<ModalProps, ModalState> {
-  static defaultProps = {
+  public static defaultProps = {
     prefixCls: 'dk-modal',
     closeByEsc: true,
     showFooter: true,
   };
-  static success: any;
-  readonly bodyRef: React.RefObject<HTMLDivElement>;
+  public static success: any;
+  public readonly bodyRef: React.RefObject<HTMLDivElement>;
 
   constructor(props: ModalProps) {
     super(props);
@@ -25,7 +25,7 @@ class ModalPanel extends React.Component<ModalProps, ModalState> {
     this.bodyRef = React.createRef();
   }
 
-  componentDidUpdate(prevProps: ModalProps, prevState: ModalState) {
+  public componentDidUpdate(prevProps: ModalProps, prevState: ModalState) {
     if (this.props.visible && !prevProps.visible) {
       this.openModal();
     } else if (!this.props.visible && prevProps.visible) {
@@ -39,16 +39,35 @@ class ModalPanel extends React.Component<ModalProps, ModalState> {
     }
   }
 
-  render() {
+  public render() {
     if (!this.state.visible) {
       return null;
     }
 
-    const { prefixCls, showFooter, footer, closeByEsc, title, className, width, children } = this.props;
-    const footerNode = <>
-      <Button type="default" onClick={this.props.onCancel}>Cancel</Button>
-      <Button type="primary" className={`${prefixCls}-footer-confirm`} onClick={this.props.onConfirm}>OK</Button>
-    </>;
+    const {
+      prefixCls,
+      showFooter,
+      footer,
+      closeByEsc,
+      title,
+      className,
+      width,
+      children,
+    } = this.props;
+    const footerNode = (
+      <>
+        <Button type="default" onClick={this.props.onCancel}>
+          Cancel
+        </Button>
+        <Button
+          type="primary"
+          className={`${prefixCls}-footer-confirm`}
+          onClick={this.props.onConfirm}
+        >
+          OK
+        </Button>
+      </>
+    );
 
     const bodyNode = (
       <CSSTransition
@@ -73,9 +92,7 @@ class ModalPanel extends React.Component<ModalProps, ModalState> {
               </div>
             </>
           )}
-          <div className={`${prefixCls}-body`}>
-            {children}
-          </div>
+          <div className={`${prefixCls}-body`}>{children}</div>
           {!!showFooter && (
             <div className={`${prefixCls}-footer`}>
               {footer === undefined ? footerNode : footer}
@@ -87,11 +104,7 @@ class ModalPanel extends React.Component<ModalProps, ModalState> {
 
     return (
       <div className={`${prefixCls}`}>
-        <CSSTransition
-          timeout={300}
-          in={this.state.bodyVisible}
-          classNames={`${prefixCls}-mask`}
-        >
+        <CSSTransition timeout={300} in={this.state.bodyVisible} classNames={`${prefixCls}-mask`}>
           <div className={`${prefixCls}-mask`} onClick={this.handleClose} />
         </CSSTransition>
         {bodyNode}
@@ -99,27 +112,30 @@ class ModalPanel extends React.Component<ModalProps, ModalState> {
     );
   }
 
-  openModal = () => {
-    this.setState({
-      visible: true,
-    }, () => {
-      this.setState({
-        bodyVisible: true,
-      });
-    })
-  }
+  public openModal = () => {
+    this.setState(
+      {
+        visible: true,
+      },
+      () => {
+        this.setState({
+          bodyVisible: true,
+        });
+      },
+    );
+  };
 
-  closeModal = () => {
+  public closeModal = () => {
     this.setState({
       bodyVisible: false,
     });
-  }
+  };
 
-  handleClose = () => {
+  public handleClose = () => {
     this.closeModal();
-  }
+  };
 
-  handleExited = () => {
+  public handleExited = () => {
     const { onClose } = this.props;
     this.setState({
       visible: false,
@@ -127,21 +143,21 @@ class ModalPanel extends React.Component<ModalProps, ModalState> {
     if (typeof onClose === 'function') {
       onClose();
     }
-  }
+  };
 
-  focusBody = () => {
+  public focusBody = () => {
     const bodyElement = this.bodyRef.current;
     if (bodyElement) {
       bodyElement.focus();
     }
-  }
+  };
 
-  handleKeydown = event => {
+  public handleKeydown = event => {
     if (event.keyCode === ESC_KEY) {
       event.stopPropagation();
       this.closeModal();
     }
-  }
+  };
 }
 
 export default ModalPanel;

@@ -23,13 +23,13 @@ export type AlertState = {
 };
 
 class Alert extends React.PureComponent<AlertProps, AlertState> {
-  static defaultProps = {
+  public static defaultProps = {
     prefixCls: 'dk-alert',
     type: 'default' as AlertType,
     closable: false,
     icon: false,
   };
-  readonly containerDiv: React.RefObject<HTMLDivElement>;
+  private readonly containerDiv: React.RefObject<HTMLDivElement>;
   constructor(props: AlertProps) {
     super(props);
     this.state = {
@@ -38,16 +38,8 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
     this.containerDiv = React.createRef();
   }
 
-  render() {
-    const {
-      prefixCls,
-      className,
-      children,
-      closable,
-      icon,
-      type,
-      style,
-    } = this.props;
+  public render() {
+    const { prefixCls, className, children, closable, icon, type, style } = this.props;
     const iconType: { [key: string]: string } = {
       success: 'check-circle',
       error: 'x-circle',
@@ -65,9 +57,7 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
       className,
     );
 
-    const dismiss = ('dismiss' in this.props)
-      ? this.props.dismiss
-      : this.state.dismiss;
+    const dismiss = 'dismiss' in this.props ? this.props.dismiss : this.state.dismiss;
 
     return (
       <CSSTransition
@@ -78,34 +68,28 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
         onExited={this.handleExited}
       >
         <div className={alertClassName} style={style}>
-          {isShowIcon
-            ? (
-              <div className={`${prefixCls}-icon-box`}>
-                <Icon type={iconType[type]} className={`${prefixCls}-icon`} />
-              </div>
-            )
-            : null
-          }
+          {isShowIcon ? (
+            <div className={`${prefixCls}-icon-box`}>
+              <Icon type={iconType[type]} className={`${prefixCls}-icon`} />
+            </div>
+          ) : null}
           {children}
-          {closable
-            ? (
-              <Icon type="x" className={`${prefixCls}-close`} onClick={this.handleClose} />
-            )
-            : null
-          }
+          {closable ? (
+            <Icon type="x" className={`${prefixCls}-close`} onClick={this.handleClose} />
+          ) : null}
         </div>
       </CSSTransition>
     );
   }
 
-  handleExited = () => {
+  private handleExited = () => {
     const { onClose } = this.props;
     if (typeof onClose === 'function') {
       onClose();
     }
-  }
+  };
 
-  handleClose = (e: React.MouseEvent) => {
+  private handleClose = (e: React.MouseEvent) => {
     e.preventDefault();
     if (this.state.dismiss) {
       return;
@@ -114,7 +98,7 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
     this.setState({
       dismiss: true,
     });
-  }
+  };
 }
 
 export default Alert;

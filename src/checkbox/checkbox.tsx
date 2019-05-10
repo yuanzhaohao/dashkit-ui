@@ -2,16 +2,14 @@ import * as React from 'react';
 import Item, { InputProps } from './item';
 
 class Checkbox extends React.PureComponent<InputProps> {
-  static Group: any;
-  static defaultProps = {
+  public static Group: any;
+  public static defaultProps = {
     prefixCls: 'dk-checkbox',
     type: 'checkbox',
   };
 
-  render() {
-    return (
-      <Item {...this.props} />
-    );
+  public render() {
+    return <Item {...this.props} />;
   }
 }
 

@@ -7,14 +7,14 @@ import { Layout } from 'dashkit-ui';
 const { Header } = Layout;
 
 class AppHeader extends React.Component {
-  render() {
+  public render() {
     return (
       <Header className="app-header">
         <a href="https://github.com/yuanzhaohao/dashkit-ui" className="header-link">
           <GithubSvg className="header-github" />
         </a>
       </Header>
-    )
+    );
   }
 }
 
