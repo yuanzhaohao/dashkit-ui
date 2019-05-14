@@ -1,18 +1,18 @@
-import { mount } from 'enzyme';
 import * as React from 'react';
+import { mount } from 'enzyme';
 import Checkbox from '..';
+const prefixCls = 'dk-checkbox';
 
 describe('Checkbox', () => {
   test('should react while click', () => {
-    const wrapper = mount(<Checkbox defaultChecked>Option</Checkbox>);
-    expect(wrapper.find(`.dk-checkbox`).hasClass(`dk-checkbox-checked`)).toBeTruthy();
-    // click label
-    wrapper.find(`.dk-checkbox-input`).simulate('change', {
+    const checkbox = mount(<Checkbox defaultChecked>Option</Checkbox>);
+    expect(checkbox.find(`.${prefixCls}`).hasClass(`${prefixCls}-checked`)).toBeTruthy();
+    checkbox.find(`.${prefixCls}-input`).simulate('change', {
       target: {
         checked: false,
       },
     });
-    wrapper.update();
-    expect(wrapper.find(`.dk-checkbox`).hasClass(`dk-checkbox-checked`)).toBeFalsy();
+    checkbox.update();
+    expect(checkbox.find(`.${prefixCls}`).hasClass(`${prefixCls}-checked`)).toBeFalsy();
   });
 });
