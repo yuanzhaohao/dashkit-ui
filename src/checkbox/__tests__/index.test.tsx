@@ -8,7 +8,7 @@ describe('CheckboxGroup', () => {
     expect(
       renderer
         .create(
-          <CheckboxGroup values={['1', '2']}>
+          <CheckboxGroup value={['1', '2']}>
             <Checkbox value="1" />
             <Checkbox value="3" />
           </CheckboxGroup>,
@@ -21,7 +21,7 @@ describe('CheckboxGroup', () => {
     expect(
       renderer
         .create(
-          <CheckboxGroup name="test" values={['1', '2']}>
+          <CheckboxGroup name="test" value={['1', '2']}>
             <div>
               <div>
                 <Checkbox value="1" />

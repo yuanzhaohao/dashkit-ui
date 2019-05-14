@@ -7,6 +7,7 @@ export type CheckboxGroupProps = {
   prefixCls?: string;
   className?: string;
   style?: React.CSSProperties;
+  name?: string;
   defaultValue?: string[];
   value?: string[];
   min?: number;
