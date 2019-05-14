@@ -1,36 +1,19 @@
+import { mount } from 'enzyme';
 import * as React from 'react';
-import * as renderer from 'react-test-renderer';
-import Checkbox from '../index';
-const CheckboxGroup = Checkbox.Group;
+import Checkbox from '..';
 
-describe('CheckboxGroup', () => {
-  it('correctly sets "checked" attribute', () => {
-    expect(
-      renderer
-        .create(
-          <CheckboxGroup value={['1', '2']}>
-            <Checkbox value="1" />
-            <Checkbox value="3" />
-          </CheckboxGroup>,
-        )
-        .toJSON(),
-    ).toMatchSnapshot();
-  });
-
-  it('renders correctly when deeply nested', () => {
-    expect(
-      renderer
-        .create(
-          <CheckboxGroup name="test" value={['1', '2']}>
-            <div>
-              <div>
-                <Checkbox value="1" />
-                <Checkbox value="3" />
-              </div>
-            </div>
-          </CheckboxGroup>,
-        )
-        .toJSON(),
-    ).toMatchSnapshot();
+describe('Checkbox', () => {
+  test('should react while click', () => {
+    const wrapper = mount(<Checkbox defaultChecked>Option</Checkbox>);
+    expect(wrapper.find(`.dk-checkbox`).hasClass(`dk-checkbox-checked`)).toBeTruthy();
+    console.log(wrapper.find(`.dk-checkbox`));
+    // click label
+    wrapper.find(`.dk-checkbox-input`).simulate('change', {
+      target: {
+        checked: false,
+      },
+    });
+    wrapper.update();
+    expect(wrapper.find(`.dk-checkbox`).hasClass(`dk-checkbox-checked`)).toBeFalsy();
   });
 });

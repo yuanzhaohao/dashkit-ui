@@ -28,7 +28,7 @@
     "format:scripts": "prettier './scripts/*.js' --write",
     "lint": "tslint tsconfig.json './{src,site}/**/*.{ts,tsx}'",
     "lint:fix": "tslint --project tsconfig.json './{src,site}/**/*.{ts,tsx}' --fix",
-    "test": "jest ./src"
+    "test": "jest --config jest.config.js --no-cache"
   },
   "lint-staged": {
     "*.{js,json,md}": [
@@ -68,6 +68,7 @@
   },
   "devDependencies": {
     "@types/classnames": "^2.2.4",
+    "@types/enzyme": "^3.9.2",
     "@types/jest": "^23.3.12",
     "@types/lodash-es": "^4.17.3",
     "@types/react": "^16.4.1",
@@ -79,7 +80,6 @@
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
@@ -88,6 +88,8 @@
     "compression-webpack-plugin": "^1.1.11",
     "connect-history-api-fallback": "^1.5.0",
     "css-loader": "^0.28.11",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.13.0",
     "eslint": "^4.19.1",
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^2.0.0",
