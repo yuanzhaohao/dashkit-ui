@@ -6,7 +6,6 @@ describe('Checkbox', () => {
   test('should react while click', () => {
     const wrapper = mount(<Checkbox defaultChecked>Option</Checkbox>);
     expect(wrapper.find(`.dk-checkbox`).hasClass(`dk-checkbox-checked`)).toBeTruthy();
-    console.log(wrapper.find(`.dk-checkbox`));
     // click label
     wrapper.find(`.dk-checkbox-input`).simulate('change', {
       target: {
