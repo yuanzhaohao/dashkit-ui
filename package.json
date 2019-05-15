@@ -19,7 +19,7 @@
   "scripts": {
     "start": "npm run dev",
     "dev": "node scripts/dev.js",
-    "docs": "node scripts/docs.js",
+    "site": "node scripts/docs.js && gh-pages -d gh-pages",
     "pub": "node scripts/publish.js && npm run pub:tsEs && npm run pub:tsLib && npm run pub:babel",
     "pub:tsEs": "tsc -p tsconfig.json",
     "pub:tsLib": "tsc -p tsconfig.json --declarationDir publish/lib",
@@ -61,6 +61,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "create-react-context": "^0.2.3",
+    "gh-pages": "^2.0.1",
     "lodash-es": "^4.17.11",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
