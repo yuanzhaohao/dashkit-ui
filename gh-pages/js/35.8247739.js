@@ -1,0 +1,2 @@
+webpackJsonp([35],{"7Dw7":function(n,e,i){n.exports={code:"import { Spin } from 'dashkit-ui';\n\nReactDOM.render(\n  <Spin spining={true} />,\n  mountNode\n);\n",meta:{order:0,title:{"zh-CN":"基本","en-US":"Basic"},subtitle:{"zh-CN":"<p>用<code>spining</code>来决定是否展示。</p>\n","en-US":"<p>Use <code>spining</code> to decide wheather it is shown.</p>\n"},__content:""},preview:function(){var n=i("GiK3"),e=(i("O27J"),i("qMEF"));return n.createElement(e.Spin,{spining:!0})}}}});
+//# sourceMappingURL=35.8247739.js.map

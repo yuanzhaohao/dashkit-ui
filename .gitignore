@@ -36,7 +36,6 @@ config/base.yaml
 yarn.lock
 package-lock.json
 /.history
-gh-pages
 publish
 
 src/**/__tests__/__snapshopts__
