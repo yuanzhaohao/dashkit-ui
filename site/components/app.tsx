@@ -5,11 +5,11 @@ import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Layout } from '../../src';
 import CommonHeader from './common/header';
 import CommonSidebar from './common/sidebar';
-import asyncComponent from '../lib/dynamic';
+import dynamic from '../lib/dynamic';
 import Page from './common/page';
 
 const { Content, Footer } = Layout;
-const Index = asyncComponent(() => import('./index'));
+const Index = dynamic(() => import('./index'));
 
 const pageMap = {
   Basic: ['Button', 'Icon'],

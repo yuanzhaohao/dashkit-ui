@@ -2,7 +2,7 @@ import * as React from 'react';
 import { createPortal, findDOMNode } from 'react-dom';
 import { CSSTransition } from 'react-transition-group';
 import * as classNames from 'classnames';
-import { SelectProps, SelectState, SelectSize } from './types';
+import { SelectProps, SelectState, SelectSize } from './typings';
 import { Provider } from './context';
 import Option from './option';
 import OptionGroup from './option-group';

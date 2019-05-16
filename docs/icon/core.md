@@ -10,21 +10,22 @@ subtitle:
 
 ```js
 import { Icon } from 'dashkit-ui';
+import types from 'dashkit-ui/icon/types';
 
 class IconList extends React.Component {
   render() {
-    const dataSource = Icon.types['core'];
+    const dataSource = types['core'];
 
     return (
       <div className="icon-list clearfix">
-        {dataSource.map((name, key) =>
+        {dataSource.map((name, key) => (
           <div className="icon-item-wrapper" key={key}>
             <div className="icon-item">
               <Icon type={name} />
               <span>{name}</span>
             </div>
           </div>
-        )}
+        ))}
       </div>
     );
   }

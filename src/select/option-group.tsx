@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import { SelectOptionGroupProps } from './types';
+import { SelectOptionGroupProps } from './typings';
 
 const OptionGroup = (props: Partial<SelectOptionGroupProps>) => {
   const { prefixCls = 'dk-select', className, label, children, ...attributes } = props;
