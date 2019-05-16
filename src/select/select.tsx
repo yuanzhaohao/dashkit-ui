@@ -6,7 +6,6 @@ import { SelectProps, SelectState, SelectSize } from './types';
 import { Provider } from './context';
 import Option from './option';
 import OptionGroup from './option-group';
-import Icon from '../icon';
 import Input from '../input';
 
 class Select extends React.PureComponent<SelectProps, SelectState> {
