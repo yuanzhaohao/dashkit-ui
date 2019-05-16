@@ -21,7 +21,7 @@
     "prefer-for-of": true,
     "only-arrow-functions": false,
     "jsx-curly-spacing": false,
-    "no-implicit-dependencies": [true, "dev"],
+    "no-implicit-dependencies": [false, "dev"],
     "object-literal-key-quotes": false,
     "no-shadowed-variable": false,
     "no-console": [true, "warning"],

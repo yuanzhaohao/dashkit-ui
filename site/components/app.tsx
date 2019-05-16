@@ -2,10 +2,10 @@ import './app.scss';
 
 import * as React from 'react';
 import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
-import { Layout } from 'dashkit-ui';
+import { Layout } from '../../src';
 import CommonHeader from './common/header';
 import CommonSidebar from './common/sidebar';
-import asyncComponent from './common/async-component';
+import asyncComponent from '../lib/dynamic';
 import Page from './common/page';
 
 const { Content, Footer } = Layout;
@@ -20,10 +20,8 @@ const pageMap = {
   Feedback: ['Tooltip', 'Popover', 'Alert', 'Message'],
 };
 
-let pages = [];
-Object.keys(pageMap).forEach(key => {
-  pages = pages.concat(pageMap[key]);
-});
+// @ts-ignore
+const pages = Object.values(pageMap).reduce((accumulator, cur) => accumulator.concat(cur));
 
 export default () => (
   <HashRouter>

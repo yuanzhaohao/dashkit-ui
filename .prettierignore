@@ -3,4 +3,3 @@ publish/
 .happypack_cache/
 .vscode/
 node_modules/
-tsconfig.json

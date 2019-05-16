@@ -15,7 +15,7 @@ interface PageProps extends RouteComponentProps<PageProps> {
 type PageState = {
   dataSource?: {
     markdown: string;
-    demos: Object[];
+    demos: object[];
   } | null;
 };
 

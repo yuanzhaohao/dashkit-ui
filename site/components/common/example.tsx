@@ -13,8 +13,10 @@ type ExampleState = {
 };
 
 class Example extends React.PureComponent<ExampleProps, ExampleState> {
+  public readonly codeElement: React.RefObject<HTMLDivElement>;
   constructor(props: ExampleProps) {
     super(props);
+    this.codeElement = React.createRef();
     this.state = {
       showCode: false,
     };
@@ -46,7 +48,7 @@ class Example extends React.PureComponent<ExampleProps, ExampleState> {
         </div>
         {showCode ? (
           <pre className="example-code">
-            <code className="language-jsx" ref="code">
+            <code className="language-jsx" ref={this.codeElement}>
               {code}
             </code>
           </pre>
@@ -62,8 +64,9 @@ class Example extends React.PureComponent<ExampleProps, ExampleState> {
       showCode: newValue,
     });
     setTimeout(() => {
-      if (newValue && this.refs.code) {
-        (window as any).Prism.highlightElement(this.refs.code);
+      const el = this.codeElement.current;
+      if (newValue && el) {
+        (window as any).Prism.highlightElement(el);
       }
     }, 0);
   };

@@ -11,20 +11,21 @@
     "strict": false,
     "declaration": true,
     "strictFunctionTypes": false,
-    "sourceMap": false,
+    "sourceMap": true,
     "removeComments": true,
     "baseUrl": "./",
     "paths": {
-      "dashkit-ui": ["src/"]
+      "dashkit-ui": ["src"]
     }
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "custom.d.ts"
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+    "./typings/*.ts",
+    "./site/**/*.ts",
+    "./site/**/*.tsx",
+    "./site/**/*.svg",
+    "./site/**/*.json"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }
-

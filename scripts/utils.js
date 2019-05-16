@@ -9,10 +9,13 @@ exports.resolve = function(dir) {
 };
 
 exports.getEntry = function(globPath) {
-  const files = glob.sync(path.join(globPath, './*.js'));
+  const files = Array.prototype.concat(
+    glob.sync(path.join(globPath, './*.tsx')),
+    glob.sync(path.join(globPath, './*.js')),
+  );
   const entries = {};
 
-  files.forEach((filepath) => {
+  files.forEach(filepath => {
     const name = filepath.replace(/(.*\/)*([^.]+).*/gi, '$2');
     if (name && !entries[name]) {
       entries[name] = filepath;

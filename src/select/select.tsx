@@ -16,7 +16,7 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
     prefixCls: 'dk-select',
     size: 'default' as SelectSize,
   };
-  public readonly selectElement: any; // React.RefObject<HTMLDivElement>;
+  public readonly selectElement: React.RefObject<HTMLDivElement>;
   public readonly panelElement: React.RefObject<HTMLDivElement>;
 
   public static getDerivedStateFromProps(nextProps: SelectProps) {

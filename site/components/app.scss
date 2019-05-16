@@ -1,5 +1,19 @@
 #app {
   width: 100%;
+
+  code {
+    margin: 0 1px;
+    padding: .2em .4em;
+    border: 1px solid #eee;
+    background-color: #f2f4f5;
+    border-radius: 3px;
+    font-size: .9em;
+    color: #95aac9;
+  }
+
+  table {
+    line-height: 1.8
+  }
 }
 
 .app-layout {
@@ -11,7 +25,6 @@
 .app-content {
   position: relative;
   min-height: calc(100vh - 72px - 36px);
-  // background-color: #dfecfa;
   background-color: #fff;
 }
 
@@ -38,31 +51,3 @@
   padding: 24px;
 }
 
-.page-subtitle {
-  margin-top: 6px;
-  margin-bottom: 0;
-  color: #95aac9;
-}
-
-.page-header {
-  padding-bottom: 24px;
-  // border-bottom: 1px solid #e3ebf6;
-}
-
-.module-title {
-  margin-bottom: 6px;
-}
-
-code {
-  margin: 0 1px;
-  padding: .2em .4em;
-  border: 1px solid #eee;
-  background-color: #f2f4f5;
-  border-radius: 3px;
-  font-size: .9em;
-  color: #95aac9;
-}
-
-table {
-  line-height: 1.8
-}
