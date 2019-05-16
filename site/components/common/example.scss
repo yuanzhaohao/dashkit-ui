@@ -124,7 +124,23 @@
 }
 
 .example-code {
-  overflow: scroll;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  height: 0;
+  transition: height 0.3s ease;
+
+  &-exit,
+  &-enter-done {
+    height: auto;
+  }
+
+  &-exit-done {
+    height: 0;
+  }
+
+  &-enter {
+    height: 0;
+  }
 }
 
 .example-content {
@@ -166,6 +182,7 @@
   color: #95aac9;
   font-size: 18px;
   cursor: pointer;
+  transition: color 0.2s ease;
 
   &:hover {
     color: #888;

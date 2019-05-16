@@ -2,7 +2,6 @@ import * as classNames from 'classnames';
 import * as React from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { BodyProps } from './types';
-// import { removeClass, addClass } from '../utils/dom';
 import { createConsumer } from './context';
 
 class Body extends React.PureComponent<BodyProps> {
@@ -44,10 +43,6 @@ class Body extends React.PureComponent<BodyProps> {
   }
 
   public handleEnter = el => {
-    // const { prefixCls, visible } = this.props;
-    // if (visible) {
-    //   removeClass(el, `${prefixCls}-body-collapse-visible`);
-    // }
     if (el.scrollHeight !== 0) {
       el.style.height = el.scrollHeight + 'px';
     }

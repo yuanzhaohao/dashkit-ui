@@ -2,6 +2,7 @@ import './example.scss';
 
 import * as React from 'react';
 import { Icon } from 'dashkit-ui';
+import { CSSTransition } from 'react-transition-group';
 
 type ExampleProps = {
   dataSource: any;
@@ -9,7 +10,7 @@ type ExampleProps = {
 };
 
 type ExampleState = {
-  showCode: boolean;
+  visible: boolean;
 };
 
 class Example extends React.PureComponent<ExampleProps, ExampleState> {
@@ -18,14 +19,14 @@ class Example extends React.PureComponent<ExampleProps, ExampleState> {
     super(props);
     this.codeElement = React.createRef();
     this.state = {
-      showCode: false,
+      visible: false,
     };
   }
 
   public render() {
     const { locale = 'en-US' } = this.props;
     const { meta, code, preview } = this.props.dataSource;
-    const { showCode } = this.state;
+    const { visible } = this.state;
 
     return (
       <div className="example">
@@ -41,34 +42,59 @@ class Example extends React.PureComponent<ExampleProps, ExampleState> {
             />
           ) : null}
           <Icon
-            type={showCode ? 'folder-minus' : 'folder-plus'}
+            type={visible ? 'folder-minus' : 'folder-plus'}
             className="example-control"
-            onClick={this.onControlClick}
+            onClick={this.handleControlClick}
           />
         </div>
-        {showCode ? (
+        <CSSTransition
+          in={visible}
+          timeout={300}
+          unmountOnExit
+          onEnter={this.handleEnter}
+          onEntered={this.handleEntered}
+          onExit={this.handleExit}
+          onExiting={this.handleExiting}
+          classNames="example-code"
+        >
           <pre className="example-code">
             <code className="language-jsx" ref={this.codeElement}>
               {code}
             </code>
           </pre>
-        ) : null}
+        </CSSTransition>
       </div>
     );
   }
 
-  public onControlClick = () => {
-    const { showCode } = this.state;
-    const newValue = !showCode;
+  public handleControlClick = () => {
+    const { visible } = this.state;
+    const newValue = !visible;
     this.setState({
-      showCode: newValue,
+      visible: newValue,
     });
-    setTimeout(() => {
-      const el = this.codeElement.current;
-      if (newValue && el) {
-        (window as any).Prism.highlightElement(el);
-      }
-    }, 0);
+  };
+
+  public handleEnter = el => {
+    if (el.scrollHeight !== 0) {
+      el.style.height = el.scrollHeight + 'px';
+    }
+    const codeElement = this.codeElement.current;
+    (window as any).Prism.highlightElement(codeElement);
+  };
+
+  public handleEntered = el => {
+    el.style.height = '';
+  };
+
+  public handleExit = el => {
+    el.style.height = el.scrollHeight + 'px';
+  };
+
+  public handleExiting = el => {
+    if (el.scrollHeight !== 0) {
+      el.style.height = '0';
+    }
   };
 }
 
