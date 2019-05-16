@@ -1,6 +1,6 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
-import { AccordionProps } from './types';
+import { AccordionProps } from './typings';
 
 class Accordion extends React.PureComponent<AccordionProps> {
   public render() {

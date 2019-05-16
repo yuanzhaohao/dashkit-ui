@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import { HeaderProps } from './types';
+import { HeaderProps } from './typings';
 import { createConsumer } from './context';
 import Icon from '../icon';
 

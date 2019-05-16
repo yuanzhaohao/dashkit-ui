@@ -16,7 +16,7 @@ export type CardState = {
 
 export type ContextProps = BasicProps & {
   collapse?: boolean;
-  handleHeaderClick?: (key?: string | number) => void;
+  handleHeaderClick?: (index?: string | number) => void;
   onClick: () => void;
   visible?: boolean;
 };
@@ -24,7 +24,6 @@ export type ContextProps = BasicProps & {
 export type HeaderProps = BasicProps &
   ContextProps & {
     title?: string;
-    key?: string | number;
   };
 
 export type BodyProps = BasicProps & ContextProps & {};

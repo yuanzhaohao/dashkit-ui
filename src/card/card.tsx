@@ -5,7 +5,7 @@ import Collapse from './collapse';
 import Header from './header';
 import Footer from './footer';
 import Body from './body';
-import { CardProps, CardState } from './types';
+import { CardProps, CardState } from './typings';
 import { Provider } from './context';
 
 class Card extends React.PureComponent<CardProps, CardState> {

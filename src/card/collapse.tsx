@@ -1,6 +1,6 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
-import { CollapseProps, CollapseState, CardProps } from './types';
+import { CollapseProps, CollapseState, CardProps } from './typings';
 import Card from './card';
 
 class Collapse extends React.PureComponent<CollapseProps, CollapseState> {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ContextProps } from './types';
+import { ContextProps } from './typings';
 
 const context = React.createContext<Partial<ContextProps>>(null);
 export const Provider = context.Provider;

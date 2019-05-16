@@ -1,7 +1,7 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
 import { CSSTransition } from 'react-transition-group';
-import { BodyProps } from './types';
+import { BodyProps } from './typings';
 import { createConsumer } from './context';
 
 class Body extends React.PureComponent<BodyProps> {

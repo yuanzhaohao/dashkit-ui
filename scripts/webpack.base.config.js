@@ -123,8 +123,8 @@ module.exports = {
         },
       },
       {
-        // test: /\.md$/,
-        test: /(en\-US)|(zh\-CN)\.md(\?.*)?$/,
+        test: /\.md$/,
+        // test: /(en\-US)|(zh\-CN)\.md(\?.*)?$/,
         loader: 'markdown-website-loader',
         options: {
           single: false,

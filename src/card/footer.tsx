@@ -1,6 +1,6 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
-import { BasicProps } from './types';
+import { BasicProps } from './typings';
 
 const Footer = (props: BasicProps) => {
   const { className, prefixCls = 'dk-card', ...attributes } = props;
