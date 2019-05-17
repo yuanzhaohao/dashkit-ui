@@ -1,23 +1,73 @@
+@import 'dashkit-ui/style/theme.scss';
+
 #app {
   width: 100%;
 }
 
-.app-layout {
-  width: calc(100vw - 250px);
-  margin-left: 250px;
-  overflow: hidden;
+.app {
+  &-layout {
+    width: calc(100vw - 250px);
+    margin-left: 250px;
+    overflow: hidden;
+  }
+
+  &-footer {
+    padding-bottom: 15px;
+    background-color: #f9fbfd;
+    text-align: center;
+  }
 }
 
 .app-content {
   position: relative;
   min-height: calc(100vh - 72px - 36px);
   background-color: #fff;
-}
 
-.app-footer {
-  padding-bottom: 15px;
-  background-color: #f9fbfd;
-  text-align: center;
+  code {
+    margin: 0 1px;
+    padding: .2em .4em;
+    border: 1px solid #eee;
+    background-color: #f2f4f5;
+    border-radius: 3px;
+    font-size: .9em;
+    color: #95aac9;
+  }
+
+  table {
+    line-height: 1.8
+  }
+
+  table {
+    width: 100%;
+    background-color: transparent;
+    vertical-align: middle;
+    background-color: #fff;
+  }
+
+  th {
+    padding: 15px;
+    text-align: inherit;
+    font-weight: 600;
+    letter-spacing: .08em;
+    color: $table-head-color;
+    border-top: 1px solid $table-border-color;
+    border-bottom: 1px solid $table-border-color;
+    background: $table-head-bg;
+    font-size: $font-size-sm;
+  }
+
+  td {
+    padding: 15px;
+    vertical-align: top;
+    font-size: 15px;
+    border-bottom: 1px solid $table-border-color;
+  }
+
+  h2, h3, h4, h5 {
+    margin-top: 32px;
+    margin-bottom: 12px;
+    color: $gray-800;
+  }
 }
 
 .page-loading {
@@ -35,18 +85,4 @@
 .page-container {
   width: 100%;
   padding: 24px;
-}
-
-code {
-  margin: 0 1px;
-  padding: .2em .4em;
-  border: 1px solid #eee;
-  background-color: #f2f4f5;
-  border-radius: 3px;
-  font-size: .9em;
-  color: #95aac9;
-}
-
-table {
-  line-height: 1.8
 }

@@ -1,4 +1,4 @@
-@import '../../../src/style/theme.scss';
+@import 'dashkit-ui/style/theme.scss';
 
 .app-header {
   height: 72px;
@@ -11,6 +11,10 @@
 .header-github {
   width: 32px;
   height: 32px;
+
+  &:hover {
+    fill: $primary;
+  }
 }
 
 .header-link {

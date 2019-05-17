@@ -10,7 +10,7 @@ class AppHeader extends React.Component {
   public render() {
     return (
       <Header className="app-header">
-        <a href="https://github.com/yuanzhaohao/dashkit-ui" className="header-link">
+        <a href="https://github.com/yuanzhaohao/dashkit-ui" target="_blank" className="header-link">
           <GithubSvg className="header-github" />
         </a>
       </Header>
