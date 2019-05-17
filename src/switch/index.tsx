@@ -82,7 +82,7 @@ class Switch extends React.Component<SwitchProps, SwitchState> {
       onChange(checked);
     }
     if (typeof onClick === 'function') {
-      onclick();
+      onClick();
     }
   };
 }
