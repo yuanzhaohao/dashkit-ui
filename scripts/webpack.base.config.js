@@ -126,10 +126,6 @@ module.exports = {
         test: /\.md$/,
         // test: /(en\-US)|(zh\-CN)\.md(\?.*)?$/,
         loader: 'markdown-website-loader',
-        options: {
-          single: false,
-          name: 'media/[name].[hash:7].[ext]',
-        },
       },
     ],
   },
