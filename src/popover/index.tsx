@@ -8,23 +8,15 @@ export type PopoverProps = TooltipProps & {
   content: React.ReactNode;
 };
 
-class Popover extends React.PureComponent<PopoverProps> {
-  public static defaultProps = {
-    prefixCls: 'dk-popover',
-    placement: 'top',
-    trigger: 'click',
-  };
-
-  public render() {
-    const { content, prefixCls, title, ...attibutes } = this.props;
-    const realContent = (
-      <>
-        <div className={`${prefixCls}-title`}>{title}</div>
-        <div className={`${prefixCls}-content`}>{content}</div>
-      </>
-    );
-    return <Tooltip {...attibutes} prefixCls={prefixCls} content={realContent} />;
-  }
-}
+const Popover = (props: PopoverProps) => {
+  const { content, prefixCls = 'dk-popover', trigger, title, visible, ...attibutes } = props;
+  const realContent = (
+    <>
+      <div className={`${prefixCls}-title`}>{title}</div>
+      <div className={`${prefixCls}-content`}>{content}</div>
+    </>
+  );
+  return <Tooltip {...attibutes} trigger={trigger} prefixCls={prefixCls} content={realContent} />;
+};
 
 export default Popover;

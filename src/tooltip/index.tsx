@@ -4,7 +4,6 @@ import { createPortal, findDOMNode } from 'react-dom';
 import * as classNames from 'classnames';
 import { CSSTransition } from 'react-transition-group';
 
-// export type TooltipTheme = 'dark' | 'light';
 export type TooltipPlacement =
   | 'top-start'
   | 'top'
@@ -22,14 +21,11 @@ export type TooltipTrigger = 'hover' | 'click' | 'focus';
 export type TooltipProps = {
   prefixCls?: string;
   className?: string;
-  style?: React.CSSProperties;
   disabled?: boolean;
   trigger: TooltipTrigger;
   visible?: boolean;
-  // theme: TooltipTheme;
   content: React.ReactNode;
   placement: TooltipPlacement;
-  children: React.ReactElement<any>;
 };
 
 export type TooltipState = {
@@ -39,10 +35,8 @@ export type TooltipState = {
 };
 
 class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
-
   public static defaultProps = {
     prefixCls: 'dk-tooltip',
-    // theme: 'dark' as TooltipTheme,
     placement: 'top' as TooltipPlacement,
     trigger: 'hover' as TooltipTrigger,
   };
@@ -71,7 +65,15 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
   }
 
   public render() {
-    const { children, prefixCls, disabled, content, placement, trigger } = this.props;
+    const {
+      children,
+      prefixCls,
+      disabled,
+      content,
+      placement,
+      trigger,
+      ...attributes
+    } = this.props;
     const tooltopClassName = classNames({
       [prefixCls]: true,
       [`${prefixCls}-${placement}`]: true,
@@ -98,16 +100,8 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
     );
     const childProps = this.getChildProps();
 
-    // const childNode = (
-    //   children
-    //     ? children instanceof Array
-    //       ? <div className={`${prefixCls}-reference`} {...childProps}>{children}</div>
-    //       : React.cloneElement(children, childProps)
-    //     : null
-    // );
-
     const childNode = (
-      <span className={`${prefixCls}-reference`} {...childProps}>
+      <span className={`${prefixCls}-reference`} {...childProps} {...attributes}>
         {children}
       </span>
     );
@@ -150,7 +144,9 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
     let left = 0;
     let top = 0;
 
-    if (!(el instanceof Element)) { return { left, top }; }
+    if (!(el instanceof Element)) {
+      return { left, top };
+    }
     const rect = el.getBoundingClientRect();
     const contentRect = contentEl.getBoundingClientRect();
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
