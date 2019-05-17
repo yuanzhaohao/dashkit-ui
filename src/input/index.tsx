@@ -25,7 +25,6 @@ export type InputProps = {
   onChange?: (value: string) => void;
   onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onFocus?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onKeyUp?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 };
 
 function fixControlledValue<T>(value: T) {
@@ -97,7 +96,6 @@ class Input extends React.Component<InputProps> {
         readOnly={disabled}
         type={inputType}
         onChange={this.handleChange}
-        onKeyUp={this.handleKeyUp}
         onBlur={this.handleBlur}
         onFocus={this.handleFocus}
       />
@@ -146,13 +144,6 @@ class Input extends React.Component<InputProps> {
     const { onFocus } = this.props;
     if (onFocus) {
       onFocus(event);
-    }
-  };
-
-  public handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    const { onKeyUp } = this.props;
-    if (onKeyUp) {
-      onKeyUp(event);
     }
   };
 

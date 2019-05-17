@@ -23,3 +23,6 @@ Dashkit supports all of Bootstrap's default form styling in addition to a handfu
 | suffixClassName | The className of suffix icon | string | - |
 | wrapperClassName | The className of suffix icon | string | - |
 | wrapperRef | ref of the wrapper | `React.RefObject<HTMLDivElement>` | - |
+| onChange | value of input is changed | `React.RefObject<HTMLDivElement>` | - |
+| onFocus | Called when focus | `(event: React.ChangeEvent<HTMLInputElement>) => void;` | - |
+| onBlur | Called when blur | `(event: React.ChangeEvent<HTMLInputElement>) => void;` | - |

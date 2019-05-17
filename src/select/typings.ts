@@ -7,8 +7,8 @@ export type SelectProps = {
   prefixCls?: string;
   size: SelectSize;
   disabled?: boolean;
+  name?: string;
   value?: ValueType;
-  inputValue?: string;
   multiple?: boolean;
   placeholder?: string;
   prefix?: string;

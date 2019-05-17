@@ -54,6 +54,7 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
       multiple,
       onChange,
       prefix,
+      name,
       prefixClassName,
       placeholder = 'Select',
       ...attributes
@@ -103,6 +104,8 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
           placeholder={options.toString() || placeholder}
           value={inputValue}
           disabled={disabled}
+          size={size}
+          name={name}
           onChange={this.handleInputChange}
           onFocus={this.handleInputFocus}
           prefix={prefix}
