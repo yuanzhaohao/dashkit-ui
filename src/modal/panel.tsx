@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 import { CSSTransition } from 'react-transition-group';
-import { ModalProps, ModalState } from './types';
+import { ModalProps, ModalState } from './typings';
 import Icon from '../icon';
 import Button from '../button';
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as classNames from 'classnames';
-import { ModalProps, ModalType } from './types';
+import { ModalProps, ModalType } from './typings';
 import Panel from './panel';
 import Button from '../button';
 import Icon from '../icon';
