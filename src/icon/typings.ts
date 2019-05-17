@@ -10,6 +10,7 @@ export type IconProps = {
   type: (typeof types)[number];
   className?: string;
   disabled?: boolean;
+  onClick?: (e: React.MouseEvent) => void;
 };
 
 export { types };

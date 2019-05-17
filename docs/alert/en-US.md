@@ -4,11 +4,14 @@ Provide contextual feedback messages for typical user actions with the handful o
 
 <Demos />
 
-### API 
-Property    | Description    | Type      | Default   |
-|---------- |-------- |---------- |-------------  |-------- |
+### API
+
+| Property | Description | Type | Default |
+| --- | --- | --- | --- |
 | className | className of the component | - | - |
-| type     | alert type, can be set to `success` `warning` `danger` `info` or ommited   | string |  default   |
-| duration   | action time  | boolean | false   |
-| closable     | determine whether it's a closable alert   | boolean | false   |
+| type | alert type, can be set to `success` `warning` `danger` `info` or ommited | `string` | default |
+| duration | action time | `boolean` | false |
+| closable | determine whether alert can be closed | `boolean` | false |
+| icon | determine whether to show the icon | `boolean` | - |
+| dismiss | determine whether the component is dismiss | `boolean` | - |
 | onClose | event handler | - | - |

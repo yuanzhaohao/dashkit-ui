@@ -13,7 +13,6 @@ export type AlertProps = {
   type?: AlertType;
   closable?: boolean;
   icon?: boolean;
-  style?: React.CSSProperties;
   onClose?: VoidFunction;
   dismiss?: boolean;
 };
@@ -29,17 +28,23 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
     closable: false,
     icon: false,
   };
-  private readonly containerDiv: React.RefObject<HTMLDivElement>;
+  public static getDerivedStateFromProps(nextProps: AlertProps) {
+    if ('dismiss' in nextProps) {
+      return {
+        dismiss: nextProps.dismiss,
+      };
+    }
+    return null;
+  }
   constructor(props: AlertProps) {
     super(props);
     this.state = {
       dismiss: false,
     };
-    this.containerDiv = React.createRef();
   }
 
   public render() {
-    const { prefixCls, className, children, closable, icon, type, style } = this.props;
+    const { prefixCls, className, children, closable, icon, type, ...attributes } = this.props;
     const iconType: { [key: string]: string } = {
       success: 'check-circle',
       error: 'x-circle',
@@ -56,8 +61,7 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
       },
       className,
     );
-
-    const dismiss = 'dismiss' in this.props ? this.props.dismiss : this.state.dismiss;
+    const { dismiss } = this.state;
 
     return (
       <CSSTransition
@@ -67,7 +71,7 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
         classNames={`${prefixCls}`}
         onExited={this.handleExited}
       >
-        <div className={alertClassName} style={style}>
+        <div className={alertClassName} {...attributes}>
           {isShowIcon ? (
             <div className={`${prefixCls}-icon-box`}>
               <Icon type={iconType[type]} className={`${prefixCls}-icon`} />
