@@ -6,7 +6,6 @@ import { Provider as CheckboxProvider } from './context';
 export type CheckboxGroupProps = {
   prefixCls?: string;
   className?: string;
-  style?: React.CSSProperties;
   name?: string;
   defaultValue?: string[];
   value?: string[];
@@ -47,7 +46,17 @@ class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGrou
   }
 
   public render() {
-    const { className, style, prefixCls, children, min, max } = this.props;
+    const {
+      className,
+      prefixCls,
+      children,
+      min,
+      max,
+      onChange,
+      value,
+      defaultValue,
+      ...attributes
+    } = this.props;
     const { options } = this.state;
     const groupClassName = classNames(
       {
@@ -57,7 +66,7 @@ class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGrou
     );
 
     return (
-      <div className={groupClassName} style={style}>
+      <div className={groupClassName} {...attributes}>
         <CheckboxProvider
           value={{
             onRawChange: this.handleRawChange,

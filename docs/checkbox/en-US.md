@@ -5,22 +5,28 @@ A group of options for multiple choices.
 <Demos />
 
 ## API
+
 ### Checkbox
-Property    | Description    | Type      | Default   |
-|---------- |-------- |---------- |-------------  |-------- |
+
+| Property | Description | Type | Default |
+| --- | --- | --- | --- |
 | className | className of the component | - | - |
 | style | style of the component | - | - |
-| disabled  | disable the checkbox   | boolean | false   |
-| checked  | value of checkbox | boolean  |  -  |
-| defaultChecked  | default value | boolean  |  -  |
+| disabled | disable the radio | boolean | false |
+| checked | checked of radio | boolean | - |
+| value | value of radio, used for `Radio.Group` | string | - |
+| defaultChecked | default checked | boolean | - |
 | onChange | `change` event handler | `(event: React.ChangeEvent<HTMLInputElement>) => void` | - |
 
 ### Checkbox.Group
-Property    | Description    | Type      | Default   |
-|---------- |-------- |---------- |-------------  |-------- |
-| className | className of the component | - | - |
-| defaultValue | Default selected value  | -   | - |
-| min       | Minimum   | number  | -  |
-| max       | Maximum   | number  | -  |
-| onChange  | `change` event handler | `(options: string[]) => void` | - |
 
+| Property     | Description                | Type                          | Default |
+| ------------ | -------------------------- | ----------------------------- | ------- |
+| className    | className of the component | -                             | -       |
+| defaultValue | Default selected value     | -                             | -       |
+| min          | Minimum                    | number                        | -       |
+| max          | Maximum                    | number                        | -       |
+| name         | name of the component      | string                        | -       |
+| value        | value of the Radio Group   | string                        | -       |
+| defaultValue | default of the Radio Group | string[]                      | -       |
+| onChange     | `change` event handler     | `(options: string[]) => void` | -       |

@@ -6,7 +6,7 @@ import { Provider as RadioProvider } from '../checkbox/context';
 export type RadioGroupProps = {
   prefixCls?: string;
   className?: string;
-  style?: React.CSSProperties;
+  name?: string;
   defaultValue?: any;
   value?: any;
   onChange?: (value: any) => void;
@@ -40,7 +40,15 @@ class RadioGroup extends React.PureComponent<RadioGroupProps, RadioGroupState> {
   }
 
   public render() {
-    const { className, style, prefixCls, children } = this.props;
+    const {
+      className,
+      prefixCls,
+      children,
+      onChange,
+      value,
+      defaultValue,
+      ...attibutes
+    } = this.props;
     const groupClassName = classNames(
       {
         [`${prefixCls}-group`]: true,
@@ -49,7 +57,7 @@ class RadioGroup extends React.PureComponent<RadioGroupProps, RadioGroupState> {
     );
 
     return (
-      <div className={groupClassName} style={style}>
+      <div className={groupClassName} {...attibutes}>
         <RadioProvider
           value={{
             onRawChange: this.handleRawChange,
