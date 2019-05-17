@@ -4,11 +4,12 @@ import * as React from 'react';
 import { createPortal } from 'react-dom';
 import * as classNames from 'classnames';
 import { CSSTransition } from 'react-transition-group';
-import { CalendarType, DateProps } from './types';
+import { CalendarType, DateProps } from './typings';
 import { isArray } from 'lodash-es';
 import Icon from '../icon';
 import Picker from './picker';
 import Range from './range';
+// import Input from '../input';
 import {
   allPlaceholders,
   allFormats,

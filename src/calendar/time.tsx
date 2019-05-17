@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 import { toDate } from './utils';
-import { PickerChildProps } from './types';
+import { PickerChildProps } from './typings';
 import TimeScroll from './time-scroll';
 
 export type TimeProps = PickerChildProps;

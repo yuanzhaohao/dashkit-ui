@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Picker from './picker';
-import { DateProps, CalendarType } from './types';
+import { DateProps, CalendarType } from './typings';
 import { compareAsc, isSameMonth, addMonths } from './utils';
 
 export type RangeProps = {

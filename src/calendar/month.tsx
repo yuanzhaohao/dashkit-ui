@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import { PickerChildProps } from './types';
+import { PickerChildProps } from './typings';
 import { monthValues, addYears, isSameMonth } from './utils';
 import Icon from '../icon';
 

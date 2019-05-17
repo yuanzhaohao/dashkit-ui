@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CalendarType, DateProps, CalendarMode } from './types';
+import { CalendarType, DateProps, CalendarMode } from './typings';
 import Time from './time';
 import Day from './day';
 import Month from './month';
