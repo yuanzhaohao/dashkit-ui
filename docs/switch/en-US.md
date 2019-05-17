@@ -6,11 +6,14 @@ Replaces a standard checkbox input with a switch button.
 
 ## API
 
-Property    | Description    | Type      | Default   |
-|---------- |-------- |---------- |-------------  |-------- |
+| Property | Description | Type | Default |
+| --- | --- | --- | --- |
 | className | className of the component | - | - |
-| total     | total number of pages   | number  | 0  |
-| current   | current page   | number | 1  |
-| pageSize  | number of each page | number  |  20  |
-| range  | number of display pages | number  |  7  |
+| size | switch size, can be set to `small` `large` or omitted | string | default |
+| checked | determine whether the `Switch` is checked | boolean | false |
+| defaultChecked | initail checked | boolean | false |
+| disabled | to disable the component | boolean | false |
+| checkedChildren | content to be shown when the state is checked | React.ReactNode | - |
+| unCheckedChildren | content to be shown when the state is unchecked | React.ReactNode | - |
 | onChange | `change` event handler | - | - |
+| onClick | trigger when clicked | - | - |

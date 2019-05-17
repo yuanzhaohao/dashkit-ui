@@ -7,7 +7,6 @@ export type SwitchSize = 'small' | 'default' | 'large';
 
 export type SwitchProps = {
   className?: string;
-  style?: React.CSSProperties;
   prefixCls?: string;
   size?: SwitchSize;
   checked?: boolean;
@@ -16,6 +15,7 @@ export type SwitchProps = {
   checkedChildren?: React.ReactNode;
   unCheckedChildren?: React.ReactNode;
   onChange?: (checked: boolean) => void;
+  onClick?: () => void;
 };
 
 export interface SwitchState {
@@ -39,12 +39,14 @@ class Switch extends React.Component<SwitchProps, SwitchState> {
   public render() {
     const {
       className,
-      style,
       checkedChildren,
       unCheckedChildren,
       disabled,
       size,
       prefixCls,
+      onClick,
+      onChange,
+      ...attributes
     } = this.props;
     const checked = this.getChecked();
     const switchClassName = classNames(
@@ -58,7 +60,7 @@ class Switch extends React.Component<SwitchProps, SwitchState> {
       className,
     );
     return (
-      <button className={switchClassName} onClick={this.handleChange} style={style}>
+      <button className={switchClassName} onClick={this.handleChange} {...attributes}>
         <span className={`${prefixCls}-inner`}>
           {checked ? checkedChildren : unCheckedChildren}
         </span>
@@ -71,13 +73,16 @@ class Switch extends React.Component<SwitchProps, SwitchState> {
   };
 
   public handleChange = () => {
-    const { onChange } = this.props;
+    const { onChange, onClick } = this.props;
     const checked = !this.getChecked();
     this.setState({
       checked,
     });
     if (typeof onChange === 'function') {
       onChange(checked);
+    }
+    if (typeof onClick === 'function') {
+      onclick();
     }
   };
 }

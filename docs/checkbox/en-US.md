@@ -13,9 +13,9 @@ A group of options for multiple choices.
 | className | className of the component | - | - |
 | style | style of the component | - | - |
 | disabled | disable the radio | boolean | false |
-| checked | checked of radio | boolean | - |
-| value | value of radio, used for `Radio.Group` | string | - |
-| defaultChecked | default checked | boolean | - |
+| checked | determine whether the `Checkbox` is checked | boolean | - |
+| value | value of radio, used for `Checkbox.Group` | string | - |
+| defaultChecked | to set the initial state | boolean | - |
 | onChange | `change` event handler | `(event: React.ChangeEvent<HTMLInputElement>) => void` | - |
 
 ### Checkbox.Group
