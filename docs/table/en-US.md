@@ -6,7 +6,10 @@ A table displays rows of data.
 
 ## API
 
-| Property  | Description                | Type     | Default |
-| --------- | -------------------------- | -------- | ------- |
-| className | className of the component | -        | -       |
-| title     | show the title             | `string` | -       |
+| Property   | Description                       | Type          | Default |
+| ---------- | --------------------------------- | ------------- | ------- |
+| className  | className of the component        | -             | -       |
+| title      | show the title                    | `string`      | -       |
+| columns    | Columns of table                  | `ColumnProps` | -       |
+| dataSource | Data record array to be displayed | `any[]`       | -       |
+| fixed      | determin the Header to be fixed   | `boolean`     | false   |
