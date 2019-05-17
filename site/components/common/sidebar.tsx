@@ -27,8 +27,8 @@ class AppSidebar extends React.PureComponent<SidebarProps> {
         </div>
         <Menu
           className="sidebar-menu"
-          defaultActive={activeIndex}
-          defaultOpeneds={['Components']}
+          defaultActiveKey={activeIndex}
+          defaultOpenKeys={['Components']}
           onSelect={this.onMenuSelect}
         >
           <Item icon="home" index="Dashboard">

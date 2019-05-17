@@ -2,15 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 import { createConsumer } from './context';
 import Icon from '../icon';
-
-export type MenuItemProps = {
-  prefixCls?: string;
-  className?: string;
-  index: string;
-  disabled?: boolean;
-  icon?: string;
-  rootContext: any;
-};
+import { MenuItemProps } from './typings';
 
 class MenuItem extends React.Component<MenuItemProps> {
   public static defaultProps = {

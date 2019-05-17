@@ -28,9 +28,13 @@ class MenuDemo extends React.Component {
           unCheckedChildren="Light"
         />
 
-        <Menu defaultActive="Dashboard" defaultOpeneds={['Layouts', 'Menu']} theme={theme}>
-          <Item icon="home" index="Dashboard">Dashboard</Item>
-          <Item icon="clipboard" index="Getting started">Getting started</Item>
+        <Menu defaultActiveKey="Dashboard" defaultOpenKeys={['Layouts', 'Menu']} theme={theme}>
+          <Item icon="home" index="Dashboard">
+            Dashboard
+          </Item>
+          <Item icon="clipboard" index="Getting started">
+            Getting started
+          </Item>
           <SubMenu icon="book-open" title="Components" index="Components">
             <Item index="Alert">Alert</Item>
             <Item index="button">Button</Item>
@@ -41,27 +45,25 @@ class MenuDemo extends React.Component {
               <Item index="MenuSubmenu">MenuSubmenu</Item>
             </SubMenu>
           </SubMenu>
-          <Item icon="git-branch" index="Changelog" disabled>Changelog</Item>
+          <Item icon="git-branch" index="Changelog" disabled>
+            Changelog
+          </Item>
           <SubMenu icon="layout" index="Layouts" title="Layouts">
             <Item index="Slidenav">Slidenav</Item>
             <Item index="Topnav">Topnav</Item>
           </SubMenu>
-          <SubMenu icon="file" index="Empty submenu" title="Empty submenu">
-          </SubMenu>
+          <SubMenu icon="file" index="Empty submenu" title="Empty submenu" />
         </Menu>
       </div>
     );
   }
 
-  handleSwitchChange = (checked) => {
+  handleSwitchChange = checked => {
     this.setState({
       theme: checked ? 'dark' : 'light',
     });
-  }
+  };
 }
 
-ReactDOM.render(
-  <MenuDemo />,
-  mountNode
-);
+ReactDOM.render(<MenuDemo />, mountNode);
 ```

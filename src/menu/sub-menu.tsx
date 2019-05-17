@@ -5,21 +5,9 @@ import { createPortal } from 'react-dom';
 import { createConsumer } from './context';
 import { removeClass } from '../utils/dom';
 import Icon from '../icon';
+import { SubMenuProps, SubMenuState } from './typings';
 
-export type MenuProps = {
-  prefixCls?: string;
-  className?: string;
-  index: string;
-  icon?: string;
-  title?: string;
-  rootContext: any;
-};
-
-export type MenuState = {
-  active: boolean;
-};
-
-class SubMenu extends React.Component<MenuProps, MenuState> {
+class SubMenu extends React.Component<SubMenuProps, SubMenuState> {
   public static Item: any;
   public static defaultProps = {
     prefixCls: 'dk-menu',
@@ -28,7 +16,7 @@ class SubMenu extends React.Component<MenuProps, MenuState> {
   public hoverTimer: number;
   public position: { left: number; top: number };
 
-  constructor(props: MenuProps) {
+  constructor(props: SubMenuProps) {
     super(props);
 
     this.hoverTimer = 0;

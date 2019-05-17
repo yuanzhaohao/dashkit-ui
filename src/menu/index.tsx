@@ -6,24 +6,7 @@ import { MenuProvider } from './context';
 import MenuItem from './item';
 import ItemGroup from './item-group';
 import SubMenu from './sub-menu';
-
-export type MenuProps = {
-  prefixCls?: string;
-  className?: string;
-  style?: React.CSSProperties;
-  active?: string;
-  defaultActive?: string;
-  defaultOpeneds?: string[];
-  mode: 'horizontal' | 'vertical';
-  theme: 'dark' | 'light';
-  onSelect?: (index: string) => void;
-  onOpen?: (index: string) => void;
-};
-
-export type MenuState = {
-  activeIndex?: string;
-  openedMenus: string[];
-};
+import { MenuProps, MenuState } from './typings';
 
 class Menu extends React.PureComponent<MenuProps, MenuState> {
   public static Item: typeof MenuItem;
@@ -36,9 +19,9 @@ class Menu extends React.PureComponent<MenuProps, MenuState> {
   };
 
   public static getDerivedStateFromProps(nextProps: MenuProps) {
-    if ('active' in nextProps) {
+    if ('activeKey' in nextProps) {
       return {
-        activeIndex: nextProps.active,
+        activeIndex: nextProps.activeKey,
       };
     }
     return null;
@@ -47,13 +30,24 @@ class Menu extends React.PureComponent<MenuProps, MenuState> {
   constructor(props: MenuProps) {
     super(props);
     this.state = {
-      activeIndex: props.active || props.defaultActive,
-      openedMenus: props.defaultOpeneds || [],
+      activeIndex: props.activeKey || props.defaultActiveKey,
+      openedMenus: props.defaultOpenKeys || [],
     };
   }
 
   public render() {
-    const { children, prefixCls, className, style, theme, mode } = this.props;
+    const {
+      children,
+      prefixCls,
+      className,
+      onOpen,
+      onSelect,
+      theme,
+      mode,
+      defaultActiveKey,
+      defaultOpenKeys,
+      ...attributes
+    } = this.props;
     const menuClassName = classNames(
       {
         [`${prefixCls}`]: true,
@@ -65,7 +59,7 @@ class Menu extends React.PureComponent<MenuProps, MenuState> {
     );
 
     return (
-      <ul className={menuClassName} style={style}>
+      <ul className={menuClassName} {...attributes}>
         <MenuProvider value={this.getMenuContext()}>{children}</MenuProvider>
       </ul>
     );
