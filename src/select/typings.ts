@@ -1,6 +1,5 @@
 export type ValueType = string | number | string[] | number[];
 export type SelectSize = 'small' | 'default' | 'large';
-export type filterOptionType = (inputValue: string, option?: any) => void;
 
 export type SelectProps = {
   className?: string;
@@ -31,17 +30,19 @@ export type SelectOptionProps = {
   prefixCls?: string;
   className?: string;
   value: string | number;
-  inputValue: string;
-  options?: ValueType;
   disabled?: boolean;
+  filterOption: boolean | ((inputValue: string, option?: any) => void);
+};
+
+export type SelectContextProps = SelectOptionProps & {
+  options?: ValueType;
+  inputValue: string;
   onRawChange?: (value) => void;
-  filterOption: boolean | filterOptionType;
 };
 
 export type SelectOptionGroupProps = {
   className: string;
   prefixCls: string;
   label: string;
-  key: string | number;
   children: any;
 };
