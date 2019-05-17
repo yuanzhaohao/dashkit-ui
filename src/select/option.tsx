@@ -1,9 +1,9 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 import { createConsumer } from './context';
-import { SelectOptionProps } from './typings';
+import { SelectContextProps } from './typings';
 
-class Option extends React.PureComponent<Partial<SelectOptionProps>> {
+class Option extends React.PureComponent<Partial<SelectContextProps>> {
   public render() {
     const {
       prefixCls,

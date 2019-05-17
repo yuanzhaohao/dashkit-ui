@@ -5,7 +5,7 @@
     "lib": ["es6", "dom"],
     "jsx": "react",
     "moduleResolution": "node",
-    "rootDir": "./src",
+    "rootDir": "./",
     "outDir": "./publish/es",
     "declarationDir": "./publish/es",
     "strict": false,
@@ -27,5 +27,5 @@
     "./site/**/*.svg",
     "./site/**/*.json"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["./node_modules"]
 }
