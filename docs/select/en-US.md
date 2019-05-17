@@ -28,8 +28,8 @@ Select component to select value from options.
 | --- | --- | --- | --- |
 | className | className of the component | - | - |
 | value | className of the option | `number | string` | - |
-| disabled | disable the option | `boolean` | false |
-| filterOption | deteimin whether to show the option | `boolean | ((inputValue: string, option?: any) => void)` | true |
+| disabled | disable the option | `boolean` | - |
+| filterOption | deteimin whether to show the option | `boolean | ((inputValue: string, option?: any) => void)` | - |
 
 ### Select.OptionGroup
 
