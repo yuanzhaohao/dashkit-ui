@@ -6,13 +6,7 @@ A table displays rows of data.
 
 ## API
 
-| Property | Description | Type | Default |
-| --- | --- | --- | --- |
-| className | className of the component | - | - |
-| title | show the title | `string` | - |
-| columns | Columns of table | `ColumnProps` | - |
-| dataSource | Data record array to be displayed | `any[]` | - |
-| fixed | determin the Header to be fixed | `boolean` | false |
-| scroll | when fixed the Header, set the scrollX and scrollY | `{ x: number | true, y: number }` | - |
-| pagination | determin whether to show the Pagination, and set the position of it | `boolean | PaginationProps & {position?: 'top' | 'bottom'}` | false |
-| onChange | `change` event handler | - | - |
+| Property  | Description                | Type     | Default |
+| --------- | -------------------------- | -------- | ------- |
+| className | className of the component | -        | -       |
+| title     | show the title             | `string` | -       |
