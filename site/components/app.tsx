@@ -2,7 +2,7 @@ import './app.scss';
 
 import * as React from 'react';
 import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
-import { Layout } from '../../src';
+import { Layout } from 'dashkit-ui';
 import CommonHeader from './common/header';
 import CommonSidebar from './common/sidebar';
 import dynamic from '../lib/dynamic';
