@@ -24,12 +24,13 @@ const publishSrcPath = path.join(publishPath, './src');
 const publishLibPath = path.join(publishPath, './lib');
 const publishEsPath = path.join(publishPath, './es');
 
-transpileTsFiles(publishEsPath, 'esnext');
-transpileTsFiles(publishLibPath, 'commonjs');
+rm(publishPath, function(err) {
+  if (err) {
+    utils.fatal(err);
+  }
 
-// transpileTsFiles(publishEsPath);
-// process.env.BABEL_MODULE = 'commonjs';
-// transpileTsFiles(publishLibPath);
+  run();
+});
 
 function run() {
   const distConfig = {
@@ -54,29 +55,24 @@ function run() {
       filename: 'dashkit.development.js',
     },
   };
-  rm(publishPath, function(err) {
-    if (err) {
-      utils.fatal(err);
-    }
 
-    webpack(merge(webpackConfig, distConfig), function(err, stats) {
+  webpack(merge(webpackConfig, distConfig), function(err, stats) {
+    callback(err, stats);
+
+    webpack(merge(webpackConfig, devConfig), function(err, stats) {
       callback(err, stats);
+      fs.copySync(srcPath, publishSrcPath);
+      fs.copySync(utils.resolve('./readme.md'), path.join(publishPath, './readme.md'));
 
-      webpack(merge(webpackConfig, devConfig), function(err, stats) {
-        callback(err, stats);
-        fs.copySync(srcPath, publishSrcPath);
-        fs.copySync(utils.resolve('./readme.md'), path.join(publishPath, './readme.md'));
+      copyFiles('scss');
+      copyFiles('svg');
+      createPackageFile();
 
-        copyFiles('scss');
-        copyFiles('svg');
-        createPackageFile();
-
-        transpileTsFiles(publishEsPath);
-        process.env.BABEL_MODULE = 'commonjs';
-        transpileTsFiles(publishLibPath);
-        // transpileTsFiles(publishEsPath, 'esnext');
-        // transpileTsFiles(publishLibPath, 'commonjs');
-      });
+      transpileTsFiles(publishEsPath);
+      process.env.BABEL_MODULE = 'commonjs';
+      transpileTsFiles(publishLibPath);
+      // transpileTsFiles(publishEsPath, 'esnext');
+      // transpileTsFiles(publishLibPath, 'commonjs');
     });
   });
 }
@@ -92,15 +88,16 @@ function transpileTsFiles(targetPath, module) {
   const files = glob.sync(path.join(publishSrcPath, './**/*.?(ts|tsx)'));
 
   files.forEach(filePath => {
-    // const codeText = babel.transformFileSync(filePath, babelConfig).code;
+    const codeText = babel.transformFileSync(filePath, babelConfig).code;
     const source = fs.readFileSync(filePath, 'utf8');
-    const codeText = tsc.transpileModule(source, {
-      ...tsConfig,
-      compilerOptions: {
-        module,
-        // noEmit: true,
-      },
-    }).outputText;
+    // const codeText = tsc.transpileModule(source, {
+    //   ...tsConfig,
+    //   compilerOptions: {
+    //     ...tsConfig.compilerOptions,
+    //     module,
+    //     // noEmitHelpers: true,
+    //   },
+    // }).outputText;
     const targetFilePath =
       targetPath + filePath.replace(publishSrcPath, '').replace(/\.[^\.]+$/g, '.js');
 
