@@ -28,6 +28,7 @@ class Page extends React.PureComponent<PageProps, PageState> {
 
   public async componentDidMount() {
     const { page, locale } = this.props;
+    console.log(page);
     const dataSource = await import(`../../../docs/${page.toLocaleLowerCase()}/${locale}.md`);
 
     this.setState({

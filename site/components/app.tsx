@@ -38,7 +38,7 @@ export default () => (
                 exact
                 key={page}
                 path={`/components/${page}`}
-                render={() => <Page page={page} locale={locale} />}
+                render={() => <Page page={`components/${page}`} locale={locale} />}
               />
             ))}
             <Redirect to="/" />
