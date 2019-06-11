@@ -1,0 +1,2 @@
+webpackJsonp([63],{acSl:function(n,t){n.exports={markdown:"<hr>\n<h2>order: 0\ntitle:\nzh-CN: 基本\nen-US: Basic\nsubtitle:\nzh-CN: 基本用法。\nen-US: Basic usage.</h2>\n<pre><code class=\"language-js\">import { Input } from 'dashkit-ui';\nconst inputStyle = {\n  marginRight: 10,\n};\nReactDOM.render(\n  &lt;div&gt;\n    &lt;Input defaultValue=&quot;Hello.&quot; style={inputStyle} /&gt;\n    &lt;Input disabled defaultValue=&quot;Hello.&quot; /&gt;\n  &lt;/div&gt;,\n  mountNode,\n);\n</code></pre>\n",demos:{}}}});
+//# sourceMappingURL=63.c55b5cd.js.map

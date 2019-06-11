@@ -1,0 +1,2 @@
+webpackJsonp([62],{eZvg:function(e,d){e.exports={markdown:"<hr>\n<h2>order: 2\ntitle:\nzh-CN: 禁用\nen-US: Disabled\nsubtitle:\nzh-CN: 使用<code>disabled</code>来决定是否禁用输入框，默认值是<code>false</code>。\nen-US: Add the <code>disabled</code> property to determine if the input is disabled.</h2>\n<pre><code class=\"language-js\">import { Input } from 'dashkit-ui';\n\nReactDOM.render(&lt;Input placeholder=&quot;This is a diabled Input&quot; disabled={true} /&gt;, mountNode);\n</code></pre>\n",demos:{}}}});
+//# sourceMappingURL=62.2cae10e.js.map

@@ -1,0 +1,2 @@
+webpackJsonp([30],{IXz6:function(n,e){n.exports={markdown:"<hr>\n<h2>order: 0\ntitle:\nzh-CN: 基本\nen-US: Basic\nsubtitle:\nzh-CN: 基本的使用。\nen-US: The most basic usage.</h2>\n<pre><code class=\"language-js\">import { Switch } from 'dashkit-ui';\n\nfunction onChange(checked) {\n  console.log(`switch to ${checked}`);\n}\n\nReactDOM.render(&lt;Switch defaultChecked onChange={onChange} /&gt;, mountNode);\n</code></pre>\n",demos:{}}}});
+//# sourceMappingURL=30.eae7573.js.map
