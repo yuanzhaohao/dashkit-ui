@@ -1,4 +1,4 @@
-@import '../../../src/style/theme.scss';
+@import 'dashkit-ui/style/theme.scss';
 
 .app-page {
   width: 100%;
@@ -19,4 +19,15 @@
 
 #demos {
   margin-bottom: 20px;
+}
+
+.index-title {
+  padding-top: 30px;
+  text-align: center;
+}
+
+.index-desc {
+  color: #95aac9;
+  font-size: 18px;
+  text-align: center;
 }

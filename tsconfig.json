@@ -25,6 +25,7 @@
     "./site/**/*.ts",
     "./site/**/*.tsx",
     "./site/**/*.svg",
+    "./docs/**/*.md",
     "./site/**/*.json"
   ],
   "exclude": ["./node_modules"]

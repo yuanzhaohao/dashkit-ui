@@ -165,6 +165,7 @@ a {
   text-decoration: $link-decoration;
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
+  transition: color 250ms ease;
 
   &:hover {
     color: $link-hover-color;

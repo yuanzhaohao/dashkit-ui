@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Spin } from '../../src';
+import { Spin } from 'dashkit-ui';
 
 export type DynamicImportCallback<P> = () => Promise<{
   default: React.ComponentType<P>;

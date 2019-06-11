@@ -2,14 +2,15 @@ import './app.scss';
 
 import * as React from 'react';
 import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
-import { Layout } from '../../src';
+import { Layout } from 'dashkit-ui';
 import CommonHeader from './common/header';
 import CommonSidebar from './common/sidebar';
-import dynamic from '../lib/dynamic';
+// import dynamic from '../lib/dynamic';
 import Page from './common/page';
 
 const { Content, Footer } = Layout;
-const Index = dynamic(() => import('./index'));
+// const Index = dynamic(() => import('./index'));
+const locale = window.localStorage.getItem('DASHKIT_UI_LOCALE') || 'en-US';
 
 const pageMap = {
   Basic: ['Button', 'Icon'],
@@ -31,10 +32,14 @@ export default () => (
         <CommonHeader />
         <Content className="app-content">
           <Switch>
-            <Route exact path="/" component={Index} />
-            <Route exact path="/index" component={Index} />
+            <Route exact path="/" render={() => <Page page="index" locale={locale} />} />
             {pages.map(page => (
-              <Route key={page} exact path={`/components/${page}`} component={Page} />
+              <Route
+                exact
+                key={page}
+                path={`/components/${page}`}
+                render={() => <Page page={`components/${page}`} locale={locale} />}
+              />
             ))}
             <Redirect to="/" />
           </Switch>

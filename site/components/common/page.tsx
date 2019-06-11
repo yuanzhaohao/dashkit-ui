@@ -2,14 +2,13 @@ import * as React from 'react';
 import './page.scss';
 
 import * as ReactDOM from 'react-dom';
-import { RouteComponentProps } from 'react-router-dom';
 import { Spin, Grid } from 'dashkit-ui';
 import Example from './example';
 const { Row, Col } = Grid;
 
-interface PageProps extends RouteComponentProps<PageProps> {
-  dataSource: any;
-  locale?: string;
+interface PageProps {
+  locale: string;
+  page: string;
 }
 
 type PageState = {
@@ -28,14 +27,17 @@ class Page extends React.PureComponent<PageProps, PageState> {
   }
 
   public async componentDidMount() {
-    const page = this.props.location.pathname.replace('/components/', '');
-    const locale = window.localStorage.getItem('DASHKIT_UI_LOCALE') || 'en-US';
+    const { page, locale } = this.props;
     const dataSource = await import(`../../../docs/${page.toLocaleLowerCase()}/${locale}.md`);
 
     this.setState({
       dataSource,
     });
+  }
 
+  public componentDidUpdate() {
+    const { dataSource } = this.state;
+    const { locale } = this.props;
     const demoElement = document.getElementById('demos');
 
     if (demoElement && dataSource.demos && Object.keys(dataSource.demos)) {
