@@ -28,7 +28,7 @@ const rowKeys: RowKeyType[] = [
   'between',
 ];
 
-class Row extends React.PureComponent<RowProps> {
+class Row extends React.Component<RowProps> {
   public static defaultProps = {
     prefixCls: 'dk-grid',
     reverse: false,

@@ -20,7 +20,7 @@ class AppSidebar extends React.PureComponent<SidebarProps> {
     const pathnameAry = pathname.slice(1).split('/');
     const activeIndex = pathnameAry.length === 1 ? 'Dashboard' : pathnameAry[1];
     return (
-      <Sidebar className="sidebar">
+      <Sidebar className="app-sidebar">
         <div className="sidebar-logo">
           {/* <LogoSvg className="sidebar-logo-img" /> */}
           <div className="sidebar-logo-title">Dashkit UI</div>
@@ -46,7 +46,6 @@ class AppSidebar extends React.PureComponent<SidebarProps> {
             ))}
           </SubMenu>
         </Menu>
-        <div className="sidebar-switch" />
       </Sidebar>
     );
   }

@@ -54,25 +54,16 @@ class Page extends React.PureComponent<PageProps, PageState> {
   public render() {
     const { dataSource } = this.state;
 
-    return (
-      <Grid className="app-page" fluid>
-        <Row center="xs">
-          <Col xs={12} md={10} lg={8}>
-            {dataSource && dataSource.markdown ? (
-              <div
-                className="app-page-info"
-                dangerouslySetInnerHTML={{
-                  __html: dataSource.markdown,
-                }}
-              />
-            ) : (
-              <div className="page-loading">
-                <Spin text="Loading..." spinning={true} />
-              </div>
-            )}
-          </Col>
-        </Row>
-      </Grid>
+    return dataSource && dataSource.markdown ? (
+      <div
+        dangerouslySetInnerHTML={{
+          __html: dataSource.markdown,
+        }}
+      />
+    ) : (
+      <div className="page-loading">
+        <Spin text="Loading..." spinning={true} />
+      </div>
     );
   }
 }

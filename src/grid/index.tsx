@@ -10,9 +10,9 @@ export type GridProps = {
   fluid?: boolean;
 };
 
-class Grid extends React.PureComponent<GridProps> {
-  public static Row: any;
-  public static Col: any;
+class Grid extends React.Component<GridProps> {
+  public static Row: typeof Row;
+  public static Col: typeof Col;
   public static defaultProps = {
     prefixCls: 'dk-grid',
     fluid: false,

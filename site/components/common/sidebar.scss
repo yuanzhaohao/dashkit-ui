@@ -1,7 +1,6 @@
-
 @import 'dashkit-ui/style/theme.scss';
 
-.sidebar {
+.app-sidebar {
   position: fixed;
   top: 0;
   left: 0;
@@ -10,6 +9,11 @@
   border-right: 1px solid $border-color;
   overflow: scroll;
   z-index: 9;
+  background-color: #fff;
+
+}
+
+.sidebar{
 
   &-logo {
     position: relative;
@@ -40,8 +44,8 @@
     border-right: none;
   }
 
-  &-switch {
-    width: 100%;
-    height: 48px;
-  }
+  // &-switch {
+  //   width: 100%;
+  //   height: 48px;
+  // }
 }

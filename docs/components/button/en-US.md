@@ -6,6 +6,8 @@ Buttons for actions in forms, dialogs, and more with support for multiple sizes,
 
 ## API
 
+<div class="api-container">
+
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
 | className | className of the component | - | - |
@@ -16,3 +18,5 @@ Buttons for actions in forms, dialogs, and more with support for multiple sizes,
 | disabled | disable the button | boolean | false |
 | loading | determine whether it's loading | boolean | false |
 | icon | button icon, see `Icon` component | string | - |
+
+</div>

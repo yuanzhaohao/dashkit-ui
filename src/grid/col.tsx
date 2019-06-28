@@ -23,7 +23,7 @@ function isInteger(value?: number | boolean) {
   return typeof value === 'number' && isFinite(value) && Math.floor(value) === value;
 }
 
-class Col extends React.PureComponent<ColProps> {
+class Col extends React.Component<ColProps> {
   public static defaultProps = {
     prefixCls: 'dk-grid',
   };

@@ -280,14 +280,9 @@
 // Button
 //
 .button-list {
-  margin-top: 12px;
-
-  &:nth-of-type(1) {
-    margin-top: 0;
-  }
-
   button {
     margin-right: 12px;
+    margin-bottom: 12px;
   }
 }
 
