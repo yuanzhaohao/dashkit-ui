@@ -8,6 +8,8 @@ To select or input a date.
 
 ### Calendar
 
+<div class="api-container">
+
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
 | className | className of the component | - | - |
@@ -15,3 +17,5 @@ To select or input a date.
 | checked | value of checkbox | boolean | - |
 | defaultChecked | default value | boolean | - |
 | onChange | `change` event handler | `(event: React.ChangeEvent<HTMLInputElement>) => void` | - |
+
+</div>

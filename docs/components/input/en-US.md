@@ -6,6 +6,8 @@ Dashkit supports all of Bootstrap's default form styling in addition to a handfu
 
 ## API
 
+<div class="api-container">
+
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
 | className | className of the component | - | - |
@@ -26,3 +28,5 @@ Dashkit supports all of Bootstrap's default form styling in addition to a handfu
 | onChange | value of input is changed | `React.RefObject<HTMLDivElement>` | - |
 | onFocus | Called when focus | `(event: React.ChangeEvent<HTMLInputElement>) => void;` | - |
 | onBlur | Called when blur | `(event: React.ChangeEvent<HTMLInputElement>) => void;` | - |
+
+</div>

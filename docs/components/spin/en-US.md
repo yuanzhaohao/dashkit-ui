@@ -6,6 +6,8 @@ A simple yet versatile animated spinner component.
 
 ## API
 
+<div class="api-container">
+
 | Property         | Description                                         | Type      | Default |
 | ---------------- | --------------------------------------------------- | --------- | ------- |
 | className        | className of the component                          | `string`  | -       |
@@ -15,3 +17,5 @@ A simple yet versatile animated spinner component.
 | delay            | to delay to show the active status                  | `number`  | 0       |
 | text             | tip of spin                                         | `string`  | -       |
 | onChange         | `change` event handler                              | -         | -       |
+
+</div>

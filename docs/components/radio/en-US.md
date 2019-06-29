@@ -8,6 +8,8 @@ A group of options for multiple choices.
 
 ### Radio
 
+<div class="api-container">
+
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
 | className | className of the component | - | - |
@@ -18,7 +20,11 @@ A group of options for multiple choices.
 | defaultChecked | to set the initial state | boolean | - |
 | onChange | `change` event handler | `(event: React.ChangeEvent<HTMLInputElement>) => void` | - |
 
+</div>
+
 ### Radio.Group
+
+<div class="api-container">
 
 | Property     | Description                | Type                   | Default |
 | ------------ | -------------------------- | ---------------------- | ------- |
@@ -27,3 +33,5 @@ A group of options for multiple choices.
 | value        | value of the Radio Group   | any                    | -       |
 | defaultValue | default of the Radio Group | any                    | -       |
 | onChange     | `change` event handler     | `(value: any) => void` | -       |
+
+</div>

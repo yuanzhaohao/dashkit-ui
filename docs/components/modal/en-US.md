@@ -6,6 +6,8 @@ Informs users while preserving the current page state.
 
 ## API
 
+<div class="api-container">
+
 | Property   | Description                                    | Type               | Default |
 | ---------- | ---------------------------------------------- | ------------------ | ------- |
 | className  | className of the component                     | `string`           | -       |
@@ -19,6 +21,8 @@ Informs users while preserving the current page state.
 | closeByEsc | cancel the modal when click `esc` keyborad     | `boolean`          | -       |
 | visible    | determine the modal is active                  | `boolean`          | -       |
 | width      | the `width` style of the modal                 | `boolean`          | -       |
+
+</div>
 
 ### Modal.method()
 

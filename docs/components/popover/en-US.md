@@ -6,6 +6,8 @@ A simple popup menu to provide extra information or operations.
 
 ## API
 
+<div class="api-container">
+
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
 | className | className of the component | `string` | - |
@@ -14,3 +16,5 @@ A simple popup menu to provide extra information or operations.
 | visible | determine the popover is active | `string` | false |
 | title | title of the component | `string | React.ReactNode` | - |
 | content | content of the component | `string | React.ReactNode` | - |
+
+</div>

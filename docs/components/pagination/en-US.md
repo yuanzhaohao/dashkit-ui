@@ -6,6 +6,8 @@ Indicates a series of related content exists across multiple pages.
 
 ## API
 
+<div class="api-container">
+
 | Property       | Description                | Type      | Default |
 | -------------- | -------------------------- | --------- | ------- |
 | className      | className of the component | -         | -       |
@@ -16,3 +18,5 @@ Indicates a series of related content exists across multiple pages.
 | range          | number of display pages    | `number`  | 7       |
 | disabled       | disable the component      | `boolean` | false   |
 | onChange       | `change` event handler     | -         | -       |
+
+</div>

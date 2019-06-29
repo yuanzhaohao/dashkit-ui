@@ -6,6 +6,8 @@ A table displays rows of data.
 
 ## API
 
+<div class="api-container">
+
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
 | className | className of the component | - | - |
@@ -16,3 +18,5 @@ A table displays rows of data.
 | onChange | `change` event handler | - | - |
 | scroll | when fixed the Header, set the scrollX and scrollY | `{ x: number | true, y: number }` | - |
 | pagination | determin whether to show the Pagination, and set the position of it | `boolean | PaginationProps & {position?: 'top' | 'bottom'}` | false |
+
+</div>
