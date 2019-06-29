@@ -92,6 +92,7 @@
 
 .api-container {
   overflow-x: auto;
+  white-space: nowrap;
 
   table {
     empty-cells: show;
@@ -110,12 +111,11 @@
   }
 
   table {
-    line-height: 1.5;
-    overflow-x: scroll;
+    line-height: 1.5 !important;
   }
 
   th, td {
-    padding: 8px;
+    padding: 8px !important;
     white-space: nowrap;
   }
 }
