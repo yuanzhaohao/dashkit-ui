@@ -89,6 +89,13 @@ class AppSidebar extends React.PureComponent<SidebarProps, SidebarState> {
 
     if (location.pathname !== page) {
       history.push(page);
+      const { visible } = this.state;
+      this.setState({
+        visible: !visible,
+      });
+      setTimeout(() => {
+        window.document.documentElement.scrollTo(0, 0);
+      }, 50);
     }
   };
 
