@@ -16,7 +16,7 @@ export type ButtonProps = {
   disabled?: boolean;
   icon?: string;
   loading?: boolean;
-} & React.HTMLProps<HTMLButtonElement>;
+};
 export type ButtonState = {
   spinning?: boolean;
 };
