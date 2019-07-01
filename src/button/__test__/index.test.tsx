@@ -3,7 +3,7 @@ import * as enzyme from 'enzyme';
 import Button from '..';
 const prefixCls = 'dk-button';
 
-describe('Button[Base]', () => {
+describe('Button[Basic]', () => {
   test(`should render .${prefixCls} in a Button`, () => {
     const wrapper = enzyme.shallow(<Button>Default</Button>);
     wrapper.find(Button).forEach(button => {
