@@ -16,6 +16,7 @@ export type ButtonProps = {
   disabled?: boolean;
   icon?: string;
   loading?: boolean;
+  onClick?: React.MouseEventHandler<any>;
 };
 export type ButtonState = {
   spinning?: boolean;

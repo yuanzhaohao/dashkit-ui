@@ -58,3 +58,13 @@ describe('Button[Size]', () => {
     });
   });
 });
+
+describe('Button[Click]', () => {
+  test('should has click wave effect', () => {
+    const mockCallBack = jest.fn();
+
+    const button = enzyme.shallow(<Button onClick={mockCallBack}>Ok!</Button>);
+    button.find('button').simulate('click');
+    expect(mockCallBack.mock.calls.length).toEqual(1);
+  });
+});
