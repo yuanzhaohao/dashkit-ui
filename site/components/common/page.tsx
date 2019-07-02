@@ -34,22 +34,14 @@ class Page extends React.Component<PageProps, PageState> {
   }
 
   public async componentDidMount() {
-    const { page, locale } = this.props;
-    const dataSource = await import(`../../../docs/${page.toLocaleLowerCase()}/${locale}.md`);
-
-    this.setState({
-      dataSource,
-    });
+    this.loadData();
   }
 
   public async componentDidUpdate() {
-    const { page, locale } = this.props;
-    const dataSource = await import(`../../../docs/${page.toLocaleLowerCase()}/${locale}.md`);
+    const { dataSource } = this.state;
+    const { locale } = this.props;
     const demoElement = document.getElementById('demos');
-
-    this.setState({
-      dataSource,
-    });
+    this.loadData();
 
     if (demoElement && dataSource.demos && Object.keys(dataSource.demos)) {
       const demoData = Object.keys(dataSource.demos)
@@ -77,6 +69,15 @@ class Page extends React.Component<PageProps, PageState> {
       </div>
     );
   }
+
+  private loadData = async () => {
+    const { page, locale } = this.props;
+    const dataSource = await import(`../../../docs/${page.toLocaleLowerCase()}/${locale}.md`);
+
+    this.setState({
+      dataSource,
+    });
+  };
 }
 
 export default Page;
