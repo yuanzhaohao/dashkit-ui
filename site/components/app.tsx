@@ -3,13 +3,12 @@ import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Layout, Grid } from 'dashkit-ui';
 import CommonHeader from './common/header';
 import CommonSidebar from './common/sidebar';
-// import dynamic from '../lib/dynamic';
 import Page from './common/page';
+import 'dashkit-ui/style/index.scss';
 import './app.scss';
 
-const { Content, Footer } = Layout;
+const { Footer } = Layout;
 const { Row, Col } = Grid;
-// const Index = dynamic(() => import('./index'));
 const locale = window.localStorage.getItem('DASHKIT_UI_LOCALE') || 'en-US';
 
 const pageMap = {
