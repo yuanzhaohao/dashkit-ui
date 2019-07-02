@@ -9,8 +9,8 @@ const rm = require('rimraf');
 const glob = require('glob');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-// const sass = require('node-sass');
-const sass = require('sass');
+const sass = require('node-sass');
+// const sass = require('sass');
 const csso = require('csso');
 const postcss = require('postcss');
 const babel = require('@babel/core');
@@ -37,48 +37,48 @@ rm(publishPath, function(err) {
 });
 
 async function run() {
-  // await buildDistEntry();
-  // await buildDevEntry();
+  await buildDistEntry();
+  await buildDevEntry();
+
   await copyFiles();
 
-  await buildStyle(publishEsPath);
+  await buildStyle();
 
-  // await transpileTsFiles(publishEsPath);
-  // process.env.BABEL_MODULE = 'commonjs';
-  // await transpileTsFiles(publishLibPath);
+  await transpileTsFiles(publishEsPath);
+  process.env.BABEL_MODULE = 'commonjs';
+  await transpileTsFiles(publishLibPath);
 }
 
-async function buildStyle(targetPath) {
-  const files = glob.sync(path.join(targetPath, './**/*.scss'));
-
-  await Promise.all(
-    files.map(filePath => {
-      const source = fs.readFileSync(filePath, 'utf8');
-      const result = sass.renderSync({
-        file: filePath,
-      });
-
-      console.log(result.css);
-    }),
-  );
+async function buildStyle() {
+  const files = glob.sync(path.join(publishSrcPath, './**/*.scss'));
+  files.map(filePath => {
+    const result = sass.renderSync({
+      file: filePath,
+    });
+    const code = csso.minify(result.css.toString()).css;
+    const cssSrcPath = filePath.replace('.scss', '.css');
+    const cssLibPath = cssSrcPath.replace(publishSrcPath, publishLibPath);
+    const cssEsPath = cssSrcPath.replace(publishSrcPath, publishEsPath);
+    fs.writeFileSync(cssSrcPath, code, 'utf8');
+    fs.writeFileSync(cssLibPath, code, 'utf8');
+    fs.writeFileSync(cssEsPath, code, 'utf8');
+  });
 }
 
 async function transpileTsFiles(targetPath, module) {
   const files = glob.sync(path.join(publishSrcPath, './**/*.?(ts|tsx)'));
 
-  await Promise.all(
-    files.map(filePath => {
-      const codeText = babel.transformFileSync(filePath, babelConfig).code;
-      const source = fs.readFileSync(filePath, 'utf8');
-      const targetFilePath =
-        targetPath + filePath.replace(publishSrcPath, '').replace(/\.[^\.]+$/g, '.js');
+  files.map(filePath => {
+    const codeText = babel.transformFileSync(filePath, babelConfig).code;
+    const source = fs.readFileSync(filePath, 'utf8');
+    const targetFilePath =
+      targetPath + filePath.replace(publishSrcPath, '').replace(/\.[^\.]+$/g, '.js');
 
-      if (!fs.existsSync(targetFilePath)) {
-        fs.createFileSync(targetFilePath);
-      }
-      fs.writeFileSync(targetFilePath, codeText, 'utf8');
-    }),
-  );
+    if (!fs.existsSync(targetFilePath)) {
+      fs.createFileSync(targetFilePath);
+    }
+    fs.writeFileSync(targetFilePath, codeText, 'utf8');
+  });
 }
 
 async function copyFiles() {

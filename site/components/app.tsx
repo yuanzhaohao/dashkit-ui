@@ -1,7 +1,8 @@
-import 'dashkit-ui/style/index.scss';
 import * as React from 'react';
 import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Layout, Grid } from 'dashkit-ui';
+import 'dashkit-ui/style/index.scss';
+
 import CommonHeader from './common/header';
 import CommonSidebar from './common/sidebar';
 import Page from './common/page';
