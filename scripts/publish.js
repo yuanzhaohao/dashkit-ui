@@ -9,6 +9,9 @@ const rm = require('rimraf');
 const glob = require('glob');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+const sass = require('node-sass');
+const csso = require('csso');
+const postcss = require('postcss');
 const babel = require('@babel/core');
 const utils = require('./utils');
 const config = require('./config');
@@ -32,83 +35,64 @@ rm(publishPath, function(err) {
   run();
 });
 
-function run() {
-  const distConfig = {
-    output: {
-      filename: 'dashkit.production.js',
-    },
-    plugins: [
-      new webpack.optimize.UglifyJsPlugin({
-        beautify: false,
-        comments: false,
-        sourceMap: false,
-        compress: {
-          warnings: false,
-          collapse_vars: true,
-          reduce_vars: true,
-        },
-      }),
-    ],
-  };
-  const devConfig = {
-    output: {
-      filename: 'dashkit.development.js',
-    },
-  };
+async function run() {
+  // await buildDistEntry();
+  // await buildDevEntry();
+  await copyFiles();
 
-  webpack(merge(webpackConfig, distConfig), function(err, stats) {
-    callback(err, stats);
+  await buildStyle(publishEsPath);
 
-    webpack(merge(webpackConfig, devConfig), function(err, stats) {
-      callback(err, stats);
-      fs.copySync(srcPath, publishSrcPath);
-      fs.copySync(utils.resolve('./readme.md'), path.join(publishPath, './readme.md'));
-
-      copyFiles('scss');
-      copyFiles('svg');
-      createPackageFile();
-
-      transpileTsFiles(publishEsPath);
-      process.env.BABEL_MODULE = 'commonjs';
-      transpileTsFiles(publishLibPath);
-      // transpileTsFiles(publishEsPath, 'esnext');
-      // transpileTsFiles(publishLibPath, 'commonjs');
-    });
-  });
+  // await transpileTsFiles(publishEsPath);
+  // process.env.BABEL_MODULE = 'commonjs';
+  // await transpileTsFiles(publishLibPath);
 }
 
-function createPackageFile() {
+async function buildStyle(targetPath) {
+  const files = glob.sync(path.join(targetPath, './**/*.scss'));
+
+  await Promise.all(
+    files.map(filePath => {
+      const source = fs.readFileSync(filePath, 'utf8');
+      const result = sass.renderSync({
+        data: source,
+      });
+
+      console.log(result);
+    }),
+  );
+}
+
+async function transpileTsFiles(targetPath, module) {
+  const files = glob.sync(path.join(publishSrcPath, './**/*.?(ts|tsx)'));
+
+  await Promise.all(
+    files.map(filePath => {
+      const codeText = babel.transformFileSync(filePath, babelConfig).code;
+      const source = fs.readFileSync(filePath, 'utf8');
+      const targetFilePath =
+        targetPath + filePath.replace(publishSrcPath, '').replace(/\.[^\.]+$/g, '.js');
+
+      if (!fs.existsSync(targetFilePath)) {
+        fs.createFileSync(targetFilePath);
+      }
+      fs.writeFileSync(targetFilePath, codeText, 'utf8');
+    }),
+  );
+}
+
+async function copyFiles() {
   const pkg = require('../package.json');
   delete pkg.devDependencies;
   delete pkg.scripts;
+
+  fs.copySync(srcPath, publishSrcPath);
+  copyFilesWithExt('scss');
+  copyFilesWithExt('svg');
+  fs.copySync(utils.resolve('./readme.md'), path.join(publishPath, './readme.md'));
   fs.writeFileSync(path.resolve(publishPath, './package.json'), JSON.stringify(pkg, null, 2));
 }
 
-function transpileTsFiles(targetPath, module) {
-  const files = glob.sync(path.join(publishSrcPath, './**/*.?(ts|tsx)'));
-
-  files.forEach(filePath => {
-    const codeText = babel.transformFileSync(filePath, babelConfig).code;
-    const source = fs.readFileSync(filePath, 'utf8');
-    // const codeText = tsc.transpileModule(source, {
-    //   ...tsConfig,
-    //   compilerOptions: {
-    //     ...tsConfig.compilerOptions,
-    //     module,
-    //     // noEmitHelpers: true,
-    //   },
-    // }).outputText;
-    const targetFilePath =
-      targetPath + filePath.replace(publishSrcPath, '').replace(/\.[^\.]+$/g, '.js');
-
-    if (!fs.existsSync(targetFilePath)) {
-      fs.createFileSync(targetFilePath);
-    }
-    fs.writeFileSync(targetFilePath, codeText, 'utf8');
-  });
-}
-
-function copyFiles(type) {
+function copyFilesWithExt(type) {
   const files = glob.sync(path.join(publishSrcPath, `./**/*.${type}`));
   files.forEach(filePath => {
     const esFilePath = publishEsPath + filePath.replace(publishSrcPath, '');
@@ -137,4 +121,44 @@ function callback(err, stats) {
   if (stats.hasErrors()) {
     utils.fatal('Build failed with errors.');
   }
+}
+
+async function buildDistEntry() {
+  return new Promise(function(resolve) {
+    const distConfig = {
+      output: {
+        filename: 'dashkit.production.js',
+      },
+      plugins: [
+        new webpack.optimize.UglifyJsPlugin({
+          beautify: false,
+          comments: false,
+          sourceMap: false,
+          compress: {
+            warnings: false,
+            collapse_vars: true,
+            reduce_vars: true,
+          },
+        }),
+      ],
+    };
+    webpack(merge(webpackConfig, distConfig), function(err, stats) {
+      callback(err, stats);
+      resolve();
+    });
+  });
+}
+
+async function buildDevEntry() {
+  return new Promise(function(resolve) {
+    const devConfig = {
+      output: {
+        filename: 'dashkit.development.js',
+      },
+    };
+    webpack(merge(webpackConfig, devConfig), function(err, stats) {
+      callback(err, stats);
+      resolve();
+    });
+  });
 }
