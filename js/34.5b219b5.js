@@ -1,0 +1,2 @@
+webpackJsonp([34],{oVir:function(n,e){n.exports={markdown:"<hr>\n<h2>order: 0\ntitle:\nzh-CN: 基本\nen-US: Basic\nsubtitle:\nzh-CN: 用<code>spining</code>来决定是否展示。\nen-US: Use <code>spining</code> to decide wheather it is shown.</h2>\n<pre><code class=\"language-js\">import { Spin } from 'dashkit-ui';\n\nReactDOM.render(&lt;Spin spining={true} /&gt;, mountNode);\n</code></pre>\n",demos:{}}}});
+//# sourceMappingURL=34.5b219b5.js.map
