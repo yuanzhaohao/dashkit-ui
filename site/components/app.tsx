@@ -1,10 +1,11 @@
+import 'dashkit-ui/style/index.scss';
 import * as React from 'react';
 import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Layout, Grid } from 'dashkit-ui';
 import CommonHeader from './common/header';
 import CommonSidebar from './common/sidebar';
 import Page from './common/page';
-import 'dashkit-ui/style/index.scss';
+
 import './app.scss';
 
 const { Footer } = Layout;

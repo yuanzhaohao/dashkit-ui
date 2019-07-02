@@ -1,0 +1,28 @@
+// CSS image replacement
+@mixin text-hide($ignore-warning: false) {
+  // stylelint-disable-next-line font-family-no-missing-generic-family-keyword
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+@mixin text-emphasis-variant($parent, $color) {
+  #{$parent} {
+    color: $color !important;
+  }
+
+  a#{$parent} {
+    &:hover,
+    &:focus {
+      color: darken($color, 10%) !important;
+    }
+  }
+}
+
+@mixin text-truncate() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

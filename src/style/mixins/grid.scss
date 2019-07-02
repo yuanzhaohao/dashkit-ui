@@ -1,0 +1,76 @@
+/// Grid system
+//
+
+@mixin grid-make-col-common() {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  padding-right: $grid-gutter-compensation * -1;
+  padding-left: $grid-gutter-compensation * -1;
+}
+
+@mixin grid-make-col($prefix, $name) {
+  [class*="#{$prefix}-col-#{$name}"] {
+    @include grid-make-col-common();
+  }
+
+  @for $i from 1 through $grid-columns {
+    .#{$prefix}-col-#{$name}-#{$i} {
+      flex-basis: 100% / $grid-columns * $i;
+      max-width: 100% / $grid-columns * $i;
+    }
+  }
+
+  @for $i from 0 through $grid-columns {
+    .#{$prefix}-col-#{$name}-offset-#{$i} {
+      margin-left: 100% / $grid-columns * $i
+    }
+  }
+
+  .#{$prefix}-col-#{$name} {
+    flex-grow: 1;
+    flex-basis: 0;
+    max-width: 100%;
+  }
+
+  .#{$prefix}-start-#{$name} {
+    justify-content: flex-start;
+    text-align: start;
+  }
+
+  .#{$prefix}-center-#{$name} {
+    justify-content: center;
+  }
+
+  .#{$prefix}-end-#{$name} {
+    justify-content: flex-end;
+    text-align: end;
+  }
+
+  .#{$prefix}-top-#{$name} {
+    align-items: flex-start;
+  }
+
+  .#{$prefix}-middle-#{$name} {
+    align-items: center;
+  }
+
+  .#{$prefix}-bottom-#{$name} {
+    align-items: flex-end;
+  }
+
+  .#{$prefix}-around-#{$name} {
+    justify-content: space-around;
+  }
+
+  .#{$prefix}-between-#{$name} {
+    justify-content: space-between;
+  }
+
+  .#{$prefix}-first-#{$name} {
+    order: -1;
+  }
+
+  .#{$prefix}-last-#{$name} {
+    order: 1;
+  }
+}

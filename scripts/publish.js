@@ -9,7 +9,8 @@ const rm = require('rimraf');
 const glob = require('glob');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const sass = require('node-sass');
+// const sass = require('node-sass');
+const sass = require('sass');
 const csso = require('csso');
 const postcss = require('postcss');
 const babel = require('@babel/core');
@@ -54,10 +55,10 @@ async function buildStyle(targetPath) {
     files.map(filePath => {
       const source = fs.readFileSync(filePath, 'utf8');
       const result = sass.renderSync({
-        data: source,
+        file: filePath,
       });
 
-      console.log(result);
+      console.log(result.css);
     }),
   );
 }
