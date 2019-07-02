@@ -2,14 +2,14 @@ import * as React from 'react';
 import './page.scss';
 
 import * as ReactDOM from 'react-dom';
-import { Spin, Grid } from 'dashkit-ui';
+import { Spin } from 'dashkit-ui';
 import Example from './example';
-const { Row, Col } = Grid;
+// import { withRouter, RouteComponentProps } from 'react-router-dom';
 
-interface PageProps {
+type PageProps = {
   locale: string;
   page: string;
-}
+};
 
 type PageState = {
   dataSource?: {
@@ -18,12 +18,19 @@ type PageState = {
   } | null;
 };
 
-class Page extends React.PureComponent<PageProps, PageState> {
+class Page extends React.Component<PageProps, PageState> {
   constructor(props: PageProps) {
     super(props);
     this.state = {
       dataSource: null,
     };
+  }
+
+  public shouldComponentUpdate(nextProps: PageProps, nextState: PageState) {
+    if (nextProps.page !== this.props.page || nextState.dataSource !== this.state.dataSource) {
+      return true;
+    }
+    return false;
   }
 
   public async componentDidMount() {
@@ -35,10 +42,14 @@ class Page extends React.PureComponent<PageProps, PageState> {
     });
   }
 
-  public componentDidUpdate() {
-    const { dataSource } = this.state;
-    const { locale } = this.props;
+  public async componentDidUpdate() {
+    const { page, locale } = this.props;
+    const dataSource = await import(`../../../docs/${page.toLocaleLowerCase()}/${locale}.md`);
     const demoElement = document.getElementById('demos');
+
+    this.setState({
+      dataSource,
+    });
 
     if (demoElement && dataSource.demos && Object.keys(dataSource.demos)) {
       const demoData = Object.keys(dataSource.demos)

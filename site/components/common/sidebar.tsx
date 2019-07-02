@@ -28,9 +28,8 @@ class AppSidebar extends React.PureComponent<SidebarProps, SidebarState> {
   public render() {
     const { pageMap, location } = this.props;
     const { pathname } = location;
-    const pathnameAry = pathname.slice(1).split('/');
-    const activeIndex = pathnameAry.length === 1 ? 'Dashboard' : pathnameAry[1];
     const { visible } = this.state;
+    const activeIndex = pathname;
     return (
       <Sidebar className="app-sidebar">
         <div
@@ -48,14 +47,17 @@ class AppSidebar extends React.PureComponent<SidebarProps, SidebarState> {
             defaultOpenKeys={['Components']}
             onSelect={this.handleMenuSelect}
           >
-            <Item icon="home" index="Dashboard">
+            <Item icon="home" index="/">
               Dashboard
+            </Item>
+            <Item icon="clipboard" index="/quickstart">
+              Quickstart
             </Item>
             <SubMenu icon="book-open" title="Components" index="Components">
               {Object.keys(pageMap).map(group => (
                 <ItemGroup title={group} key={group}>
                   {pageMap[group].map(page => (
-                    <Item key={page} index={page}>
+                    <Item key={page} index={`/components/${page.toLowerCase()}`}>
                       {page}
                     </Item>
                   ))}
@@ -77,15 +79,13 @@ class AppSidebar extends React.PureComponent<SidebarProps, SidebarState> {
     );
   }
 
-  private handleMenuSelect = (index: string) => {
+  private handleMenuSelect = (page: string) => {
     const { pageMap, location, history } = this.props;
     let pages = [];
 
     Object.keys(pageMap).forEach(key => {
       pages = pages.concat(pageMap[key]);
     });
-
-    const page = pages.indexOf(index) === -1 ? '/' : `/components/${index}`;
 
     if (location.pathname !== page) {
       history.push(page);

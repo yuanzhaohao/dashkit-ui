@@ -24,7 +24,19 @@
     min-height: calc(100vh - 72px - 36px);
     background-color: #fff;
 
-    code {
+    code, pre {
+      background-color: #12263f;
+      color: #ccc;
+    }
+
+    pre {
+      padding: 16px 24px;
+      margin-bottom: 0;
+      overflow-x: scroll;
+      overflow-y: hidden;
+    }
+
+    p code {
       margin: 0 1px;
       padding: .2em .4em;
       border: 1px solid #eee;

@@ -30,15 +30,15 @@
     color: #ccc;
   }
 
-  pre[class*="language-"] {
-    padding: 16px 24px;
-    margin-bottom: 0;
-  }
+  // pre[class*="language-"] {
+  //   padding: 16px 24px;
+  //   margin-bottom: 0;
+  // }
 
-  :not(pre)>code[class*="language-"],
-  pre[class*="language-"] {
-    background-color: #12263f;
-  }
+  // :not(pre)>code[class*="language-"],
+  // pre[class*="language-"] {
+  //   background-color: #12263f;
+  // }
 
   :not(pre)>code[class*="language-"] {
     padding: .1em;

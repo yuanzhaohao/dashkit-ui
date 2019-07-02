@@ -35,6 +35,11 @@ export default () => (
           <Col xs={12} md={10} lg={8}>
             <Switch>
               <Route exact path="/" render={() => <Page page="index" locale={locale} />} />
+              <Route
+                exact
+                path="/quickstart"
+                render={() => <Page page="quickstart" locale={locale} />}
+              />
               {pages.map(page => (
                 <Route
                   exact
