@@ -1,6 +1,5 @@
-import './style.scss';
-import * as classNames from 'classnames';
 import * as React from 'react';
+import * as classNames from 'classnames';
 import Sidebar from './sidebar';
 import { LayoutProvider } from './context';
 

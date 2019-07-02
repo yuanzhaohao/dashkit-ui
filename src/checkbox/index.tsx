@@ -1,4 +1,3 @@
-import './style.scss';
 import Checkbox from './checkbox';
 import Group from './group';
 

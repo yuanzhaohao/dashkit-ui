@@ -1,7 +1,6 @@
-import * as classNames from 'classnames';
 import * as React from 'react';
+import * as classNames from 'classnames';
 import Icon from '../icon';
-import './style.scss';
 
 export type InputSize = 'small' | 'default' | 'large';
 

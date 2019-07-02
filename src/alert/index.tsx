@@ -1,5 +1,3 @@
-import './style.scss';
-
 import * as React from 'react';
 import * as classNames from 'classnames';
 import { CSSTransition } from 'react-transition-group';
