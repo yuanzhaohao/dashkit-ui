@@ -1,4 +1,3 @@
-import './style.scss';
 import * as React from 'react';
 import * as classNames from 'classnames';
 import { getInnerWidth, getInnerHeight, getScrollbarWidth, raf, caf } from './utils';

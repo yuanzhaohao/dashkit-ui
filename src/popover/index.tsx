@@ -1,5 +1,3 @@
-import './style.scss';
-
 import * as React from 'react';
 import Tooltip, { TooltipProps } from '../tooltip';
 

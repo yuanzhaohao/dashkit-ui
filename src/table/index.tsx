@@ -1,9 +1,7 @@
-import './style.scss';
-
-import Pagination, { PaginationProps } from '../pagination';
+import * as React from 'react';
 import * as classNames from 'classnames';
 import { debounce } from 'lodash-es';
-import * as React from 'react';
+import Pagination, { PaginationProps } from '../pagination';
 
 export type ColumnProps<T> = {
   title?: React.ReactNode;

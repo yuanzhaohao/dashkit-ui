@@ -6,6 +6,10 @@ Form is used to collect, validate, and submit the user input, usually contains v
 
 ## API
 
+<div class="api-container">
+
 | Property  | Description                | Type | Default |
 | --------- | -------------------------- | ---- | ------- |
 | className | className of the component | -    | -       |
+
+</div>

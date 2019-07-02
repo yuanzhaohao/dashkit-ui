@@ -1,5 +1,3 @@
-import './style/index.scss';
-
 // Basic
 //
 export { default as Icon } from './icon';

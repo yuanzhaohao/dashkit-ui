@@ -1,6 +1,5 @@
-import './style.scss';
-import * as classNames from 'classnames';
 import * as React from 'react';
+import * as classNames from 'classnames';
 import Row from './row';
 import Col from './col';
 
@@ -10,9 +9,9 @@ export type GridProps = {
   fluid?: boolean;
 };
 
-class Grid extends React.PureComponent<GridProps> {
-  public static Row: any;
-  public static Col: any;
+class Grid extends React.Component<GridProps> {
+  public static Row: typeof Row;
+  public static Col: typeof Col;
   public static defaultProps = {
     prefixCls: 'dk-grid',
     fluid: false,

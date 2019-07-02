@@ -38,8 +38,7 @@
     "max-classes-per-file": false,
     "jsx-wrap-multiline": false
   },
-  "rulesDirectory": [],
   "linterOptions": {
-    "exclude": ["./typing-workarounds/*.d.ts", "./node_modules/**/*"]
+    "exclude": ["./typings/*.d.ts", "./node_modules/**/*"]
   }
 }

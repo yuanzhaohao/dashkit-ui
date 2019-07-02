@@ -30,15 +30,15 @@
     color: #ccc;
   }
 
-  pre[class*="language-"] {
-    padding: 16px 24px;
-    margin-bottom: 0;
-  }
+  // pre[class*="language-"] {
+  //   padding: 16px 24px;
+  //   margin-bottom: 0;
+  // }
 
-  :not(pre)>code[class*="language-"],
-  pre[class*="language-"] {
-    background-color: #12263f;
-  }
+  // :not(pre)>code[class*="language-"],
+  // pre[class*="language-"] {
+  //   background-color: #12263f;
+  // }
 
   :not(pre)>code[class*="language-"] {
     padding: .1em;
@@ -280,14 +280,9 @@
 // Button
 //
 .button-list {
-  margin-top: 12px;
-
-  &:nth-of-type(1) {
-    margin-top: 0;
-  }
-
   button {
     margin-right: 12px;
+    margin-bottom: 12px;
   }
 }
 

@@ -1,4 +1,3 @@
-import './style.scss';
 import * as React from 'react';
 import { createPortal, findDOMNode } from 'react-dom';
 import * as classNames from 'classnames';

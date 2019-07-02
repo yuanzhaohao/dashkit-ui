@@ -6,6 +6,8 @@ A simple text popup tip.
 
 ## API
 
+<div class="api-container">
+
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
 | className | className of the component | `string` | - |
@@ -13,3 +15,5 @@ A simple text popup tip.
 | trigger | event to trigger the tooltip | `'hover' | 'click' | 'focus'` | hover |
 | visible | determine the tooltip is active | `string` | false |
 | content | content of the component | `string` | - |
+
+</div>

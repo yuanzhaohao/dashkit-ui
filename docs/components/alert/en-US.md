@@ -6,6 +6,8 @@ Provide contextual feedback messages for typical user actions with the handful o
 
 ### API
 
+<div class="api-container">
+
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
 | className | className of the component | - | - |
@@ -15,3 +17,5 @@ Provide contextual feedback messages for typical user actions with the handful o
 | icon | determine whether to show the icon | `boolean` | - |
 | dismiss | determine whether the component is dismiss | `boolean` | - |
 | onClose | event handler | - | - |
+
+</div>

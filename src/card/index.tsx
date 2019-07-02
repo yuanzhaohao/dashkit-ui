@@ -1,5 +1,3 @@
-import './style.scss';
-
 import Accordion from './accordion';
 import Collapse from './collapse';
 import Header from './header';

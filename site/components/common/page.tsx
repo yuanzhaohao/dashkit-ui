@@ -2,14 +2,14 @@ import * as React from 'react';
 import './page.scss';
 
 import * as ReactDOM from 'react-dom';
-import { Spin, Grid } from 'dashkit-ui';
+import { Spin } from 'dashkit-ui';
 import Example from './example';
-const { Row, Col } = Grid;
+// import { withRouter, RouteComponentProps } from 'react-router-dom';
 
-interface PageProps {
+type PageProps = {
   locale: string;
   page: string;
-}
+};
 
 type PageState = {
   dataSource?: {
@@ -18,7 +18,7 @@ type PageState = {
   } | null;
 };
 
-class Page extends React.PureComponent<PageProps, PageState> {
+class Page extends React.Component<PageProps, PageState> {
   constructor(props: PageProps) {
     super(props);
     this.state = {
@@ -26,19 +26,22 @@ class Page extends React.PureComponent<PageProps, PageState> {
     };
   }
 
-  public async componentDidMount() {
-    const { page, locale } = this.props;
-    const dataSource = await import(`../../../docs/${page.toLocaleLowerCase()}/${locale}.md`);
-
-    this.setState({
-      dataSource,
-    });
+  public shouldComponentUpdate(nextProps: PageProps, nextState: PageState) {
+    if (nextProps.page !== this.props.page || nextState.dataSource !== this.state.dataSource) {
+      return true;
+    }
+    return false;
   }
 
-  public componentDidUpdate() {
+  public async componentDidMount() {
+    this.loadData();
+  }
+
+  public async componentDidUpdate() {
     const { dataSource } = this.state;
     const { locale } = this.props;
     const demoElement = document.getElementById('demos');
+    this.loadData();
 
     if (demoElement && dataSource.demos && Object.keys(dataSource.demos)) {
       const demoData = Object.keys(dataSource.demos)
@@ -54,27 +57,27 @@ class Page extends React.PureComponent<PageProps, PageState> {
   public render() {
     const { dataSource } = this.state;
 
-    return (
-      <Grid className="app-page" fluid>
-        <Row center="xs">
-          <Col xs={12} md={10} lg={8}>
-            {dataSource && dataSource.markdown ? (
-              <div
-                className="app-page-info"
-                dangerouslySetInnerHTML={{
-                  __html: dataSource.markdown,
-                }}
-              />
-            ) : (
-              <div className="page-loading">
-                <Spin text="Loading..." spinning={true} />
-              </div>
-            )}
-          </Col>
-        </Row>
-      </Grid>
+    return dataSource && dataSource.markdown ? (
+      <div
+        dangerouslySetInnerHTML={{
+          __html: dataSource.markdown,
+        }}
+      />
+    ) : (
+      <div className="page-loading">
+        <Spin text="Loading..." spinning={true} />
+      </div>
     );
   }
+
+  private loadData = async () => {
+    const { page, locale } = this.props;
+    const dataSource = await import(`../../../docs/${page.toLocaleLowerCase()}/${locale}.md`);
+
+    this.setState({
+      dataSource,
+    });
+  };
 }
 
 export default Page;

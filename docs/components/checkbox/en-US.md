@@ -8,6 +8,8 @@ A group of options for multiple choices.
 
 ### Checkbox
 
+<div class="api-container">
+
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
 | className | className of the component | - | - |
@@ -18,7 +20,11 @@ A group of options for multiple choices.
 | defaultChecked | to set the initial state | boolean | - |
 | onChange | `change` event handler | `(event: React.ChangeEvent<HTMLInputElement>) => void` | - |
 
+</div>
+
 ### Checkbox.Group
+
+<div class="api-container">
 
 | Property     | Description                | Type                          | Default |
 | ------------ | -------------------------- | ----------------------------- | ------- |
@@ -30,3 +36,5 @@ A group of options for multiple choices.
 | value        | value of the Radio Group   | string                        | -       |
 | defaultValue | default of the Radio Group | string[]                      | -       |
 | onChange     | `change` event handler     | `(options: string[]) => void` | -       |
+
+</div>

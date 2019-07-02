@@ -1,7 +1,5 @@
-import './style.scss';
-
-import * as classNames from 'classnames';
 import * as React from 'react';
+import * as classNames from 'classnames';
 import Icon from '../icon';
 
 export type PaginationSize = 'small' | 'default' | 'large';

@@ -6,6 +6,8 @@ Replaces a standard checkbox input with a switch button.
 
 ## API
 
+<div class="api-container">
+
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
 | className | className of the component | - | - |
@@ -17,3 +19,5 @@ Replaces a standard checkbox input with a switch button.
 | unCheckedChildren | content to be shown when the state is unchecked | React.ReactNode | - |
 | onChange | `change` event handler | - | - |
 | onClick | trigger when clicked | - | - |
+
+</div>

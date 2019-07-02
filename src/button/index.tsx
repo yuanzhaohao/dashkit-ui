@@ -1,5 +1,3 @@
-import './style.scss';
-
 import * as classNames from 'classnames';
 import * as React from 'react';
 import Icon from '../icon';
@@ -16,7 +14,8 @@ export type ButtonProps = {
   disabled?: boolean;
   icon?: string;
   loading?: boolean;
-} & React.HTMLProps<HTMLButtonElement>;
+  onClick?: React.MouseEventHandler<any>;
+};
 export type ButtonState = {
   spinning?: boolean;
 };
