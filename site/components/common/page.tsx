@@ -19,8 +19,10 @@ type PageState = {
 };
 
 class Page extends React.Component<PageProps, PageState> {
+  public readonly rootElement: React.RefObject<HTMLDivElement>;
   constructor(props: PageProps) {
     super(props);
+    this.rootElement = React.createRef();
     this.state = {
       dataSource: null,
     };
@@ -51,6 +53,14 @@ class Page extends React.Component<PageProps, PageState> {
         return <Example key={key} locale={locale} dataSource={d} />;
       });
       ReactDOM.render(children, demoElement);
+    } else if (this.rootElement && this.rootElement.current) {
+      const rootElement = this.rootElement.current;
+      const codeElements = rootElement.querySelectorAll('pre code');
+      if (codeElements && codeElements.length > 0) {
+        codeElements.forEach(codeElement => {
+          (window as any).Prism.highlightElement(codeElement);
+        });
+      }
     }
   }
 
@@ -59,6 +69,7 @@ class Page extends React.Component<PageProps, PageState> {
 
     return dataSource && dataSource.markdown ? (
       <div
+        ref={this.rootElement}
         dangerouslySetInnerHTML={{
           __html: dataSource.markdown,
         }}
