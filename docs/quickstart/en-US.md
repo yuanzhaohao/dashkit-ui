@@ -21,7 +21,7 @@ yarn add dashkit-ui
 
 Use [babel-plugin-import](https://github.com/ant-design/babel-plugin-import) to import components on demand.
 
-```javascript
+```js
 # Install plugin
 npm i babel-plugin-import -D
 
@@ -43,7 +43,9 @@ module.exports = {
     ['import', {
       libraryName: 'dashkit-ui',
       libraryDirectory: 'es',
-      style: true
+      style: function(stylePath) {
+        return `${stylePath}/style.scss`;
+      }
     }, 'dashkit-ui']
   ]
 };
