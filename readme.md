@@ -6,7 +6,7 @@
 
 ## Dashkit UI
 
-> A ui library.
+> UI Components built on React.
 
 ## Docs
 

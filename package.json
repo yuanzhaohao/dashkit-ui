@@ -1,7 +1,7 @@
 {
   "name": "dashkit-ui",
-  "description": "A ui library.",
-  "version": "0.0.16",
+  "description": "UI Components built on React.",
+  "version": "0.0.17",
   "main": "lib/index.js",
   "module": "es/index.js",
   "files": [
