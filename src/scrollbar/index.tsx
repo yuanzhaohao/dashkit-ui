@@ -31,7 +31,7 @@ export type ScrollbarProps = {
   onUpdate?: UpdateCallbackProps;
 };
 
-class Scrollbar extends React.PureComponent<ScrollbarProps> {
+class Scrollbar extends React.PureComponent<Partial<ScrollbarProps>> {
   public static defaultProps = {
     prefixCls: 'dk-scrollbar',
     thumbMinSize: 30,
