@@ -15,7 +15,7 @@ export type TimeScrollState = {
 };
 const itemHeight = 32;
 
-class Time extends React.PureComponent<TimeScrollProps, TimeScrollState> {
+class Time extends React.PureComponent<Partial<TimeScrollProps>, TimeScrollState> {
   public readonly scrollRef: React.RefObject<Scrollbars>;
 
   constructor(props: TimeScrollProps) {

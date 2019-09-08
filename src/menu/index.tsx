@@ -6,7 +6,7 @@ import ItemGroup from './item-group';
 import SubMenu from './sub-menu';
 import { MenuProps, MenuState } from './typings';
 
-class Menu extends React.PureComponent<MenuProps, MenuState> {
+class Menu extends React.Component<Partial<MenuProps>, MenuState> {
   public static Item: typeof MenuItem;
   public static ItemGroup: typeof ItemGroup;
   public static SubMenu: typeof SubMenu;
