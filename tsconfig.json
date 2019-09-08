@@ -6,12 +6,8 @@
     "jsx": "react",
     "moduleResolution": "node",
     "rootDir": "./",
-    "outDir": "./publish/es",
-    "declarationDir": "./publish/es",
     "strict": false,
-    "declaration": true,
     "strictFunctionTypes": false,
-    "sourceMap": true,
     "removeComments": true,
     "baseUrl": "./",
     "paths": {
