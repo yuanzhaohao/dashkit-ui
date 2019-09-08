@@ -10,17 +10,13 @@ const glob = require('glob');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const sass = require('node-sass');
-// const sass = require('sass');
 const csso = require('csso');
-const postcss = require('postcss');
 const babel = require('@babel/core');
 const utils = require('./utils');
 const config = require('./config');
 const webpackConfig = require('./webpack.publish.config');
 const publishPath = utils.resolve(config.publishPath);
 const srcPath = utils.resolve(config.srcPath);
-const tsc = require('typescript');
-const tsConfig = require('../tsconfig.json');
 const babelConfig = {
   configFile: utils.resolve('./babel.config.js'),
 };
@@ -70,7 +66,6 @@ async function transpileTsFiles(targetPath, module) {
 
   files.map(filePath => {
     const codeText = babel.transformFileSync(filePath, babelConfig).code;
-    const source = fs.readFileSync(filePath, 'utf8');
     const targetFilePath =
       targetPath + filePath.replace(publishSrcPath, '').replace(/\.[^\.]+$/g, '.js');
 
