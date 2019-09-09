@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
+import { createConsumer } from './context';
 import { ContextProps, FormItemProps, FormItemState } from './typings';
 
 class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
@@ -61,13 +62,16 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
     const labelStyle = {
       width: labelWidth,
     };
+    const contentStyle = {
+      marginLeft: labelAlign !== 'top' ? labelWidth : 0,
+    };
 
     return (
       <div className={itemClassName} {...attributes}>
         <div className={labelClassName} style={labelStyle}>
           {label}
         </div>
-        <div className={`${prefixCls}-item-content`} style={{ marginRight: labelWidth }}>
+        <div className={`${prefixCls}-item-content`} style={contentStyle}>
           {children}
           {message ? <div className={`${prefixCls}-item-tips`}>{message}</div> : null}
         </div>
@@ -97,4 +101,4 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
   };
 }
 
-export default FormItem;
+export default createConsumer(FormItem);

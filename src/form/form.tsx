@@ -32,6 +32,7 @@ class Form extends React.Component<Partial<FormProps>> {
       },
       className,
     );
+
     return (
       <form {...attributes} className={formClassName} onSubmit={this.handleSubmit}>
         <Provider

@@ -12,15 +12,31 @@ $form-prefix: 'dk-form';
     @include clearfix();
 
     &-label {
-      display: flex;
+      // display: flex;
       float: left;
       height: $form-label-height;
       padding: $form-label-padding-y $form-label-padding-x $form-label-padding-y 0;
-      text-align: right;
+      // text-align: right;
       line-height: 1;
       vertical-align: middle;
-      justify-content: flex-end;
-      align-items: center;
+      // justify-content: flex-end;
+      // align-items: center;
+    }
+
+    &-label-right {
+      text-align: right;
+    }
+
+    &-label-left {
+      text-align: left;
+    }
+
+    &-label-top {
+      float: none;
+      height: auto;
+      display: inline-block;
+      text-align: left;
+      padding: 0 0 $form-label-padding-y;
     }
 
     &-label-required {
