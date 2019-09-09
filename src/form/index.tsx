@@ -1,20 +1,6 @@
-import * as classNames from 'classnames';
-import * as React from 'react';
+import Form from './form';
+import FormItem from './item';
 
-export type FormProps = {
-  className?: string;
-};
-
-class Form extends React.Component<FormProps> {
-  public render() {
-    const { className, children, ...attributes } = this.props;
-    const formClassName = classNames('dashkit-card', className);
-    return (
-      <div {...attributes} className={formClassName}>
-        {children}
-      </div>
-    );
-  }
-}
+Form.Item = FormItem;
 
 export default Form;
