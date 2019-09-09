@@ -41,6 +41,7 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
       label,
       ...attributes
     } = this.props;
+    const { message } = this.state;
     const itemClassName = classNames(
       {
         [`${prefixCls}-item`]: true,
@@ -52,7 +53,6 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
       [`${prefixCls}-item-label`]: true,
       [`${prefixCls}-item-label-${labelAlign}`]: true,
     });
-    const { message } = this.state;
     return (
       <div className={itemClassName} {...attributes}>
         <div className={labelClassName}>{label}</div>
