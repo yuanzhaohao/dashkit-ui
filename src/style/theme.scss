@@ -435,3 +435,10 @@ $modal-type-colors: (
   "error":      $danger,
   "confirm":    $warning
 ) !default;
+
+// Form
+//
+$form-margin-y:                         24px !default;
+$form-label-height:                     $input-height !default;
+$form-label-padding-x:                  12px !default;
+$form-label-padding-y:                  10px !default;

@@ -1,0 +1,34 @@
+@import '../style/functions.scss';
+@import '../style/theme.scss';
+@import '../style/mixins.scss';
+
+$form-prefix: 'dk-form';
+
+.#{$form-prefix} {
+  @include reset-component();
+
+  &-item {
+    margin-bottom: $form-margin-y;
+    @include clearfix();
+
+    &-label {
+      display: flex;
+      float: left;
+      height: $form-label-height;
+      padding: $form-label-padding-y $form-label-padding-x $form-label-padding-y 0;
+      text-align: right;
+      line-height: 1;
+      vertical-align: middle;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    &-label-required {
+      &::before {
+        content: '*';
+        color: $red;
+        margin-right: 4px;
+      }
+    }
+  }
+}

@@ -5,6 +5,7 @@ import { ContextProps, FormItemProps, FormItemState } from './typings';
 class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
   public static defaultProps = {
     prefixCls: 'dk-form',
+    labelWidth: 100,
   };
 
   constructor(props: FormItemProps) {
@@ -37,11 +38,14 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
       prefixCls,
       className,
       labelAlign,
+      labelWidth,
       fieldName,
       label,
       ...attributes
     } = this.props;
     const { message } = this.state;
+    const required = this.getRequired();
+
     const itemClassName = classNames(
       {
         [`${prefixCls}-item`]: true,
@@ -51,12 +55,19 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
     );
     const labelClassName = classNames({
       [`${prefixCls}-item-label`]: true,
+      [`${prefixCls}-item-label-required`]: required,
       [`${prefixCls}-item-label-${labelAlign}`]: true,
     });
+    const labelStyle = {
+      width: labelWidth,
+    };
+
     return (
       <div className={itemClassName} {...attributes}>
-        <div className={labelClassName}>{label}</div>
-        <div className={`${prefixCls}-item-content`}>
+        <div className={labelClassName} style={labelStyle}>
+          {label}
+        </div>
+        <div className={`${prefixCls}-item-content`} style={{ marginRight: labelWidth }}>
           {children}
           {message ? <div className={`${prefixCls}-item-tips`}>{message}</div> : null}
         </div>

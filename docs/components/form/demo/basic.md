@@ -26,7 +26,7 @@ class App extends React.Component {
   render() {
     return (
       <Form>
-        <Form.Item label="Name">
+        <Form.Item label="Name" required>
           <Input value={this.state.form.name} onChange={this.handleChange.bind(this, 'name')} />
         </Form.Item>
         <Form.Item label="Email">

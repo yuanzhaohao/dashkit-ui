@@ -10,8 +10,9 @@ export type FormItemProps = {
   className: string;
   required: boolean;
   fieldName: string;
-  label: string;
   labelAlign: FormAlign;
+  labelWidth: number;
+  label: string;
   rule: Partial<FormRule>;
 };
 
