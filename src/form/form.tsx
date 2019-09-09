@@ -50,8 +50,11 @@ class Form extends React.Component<Partial<FormProps>> {
     );
   }
 
-  private handleSubmit = () => {
+  private handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+
     const { onSubmit } = this.props;
+    console.log('call handleSubmit');
 
     if (typeof onSubmit === 'function') {
       onSubmit();
