@@ -1,5 +1,6 @@
 export type FormAlign = 'right' | 'left' | 'top';
 export type FormTriggerEvent = 'blur' | 'change' | 'focus';
+export type FormItemStatus = 'error' | 'default' | 'success' | 'warning';
 export type FormRule = {
   type: string;
   message: string;
@@ -14,12 +15,15 @@ export type FormItemProps = {
   labelWidth: number;
   label: string;
   name: string;
+  status: FormItemStatus;
   rule: Partial<FormRule>;
 };
 
 export type FormItemState = {
   message: string;
+  status: FormItemStatus;
   isInValid: boolean;
+  value: any;
 };
 
 export type FormProps = {
@@ -28,7 +32,7 @@ export type FormProps = {
   labelAlign: FormAlign;
   labelWidth: number;
   labelSuffix: string;
-  onSubmit: (event?: React.FormEvent) => void;
+  onSubmit: (event?: React.FormEvent, values?: { [key: string]: any }, error?: boolean) => void;
   onReset: (event?: React.FormEvent) => void;
   rules: {
     [key: string]: Partial<FormRule>;

@@ -201,6 +201,18 @@ $card-padding-x:                    24px !default;
 
 // Input
 //
+
+$input-type-colors: () !default;
+$input-type-colors: map-merge(
+  (
+    "success":    $success,
+    "info":       $info,
+    "warning":    $warning,
+    "error":     $danger
+  ),
+  $input-type-colors
+);
+
 $input-width:                       220px !default;
 $input-height:                      34px !default;
 $input-height-sm:                   24px !default;
@@ -442,3 +454,5 @@ $form-margin-y:                         24px !default;
 $form-label-height:                     $input-height !default;
 $form-label-padding-x:                  12px !default;
 $form-label-padding-y:                  10px !default;
+$form-message-font-size:                12px !default;
+$form-message-padding-y:                4px !default;

@@ -18,16 +18,21 @@ class App extends React.Component {
 
   render() {
     return (
-      <Form>
+      <Form onSubmit={this.handleSubmit}>
         <Form.Item
           label="Name"
           name="name"
           required
-          rule={{ message: 'Please input your name', trigger: 'blur,change' }}
+          rule={{ message: 'Please input your name', trigger: [`blur`, `change`] }}
         >
           <Input placeholder="Please input your name" />
         </Form.Item>
-        <Form.Item label="Email" name="email" required>
+        <Form.Item
+          label="Email"
+          name="email"
+          required
+          rule={{ message: 'Please input your email' }}
+        >
           <Input placeholder="Please input your email" />
         </Form.Item>
         <Form.Item>
@@ -41,6 +46,12 @@ class App extends React.Component {
       </Form>
     );
   }
+
+  handleSubmit = (event, values, error) => {
+    event.preventDefault();
+
+    console.log(values, error);
+  };
 }
 
 ReactDOM.render(<App />, mountNode);

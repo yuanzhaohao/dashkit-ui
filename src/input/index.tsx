@@ -3,6 +3,7 @@ import * as classNames from 'classnames';
 import Icon from '../icon';
 
 export type InputSize = 'small' | 'default' | 'large';
+export type InputFormStatus = 'error' | 'default' | 'success' | 'warning';
 
 export type InputProps = {
   className?: string;
@@ -13,6 +14,7 @@ export type InputProps = {
   value?: string;
   defaultValue?: string;
   placeholder?: string;
+  status?: InputFormStatus;
   type?: 'text' | 'password' | 'number';
   digits?: number;
   prefix?: string;
@@ -37,6 +39,7 @@ class Input extends React.Component<InputProps> {
   public static defaultProps = {
     prefixCls: 'dk-input',
     size: 'default' as InputSize,
+    status: 'default' as InputFormStatus,
     type: 'text',
   };
   public static componentType = 'Input';
@@ -70,6 +73,7 @@ class Input extends React.Component<InputProps> {
       suffixClassName,
       wrapperClassName,
       wrapperRef,
+      status,
       ...attributes
     } = this.props;
     const value = this.props.value;
@@ -80,6 +84,7 @@ class Input extends React.Component<InputProps> {
         [`${prefixCls}-small`]: size === 'small',
         [`${prefixCls}-prefix`]: prefix,
         [`${prefixCls}-suffix`]: suffix,
+        [`${prefixCls}-${status}`]: status !== 'default',
       },
       className,
     );

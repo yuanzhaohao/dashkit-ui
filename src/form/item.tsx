@@ -1,19 +1,23 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
+import { CSSTransition } from 'react-transition-group';
 import { createConsumer } from './context';
-import { ContextProps, FormItemProps, FormItemState } from './typings';
+import { ContextProps, FormItemProps, FormItemState, FormItemStatus } from './typings';
 import warning from '../utils/warning';
-import { COMPONENT_TYPE } from './constants';
+import { COMPONENT_TYPE, DEFAULT_TRIGGER } from './constants';
 
 class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
   public static defaultProps = {
     prefixCls: 'dk-form',
     labelWidth: 100,
+    theme: 'default' as FormItemStatus,
   };
 
   constructor(props: FormItemProps) {
     super(props);
     this.state = {
+      status: 'default',
+      value: null,
       message: props.rule && props.rule.message ? props.rule.message : '',
       isInValid: false,
     };
@@ -29,7 +33,8 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
       form.addField({
         [name]: {
           name,
-          message: rule.message,
+          rule,
+          component: this,
         },
       });
     }
@@ -53,9 +58,10 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
       name,
       label,
       rule,
+      status: statusProp,
       ...attributes
     } = this.props;
-    const { message, isInValid } = this.state;
+    const { message, value, status, isInValid } = this.state;
     const required = this.getRequired();
 
     const itemClassName = classNames(
@@ -73,36 +79,53 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
     const realRule = this.getRule();
 
     const newChildren = React.Children.map(children, (child: any) => {
-      console.log(child);
       const { componentType } = child.type;
       if (COMPONENT_TYPE[componentType]) {
         const newProps = {
           ...child.props,
+          status,
+          onChange: (value: any) => {
+            this.handleChange(value);
+            if (child.props.onChange) {
+              child.props.onChange(value);
+            }
+          },
         };
-        if (realRule.trigger && realRule.trigger.length) {
-          if (realRule.trigger.indexOf('change') !== -1) {
-            newProps.onChange = (value: any) => {
-              this.handleChange(value);
-              if (child.props.onChange) {
-                child.props.onChange(value);
-              }
-            };
-          }
+        const trigger = Array.isArray(realRule.trigger)
+          ? Array.from(new Set([...DEFAULT_TRIGGER, ...realRule.trigger]))
+          : DEFAULT_TRIGGER;
 
-          if (realRule.trigger.indexOf('blur') !== -1) {
-            newProps.onBlur = (...args) => {
-              this.handleBlur();
-              if (child.props.onBlur) {
-                child.props.onBlur(...args);
-              }
-            };
-          }
+        if (trigger.indexOf('blur') !== -1) {
+          newProps.onBlur = (...args) => {
+            this.handleBlur();
+            if (child.props.onBlur) {
+              child.props.onBlur(...args);
+            }
+          };
         }
 
         return React.cloneElement(child, newProps);
       }
       return child;
     });
+
+    const messageNode = (
+      <CSSTransition
+        in={!!(message && isInValid)}
+        timeout={216}
+        unmountOnExit
+        classNames={`${prefixCls}-item-message`}
+      >
+        <div
+          className={classNames(
+            `${prefixCls}-item-message`,
+            `${prefixCls}-item-message-${this.state.status}`,
+          )}
+        >
+          {message}
+        </div>
+      </CSSTransition>
+    );
 
     return (
       <div className={itemClassName} {...attributes}>
@@ -121,7 +144,7 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
           }}
         >
           {newChildren}
-          {message && isInValid ? <div className={`${prefixCls}-item-tips`}>{message}</div> : null}
+          {messageNode}
         </div>
       </div>
     );
@@ -148,24 +171,64 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
     return {};
   };
 
+  private getField = () => {
+    const { form, name } = this.props;
+    const required = this.getRequired();
+    if (form && name && required) {
+      return form.getFields()[name];
+    }
+    return null;
+  };
+
   private handleChange = (value: any) => {
-    console.log(value);
+    const rule = this.getRule();
+    if (value) {
+      this.setState({
+        status: 'default',
+        isInValid: false,
+        value,
+      });
+    } else {
+      this.setState({
+        status: 'error',
+        isInValid: true,
+        message: rule.message,
+        value,
+      });
+    }
   };
 
   private handleBlur = () => {
-    const { form, name } = this.props;
-    console.log('call handleBlur');
+    const rule = this.getRule();
+    const required = this.getRequired();
+    const { value } = this.state;
 
-    if (form && name) {
-      const field = form.getFields()[name];
-      console.log(form.getFields(), field, name);
-      if (field && field.message && !field.value) {
-        this.setState({
-          message: field.message,
-          isInValid: true,
-        });
-      }
+    if (rule && rule.message && required && !value) {
+      this.setState({
+        message: rule.message,
+        status: 'error',
+        isInValid: true,
+      });
+    } else {
+      this.setState({
+        status: 'default',
+        isInValid: false,
+      });
     }
+  };
+
+  private checkValid = () => {
+    const required = this.getRequired();
+    const { value } = this.state;
+    return !(required && !value);
+  };
+
+  private resetField = () => {
+    this.setState({
+      status: 'default',
+      isInValid: false,
+      value: null,
+    });
   };
 }
 

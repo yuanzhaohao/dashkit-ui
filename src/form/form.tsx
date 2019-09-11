@@ -11,7 +11,12 @@ class Form extends React.Component<Partial<FormProps>> {
     labelAlign: 'right' as FormAlign,
   };
   private fields: {
-    [key: string]: typeof FormItem;
+    [key: string]: {
+      message?: string;
+      name?: string;
+      value?: any;
+      component?: any;
+    };
   };
   constructor(props: FormProps) {
     super(props);
@@ -60,20 +65,30 @@ class Form extends React.Component<Partial<FormProps>> {
   }
 
   private handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-
     const { onSubmit } = this.props;
-    console.log('call handleSubmit');
+    const { fields } = this;
+    const values = {};
+    const error = !Object.keys(fields).every(key => {
+      return fields[key].component.checkValid();
+    });
+    Object.keys(fields).forEach(key => {
+      values[key] = fields[key].component.state.value;
+    });
 
     if (typeof onSubmit === 'function') {
-      onSubmit(event);
+      onSubmit(event, values, error);
     }
   };
 
   private handleReset = (event: React.FormEvent) => {
     const { onReset } = this.props;
-    console.log('call handleReset');
+    const { fields } = this;
 
+    Object.keys(fields).forEach(key => {
+      if (fields[key] && fields[key].component) {
+        fields[key].component.resetField();
+      }
+    });
     if (typeof onReset === 'function') {
       onReset(event);
     }
