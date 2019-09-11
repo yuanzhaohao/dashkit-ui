@@ -218,9 +218,18 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
   };
 
   private checkValid = () => {
+    const rule = this.getRule();
     const required = this.getRequired();
     const { value } = this.state;
-    return !(required && !value);
+    const isInvalid = !!(required && !value);
+    if (isInvalid) {
+      this.setState({
+        message: rule.message,
+        status: 'error',
+        isInValid: true,
+      });
+    }
+    return !isInvalid;
   };
 
   private resetField = () => {

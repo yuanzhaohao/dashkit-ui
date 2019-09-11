@@ -68,15 +68,14 @@ class Form extends React.Component<Partial<FormProps>> {
     const { onSubmit } = this.props;
     const { fields } = this;
     const values = {};
-    const error = !Object.keys(fields).every(key => {
-      return fields[key].component.checkValid();
-    });
+    const valids = [];
     Object.keys(fields).forEach(key => {
       values[key] = fields[key].component.state.value;
+      valids.push(fields[key].component.checkValid());
     });
 
     if (typeof onSubmit === 'function') {
-      onSubmit(event, values, error);
+      onSubmit(event, values, valids.every(valid => !valid));
     }
   };
 
