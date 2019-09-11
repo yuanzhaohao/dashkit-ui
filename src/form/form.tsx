@@ -10,10 +10,12 @@ class Form extends React.Component<Partial<FormProps>> {
     prefixCls: 'dk-form',
     labelAlign: 'right' as FormAlign,
   };
-  private fields: Array<typeof FormItem>;
+  private fields: {
+    [key: string]: typeof FormItem;
+  };
   constructor(props: FormProps) {
     super(props);
-    this.fields = [];
+    this.fields = {};
   }
 
   public render() {
@@ -34,12 +36,18 @@ class Form extends React.Component<Partial<FormProps>> {
     );
 
     return (
-      <form {...attributes} className={formClassName} onSubmit={this.handleSubmit}>
+      <form
+        {...attributes}
+        className={formClassName}
+        onSubmit={this.handleSubmit}
+        onReset={this.handleReset}
+      >
         <Provider
           value={{
             labelAlign,
             form: {
               rules,
+              getFields: this.getFields,
               addField: this.addField,
               removeField: this.removeField,
             },
@@ -55,20 +63,37 @@ class Form extends React.Component<Partial<FormProps>> {
     event.preventDefault();
 
     const { onSubmit } = this.props;
+    console.log('call handleSubmit');
 
     if (typeof onSubmit === 'function') {
-      onSubmit();
+      onSubmit(event);
+    }
+  };
+
+  private handleReset = (event: React.FormEvent) => {
+    const { onReset } = this.props;
+    console.log('call handleReset');
+
+    if (typeof onReset === 'function') {
+      onReset(event);
     }
   };
 
   private addField = (field: any) => {
-    this.fields.push(field);
+    this.fields = {
+      ...this.fields,
+      ...field,
+    };
   };
 
-  private removeField = (field: any) => {
-    if (field.props.prop) {
-      this.fields.splice(this.fields.indexOf(field), 1);
+  private removeField = (name: string) => {
+    if (this.fields[name]) {
+      delete this.fields[name];
     }
+  };
+
+  private getFields = () => {
+    return this.fields;
   };
 }
 

@@ -14,36 +14,33 @@ import { Form, Input, Button } from 'dashkit-ui';
 class App extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      form: {
-        name: '',
-        email: '',
-      },
-    };
   }
 
   render() {
     return (
       <Form>
-        <Form.Item label="Name" required>
-          <Input value={this.state.form.name} onChange={this.handleChange.bind(this, 'name')} />
+        <Form.Item
+          label="Name"
+          name="name"
+          required
+          rule={{ message: 'Please input your name', trigger: 'blur,change' }}
+        >
+          <Input placeholder="Please input your name" />
         </Form.Item>
-        <Form.Item label="Email">
-          <Input value={this.state.form.email} onChange={this.handleChange.bind(this, 'email')} />
+        <Form.Item label="Email" name="email" required>
+          <Input placeholder="Please input your email" />
         </Form.Item>
         <Form.Item>
-          <Button type="primary">Submit</Button>
-          <Button style={{ marginLeft: 10 }}>Reset</Button>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+          <Button style={{ marginLeft: 10 }} htmlType="reset">
+            Reset
+          </Button>
         </Form.Item>
       </Form>
     );
   }
-
-  handleChange = (key, value) => {
-    this.state.form[key] = value;
-    this.forceUpdate();
-  };
 }
 
 ReactDOM.render(<App />, mountNode);

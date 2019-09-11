@@ -39,6 +39,7 @@ class Input extends React.Component<InputProps> {
     size: 'default' as InputSize,
     type: 'text',
   };
+  public static componentType = 'Input';
 
   public static getDerivedStateFromProps(nextProps: InputProps) {
     if ('value' in nextProps) {
@@ -48,7 +49,6 @@ class Input extends React.Component<InputProps> {
     }
     return null;
   }
-
   constructor(props: InputProps) {
     super(props);
     this.state = {

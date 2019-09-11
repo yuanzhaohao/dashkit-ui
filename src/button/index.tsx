@@ -3,12 +3,14 @@ import * as React from 'react';
 import Icon from '../icon';
 
 export type ButtonSize = 'small' | 'default' | 'large';
+export type ButtonHtmlType = 'submit' | 'button' | 'reset';
 export type ButtonType = 'default' | 'primary' | 'success' | 'danger' | 'warning' | 'info' | 'link';
 export type ButtonProps = {
   prefixCls?: string;
   className?: string;
   size?: ButtonSize;
   type?: ButtonType;
+  htmlType?: ButtonHtmlType;
   outline?: boolean;
   round?: boolean;
   disabled?: boolean;
@@ -25,6 +27,7 @@ class Button extends React.PureComponent<ButtonProps, ButtonState> {
     prefixCls: 'dk-btn',
     size: 'default' as ButtonSize,
     type: 'default' as ButtonType,
+    htmlType: 'button' as ButtonHtmlType,
   };
 
   public render() {
@@ -39,6 +42,7 @@ class Button extends React.PureComponent<ButtonProps, ButtonState> {
       disabled,
       icon,
       loading,
+      htmlType,
       ...attibutes
     } = this.props;
     const buttonClassName = classNames(
@@ -64,7 +68,7 @@ class Button extends React.PureComponent<ButtonProps, ButtonState> {
     );
 
     return (
-      <button {...attibutes} className={buttonClassName} disabled={disabled}>
+      <button {...attibutes} type={htmlType} className={buttonClassName} disabled={disabled}>
         {iconNode}
         {children}
       </button>

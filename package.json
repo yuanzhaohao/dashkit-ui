@@ -59,12 +59,14 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.4.5",
+    "@types/warning": "^3.0.0",
     "classnames": "^2.2.5",
     "create-react-context": "^0.2.3",
     "lodash-es": "^4.17.11",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-transition-group": "^2.4.0"
+    "react-transition-group": "^2.4.0",
+    "warning": "^4.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
