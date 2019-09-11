@@ -11,6 +11,10 @@ $form-prefix: 'dk-form';
     margin-bottom: $form-margin-y;
     @include clearfix();
 
+    &-content {
+      position: relative;
+    }
+
     &-label {
       // display: flex;
       float: left;
@@ -45,6 +49,15 @@ $form-prefix: 'dk-form';
         color: $red;
         margin-right: 4px;
       }
+    }
+
+    &-tips {
+      font-size: 12px;
+      line-height: 1;
+      padding-top: 4px;
+      position: absolute;
+      top: 100%;
+      left: 0;
     }
   }
 }
