@@ -1,0 +1,2 @@
+webpackJsonp([55],{C40d:function(n,e){n.exports={markdown:"<hr>\n<h2>order: 1\ntitle:\nzh-CN: 时间\nen-US: Duration\nsubtitle:\nzh-CN: 可以设置<code>duration</code>控制展示的时间。\nen-US: Use <code>duration</code> to control display time.</h2>\n<pre><code class=\"language-js\">import { Message, Button } from 'dashkit-ui';\n\nconst show = () =&gt; {\n  Message.show('Display a 10s time message', 10);\n};\n\nReactDOM.render(&lt;Button onClick={show}&gt;Display a 10s time message&lt;/Button&gt;, mountNode);\n</code></pre>\n",demos:{}}}});
+//# sourceMappingURL=55.094d9f8.js.map

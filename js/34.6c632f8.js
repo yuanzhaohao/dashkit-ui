@@ -1,0 +1,2 @@
+webpackJsonp([34],{"7GM2":function(e,n){e.exports={markdown:"<hr>\n<h2>order: 2\ntitle:\nzh-CN: 描述\nen-US: Description\nsubtitle:\nzh-CN: 用<code>text</code>来展示描述。\nen-US: Use <code>text</code> to show description.</h2>\n<pre><code class=\"language-js\">import { Spin } from 'dashkit-ui';\n\nReactDOM.render(&lt;Spin spining={true} text=&quot;Loading...&quot; /&gt;, mountNode);\n</code></pre>\n",demos:{}}}});
+//# sourceMappingURL=34.6c632f8.js.map

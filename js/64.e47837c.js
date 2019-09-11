@@ -1,0 +1,2 @@
+webpackJsonp([64],{jUWw:function(e,o){e.exports={markdown:"<hr>\n<h2>order: 3\ntitle:\nzh-CN: 前缀后缀\nen-US: prefix and suffix\nsubtitle:\nzh-CN: 使用<code>prefix</code>或者<code>suffix</code>来增加前缀或者后缀。\nen-US: Add <code>prefix</code> or <code>suffix</code> icons inside input..</h2>\n<pre><code class=\"language-js\">import { Input, Tooltip, Icon } from 'dashkit-ui';\n\nReactDOM.render(&lt;Input placeholder=&quot;Enter your username&quot; prefix=&quot;user&quot; suffix=&quot;info&quot; /&gt;, mountNode);\n</code></pre>\n",demos:{}}}});
+//# sourceMappingURL=64.e47837c.js.map
