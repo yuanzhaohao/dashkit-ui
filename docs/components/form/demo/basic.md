@@ -21,45 +21,25 @@ class App extends React.Component {
   render() {
     return (
       <Form onSubmit={this.handleSubmit} labelWidth={150}>
-        <Form.Item
-          label="Name"
-          name="name"
-          required
-          rule={{ message: 'Please input your name', trigger: [`blur`, `change`] }}
-        >
+        <Form.Item label="Name" name="name">
           <Input placeholder="Please input your name" />
         </Form.Item>
-        <Form.Item
-          label="Email"
-          name="email"
-          required
-          rule={{ message: 'Please input your email' }}
-        >
+        <Form.Item label="Email" name="email">
           <Input placeholder="Please input your email" />
         </Form.Item>
-        <Form.Item label="Zone" name="zone" required rule={{ message: 'Please select your zone' }}>
+        <Form.Item label="Zone" name="zone">
           <Select placeholder="Please select your zone">
             <Select.Option value="zone1">Zone 1</Select.Option>
             <Select.Option value="zone2">Zone 2</Select.Option>
           </Select>
         </Form.Item>
-        <Form.Item
-          label="Range Time"
-          name="rangTime"
-          required
-          rule={{ message: 'Please select rang time' }}
-        >
+        <Form.Item label="Range Time" name="rangTime">
           <Calendar type="datetime" range />
         </Form.Item>
         <Form.Item label="Switch" name="switch">
           <Switch />
         </Form.Item>
-        <Form.Item
-          required
-          label="CheckboxGroup"
-          name="checkboxGroup"
-          rule={{ message: 'Please select your city' }}
-        >
+        <Form.Item label="CheckboxGroup" name="checkboxGroup">
           <Checkbox.Group options={cityOptions}>
             {cityOptions.map((city, index) => (
               <Checkbox key={index} value={city}>
@@ -71,12 +51,7 @@ class App extends React.Component {
         <Form.Item label="Checkbox" name="checkbox">
           <Checkbox>checkbox</Checkbox>
         </Form.Item>
-        <Form.Item
-          required
-          label="RadioGroup"
-          name="radioGroup"
-          rule={{ message: 'Please select your radio' }}
-        >
+        <Form.Item label="RadioGroup" name="radioGroup">
           <Radio.Group>
             <Radio value={1}>A</Radio>
             <Radio value={2}>B</Radio>

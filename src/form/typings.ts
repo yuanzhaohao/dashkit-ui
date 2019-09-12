@@ -22,7 +22,7 @@ export type FormItemProps = {
 export type FormItemState = {
   message: string;
   status: FormItemStatus;
-  isInValid: boolean;
+  isInvalid: boolean;
   value: any;
 };
 

@@ -6,7 +6,7 @@ import { ContextProps, FormItemProps, FormItemState, FormItemStatus } from './ty
 import warning from '../utils/warning';
 import { COMPONENT_TYPE, DEFAULT_TRIGGER } from './constants';
 
-class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
+class FormItem extends React.Component<Partial<ContextProps>, Partial<FormItemState>> {
   public static defaultProps = {
     prefixCls: 'dk-form',
     labelWidth: 100,
@@ -19,7 +19,7 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
       status: 'default',
       value: undefined,
       message: props.rule && props.rule.message ? props.rule.message : '',
-      isInValid: false,
+      isInvalid: false,
     };
   }
 
@@ -59,7 +59,7 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
       status: statusProp,
       ...attributes
     } = this.props;
-    const { message, value, status, isInValid } = this.state;
+    const { message, value, status, isInvalid } = this.state;
     const required = this.getRequired();
 
     const itemClassName = classNames(
@@ -80,6 +80,7 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
       const { componentType } = child.type;
       if (COMPONENT_TYPE[componentType]) {
         // console.log(child);
+        console.log(status);
         const newProps = {
           ...child.props,
           status,
@@ -114,7 +115,7 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
 
     const messageNode = (
       <CSSTransition
-        in={!!(message && isInValid)}
+        in={!!(message && isInvalid)}
         timeout={216}
         unmountOnExit
         classNames={`${prefixCls}-item-message`}
@@ -185,28 +186,29 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
 
   private handleChange = (value: any) => {
     const rule = this.getRule();
+    const required = this.getRequired();
 
     // for Checkbox & Radio
     if (value && value.target) {
       value = value.target.checked;
     }
 
-    const isInvalid = Array.isArray(value) ? value.length === 0 : value === undefined;
+    const isInvalid = Array.isArray(value)
+      ? value.length === 0
+      : value === undefined || value === '';
+    const newState: Partial<FormItemState> = {
+      isInvalid,
+      value,
+    };
 
-    if (isInvalid) {
-      this.setState({
-        status: 'error',
-        isInValid: true,
-        message: rule.message,
-        value,
-      });
+    if (required) {
+      newState.message = rule.message;
+      newState.status = isInvalid ? 'error' : 'default';
     } else {
-      this.setState({
-        status: 'default',
-        isInValid: false,
-        value,
-      });
+      newState.status = 'default';
     }
+
+    this.setState(newState);
   };
 
   private handleBlur = () => {
@@ -218,12 +220,12 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
       this.setState({
         message: rule.message,
         status: 'error',
-        isInValid: true,
+        isInvalid: true,
       });
     } else {
       this.setState({
         status: 'default',
-        isInValid: false,
+        isInvalid: false,
       });
     }
   };
@@ -238,7 +240,7 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
       this.setState({
         message: rule.message,
         status: 'error',
-        isInValid: true,
+        isInvalid: true,
       });
       return {
         message: rule.message,
@@ -250,7 +252,7 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
   private resetField = () => {
     this.setState({
       status: 'default',
-      isInValid: false,
+      isInvalid: false,
       value: null,
     });
   };
