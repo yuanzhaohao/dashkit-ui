@@ -29,7 +29,6 @@ class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGrou
     nextProps: CheckboxGroupProps,
     prevState: CheckboxGroupState,
   ) {
-    console.log(!isEqual(nextProps.value, prevState.options), nextProps.value);
     let newValue = nextProps.value;
     if (!Array.isArray(newValue)) {
       newValue = [];

@@ -21,6 +21,13 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
 
   public static getDerivedStateFromProps(nextProps: SelectProps) {
     if ('value' in nextProps) {
+      if (nextProps.value === undefined) {
+        return {
+          inputValue: '',
+          value: nextProps.value,
+          options: nextProps.multiple ? [] : '',
+        };
+      }
       return {
         value: nextProps.value,
       };

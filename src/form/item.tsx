@@ -59,7 +59,7 @@ class FormItem extends React.Component<Partial<ContextProps>, Partial<FormItemSt
       status: statusProp,
       ...attributes
     } = this.props;
-    const { message, value, status, isInvalid } = this.state;
+    const { message, isInvalid } = this.state;
     const required = this.getRequired();
 
     const itemClassName = classNames(
@@ -74,44 +74,8 @@ class FormItem extends React.Component<Partial<ContextProps>, Partial<FormItemSt
       [`${prefixCls}-item-label-required`]: required,
       [`${prefixCls}-item-label-${labelAlign}`]: true,
     });
-    const realRule = this.getRule();
 
-    const newChildren = React.Children.map(children, (child: any) => {
-      const { componentType } = child.type;
-      if (COMPONENT_TYPE[componentType]) {
-        // console.log(child);
-        console.log(status);
-        const newProps = {
-          ...child.props,
-          status,
-          onChange: (value: any) => {
-            this.handleChange(value);
-            if (child.props.onChange) {
-              child.props.onChange(value);
-            }
-          },
-        };
-        const trigger = Array.isArray(realRule.trigger)
-          ? Array.from(new Set([...DEFAULT_TRIGGER, ...realRule.trigger]))
-          : DEFAULT_TRIGGER;
-
-        if (trigger.indexOf('blur') !== -1) {
-          newProps.onBlur = (...args) => {
-            this.handleBlur();
-            if (child.props.onBlur) {
-              child.props.onBlur(...args);
-            }
-          };
-        }
-
-        if (componentType === 'CheckboxGroup' || componentType === 'RadioGroup') {
-          newProps.value = value;
-        }
-
-        return React.cloneElement(child, newProps);
-      }
-      return child;
-    });
+    const newChildren = this.getChildren();
 
     const messageNode = (
       <CSSTransition
@@ -153,6 +117,62 @@ class FormItem extends React.Component<Partial<ContextProps>, Partial<FormItemSt
       </div>
     );
   }
+
+  private getChildren = () => {
+    const realRule = this.getRule();
+    const { children } = this.props;
+    const { value, status } = this.state;
+
+    return React.Children.map(children, (child: any) => {
+      const { componentType } = child.type;
+      if (COMPONENT_TYPE[componentType]) {
+        const newProps = {
+          ...child.props,
+          status,
+          onChange: (value: any) => {
+            this.handleChange(value);
+            if (child.props.onChange) {
+              child.props.onChange(value);
+            }
+          },
+        };
+        const trigger = Array.isArray(realRule.trigger)
+          ? Array.from(new Set([...DEFAULT_TRIGGER, ...realRule.trigger]))
+          : DEFAULT_TRIGGER;
+
+        if (trigger.indexOf('blur') !== -1) {
+          newProps.onBlur = (...args) => {
+            this.handleBlur();
+            if (child.props.onBlur) {
+              child.props.onBlur(...args);
+            }
+          };
+        }
+
+        if (
+          [
+            COMPONENT_TYPE.CheckboxGroup,
+            COMPONENT_TYPE.Select,
+            COMPONENT_TYPE.RadioGroup,
+            COMPONENT_TYPE.Calendar,
+          ].indexOf(componentType) !== -1
+        ) {
+          newProps.value = value;
+        }
+
+        if (
+          [COMPONENT_TYPE.Switch, COMPONENT_TYPE.Checkbox, COMPONENT_TYPE.Radio].indexOf(
+            componentType,
+          ) !== -1
+        ) {
+          newProps.checked = !!value;
+        }
+
+        return React.cloneElement(child, newProps);
+      }
+      return child;
+    });
+  };
 
   private getRequired = () => {
     const rule = this.getRule();
@@ -253,7 +273,7 @@ class FormItem extends React.Component<Partial<ContextProps>, Partial<FormItemSt
     this.setState({
       status: 'default',
       isInvalid: false,
-      value: null,
+      value: undefined,
     });
   };
 }

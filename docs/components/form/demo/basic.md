@@ -33,6 +33,9 @@ class App extends React.Component {
             <Select.Option value="zone2">Zone 2</Select.Option>
           </Select>
         </Form.Item>
+        <Form.Item label="Date" name="date">
+          <Calendar />
+        </Form.Item>
         <Form.Item label="Range Time" name="rangTime">
           <Calendar type="datetime" range />
         </Form.Item>
