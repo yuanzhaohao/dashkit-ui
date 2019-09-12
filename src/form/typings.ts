@@ -1,11 +1,27 @@
 export type FormAlign = 'right' | 'left' | 'top';
 export type FormTriggerEvent = 'blur' | 'change' | 'focus';
 export type FormItemStatus = 'error' | 'default' | 'success' | 'warning';
+
+export type FormValues = {
+  [key: string]: any;
+};
+
+export type FormErrors = Array<{ message: string }>;
+
 export type FormRule = {
   type: string;
   message: string;
   required: boolean;
   trigger: FormTriggerEvent[];
+  validator: (formFields: FormValues, value: any, callback: (message: string) => void) => void;
+};
+export type FormFields = {
+  [key: string]: {
+    name?: string;
+    value?: any;
+    rule?: FormRule;
+    component?: any;
+  };
 };
 export type FormItemProps = {
   prefixCls: string;
@@ -48,10 +64,9 @@ export type ContextProps = FormItemProps & {
     rules: {
       [key: string]: Partial<FormRule>;
     };
-    getFields: () => void;
+    getFields: () => FormFields;
+    getFieldsValues: () => FormValues;
     addField: (field: any) => void;
     removeField: (field: any) => void;
   };
 };
-
-export type CallbackFunction = (valid: boolean) => void;

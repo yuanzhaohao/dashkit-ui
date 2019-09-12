@@ -1,6 +1,6 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
-import { FormProps, FormAlign, CallbackFunction } from './typings';
+import { FormProps, FormAlign, FormFields } from './typings';
 import FormItem from './item';
 import { Provider } from './context';
 
@@ -11,14 +11,7 @@ class Form extends React.Component<Partial<FormProps>> {
     labelAlign: 'right' as FormAlign,
     labelWidth: 100,
   };
-  private fields: {
-    [key: string]: {
-      message?: string;
-      name?: string;
-      value?: any;
-      component?: any;
-    };
-  };
+  private fields: FormFields;
   constructor(props: FormProps) {
     super(props);
     this.fields = {};
@@ -55,6 +48,7 @@ class Form extends React.Component<Partial<FormProps>> {
             labelWidth,
             form: {
               rules,
+              getFieldsValues: this.getFieldsValues,
               getFields: this.getFields,
               addField: this.addField,
               removeField: this.removeField,
@@ -69,16 +63,8 @@ class Form extends React.Component<Partial<FormProps>> {
 
   private handleSubmit = (event: React.FormEvent) => {
     const { onSubmit } = this.props;
-    const { fields } = this;
-    const values = {};
-    const errors = [];
-    Object.keys(fields).forEach(key => {
-      values[key] = fields[key].component.state.value;
-      const error = fields[key].component.checkInvalid();
-      if (error) {
-        errors.push(error);
-      }
-    });
+    const values = this.getFieldsValues();
+    const errors = this.getFiledsErrors();
 
     if (typeof onSubmit === 'function') {
       onSubmit(event, values, errors.length === 0 ? undefined : errors.filter(error => !!error));
@@ -114,6 +100,30 @@ class Form extends React.Component<Partial<FormProps>> {
 
   private getFields = () => {
     return this.fields;
+  };
+
+  private getFieldsValues = () => {
+    const { fields } = this;
+    const values = {};
+    Object.keys(fields).forEach(key => {
+      values[key] = fields[key].component.state.value;
+    });
+
+    return values;
+  };
+
+  private getFiledsErrors = () => {
+    const { fields } = this;
+    const errors = [];
+
+    Object.keys(fields).forEach(key => {
+      const error = fields[key].component.checkInvalid();
+      if (error) {
+        errors.push(error);
+      }
+    });
+
+    return errors;
   };
 }
 

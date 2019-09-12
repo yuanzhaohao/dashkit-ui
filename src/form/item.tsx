@@ -5,6 +5,7 @@ import { createConsumer } from './context';
 import { ContextProps, FormItemProps, FormItemState, FormItemStatus } from './typings';
 import warning from '../utils/warning';
 import { COMPONENT_TYPE, DEFAULT_TRIGGER } from './constants';
+import message from 'src/message';
 
 class FormItem extends React.Component<Partial<ContextProps>, Partial<FormItemState>> {
   public static defaultProps = {
@@ -140,13 +141,28 @@ class FormItem extends React.Component<Partial<ContextProps>, Partial<FormItemSt
           ? Array.from(new Set([...DEFAULT_TRIGGER, ...realRule.trigger]))
           : DEFAULT_TRIGGER;
 
-        if (trigger.indexOf('blur') !== -1) {
-          newProps.onBlur = (...args) => {
-            this.handleBlur();
-            if (child.props.onBlur) {
-              child.props.onBlur(...args);
-            }
-          };
+        if (
+          [COMPONENT_TYPE.Input, COMPONENT_TYPE.Select, COMPONENT_TYPE.Calendar].indexOf(
+            componentType,
+          ) !== -1
+        ) {
+          if (trigger.indexOf('blur') !== -1) {
+            newProps.onBlur = (...args) => {
+              this.handleBlurAndFocus();
+              if (child.props.onBlur) {
+                child.props.onBlur(...args);
+              }
+            };
+          }
+
+          if (trigger.indexOf('focus') !== -1) {
+            newProps.onFocus = (...args) => {
+              this.handleBlurAndFocus();
+              if (child.props.onFocus) {
+                child.props.onFocus(...args);
+              }
+            };
+          }
         }
 
         if (
@@ -207,6 +223,7 @@ class FormItem extends React.Component<Partial<ContextProps>, Partial<FormItemSt
   private handleChange = (value: any) => {
     const rule = this.getRule();
     const required = this.getRequired();
+    const { form } = this.props;
 
     // for Checkbox & Radio
     if (value && value.target) {
@@ -229,9 +246,21 @@ class FormItem extends React.Component<Partial<ContextProps>, Partial<FormItemSt
     }
 
     this.setState(newState);
+    if (typeof rule.validator === 'function') {
+      const values = form.getFieldsValues();
+      rule.validator(values, value, (message: string) => {
+        if (message && required) {
+          this.setState({
+            message,
+            isInvalid: true,
+            status: 'error',
+          });
+        }
+      });
+    }
   };
 
-  private handleBlur = () => {
+  private handleBlurAndFocus = () => {
     const rule = this.getRule();
     const required = this.getRequired();
     const { value } = this.state;

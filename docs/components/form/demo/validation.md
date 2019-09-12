@@ -14,10 +14,6 @@ import { Form, Input, Button, Select, Calendar, Switch, Checkbox, Radio } from '
 const cityOptions = ['Shanghai', 'Beijing', 'Guangzhou', 'Shenzhen'];
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <Form onSubmit={this.handleSubmit} labelWidth={150}>
