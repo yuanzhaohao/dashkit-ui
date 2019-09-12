@@ -32,7 +32,11 @@ export type FormProps = {
   labelAlign: FormAlign;
   labelWidth: number;
   labelSuffix: string;
-  onSubmit: (event?: React.FormEvent, values?: { [key: string]: any }, error?: boolean) => void;
+  onSubmit: (
+    event?: React.FormEvent,
+    values?: { [key: string]: any },
+    error?: Array<{ message: string }>,
+  ) => void;
   onReset: (event?: React.FormEvent) => void;
   rules: {
     [key: string]: Partial<FormRule>;

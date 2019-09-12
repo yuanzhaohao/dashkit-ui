@@ -36,13 +36,13 @@ function fixControlledValue<T>(value: T) {
 }
 
 class Input extends React.Component<InputProps> {
+  public static componentType = 'Input';
   public static defaultProps = {
     prefixCls: 'dk-input',
     size: 'default' as InputSize,
     status: 'default' as InputFormStatus,
     type: 'text',
   };
-  public static componentType = 'Input';
 
   public static getDerivedStateFromProps(nextProps: InputProps) {
     if ('value' in nextProps) {

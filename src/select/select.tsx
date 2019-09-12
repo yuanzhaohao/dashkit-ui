@@ -11,6 +11,7 @@ import Input from '../input';
 class Select extends React.PureComponent<SelectProps, SelectState> {
   public static Option: typeof Option;
   public static OptionGroup: typeof OptionGroup;
+  public static componentType = 'Select';
   public static defaultProps = {
     prefixCls: 'dk-select',
     size: 'default' as SelectSize,

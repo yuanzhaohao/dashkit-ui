@@ -30,10 +30,10 @@ class App extends React.Component {
           <Radio value="top">Top</Radio>
         </Radio.Group>
         <Form labelAlign={align}>
-          <Form.Item label="Name" required>
+          <Form.Item label="Name" name="name" required>
             <Input placeholder="Please input your name" />
           </Form.Item>
-          <Form.Item label="Email">
+          <Form.Item label="Email" name="email">
             <Input placeholder="Please input your email" />
           </Form.Item>
         </Form>

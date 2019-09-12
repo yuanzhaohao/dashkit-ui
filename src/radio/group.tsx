@@ -17,6 +17,7 @@ export type RadioGroupState = {
 };
 
 class RadioGroup extends React.PureComponent<RadioGroupProps, RadioGroupState> {
+  public static componentType = 'RadioGroup';
   public static defaultProps = {
     prefixCls: 'dk-radio',
   };

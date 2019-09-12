@@ -9,6 +9,7 @@ class Form extends React.Component<Partial<FormProps>> {
   public static defaultProps = {
     prefixCls: 'dk-form',
     labelAlign: 'right' as FormAlign,
+    labelWidth: 100,
   };
   private fields: {
     [key: string]: {
@@ -29,6 +30,7 @@ class Form extends React.Component<Partial<FormProps>> {
       prefixCls,
       className,
       onSubmit,
+      labelWidth,
       labelAlign,
       rules,
       ...attributes
@@ -50,6 +52,7 @@ class Form extends React.Component<Partial<FormProps>> {
         <Provider
           value={{
             labelAlign,
+            labelWidth,
             form: {
               rules,
               getFields: this.getFields,
@@ -68,14 +71,17 @@ class Form extends React.Component<Partial<FormProps>> {
     const { onSubmit } = this.props;
     const { fields } = this;
     const values = {};
-    const valids = [];
+    const errors = [];
     Object.keys(fields).forEach(key => {
       values[key] = fields[key].component.state.value;
-      valids.push(fields[key].component.checkValid());
+      const error = fields[key].component.checkInvalid();
+      if (error) {
+        errors.push(error);
+      }
     });
 
     if (typeof onSubmit === 'function') {
-      onSubmit(event, values, valids.every(valid => !valid));
+      onSubmit(event, values, errors.length === 0 ? undefined : errors.filter(error => !!error));
     }
   };
 

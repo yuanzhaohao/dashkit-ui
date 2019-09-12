@@ -45,6 +45,7 @@ export type CalendarState = {
 };
 
 class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
+  public static componentType = 'Calendar';
   public static defaultProps = {
     prefixCls: 'dk-calendar',
     type: 'day',

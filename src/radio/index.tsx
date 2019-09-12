@@ -6,6 +6,8 @@ const Radio = ({ prefixCls = 'dk-radio', ...attributes }: InputProps) => (
   <Item prefixCls={prefixCls} type="radio" {...attributes} />
 );
 
+Radio.componentType = 'Radio';
+
 Radio.Group = Group;
 
 export default Radio;

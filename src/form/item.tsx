@@ -17,7 +17,7 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
     super(props);
     this.state = {
       status: 'default',
-      value: null,
+      value: undefined,
       message: props.rule && props.rule.message ? props.rule.message : '',
       isInValid: false,
     };
@@ -26,8 +26,6 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
   public componentDidMount() {
     const { form, name } = this.props;
     const rule = this.getRule();
-
-    warning(!name, 'Form.Item', '`name` is required parameter`.');
 
     if (form && name) {
       form.addField({
@@ -81,6 +79,7 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
     const newChildren = React.Children.map(children, (child: any) => {
       const { componentType } = child.type;
       if (COMPONENT_TYPE[componentType]) {
+        // console.log(child);
         const newProps = {
           ...child.props,
           status,
@@ -102,6 +101,10 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
               child.props.onBlur(...args);
             }
           };
+        }
+
+        if (componentType === 'CheckboxGroup' || componentType === 'RadioGroup') {
+          newProps.value = value;
         }
 
         return React.cloneElement(child, newProps);
@@ -182,17 +185,25 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
 
   private handleChange = (value: any) => {
     const rule = this.getRule();
-    if (value) {
-      this.setState({
-        status: 'default',
-        isInValid: false,
-        value,
-      });
-    } else {
+
+    // for Checkbox & Radio
+    if (value && value.target) {
+      value = value.target.checked;
+    }
+
+    const isInvalid = Array.isArray(value) ? value.length === 0 : value === undefined;
+
+    if (isInvalid) {
       this.setState({
         status: 'error',
         isInValid: true,
         message: rule.message,
+        value,
+      });
+    } else {
+      this.setState({
+        status: 'default',
+        isInValid: false,
         value,
       });
     }
@@ -217,19 +228,23 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
     }
   };
 
-  private checkValid = () => {
+  private checkInvalid = () => {
     const rule = this.getRule();
     const required = this.getRequired();
+    const { name } = this.props;
     const { value } = this.state;
-    const isInvalid = !!(required && !value);
-    if (isInvalid) {
+    if (required && !value) {
+      warning(false, 'Form.Item.validator', `${name} is invalid.`);
       this.setState({
         message: rule.message,
         status: 'error',
         isInValid: true,
       });
+      return {
+        message: rule.message,
+      };
     }
-    return !isInvalid;
+    return null;
   };
 
   private resetField = () => {

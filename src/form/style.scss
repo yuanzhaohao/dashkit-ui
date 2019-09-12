@@ -9,10 +9,14 @@ $form-prefix: 'dk-form';
 
   &-item {
     margin-bottom: $form-margin-y;
+    min-height: $form-item-height;
     @include clearfix();
 
     &-content {
       position: relative;
+      display: flex;
+      align-items: center;
+      min-height: $form-item-height;
     }
 
     &-label {
