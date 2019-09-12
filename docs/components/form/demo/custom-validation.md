@@ -62,7 +62,6 @@ class App extends React.Component {
   };
 
   handleValidator = (forms, value, callback) => {
-    console.log('call handleValidator', value, forms.email, forms);
     if (value !== forms.email) {
       callback("Two inputs don't match!");
     }
