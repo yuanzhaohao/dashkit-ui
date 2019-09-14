@@ -19,7 +19,11 @@ class App extends React.Component {
           label="Full Name"
           name="name"
           required
-          rule={{ message: 'Please input your name', trigger: [`blur`, `change`] }}
+          rule={{
+            message: 'Please input your name',
+            trigger: [`blur`, `change`],
+            validator: this.handleNameValidator,
+          }}
         >
           <Input placeholder="Full name" />
         </Form.Item>
@@ -27,7 +31,10 @@ class App extends React.Component {
           label="Email"
           name="email"
           required
-          rule={{ message: 'Please input your email' }}
+          rule={{
+            message: 'Please input your email',
+            validator: this.handleEmailValidator,
+          }}
         >
           <Input placeholder="Email" />
         </Form.Item>
@@ -38,7 +45,7 @@ class App extends React.Component {
           rule={{
             message: 'Please input your email',
             trigger: [`focus`, `change`],
-            validator: this.handleValidator,
+            validator: this.handleConfirmValidator,
           }}
         >
           <Input placeholder="Confirm email" />
@@ -58,12 +65,28 @@ class App extends React.Component {
   handleSubmit = (event, values, error) => {
     event.preventDefault();
 
-    console.log(values, error);
+    if (!error) {
+      console.log(values);
+    }
   };
 
-  handleValidator = (forms, value, callback) => {
+  handleEmailValidator = (forms, value, callback) => {
+    const reg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
+
+    if (value && !reg.test(value)) {
+      callback('Email needs to be in validation email format!');
+    }
+  };
+
+  handleConfirmValidator = (forms, value, callback) => {
     if (value !== forms.email) {
       callback("Two inputs don't match!");
+    }
+  };
+
+  handleNameValidator = (forms, value, callback) => {
+    if (value.length < 3) {
+      callback('Full name needs to be at least 3 characters long');
     }
   };
 }

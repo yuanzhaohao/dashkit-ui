@@ -32,7 +32,11 @@ class App extends React.Component {
               label="Full Name"
               name="name"
               required
-              rule={{ message: 'Please input your name', trigger: [`blur`, `change`] }}
+              rule={{
+                message: 'Please input your name',
+                trigger: [`blur`, `change`],
+                validator: this.handleNameValidator,
+              }}
             >
               <Input placeholder="Full name" />
             </Form.Item>
@@ -79,6 +83,13 @@ class App extends React.Component {
   handleValidator = (forms, value, callback) => {
     if (value !== forms.email) {
       callback("Two inputs don't match!");
+    }
+  };
+
+  handleNameValidator = (forms, value, callback) => {
+    console.log(forms.name);
+    if (forms.name && forms.name.length < 3) {
+      callback('Full name needs to be at least 3 characters long');
     }
   };
 
