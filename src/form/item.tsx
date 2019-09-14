@@ -211,19 +211,18 @@ class FormItem extends React.Component<Partial<ContextProps>, Partial<FormItemSt
     return {};
   };
 
-  private getField = () => {
-    const { form, name } = this.props;
-    const required = this.getRequired();
-    if (form && name && required) {
-      return form.getFields()[name];
-    }
-    return null;
-  };
+  // private getField = () => {
+  //   const { form, name } = this.props;
+  //   const required = this.getRequired();
+  //   if (form && name && required) {
+  //     return form.getFields()[name];
+  //   }
+  //   return null;
+  // };
 
   private handleChange = (value: any) => {
     const rule = this.getRule();
     const required = this.getRequired();
-    const { form } = this.props;
 
     // for Checkbox & Radio
     if (value && value.target) {
@@ -246,18 +245,7 @@ class FormItem extends React.Component<Partial<ContextProps>, Partial<FormItemSt
     }
 
     this.setState(newState);
-    if (typeof rule.validator === 'function') {
-      const values = form.getFieldsValues();
-      rule.validator(values, value, (message: string) => {
-        if (message && required) {
-          this.setState({
-            message,
-            isInvalid: true,
-            status: 'error',
-          });
-        }
-      });
-    }
+    this.handleValidator(value);
   };
 
   private handleBlurAndFocus = () => {
@@ -277,6 +265,28 @@ class FormItem extends React.Component<Partial<ContextProps>, Partial<FormItemSt
         isInvalid: false,
       });
     }
+    this.handleValidator(value);
+  };
+
+  private handleValidator = (value: any) => {
+    const { form } = this.props;
+    const rule = this.getRule();
+    const required = this.getRequired();
+    if (typeof rule.validator === 'function') {
+      const values = form.getFieldsValues();
+      let validatorMessage;
+      rule.validator(values, value, (message: string) => {
+        if (message && required) {
+          this.setState({
+            message,
+            isInvalid: true,
+            status: 'error',
+          });
+          validatorMessage = message;
+        }
+      });
+      return validatorMessage;
+    }
   };
 
   private checkInvalid = () => {
@@ -284,16 +294,32 @@ class FormItem extends React.Component<Partial<ContextProps>, Partial<FormItemSt
     const required = this.getRequired();
     const { name } = this.props;
     const { value } = this.state;
-    if (required && !value) {
-      warning(false, 'Form.Item.validator', `${name} is invalid.`);
-      this.setState({
-        message: rule.message,
-        status: 'error',
-        isInvalid: true,
-      });
-      return {
-        message: rule.message,
-      };
+    const isInvalid = Array.isArray(value)
+      ? value.length === 0
+      : value === undefined || value === '';
+    if (required) {
+      const result = [];
+      if (isInvalid) {
+        warning(false, 'Form.Item.validator', `${name} is invalid.`);
+        this.setState({
+          message: rule.message,
+          status: 'error',
+          isInvalid: true,
+        });
+        result.push(rule.message);
+      }
+
+      const message = this.handleValidator(value);
+      if (message) {
+        result.push(message);
+      }
+
+      if (result.length > 0) {
+        return {
+          message: result,
+          name,
+        };
+      }
     }
     return null;
   };

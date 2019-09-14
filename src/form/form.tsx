@@ -118,7 +118,7 @@ class Form extends React.Component<Partial<FormProps>> {
 
     Object.keys(fields).forEach(key => {
       const error = fields[key].component.checkInvalid();
-      if (error) {
+      if (error && error.message) {
         errors.push(error);
       }
     });
