@@ -95,16 +95,42 @@ $btn-prefix: 'dk-btn';
 
   &-icon {
     font-size: $font-size-base;
+
+    &-with-child {
+      margin-right: 6px;
+    }
+
+    &-only {
+      width: $btn-size;
+      height: $btn-size;
+      padding: 0;
+    }
   }
 
-  &-icon-with-child {
-    margin-right: 6px;
-  }
+  &-loading {
+    display: inline-block;
+    width: $btn-loading-size;
+    height: $btn-loading-size;
+    position: relative;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    // border: 2px solid $primary;
+    border-left: 2px solid $white;
+    animation: buttonLoadingRotate 1s infinite linear;
+    box-sizing: border-box;
+    vertical-align: middle;
 
-  &-icon-only {
-    width: $btn-size;
-    height: $btn-size;
-    padding: 0;
+    &-wrapper {
+      display: inline-block;
+    }
+
+    &-default {
+      border-left: 2px solid $primary;
+    }
+
+    &-with-child {
+      margin-right: 6px;
+    }
   }
 
   // Button Sizes
@@ -178,4 +204,14 @@ $btn-prefix: 'dk-btn';
 a.#{$btn-prefix}.disabled,
 fieldset:disabled a.#{$btn-prefix} {
   pointer-events: none;
+}
+
+
+@keyframes buttonLoadingRotate {
+  0% {
+    transform: rotate(120deg)
+  }
+  100% {
+    transform: rotate(-240deg)
+  }
 }

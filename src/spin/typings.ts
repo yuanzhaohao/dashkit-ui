@@ -16,4 +16,5 @@ export type SpinState = {
 export type SpinCircleProps = {
   size?: SpinSize;
   prefixCls?: string;
+  className?: string;
 };
