@@ -114,7 +114,6 @@ $btn-prefix: 'dk-btn';
     position: relative;
     border-radius: 50%;
     border: 2px solid transparent;
-    // border: 2px solid $primary;
     border-left: 2px solid $white;
     animation: buttonLoadingRotate 1s infinite linear;
     box-sizing: border-box;
@@ -130,6 +129,17 @@ $btn-prefix: 'dk-btn';
 
     &-with-child {
       margin-right: 6px;
+    }
+
+    &-large {
+      width: $btn-loading-size-lg;
+      height: $btn-loading-size-lg;
+    }
+
+    &-small {
+      width: $btn-loading-size-sm;
+      height: $btn-loading-size-sm;
+      border-width: 1px;
     }
   }
 

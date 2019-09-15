@@ -14,39 +14,67 @@ import { Button } from 'dashkit-ui';
 ReactDOM.render(
   <div className="button-wrapper">
     <div className="button-list">
-      <Button>Default</Button>
-      <Button loading>Default loading</Button>
+      <Button loading size="large">
+        Default
+      </Button>
+      <Button loading>Default</Button>
+      <Button loading size="small">
+        Default
+      </Button>
     </div>
     <div className="button-list">
-      <Button type="primary" icon="loading">
+      <Button type="primary" size="large" loading>
         Primary
       </Button>
       <Button type="primary" loading>
-        Default loading
+        Primary
+      </Button>
+      <Button type="primary" size="small" loading>
+        Primary
       </Button>
     </div>
     <div className="button-list">
-      <Button type="success">Success</Button>
+      <Button type="success" size="large" loading>
+        success
+      </Button>
       <Button type="success" loading>
-        Success loading
+        success
+      </Button>
+      <Button type="success" size="small" loading>
+        success
       </Button>
     </div>
     <div className="button-list">
-      <Button type="warning">Warning</Button>
+      <Button type="warning" size="large" loading>
+        warning
+      </Button>
       <Button type="warning" loading>
-        Warning loading
+        warning
+      </Button>
+      <Button type="warning" size="small" loading>
+        warning
       </Button>
     </div>
     <div className="button-list">
-      <Button type="danger">Danger</Button>
+      <Button type="danger" size="large" loading>
+        danger
+      </Button>
       <Button type="danger" loading>
-        Danger loading
+        danger
+      </Button>
+      <Button type="danger" size="small" loading>
+        danger
       </Button>
     </div>
     <div className="button-list">
-      <Button type="info">Info</Button>
+      <Button type="info" size="large" loading>
+        info
+      </Button>
       <Button type="info" loading>
-        Info loading
+        info
+      </Button>
+      <Button type="info" size="small" loading>
+        info
       </Button>
     </div>
   </div>,
