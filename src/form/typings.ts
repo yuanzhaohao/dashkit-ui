@@ -52,6 +52,9 @@ export type FormProps = {
     event?: React.FormEvent,
     values?: { [key: string]: any },
     error?: Array<{ message: string }>,
+    forms?: {
+      reset: () => void;
+    },
   ) => void;
   onReset: (event?: React.FormEvent) => void;
   rules: {

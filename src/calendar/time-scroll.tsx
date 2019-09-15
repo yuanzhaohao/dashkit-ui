@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import Scrollbars from '../scrollbar';
+import Scrollbar from '../scrollbar';
 import { rangeNumber } from '../utils/number';
 import { pad } from './utils';
 
@@ -16,7 +16,7 @@ export type TimeScrollState = {
 const itemHeight = 32;
 
 class Time extends React.PureComponent<Partial<TimeScrollProps>, TimeScrollState> {
-  public readonly scrollRef: React.RefObject<Scrollbars>;
+  public readonly scrollRef: React.RefObject<Scrollbar>;
 
   constructor(props: TimeScrollProps) {
     super(props);
@@ -45,7 +45,7 @@ class Time extends React.PureComponent<Partial<TimeScrollProps>, TimeScrollState
     const { prefixCls, value, total = 0 } = this.props;
 
     return (
-      <Scrollbars
+      <Scrollbar
         className={`${prefixCls}-time-scroll`}
         ref={this.scrollRef}
         autoHide={this.state.autoHide}
@@ -64,7 +64,7 @@ class Time extends React.PureComponent<Partial<TimeScrollProps>, TimeScrollState
             </span>
           ))}
         </div>
-      </Scrollbars>
+      </Scrollbar>
     );
   }
 

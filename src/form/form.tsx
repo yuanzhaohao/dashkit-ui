@@ -67,12 +67,22 @@ class Form extends React.Component<Partial<FormProps>> {
     const errors = this.getFiledsErrors();
 
     if (typeof onSubmit === 'function') {
-      onSubmit(event, values, errors.length === 0 ? undefined : errors.filter(error => !!error));
+      onSubmit(event, values, errors.length === 0 ? undefined : errors.filter(error => !!error), {
+        reset: this.reset,
+      });
     }
   };
 
   private handleReset = (event: React.FormEvent) => {
     const { onReset } = this.props;
+
+    this.reset();
+    if (typeof onReset === 'function') {
+      onReset(event);
+    }
+  };
+
+  private reset = () => {
     const { fields } = this;
 
     Object.keys(fields).forEach(key => {
@@ -80,9 +90,6 @@ class Form extends React.Component<Partial<FormProps>> {
         fields[key].component.resetField();
       }
     });
-    if (typeof onReset === 'function') {
-      onReset(event);
-    }
   };
 
   private addField = (field: any) => {

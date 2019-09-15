@@ -9,7 +9,17 @@ subtitle:
 ---
 
 ```js
-import { Form, Input, Button, Select, Calendar, Switch, Checkbox, Radio } from 'dashkit-ui';
+import {
+  Form,
+  Input,
+  Button,
+  Select,
+  Calendar,
+  Switch,
+  Checkbox,
+  Radio,
+  Message,
+} from 'dashkit-ui';
 
 class App extends React.Component {
   render() {
@@ -62,11 +72,15 @@ class App extends React.Component {
     );
   }
 
-  handleSubmit = (event, values, error) => {
+  handleSubmit = (event, values, errors, forms) => {
     event.preventDefault();
 
-    if (!error) {
+    if (!errors) {
       console.log(values);
+      setTimeout(() => {
+        Message.success('Success');
+        forms.reset();
+      }, 2000);
     }
   };
 
@@ -85,7 +99,7 @@ class App extends React.Component {
   };
 
   handleNameValidator = (forms, value, callback) => {
-    if (value.length < 3) {
+    if (value && value.length < 3) {
       callback('Full name needs to be at least 3 characters long');
     }
   };
