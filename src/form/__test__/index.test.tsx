@@ -1,6 +1,4 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import * as TestUtils from 'react-dom/test-utils';
 import * as enzyme from 'enzyme';
 import Form from '..';
 import Input from '../../input';
