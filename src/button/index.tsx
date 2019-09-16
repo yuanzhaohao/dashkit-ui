@@ -57,19 +57,34 @@ class Button extends React.PureComponent<ButtonProps, ButtonState> {
       },
       className,
     );
-    const iconType = loading ? 'loading' : icon;
-    const iconNode = iconType && (
+    const iconNode = !!icon && (
       <Icon
-        type={iconType}
+        type={icon}
         className={classNames(`${prefixCls}-icon`, {
           [`${prefixCls}-icon-with-child`]: !!children,
         })}
       />
     );
+    const loadingNode = !!loading && (
+      <div
+        className={classNames(`${prefixCls}-loading`, {
+          [`${prefixCls}-loading-default`]: type === 'default',
+          [`${prefixCls}-loading-large`]: size === 'large',
+          [`${prefixCls}-loading-small`]: size === 'small',
+          [`${prefixCls}-loading-with-child`]: !!children,
+        })}
+      />
+    );
 
     return (
-      <button {...attibutes} type={htmlType} className={buttonClassName} disabled={disabled}>
+      <button
+        {...attibutes}
+        type={htmlType}
+        className={buttonClassName}
+        disabled={disabled || loading}
+      >
         {iconNode}
+        {loadingNode}
         {children}
       </button>
     );

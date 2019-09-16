@@ -5,8 +5,9 @@ import { createConsumer } from './context';
 import { ContextProps, FormItemProps, FormItemState, FormItemStatus } from './typings';
 import warning from '../utils/warning';
 import { COMPONENT_TYPE, DEFAULT_TRIGGER } from './constants';
+import message from 'src/message';
 
-class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
+class FormItem extends React.Component<Partial<ContextProps>, Partial<FormItemState>> {
   public static defaultProps = {
     prefixCls: 'dk-form',
     theme: 'default' as FormItemStatus,
@@ -16,17 +17,15 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
     super(props);
     this.state = {
       status: 'default',
-      value: null,
+      value: undefined,
       message: props.rule && props.rule.message ? props.rule.message : '',
-      isInValid: false,
+      isInvalid: false,
     };
   }
 
   public componentDidMount() {
     const { form, name } = this.props;
     const rule = this.getRule();
-
-    warning(!name, 'Form.Item', '`name` is required parameter`.');
 
     if (form && name) {
       form.addField({
@@ -60,7 +59,7 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
       status: statusProp,
       ...attributes
     } = this.props;
-    const { message, value, status, isInValid } = this.state;
+    const { message, isInvalid } = this.state;
     const required = this.getRequired();
 
     const itemClassName = classNames(
@@ -76,42 +75,12 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
       [`${prefixCls}-item-label-required`]: required,
       [`${prefixCls}-item-label-${labelAlign}`]: true,
     });
-    const realRule = this.getRule();
 
-    const newChildren = React.Children.map(children, (child: any) => {
-      const { componentType } = child.type;
-      if (COMPONENT_TYPE[componentType]) {
-        const newProps = {
-          ...child.props,
-          status,
-          onChange: (value: any) => {
-            this.handleChange(value);
-            if (child.props.onChange) {
-              child.props.onChange(value);
-            }
-          },
-        };
-        const trigger = Array.isArray(realRule.trigger)
-          ? Array.from(new Set([...DEFAULT_TRIGGER, ...realRule.trigger]))
-          : DEFAULT_TRIGGER;
-
-        if (trigger.indexOf('blur') !== -1) {
-          newProps.onBlur = (...args) => {
-            this.handleBlur();
-            if (child.props.onBlur) {
-              child.props.onBlur(...args);
-            }
-          };
-        }
-
-        return React.cloneElement(child, newProps);
-      }
-      return child;
-    });
+    const newChildren = this.getChildren();
 
     const messageNode = (
       <CSSTransition
-        in={!!(message && isInValid)}
+        in={!!(message && isInvalid)}
         timeout={216}
         unmountOnExit
         classNames={`${prefixCls}-item-message`}
@@ -145,6 +114,78 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
     );
   }
 
+  private getChildren = () => {
+    const realRule = this.getRule();
+    const { children } = this.props;
+    const { value, status } = this.state;
+
+    return React.Children.map(children, (child: any) => {
+      const { componentType } = child.type;
+      if (COMPONENT_TYPE[componentType]) {
+        const newProps = {
+          ...child.props,
+          status,
+          onChange: (value: any) => {
+            this.handleChange(value);
+            if (child.props.onChange) {
+              child.props.onChange(value);
+            }
+          },
+        };
+        const trigger = Array.isArray(realRule.trigger)
+          ? Array.from(new Set([...DEFAULT_TRIGGER, ...realRule.trigger]))
+          : DEFAULT_TRIGGER;
+
+        if (
+          [COMPONENT_TYPE.Input, COMPONENT_TYPE.Select, COMPONENT_TYPE.Calendar].indexOf(
+            componentType,
+          ) !== -1
+        ) {
+          if (trigger.indexOf('blur') !== -1) {
+            newProps.onBlur = (...args) => {
+              this.handleBlurAndFocus();
+              if (child.props.onBlur) {
+                child.props.onBlur(...args);
+              }
+            };
+          }
+
+          if (trigger.indexOf('focus') !== -1) {
+            newProps.onFocus = (...args) => {
+              this.handleBlurAndFocus();
+              if (child.props.onFocus) {
+                child.props.onFocus(...args);
+              }
+            };
+          }
+        }
+
+        if (
+          [
+            COMPONENT_TYPE.CheckboxGroup,
+            COMPONENT_TYPE.RadioGroup,
+            COMPONENT_TYPE.Input,
+            COMPONENT_TYPE.Select,
+            COMPONENT_TYPE.Calendar,
+          ].indexOf(componentType) !== -1
+        ) {
+          newProps.value = value;
+        }
+
+        if (
+          [COMPONENT_TYPE.Switch, COMPONENT_TYPE.Checkbox, COMPONENT_TYPE.Radio].indexOf(
+            componentType,
+          ) !== -1
+        ) {
+          newProps.checked = !!value;
+        }
+
+        return React.cloneElement(child, newProps);
+      }
+      return child;
+    });
+  };
+
   private getRequired = () => {
     const rule = this.getRule();
     const { required } = this.props;
@@ -166,34 +207,35 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
     return {};
   };
 
-  private getField = () => {
-    const { form, name } = this.props;
-    const required = this.getRequired();
-    if (form && name && required) {
-      return form.getFields()[name];
-    }
-    return null;
-  };
-
   private handleChange = (value: any) => {
     const rule = this.getRule();
-    if (value) {
-      this.setState({
-        status: 'default',
-        isInValid: false,
-        value,
-      });
-    } else {
-      this.setState({
-        status: 'error',
-        isInValid: true,
-        message: rule.message,
-        value,
-      });
+    const required = this.getRequired();
+
+    // for Checkbox & Radio
+    if (value && value.target) {
+      value = value.target.checked;
     }
+
+    const isInvalid = Array.isArray(value)
+      ? value.length === 0
+      : value === undefined || value === '';
+    const newState: Partial<FormItemState> = {
+      isInvalid,
+      value,
+    };
+
+    if (required) {
+      newState.message = rule.message;
+      newState.status = isInvalid ? 'error' : 'default';
+    } else {
+      newState.status = 'default';
+    }
+
+    this.setState(newState);
+    this.handleValidator(value);
   };
 
-  private handleBlur = () => {
+  private handleBlurAndFocus = () => {
     const rule = this.getRule();
     const required = this.getRequired();
     const { value } = this.state;
@@ -202,36 +244,78 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
       this.setState({
         message: rule.message,
         status: 'error',
-        isInValid: true,
+        isInvalid: true,
       });
     } else {
       this.setState({
         status: 'default',
-        isInValid: false,
+        isInvalid: false,
       });
+    }
+    this.handleValidator(value);
+  };
+
+  private handleValidator = (value: any) => {
+    const { form } = this.props;
+    const rule = this.getRule();
+    const required = this.getRequired();
+    if (typeof rule.validator === 'function') {
+      const values = form.getFieldsValues();
+      let validatorMessage;
+      rule.validator(values, value, (message: string) => {
+        if (message && required) {
+          this.setState({
+            message,
+            isInvalid: true,
+            status: 'error',
+          });
+          validatorMessage = message;
+        }
+      });
+      return validatorMessage;
     }
   };
 
-  private checkValid = () => {
+  private checkInvalid = () => {
     const rule = this.getRule();
     const required = this.getRequired();
+    const { name } = this.props;
     const { value } = this.state;
-    const isInvalid = !!(required && !value);
-    if (isInvalid) {
-      this.setState({
-        message: rule.message,
-        status: 'error',
-        isInValid: true,
-      });
+    const isInvalid = Array.isArray(value)
+      ? value.length === 0
+      : value === undefined || value === '';
+    if (required) {
+      const result = [];
+      if (isInvalid) {
+        warning(false, 'Form.Item.validator', `${name} is invalid.`);
+        this.setState({
+          message: rule.message,
+          status: 'error',
+          isInvalid: true,
+        });
+        result.push(rule.message);
+      }
+
+      const message = this.handleValidator(value);
+      if (message) {
+        result.push(message);
+      }
+
+      if (result.length > 0) {
+        return {
+          message: result,
+          name,
+        };
+      }
     }
-    return !isInvalid;
+    return null;
   };
 
   private resetField = () => {
     this.setState({
       status: 'default',
-      isInValid: false,
-      value: null,
+      isInvalid: false,
+      value: undefined,
     });
   };
 }

@@ -1,11 +1,11 @@
 ---
-order: 0
+order: 2
 title:
-  zh-CN: 基本
-  en-US: Basic
+  zh-CN: 校验
+  en-US: Validation
 subtitle:
-  zh-CN: 基本用法，可以用`defaultChecked`来定义checkbox默认的值。
-  en-US: It includes all kinds of input items, such as input, select, radio and checkbox.
+  zh-CN: 校验，可以用`rule`来定义校验规则。
+  en-US: Form component allows you to verify your data, helping you find and correct errors.
 ---
 
 ```js
@@ -17,28 +17,45 @@ class App extends React.Component {
   render() {
     return (
       <Form onSubmit={this.handleSubmit} labelWidth={150}>
-        <Form.Item label="Name" name="name">
+        <Form.Item
+          label="Name"
+          name="name"
+          required
+          rule={{ message: 'Please input your name', trigger: [`blur`, `change`] }}
+        >
           <Input placeholder="Please input your name" />
         </Form.Item>
-        <Form.Item label="Email" name="email">
+        <Form.Item
+          label="Email"
+          name="email"
+          required
+          rule={{ message: 'Please input your email' }}
+        >
           <Input placeholder="Please input your email" />
         </Form.Item>
-        <Form.Item label="Zone" name="zone">
+        <Form.Item label="Zone" name="zone" required rule={{ message: 'Please select your zone' }}>
           <Select placeholder="Please select your zone">
             <Select.Option value="zone1">Zone 1</Select.Option>
             <Select.Option value="zone2">Zone 2</Select.Option>
           </Select>
         </Form.Item>
-        <Form.Item label="Date" name="date">
-          <Calendar />
-        </Form.Item>
-        <Form.Item label="Range Time" name="rangTime">
+        <Form.Item
+          label="Range Time"
+          name="rangTime"
+          required
+          rule={{ message: 'Please select rang time' }}
+        >
           <Calendar type="datetime" range />
         </Form.Item>
         <Form.Item label="Switch" name="switch">
           <Switch />
         </Form.Item>
-        <Form.Item label="CheckboxGroup" name="checkboxGroup">
+        <Form.Item
+          required
+          label="CheckboxGroup"
+          name="checkboxGroup"
+          rule={{ message: 'Please select your city' }}
+        >
           <Checkbox.Group options={cityOptions}>
             {cityOptions.map((city, index) => (
               <Checkbox key={index} value={city}>
@@ -50,7 +67,12 @@ class App extends React.Component {
         <Form.Item label="Checkbox" name="checkbox">
           <Checkbox>checkbox</Checkbox>
         </Form.Item>
-        <Form.Item label="RadioGroup" name="radioGroup">
+        <Form.Item
+          required
+          label="RadioGroup"
+          name="radioGroup"
+          rule={{ message: 'Please select your radio' }}
+        >
           <Radio.Group>
             <Radio value={1}>A</Radio>
             <Radio value={2}>B</Radio>

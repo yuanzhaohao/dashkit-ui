@@ -20,6 +20,7 @@ export interface SwitchState {
   checked?: boolean;
 }
 class Switch extends React.Component<SwitchProps, SwitchState> {
+  public static componentType = 'Switch';
   public static defaultProps = {
     disabled: false,
     prefixCls: 'dk-switch',
@@ -58,7 +59,7 @@ class Switch extends React.Component<SwitchProps, SwitchState> {
       className,
     );
     return (
-      <button className={switchClassName} onClick={this.handleChange} {...attributes}>
+      <button className={switchClassName} type="button" onClick={this.handleChange} {...attributes}>
         <span className={`${prefixCls}-inner`}>
           {checked ? checkedChildren : unCheckedChildren}
         </span>
