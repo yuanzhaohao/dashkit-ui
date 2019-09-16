@@ -14,30 +14,22 @@ it('calls onSubmit prop function when form is submitted', () => {
   expect(onSubmitFn).toHaveBeenCalledTimes(1);
 });
 
-test('should make contact on prop and className', () => {
-  const wrapper = enzyme.mount(
-    <Form labelAlign="left">
-      <Form.Item label="Name" name="name" required>
-        <Input placeholder="Please input your name" />
-      </Form.Item>
-    </Form>,
-  );
-  wrapper.find(`.${prefixCls}-item-label`).forEach(label => {
-    const align = label.prop('labelAlign');
-    console.log(align);
-    expect(label.hasClass(`${prefixCls}-item-label-${align}`)).toBeTruthy();
-  });
-});
-
 it('reads and sets input value', () => {
+  const onSubmit = (event, values, errors) => {
+    expect(values.name).toEqual('Yuan Zhaohao');
+    const isError = errors && errors.length;
+    expect(isError).toBeTruthy();
+  };
   const wrapper = enzyme.mount(
-    <Form>
+    <Form onSubmit={onSubmit}>
       <Form.Item label="First Name" name="name">
+        <Input name="name" />
+      </Form.Item>
+      <Form.Item label="Email" name="email" required>
         <Input />
       </Form.Item>
     </Form>,
   );
-  wrapper.find('input').simulate('change', { target: { value: 'Yuan Zhaohao' } });
-  console.log(wrapper);
-  expect(wrapper.fields.name.value).toEqual('Yuan Zhaohao');
+  wrapper.find('input[name="name"]').simulate('change', { target: { value: 'Yuan Zhaohao' } });
+  wrapper.find('form').simulate('submit');
 });
