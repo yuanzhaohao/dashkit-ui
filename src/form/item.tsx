@@ -9,7 +9,6 @@ import { COMPONENT_TYPE, DEFAULT_TRIGGER } from './constants';
 class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
   public static defaultProps = {
     prefixCls: 'dk-form',
-    labelWidth: 100,
     theme: 'default' as FormItemStatus,
   };
 
@@ -67,6 +66,7 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
     const itemClassName = classNames(
       {
         [`${prefixCls}-item`]: true,
+        [`${prefixCls}-item-top`]: labelAlign === 'top',
         [`${prefixCls}-item-required`]: this.getRequired(),
       },
       className,
@@ -137,12 +137,7 @@ class FormItem extends React.Component<Partial<ContextProps>, FormItemState> {
         >
           {label}
         </div>
-        <div
-          className={`${prefixCls}-item-content`}
-          style={{
-            marginLeft: labelAlign !== 'top' ? labelWidth : 0,
-          }}
-        >
+        <div className={`${prefixCls}-item-content`}>
           {newChildren}
           {messageNode}
         </div>
