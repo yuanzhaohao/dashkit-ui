@@ -19,6 +19,7 @@ $form-prefix: 'dk-form';
     &-content {
       position: relative;
       display: flex;
+      flex: 1;
       align-items: center;
       min-height: $form-item-height;
     }

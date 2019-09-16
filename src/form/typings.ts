@@ -29,6 +29,7 @@ export type FormItemProps = {
   required: boolean;
   labelAlign: FormAlign;
   labelWidth: number;
+  labelClassName: string;
   label: string;
   name: string;
   status: FormItemStatus;

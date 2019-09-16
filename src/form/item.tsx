@@ -5,7 +5,6 @@ import { createConsumer } from './context';
 import { ContextProps, FormItemProps, FormItemState, FormItemStatus } from './typings';
 import warning from '../utils/warning';
 import { COMPONENT_TYPE, DEFAULT_TRIGGER } from './constants';
-import message from 'src/message';
 
 class FormItem extends React.Component<Partial<ContextProps>, Partial<FormItemState>> {
   public static defaultProps = {
@@ -53,9 +52,11 @@ class FormItem extends React.Component<Partial<ContextProps>, Partial<FormItemSt
       className,
       labelAlign,
       labelWidth,
+      labelClassName,
       name,
       label,
       rule,
+      form,
       status: statusProp,
       ...attributes
     } = this.props;
@@ -70,11 +71,14 @@ class FormItem extends React.Component<Partial<ContextProps>, Partial<FormItemSt
       },
       className,
     );
-    const labelClassName = classNames({
-      [`${prefixCls}-item-label`]: true,
-      [`${prefixCls}-item-label-required`]: required,
-      [`${prefixCls}-item-label-${labelAlign}`]: true,
-    });
+    const labelClsName = classNames(
+      {
+        [`${prefixCls}-item-label`]: true,
+        [`${prefixCls}-item-label-required`]: required,
+        [`${prefixCls}-item-label-${labelAlign}`]: true,
+      },
+      labelClassName,
+    );
 
     const newChildren = this.getChildren();
 
@@ -99,7 +103,7 @@ class FormItem extends React.Component<Partial<ContextProps>, Partial<FormItemSt
     return (
       <div className={itemClassName} {...attributes}>
         <div
-          className={labelClassName}
+          className={labelClsName}
           style={{
             width: labelWidth,
           }}
