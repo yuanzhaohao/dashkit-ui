@@ -110,7 +110,7 @@ class FormItem extends React.Component<Partial<ContextProps>, Partial<FormItemSt
         >
           {label}
         </div>
-        <div className={`${prefixCls}-item-content`}>
+        <div className={`${prefixCls}-item-control`}>
           {newChildren}
           {messageNode}
         </div>
