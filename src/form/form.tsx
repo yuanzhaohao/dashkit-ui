@@ -85,6 +85,8 @@ class Form extends React.Component<Partial<FormProps>> {
   private reset = () => {
     const { fields } = this;
 
+    console.log(fields);
+
     Object.keys(fields).forEach(key => {
       if (fields[key] && fields[key].component) {
         fields[key].component.resetField();

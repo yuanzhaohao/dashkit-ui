@@ -168,8 +168,9 @@ class FormItem extends React.Component<Partial<ContextProps>, Partial<FormItemSt
         if (
           [
             COMPONENT_TYPE.CheckboxGroup,
-            COMPONENT_TYPE.Select,
             COMPONENT_TYPE.RadioGroup,
+            COMPONENT_TYPE.Input,
+            COMPONENT_TYPE.Select,
             COMPONENT_TYPE.Calendar,
           ].indexOf(componentType) !== -1
         ) {
@@ -210,15 +211,6 @@ class FormItem extends React.Component<Partial<ContextProps>, Partial<FormItemSt
     }
     return {};
   };
-
-  // private getField = () => {
-  //   const { form, name } = this.props;
-  //   const required = this.getRequired();
-  //   if (form && name && required) {
-  //     return form.getFields()[name];
-  //   }
-  //   return null;
-  // };
 
   private handleChange = (value: any) => {
     const rule = this.getRule();
