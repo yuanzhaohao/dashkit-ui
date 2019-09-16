@@ -10,7 +10,7 @@ class Form extends React.Component<Partial<FormProps>> {
     prefixCls: 'dk-form',
     labelAlign: 'right' as FormAlign,
   };
-  private fields: FormFields;
+  public fields: FormFields;
   constructor(props: FormProps) {
     super(props);
     this.fields = {};

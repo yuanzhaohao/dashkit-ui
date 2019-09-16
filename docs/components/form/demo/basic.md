@@ -15,6 +15,7 @@ const cityOptions = ['Shanghai', 'Beijing', 'Guangzhou', 'Shenzhen'];
 
 class App extends React.Component {
   render() {
+    console.log(<Form />);
     return (
       <Form onSubmit={this.handleSubmit} labelWidth={150}>
         <Form.Item label="Name" name="name">

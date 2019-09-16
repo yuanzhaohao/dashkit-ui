@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 import { CSSTransition } from 'react-transition-group';
-import { Icon } from 'dashkit-ui';
+import Icon from '../icon';
 
 export type AlertType = 'default' | 'success' | 'error' | 'warning' | 'info' | 'loading';
 
