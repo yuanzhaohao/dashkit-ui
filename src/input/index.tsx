@@ -3,6 +3,7 @@ import * as classNames from 'classnames';
 import Icon from '../icon';
 
 export type InputSize = 'small' | 'default' | 'large';
+export type InputFormStatus = 'error' | 'default' | 'success' | 'warning';
 
 export type InputProps = {
   className?: string;
@@ -13,6 +14,7 @@ export type InputProps = {
   value?: string;
   defaultValue?: string;
   placeholder?: string;
+  status?: InputFormStatus;
   type?: 'text' | 'password' | 'number';
   digits?: number;
   prefix?: string;
@@ -34,9 +36,11 @@ function fixControlledValue<T>(value: T) {
 }
 
 class Input extends React.Component<InputProps> {
+  public static componentType = 'Input';
   public static defaultProps = {
     prefixCls: 'dk-input',
     size: 'default' as InputSize,
+    status: 'default' as InputFormStatus,
     type: 'text',
   };
 
@@ -48,7 +52,6 @@ class Input extends React.Component<InputProps> {
     }
     return null;
   }
-
   constructor(props: InputProps) {
     super(props);
     this.state = {
@@ -70,6 +73,7 @@ class Input extends React.Component<InputProps> {
       suffixClassName,
       wrapperClassName,
       wrapperRef,
+      status,
       ...attributes
     } = this.props;
     const value = this.props.value;
@@ -80,6 +84,7 @@ class Input extends React.Component<InputProps> {
         [`${prefixCls}-small`]: size === 'small',
         [`${prefixCls}-prefix`]: prefix,
         [`${prefixCls}-suffix`]: suffix,
+        [`${prefixCls}-${status}`]: status !== 'default',
       },
       className,
     );

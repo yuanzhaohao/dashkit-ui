@@ -29,7 +29,7 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
   public static getDerivedStateFromProps(nextProps: AlertProps) {
     if ('dismiss' in nextProps) {
       return {
-        dismiss: nextProps.dismiss,
+        dismiss: !!nextProps.dismiss,
       };
     }
     return null;
@@ -42,7 +42,16 @@ class Alert extends React.PureComponent<AlertProps, AlertState> {
   }
 
   public render() {
-    const { prefixCls, className, children, closable, icon, type, ...attributes } = this.props;
+    const {
+      prefixCls,
+      className,
+      children,
+      closable,
+      icon,
+      type,
+      dismiss: dismissProp,
+      ...attributes
+    } = this.props;
     const iconType: { [key: string]: string } = {
       success: 'check-circle',
       error: 'x-circle',

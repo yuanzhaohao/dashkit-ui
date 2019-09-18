@@ -37,6 +37,13 @@ $prefix-cls: 'dk-input';
     font-size: $font-size-lg;
   }
 
+  @each $type,
+  $color in $input-type-colors {
+    &-#{$type} {
+      @include input-variant($color);
+    }
+  }
+
   &::placeholder {
     color: $input-placeholder-color;
     opacity: 1;

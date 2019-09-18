@@ -1,0 +1,100 @@
+@import '../style/functions.scss';
+@import '../style/theme.scss';
+@import '../style/mixins.scss';
+
+$form-prefix: 'dk-form';
+
+.#{$form-prefix} {
+  @include reset-component();
+
+  &-item {
+    display: flex;
+    margin-bottom: $form-margin-y;
+    min-height: $form-item-height;
+
+    &-top {
+      flex-direction: column;
+    }
+
+    &-control {
+      position: relative;
+      display: flex;
+      flex: 1;
+      align-items: center;
+      min-height: $form-item-height;
+    }
+
+    &-label {
+      display: flex;
+      width: 100px;
+      height: $form-label-height;
+      padding: $form-label-padding-y $form-label-padding-x $form-label-padding-y 0;
+      line-height: 1;
+      vertical-align: middle;
+      align-items: center;
+    }
+
+    &-label-right {
+      justify-content: flex-end;
+    }
+
+    &-label-left {
+      justify-content: flex-start;
+    }
+
+    &-label-top {
+      float: none;
+      height: auto;
+      display: inline-block;
+      text-align: left;
+      padding: 0 0 $form-label-padding-y;
+    }
+
+    &-label-required {
+      &::before {
+        content: '*';
+        color: $red;
+        margin-right: 4px;
+      }
+    }
+
+    &-message {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      padding-top: $form-message-padding-y;
+      font-size: $form-message-font-size;
+      line-height: 1;
+      transform-origin: 0 0;
+
+      &-enter {
+        opacity: 0;
+        transform: scaleY(0);
+      }
+
+      &-enter-active {
+        opacity: 1;
+        transform: scaleY(1);
+        transition: transform 0.216s, opacity 0.216s ease-in;
+      }
+
+      &-exit {
+        opacity: 1;
+        transform: scaleY(1);
+      }
+
+      &-exit-active {
+        opacity: 0;
+        transform: scaleY(0);
+        transition: transform 0.216s, opacity 0.216s ease-out;
+      }
+
+      @each $type,
+      $color in $input-type-colors {
+        &-#{$type} {
+          color: $color;
+        }
+      }
+    }
+  }
+}

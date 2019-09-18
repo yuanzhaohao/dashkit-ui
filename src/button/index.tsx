@@ -3,12 +3,14 @@ import * as React from 'react';
 import Icon from '../icon';
 
 export type ButtonSize = 'small' | 'default' | 'large';
+export type ButtonHtmlType = 'submit' | 'button' | 'reset';
 export type ButtonType = 'default' | 'primary' | 'success' | 'danger' | 'warning' | 'info' | 'link';
 export type ButtonProps = {
   prefixCls?: string;
   className?: string;
   size?: ButtonSize;
   type?: ButtonType;
+  htmlType?: ButtonHtmlType;
   outline?: boolean;
   round?: boolean;
   disabled?: boolean;
@@ -25,6 +27,7 @@ class Button extends React.PureComponent<ButtonProps, ButtonState> {
     prefixCls: 'dk-btn',
     size: 'default' as ButtonSize,
     type: 'default' as ButtonType,
+    htmlType: 'button' as ButtonHtmlType,
   };
 
   public render() {
@@ -39,6 +42,7 @@ class Button extends React.PureComponent<ButtonProps, ButtonState> {
       disabled,
       icon,
       loading,
+      htmlType,
       ...attibutes
     } = this.props;
     const buttonClassName = classNames(
@@ -53,19 +57,34 @@ class Button extends React.PureComponent<ButtonProps, ButtonState> {
       },
       className,
     );
-    const iconType = loading ? 'loading' : icon;
-    const iconNode = iconType && (
+    const iconNode = !!icon && (
       <Icon
-        type={iconType}
+        type={icon}
         className={classNames(`${prefixCls}-icon`, {
           [`${prefixCls}-icon-with-child`]: !!children,
         })}
       />
     );
+    const loadingNode = !!loading && (
+      <div
+        className={classNames(`${prefixCls}-loading`, {
+          [`${prefixCls}-loading-default`]: type === 'default',
+          [`${prefixCls}-loading-large`]: size === 'large',
+          [`${prefixCls}-loading-small`]: size === 'small',
+          [`${prefixCls}-loading-with-child`]: !!children,
+        })}
+      />
+    );
 
     return (
-      <button {...attibutes} className={buttonClassName} disabled={disabled}>
+      <button
+        {...attibutes}
+        type={htmlType}
+        className={buttonClassName}
+        disabled={disabled || loading}
+      >
         {iconNode}
+        {loadingNode}
         {children}
       </button>
     );

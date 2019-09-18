@@ -45,6 +45,7 @@ export type CalendarState = {
 };
 
 class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
+  public static componentType = 'Calendar';
   public static defaultProps = {
     prefixCls: 'dk-calendar',
     type: 'day',
@@ -58,7 +59,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
     if ('visible' in nextProps) {
       state.visible = !!nextProps.visible;
     }
-    if ('value' in nextProps && nextProps.value) {
+    if ('value' in nextProps) {
       if (isArray(nextProps.value)) {
         if (isDate(nextProps.value[0]) && isDate(nextProps.value[1])) {
           state.value = nextProps.value;
@@ -67,6 +68,9 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
       } else if (isDate(nextProps.value)) {
         state.value = nextProps.value;
         state.inputValue = nextProps.value;
+      } else if (nextProps.value === undefined) {
+        state.inputValue = nextProps.range ? [] : '';
+        state.value = nextProps.range ? [] : '';
       }
     }
     return state;
@@ -90,7 +94,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
 
   public render() {
     const { className, prefixCls, type, range, disabled, onChange, ...attributes } = this.props;
-    const { value, position, inputValue, visible } = this.state;
+    const { position, inputValue, visible } = this.state;
     const placeholder = this.getPlaceholder();
     const calendarClassName = classNames(
       {
@@ -119,6 +123,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
         </div>
       </CSSTransition>
     );
+    const format = this.getFormat();
 
     return (
       <span {...attributes} className={calendarClassName} ref={this.calendarElement}>
@@ -127,14 +132,14 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
             <input
               placeholder={placeholder[0]}
               onFocus={this.handleInputFocus}
-              value={inputValue[0]}
+              value={isDate(inputValue[0]) ? formatDate(inputValue[0], format) : inputValue[0]}
               onChange={this.handleInputChange.bind(this, 0)}
             />
             <span>~</span>
             <input
               placeholder={placeholder[1]}
               onFocus={this.handleInputFocus}
-              value={inputValue[1]}
+              value={isDate(inputValue[1]) ? formatDate(inputValue[1], format) : inputValue[1]}
               onChange={this.handleInputChange.bind(this, 1)}
             />
           </div>
@@ -143,7 +148,7 @@ class Calendar extends React.PureComponent<CalendarProps, CalendarState> {
             className={`${prefixCls}-input`}
             placeholder={placeholder}
             onFocus={this.handleInputFocus}
-            value={inputValue}
+            value={isDate(inputValue) ? formatDate(inputValue, format) : inputValue}
             onChange={this.handleInputChange}
           />
         )}

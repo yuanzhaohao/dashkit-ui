@@ -1,7 +1,7 @@
 {
   "name": "dashkit-ui",
   "description": "UI Components built on React.",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "main": "es/index.js",
   "module": "es/index.js",
   "files": [
@@ -59,12 +59,14 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.4.5",
+    "@types/warning": "^3.0.0",
     "classnames": "^2.2.5",
     "create-react-context": "^0.2.3",
     "lodash-es": "^4.17.11",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-transition-group": "^2.4.0"
+    "react-transition-group": "^2.4.0",
+    "warning": "^4.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
@@ -98,7 +100,7 @@
     "file-loader": "^1.1.11",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "fs-extra": "^6.0.1",
-    "gh-pages": "^2.1.0",
+    "gh-pages": "^2.1.1",
     "glob": "^7.1.2",
     "happypack": "^5.0.0",
     "html-webpack-plugin": "^2.30.1",

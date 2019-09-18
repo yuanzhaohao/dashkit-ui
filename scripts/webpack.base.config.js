@@ -37,6 +37,7 @@ const createHappypackPlugin = () => {
         loader: 'sass-loader',
         options: {
           data: "$icon-base-url: '//yuanzhaohao.github.io/dashkit-fonts';",
+          // data: "$icon-base-url: '/static/fonts';",
         },
       },
     ]),

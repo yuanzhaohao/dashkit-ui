@@ -19,6 +19,7 @@ export type CheckboxGroupState = {
 };
 
 class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGroupState> {
+  public static componentType = 'CheckboxGroup';
   public static defaultProps = {
     prefixCls: 'dk-checkbox',
     value: [],
@@ -28,9 +29,13 @@ class CheckboxGroup extends React.PureComponent<CheckboxGroupProps, CheckboxGrou
     nextProps: CheckboxGroupProps,
     prevState: CheckboxGroupState,
   ) {
-    if (!isEqual(nextProps.value, prevState.options)) {
+    let newValue = nextProps.value;
+    if (!Array.isArray(newValue)) {
+      newValue = [];
+    }
+    if (!isEqual(newValue, prevState.options)) {
       return {
-        options: nextProps.value,
+        options: newValue,
       };
     }
     return null;

@@ -1,19 +1,8 @@
 import * as classNames from 'classnames';
 import * as React from 'react';
+import { SpinSize, SpinProps, SpinState } from './typings';
+import Circle from './circle';
 
-export type SpinSize = 'small' | 'default' | 'large';
-export type SpinProps = {
-  spinning?: boolean;
-  className?: string;
-  wrapperClassName?: string;
-  size?: SpinSize;
-  delay?: number;
-  text?: string;
-  prefixCls?: string;
-};
-export interface SpinState {
-  spinning?: boolean;
-}
 class Spin extends React.Component<SpinProps, SpinState> {
   public static defaultProps = {
     prefixCls: 'dk-spin',
@@ -98,17 +87,10 @@ class Spin extends React.Component<SpinProps, SpinState> {
         [`${prefixCls}-spinning`]: spinning,
       },
     ]);
-    const circleClassName = classNames([
-      `${prefixCls}-circle`,
-      {
-        [`${prefixCls}-large`]: size === 'large',
-        [`${prefixCls}-small`]: size === 'small',
-      },
-    ]);
 
     const spinElement = (
       <div className={spinClassName}>
-        <div className={circleClassName} />
+        <Circle prefixCls={prefixCls} size={size} />
         {text ? <div className={`${prefixCls}-text`}>{text}</div> : null}
       </div>
     );
