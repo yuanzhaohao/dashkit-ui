@@ -9,9 +9,8 @@ class Form extends React.Component<Partial<FormProps>> {
   public static defaultProps = {
     prefixCls: 'dk-form',
     labelAlign: 'right' as FormAlign,
-    labelWidth: 100,
   };
-  private fields: FormFields;
+  public fields: FormFields;
   constructor(props: FormProps) {
     super(props);
     this.fields = {};
@@ -84,8 +83,6 @@ class Form extends React.Component<Partial<FormProps>> {
 
   private reset = () => {
     const { fields } = this;
-
-    console.log(fields);
 
     Object.keys(fields).forEach(key => {
       if (fields[key] && fields[key].component) {

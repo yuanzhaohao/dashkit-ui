@@ -2,6 +2,7 @@
 @import '../style/theme.scss';
 @import '../style/mixins.scss';
 
+$icon-base-url: '//yuanzhaohao.github.io/dashkit-fonts';
 @font-face {
   font-family: 'feather';
   src: url('#{$icon-base-url}/feather.eot');

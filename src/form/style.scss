@@ -8,35 +8,38 @@ $form-prefix: 'dk-form';
   @include reset-component();
 
   &-item {
+    display: flex;
     margin-bottom: $form-margin-y;
     min-height: $form-item-height;
-    @include clearfix();
 
-    &-content {
+    &-top {
+      flex-direction: column;
+    }
+
+    &-control {
       position: relative;
       display: flex;
+      flex: 1;
       align-items: center;
       min-height: $form-item-height;
     }
 
     &-label {
-      // display: flex;
-      float: left;
+      display: flex;
+      width: 100px;
       height: $form-label-height;
       padding: $form-label-padding-y $form-label-padding-x $form-label-padding-y 0;
-      // text-align: right;
       line-height: 1;
       vertical-align: middle;
-      // justify-content: flex-end;
-      // align-items: center;
+      align-items: center;
     }
 
     &-label-right {
-      text-align: right;
+      justify-content: flex-end;
     }
 
     &-label-left {
-      text-align: left;
+      justify-content: flex-start;
     }
 
     &-label-top {
