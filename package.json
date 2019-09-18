@@ -1,7 +1,7 @@
 {
   "name": "dashkit-ui",
   "description": "UI Components built on React.",
-  "version": "0.0.18-beta.3",
+  "version": "0.0.18",
   "main": "es/index.js",
   "module": "es/index.js",
   "files": [
