@@ -13,7 +13,7 @@ export type SelectProps = {
   placeholder?: string;
   prefix?: string;
   prefixClassName?: string;
-  onChange?: (options: string[]) => void;
+  onChange?: (options: ValueType) => void;
 };
 
 export type SelectState = {
