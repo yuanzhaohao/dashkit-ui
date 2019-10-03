@@ -1,11 +1,11 @@
 ---
 order: 2
 title:
-  zh-CN: 选项
-  en-US: FilterOption
+  zh-CN: icon
+  en-US: Prefix Icon
 subtitle:
-  zh-CN: 处理选项用法。
-  en-US: Use `filterOption` to flilter options.
+  zh-CN: 用prefix设置icon
+  en-US: Use `prefix` to set prefix icon.
 ---
 
 ```js

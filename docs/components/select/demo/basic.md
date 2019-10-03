@@ -44,6 +44,13 @@ const Demo = () => (
         disabled
       </Option>
     </Select>
+    <Select onChange={onChange} defaultValue="orange" style={{ marginLeft: 10 }}>
+      {data.map(color => (
+        <Option key={color} value={color}>
+          {color}
+        </Option>
+      ))}
+    </Select>
     <Select onChange={onChange} disabled style={{ marginLeft: 10 }}>
       {data.map(color => (
         <Option key={color} value={color}>

@@ -8,6 +8,7 @@ export type SelectProps = {
   disabled?: boolean;
   name?: string;
   value?: ValueType;
+  defaultValue?: ValueType;
   multiple?: boolean;
   placeholder?: string;
   prefix?: string;
