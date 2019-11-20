@@ -84,12 +84,15 @@ $prefix-cls: 'dk-pagination';
     }
   }
 
-  &-small &-item {
+  &-small &-item,
+  &-small &-prev,
+  &-small &-next {
     min-width: $pagination-size-sm;
     height: $pagination-size-sm;
     font-size: $font-size-sm;
     border-radius: $border-radius-sm;
   }
+
 
   &-small &-prev,
   &-small &-next {
@@ -100,12 +103,15 @@ $prefix-cls: 'dk-pagination';
     }
   }
 
-  &-large &-item {
+  &-large &-item,
+  &-large &-prev,
+  &-large &-next {
     min-width: $pagination-size-lg;
     height: $pagination-size-lg;
     font-size: $font-size-lg;
     border-radius: $border-radius-lg;
   }
+
 
   &-large i {
     font-size: 20px;
