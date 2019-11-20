@@ -8,6 +8,8 @@ $prefix-cls: 'dk-pagination';
   @include reset-component();
   display: flex;
 
+  &-prev,
+  &-next,
   &-item {
     display: flex;
     min-width: $pagination-size;

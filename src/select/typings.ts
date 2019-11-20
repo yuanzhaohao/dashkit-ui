@@ -38,7 +38,7 @@ export type SelectOptionProps = {
 export type SelectContextProps = SelectOptionProps & {
   options?: ValueType;
   inputValue: string;
-  onRawChange?: (value) => void;
+  onRawChange?: (value: ValueType) => void;
 };
 
 export type SelectOptionGroupProps = {
