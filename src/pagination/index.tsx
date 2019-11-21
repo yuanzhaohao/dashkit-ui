@@ -68,7 +68,7 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
       <button
         key="previous"
         onClick={current > 1 && !disabled ? this.handleChange.bind(this, current - 1) : null}
-        className={classNames(itemClassName, [`${prefixCls}-prev`], {
+        className={classNames(`${prefixCls}-prev`, {
           [`${prefixCls}-disabled`]: current === 1,
         })}
       >
@@ -104,7 +104,7 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
       <button
         key="next"
         onClick={current < max && !disabled ? this.handleChange.bind(this, current + 1) : null}
-        className={classNames(itemClassName, [`${prefixCls}-next`], {
+        className={classNames(`${prefixCls}-next`, {
           [`${prefixCls}-disabled`]: current === max,
         })}
       >

@@ -8,11 +8,12 @@ export type SelectProps = {
   disabled?: boolean;
   name?: string;
   value?: ValueType;
+  defaultValue?: ValueType;
   multiple?: boolean;
   placeholder?: string;
   prefix?: string;
   prefixClassName?: string;
-  onChange?: (options: string[]) => void;
+  onChange?: (options: ValueType) => void;
 };
 
 export type SelectState = {
@@ -37,7 +38,7 @@ export type SelectOptionProps = {
 export type SelectContextProps = SelectOptionProps & {
   options?: ValueType;
   inputValue: string;
-  onRawChange?: (value) => void;
+  onRawChange?: (value: ValueType) => void;
 };
 
 export type SelectOptionGroupProps = {

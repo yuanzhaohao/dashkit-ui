@@ -41,8 +41,8 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
     this.panelElement = React.createRef();
     this.state = {
       visible: false,
-      options: props.multiple ? [] : '',
-      inputValue: '',
+      options: props.multiple ? [] : props.defaultValue || '',
+      inputValue: props.defaultValue ? props.defaultValue.toString() : '',
       width: 0,
       position: {
         top: 0,
@@ -53,7 +53,6 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
 
   public render() {
     const {
-      className,
       prefixCls,
       size,
       children,
@@ -107,8 +106,6 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
     return (
       <>
         <Input
-          {...attributes}
-          wrapperRef={this.selectElement}
           placeholder={options.toString() || placeholder}
           value={inputValue}
           disabled={disabled}
@@ -119,7 +116,10 @@ class Select extends React.PureComponent<SelectProps, SelectState> {
           prefix={prefix}
           prefixClassName={prefixClassName}
           suffix="chevron-down"
-          wrapperClassName={className}
+          wrapperProps={{
+            ...attributes,
+            ref: this.selectElement,
+          }}
           suffixClassName={iconClassName}
         />
         {!disabled && createPortal(selectNode, document.body)}

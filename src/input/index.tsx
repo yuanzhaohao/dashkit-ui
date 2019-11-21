@@ -5,7 +5,7 @@ import Icon from '../icon';
 export type InputSize = 'small' | 'default' | 'large';
 export type InputFormStatus = 'error' | 'default' | 'success' | 'warning';
 
-export type InputProps = {
+export type InputProps<> = {
   className?: string;
   prefixCls?: string;
   size?: InputSize;
@@ -21,7 +21,7 @@ export type InputProps = {
   prefixClassName?: string;
   suffix?: string;
   suffixClassName?: string;
-  wrapperClassName?: string;
+  wrapperProps?: any;
   wrapperRef?: React.RefObject<HTMLDivElement>;
   onChange?: (value: string) => void;
   onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -71,7 +71,7 @@ class Input extends React.Component<InputProps> {
       suffix,
       prefixClassName,
       suffixClassName,
-      wrapperClassName,
+      wrapperProps = {},
       wrapperRef,
       status,
       ...attributes
@@ -104,9 +104,10 @@ class Input extends React.Component<InputProps> {
         onFocus={this.handleFocus}
       />
     );
+    const { className: wrapperClassName, ...otherWrapperProps } = wrapperProps;
 
     return prefix || suffix ? (
-      <div ref={wrapperRef} className={classNames(`${prefixCls}-wrapper`, wrapperClassName)}>
+      <div className={classNames(`${prefixCls}-wrapper`, wrapperClassName)} {...otherWrapperProps}>
         {prefix ? (
           <Icon type={prefix} className={classNames(`${prefixCls}-prefix-icon`, prefixClassName)} />
         ) : null}
