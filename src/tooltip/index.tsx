@@ -45,7 +45,8 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
 
   public static getDerivedStateFromProps(nextProps: TooltipProps) {
     if ('visible' in nextProps) {
-      return { visible: nextProps.visible };
+      console.log('call visible', nextProps.visible);
+      return { visible: !!nextProps.visible };
     }
     return null;
   }
@@ -71,6 +72,7 @@ class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
       content,
       placement,
       trigger,
+      visible: visibleProp,
       ...attributes
     } = this.props;
     const tooltopClassName = classNames({
