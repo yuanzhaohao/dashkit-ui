@@ -7,7 +7,7 @@ export type PopoverProps = TooltipProps & {
 };
 
 const Popover = (props: PopoverProps) => {
-  const { content, prefixCls = 'dk-popover', trigger, title, visible, ...attibutes } = props;
+  const { content, prefixCls = 'dk-popover', trigger = 'click', title, ...attibutes } = props;
   const realContent = (
     <>
       <div className={`${prefixCls}-title`}>{title}</div>
