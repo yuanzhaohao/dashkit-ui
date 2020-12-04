@@ -1,7 +1,6 @@
 import * as React from 'react';
-import createReactContext from 'create-react-context';
 
-const LayoutContext = createReactContext<any>(null);
+const LayoutContext = React.createContext<any>(null);
 
 export const LayoutProvider = LayoutContext.Provider;
 export const LayoutConsumer = LayoutContext.Consumer;

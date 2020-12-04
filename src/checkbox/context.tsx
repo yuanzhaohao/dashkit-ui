@@ -1,5 +1,4 @@
 import * as React from 'react';
-// import createReactContext from 'create-react-context';
 
 type ContextProps = {
   onRawChange?: (checked?: boolean, label?: string) => void;
